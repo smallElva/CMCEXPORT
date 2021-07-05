@@ -1,0 +1,819 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[54],{
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _svibs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./svibs.js */ "./src/components/content/system/position/table/component/svibs/svibs.js");
+//
+//
+//
+//
+var vibValue = ["有效值", "峰值", "峰峰值", "能量有效值", "峭度", "峰值因素", "频段1", "频段2", "频段3", "频段4", "频段5", "频段6", "频段7", "频段8"];
+var gdValue = ["包络解调值", "包络特征值", "能量有效值", "频段1", "频段2", "频段3", "频段4", "频段5", "频段6", "频段7", "频段8"];
+var vibCode = {
+  "2000": "有效值",
+  "3000": "峰值",
+  "4000": "峰峰值",
+  "19000": "能量有效值",
+  "24000": "峭度",
+  "15000": "峰值因素",
+  "12001": "频段1",
+  "12002": "频段2",
+  "12003": "频段3",
+  "12004": "频段4",
+  "12005": "频段5",
+  "12006": "频段6",
+  "12007": "频段7",
+  "12008": "频段8"
+};
+var gdCode = {
+  "5000": "包络解调值",
+  "6000": "包络特征值",
+  "19000": "能量有效值",
+  "12001": "频段1",
+  "12002": "频段2",
+  "12003": "频段3",
+  "12004": "频段4",
+  "12005": "频段5",
+  "12006": "频段6",
+  "12007": "频段7",
+  "12008": "频段8"
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Svibs",
+  //转速提取界面
+  data: function data() {
+    return {
+      type: -1,
+      data: [],
+      //存放列表渲染数据
+      speedList: [],
+      //存放转速测点
+      dgmList: [],
+      //存在采集器列表(一个测点如果不存在绑定的采集器，则不做显示)
+      changeList: {
+        changeData: {} //修改的数据
+
+      },
+      macId_posType_taskId_list: {} //存放振动和包络测点
+
+    };
+  },
+  mounted: function mounted() {
+    this.getListData();
+  },
+  methods: {
+    getListData: function getListData() {
+      var _this = this;
+
+      var p1 = this.$getApi.queryPositionInfo(3, this.$store.state.tids); //振动
+
+      var p2 = this.$getApi.queryPositionInfo(4, this.$store.state.tids); //包络
+
+      var p3 = this.$getApi.queryPositionInfo(1, this.$store.state.tids); //转速
+
+      Promise.all([p1, p2, p3]).then(function (values) {
+        _this.getPosition(values[0]);
+
+        _this.getPosition(values[1]);
+
+        _this.getDateList(values[2]);
+      });
+    },
+    getPosition: function getPosition(res) {
+      var _this2 = this;
+
+      if (!res.position_list.length) return;
+      /* 保存振动和包络测点 */
+
+      res.position_list.forEach(function (position_list) {
+        position_list.machine_info.forEach(function (machine_info) {
+          machine_info.positions.forEach(function (positions) {
+            var key = "".concat(positions.mac_id, "_").concat(positions.dgm_id, "_").concat(positions.pos_type, "_").concat(positions.task_id);
+            _this2.macId_posType_taskId_list[key] == undefined ? _this2.macId_posType_taskId_list[key] = {} : null;
+            _this2.macId_posType_taskId_list[key][positions.pos_name] = {
+              pos_id: positions.pos_id,
+              dgm_type: positions.dgm_type // 一个机组下存在不同采集器的统一类型测点，需要判断，
+
+            };
+          });
+        });
+      });
+    },
+    getDateList: function getDateList(res) {
+      var _this3 = this;
+
+      if (!res.position_list.length) return;
+      if (!res.new_position_list.length) return;
+      res.new_position_list.forEach(function (position_list) {
+        position_list.machine_info.forEach(function (machine_info) {
+          machine_info.bindDgm_list.forEach(function (dgm_info) {
+            _this3.dgmList.push(dgm_info.dgm_id); //保存所有绑定的dgm_id
+
+          });
+        });
+      });
+      res.position_list.forEach(function (position_list) {
+        position_list.machine_info.forEach(function (machine_info) {
+          machine_info.positions.forEach(function (positions) {
+            if (positions.ch_type != 13) return; //不是转速提取通道的直接return
+
+            if (!_this3.dgmList.includes(positions.dgm_id)) return;
+            var speedKey = "".concat(positions.mac_id, "_").concat(positions.pos_type, "_").concat(positions.pos_id); //初始化转速提取
+
+            if (!positions.baseInfo.svibsList || positions.baseInfo.svibsList.length == 0) {
+              positions.baseInfo.svibsList = [];
+
+              for (var i = 0; i < 18; i++) {
+                var task_id = i % 3;
+                var _obj = {
+                  code: "2000",
+                  rate: "1",
+                  position_name: "无",
+                  task_id: String(task_id),
+                  threshold: "0.1",
+                  position_type: "3",
+                  position_id: "-1"
+                };
+
+                if (i > 8) {
+                  //包络测点
+                  _obj.code = "5000";
+                  _obj.position_type = "4";
+                }
+
+                positions.baseInfo.svibsList.push(_obj);
+              }
+            }
+
+            var svibsList = positions.baseInfo.svibsList; //保存转速测点
+
+            _this3.speedList[speedKey] = positions;
+            var obj = {},
+                group = 0; //在data中加入数组
+
+            for (var _i = 0; _i < svibsList.length; _i++) {
+              var num = _i % 3;
+              var key = "".concat(machine_info.mac_id, "_").concat(positions.dgm_id, "_").concat(svibsList[_i].position_type, "_").concat(num);
+              var value = _this3.macId_posType_taskId_list[key];
+              var sources = [];
+
+              if (value) {
+                for (var k in value) {
+                  //同一个机组下面有不同类型的采集器测点，需要进行筛选
+                  sources.push(k);
+                }
+
+                sources.unshift("无");
+              } else {
+                sources = ["无"];
+              }
+
+              obj.group = group;
+              obj.t_name = position_list.t_name;
+              obj.mac_me = machine_info.mac_me;
+              obj.dgm_name = positions.dgm_name;
+              obj.pos_name = positions.pos_name;
+              obj.pos_id = positions.pos_id;
+              obj.mac_id = positions.mac_id;
+              obj.pos_type = positions.pos_type;
+              obj["positionName_" + num] = svibsList[_i].position_name; //测点名称
+
+              obj["position_id_" + num] = svibsList[_i].position_id; //选择测点的id
+
+              obj["positionName_source_" + num] = sources; //测点下拉选项
+
+              obj["positionInfo_" + num] = value; //选项测点的信息
+
+              obj["threshold_" + num] = svibsList[_i].threshold; //阈值
+
+              obj["rate_" + num] = svibsList[_i].rate; //系数
+
+              if (svibsList[_i].position_type == 3) {
+                obj.pos_type_value = "振动测点";
+                obj["codeKey_" + num] = svibsList[_i].code; // 特特征值key
+
+                obj["codeValue_" + num] = vibCode[svibsList[_i].code]; //特征值value
+
+                obj["code_sources"] = vibValue; //特征值选项  Object.values会打乱顺序，要自己写一个方法
+
+                obj["code_sources_map"] = vibCode;
+              } else if (svibsList[_i].position_type == 4) {
+                break; //暂时不显示包络测点
+                // obj.pos_type_value = "包络测点";
+                // obj["codeKey_" + num] = svibsList[i].code;
+                // obj["codeValue_" + num] = gdCode[svibsList[i].code];
+                // obj["code_sources"] = gdValue;
+                // obj["code_sources_map"] = gdCode;
+              }
+
+              if (num == 2) {
+                group++;
+
+                _this3.data.push(obj);
+
+                obj = {};
+              }
+            }
+          });
+        });
+      });
+      this.renderTable();
+    },
+    renderTable: function renderTable() {
+      var HotTable = document.getElementById("HotTable"); //创建table
+
+      this.hot = new _svibs_js__WEBPACK_IMPORTED_MODULE_0__["svibsHandsontable"](HotTable, this);
+      /* 添加行之后选项框错位 */
+
+      this.reRenderSelectOption(this.hot, this.data);
+      this.destroyEditor();
+    },
+    destroyEditor: function destroyEditor() {
+      var _this4 = this;
+
+      var wtHolder = document.getElementsByClassName("wtHolder")[0];
+      wtHolder.addEventListener("scroll", function (e) {
+        _this4.hot.destroyEditor(); //处理当选择下拉框后拖动滚动条框框会跟着跑的问题
+
+      });
+    },
+    reRenderSelectOption: function reRenderSelectOption(hot, data, newRow, isnew) {
+      //重新渲染selectOption,让每个option
+      var cellMeta = hot.getCellMetaAtRow(0);
+      var rows = data.length;
+      cellMeta.forEach(function (item) {
+        if (item.prop == "positionName_0") {
+          //测点一
+          if (isnew) {
+            //新建行的时候的遍历 一条数据
+            hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+              return data[hot.toPhysicalRow(row)].positionName_source_0;
+            });
+          } else {
+            for (var i = 0; i <= rows; i++) {
+              //第一次创建hot时候的遍历 全部数据
+              hot.setCellMeta(i, item.col, "selectOptions", function (row) {
+                return data[hot.toPhysicalRow(row)].positionName_source_0;
+              });
+            }
+          }
+
+          return;
+        }
+
+        if (item.prop == "codeValue_0") {
+          //特征值1
+          if (isnew) {
+            //新建行的时候的遍历 一条数据
+            hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+              return data[hot.toPhysicalRow(row)].code_sources;
+            });
+          } else {
+            for (var _i2 = 0; _i2 <= rows; _i2++) {
+              //第一次创建hot时候的遍历 全部数据
+              hot.setCellMeta(_i2, item.col, "selectOptions", function (row) {
+                return data[hot.toPhysicalRow(row)].code_sources;
+              });
+            }
+          }
+
+          return;
+        }
+
+        if (item.prop == "positionName_1") {
+          //测点2
+          if (isnew) {
+            //新建行的时候的遍历 一条数据
+            hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+              return data[hot.toPhysicalRow(row)].positionName_source_1;
+            });
+          } else {
+            for (var _i3 = 0; _i3 <= rows; _i3++) {
+              //第一次创建hot时候的遍历 全部数据
+              hot.setCellMeta(_i3, item.col, "selectOptions", function (row) {
+                return data[hot.toPhysicalRow(row)].positionName_source_1;
+              });
+            }
+          }
+
+          return;
+        }
+
+        if (item.prop == "codeValue_1") {
+          //特征值2
+          if (isnew) {
+            //新建行的时候的遍历 一条数据
+            hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+              return data[hot.toPhysicalRow(row)].code_sources;
+            });
+          } else {
+            for (var _i4 = 0; _i4 <= rows; _i4++) {
+              //第一次创建hot时候的遍历 全部数据
+              hot.setCellMeta(_i4, item.col, "selectOptions", function (row) {
+                return data[hot.toPhysicalRow(row)].code_sources;
+              });
+            }
+          }
+
+          return;
+        }
+
+        if (item.prop == "positionName_2") {
+          //测点3
+          if (isnew) {
+            //新建行的时候的遍历 一条数据
+            hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+              return data[hot.toPhysicalRow(row)].positionName_source_2;
+            });
+          } else {
+            for (var _i5 = 0; _i5 <= rows; _i5++) {
+              //第一次创建hot时候的遍历 全部数据
+              hot.setCellMeta(_i5, item.col, "selectOptions", function (row) {
+                return data[hot.toPhysicalRow(row)].positionName_source_2;
+              });
+            }
+          }
+
+          return;
+        }
+
+        if (item.prop == "codeValue_2") {
+          //特征值3
+          if (isnew) {
+            //新建行的时候的遍历 一条数据
+            hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+              return data[hot.toPhysicalRow(row)].code_sources;
+            });
+          } else {
+            for (var _i6 = 0; _i6 <= rows; _i6++) {
+              //第一次创建hot时候的遍历 全部数据
+              hot.setCellMeta(_i6, item.col, "selectOptions", function (row) {
+                return data[hot.toPhysicalRow(row)].code_sources;
+              });
+            }
+          }
+
+          return;
+        }
+      });
+    },
+    getData: function getData() {
+      return this.data;
+    },
+
+    /* 获取hot实例 */
+    getHot: function getHot() {
+      return this.hot;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=template&id=36c19a30&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=template&id=36c19a30&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "HotTable" } })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./src/components/content/system/position/table/component/svibs/Svibs.vue":
+/*!********************************************************************************!*\
+  !*** ./src/components/content/system/position/table/component/svibs/Svibs.vue ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Svibs_vue_vue_type_template_id_36c19a30_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Svibs.vue?vue&type=template&id=36c19a30&scoped=true& */ "./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=template&id=36c19a30&scoped=true&");
+/* harmony import */ var _Svibs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Svibs.vue?vue&type=script&lang=js& */ "./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Svibs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Svibs_vue_vue_type_template_id_36c19a30_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Svibs_vue_vue_type_template_id_36c19a30_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "36c19a30",
+  null
+  
+)
+
+/* hot reload */
+if (true) {
+  var api = __webpack_require__(/*! ./node_modules/vue-hot-reload-api/dist/index.js */ "./node_modules/vue-hot-reload-api/dist/index.js")
+  api.install(__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"))
+  if (api.compatible) {
+    module.hot.accept()
+    if (!api.isRecorded('36c19a30')) {
+      api.createRecord('36c19a30', component.options)
+    } else {
+      api.reload('36c19a30', component.options)
+    }
+    module.hot.accept(/*! ./Svibs.vue?vue&type=template&id=36c19a30&scoped=true& */ "./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=template&id=36c19a30&scoped=true&", function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ _Svibs_vue_vue_type_template_id_36c19a30_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Svibs.vue?vue&type=template&id=36c19a30&scoped=true& */ "./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=template&id=36c19a30&scoped=true&");
+(function () {
+      api.rerender('36c19a30', {
+        render: _Svibs_vue_vue_type_template_id_36c19a30_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+        staticRenderFns: _Svibs_vue_vue_type_template_id_36c19a30_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]
+      })
+    })(__WEBPACK_OUTDATED_DEPENDENCIES__); }.bind(this))
+  }
+}
+component.options.__file = "src/components/content/system/position/table/component/svibs/Svibs.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Svibs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/babel-loader/lib??ref--1-0!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svibs.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Svibs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=template&id=36c19a30&scoped=true&":
+/*!***************************************************************************************************************************!*\
+  !*** ./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=template&id=36c19a30&scoped=true& ***!
+  \***************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svibs_vue_vue_type_template_id_36c19a30_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svibs.vue?vue&type=template&id=36c19a30&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/content/system/position/table/component/svibs/Svibs.vue?vue&type=template&id=36c19a30&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svibs_vue_vue_type_template_id_36c19a30_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svibs_vue_vue_type_template_id_36c19a30_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./src/components/content/system/position/table/component/svibs/svibs.js":
+/*!*******************************************************************************!*\
+  !*** ./src/components/content/system/position/table/component/svibs/svibs.js ***!
+  \*******************************************************************************/
+/*! exports provided: svibsHandsontable */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(swal) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "svibsHandsontable", function() { return svibsHandsontable; });
+/* harmony import */ var common_hdtable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! common/hdtable.js */ "./src/common/hdtable.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+function svibsHandsontable(el, vm) {
+  var F = new Func(vm);
+  var tableConfig = {
+    // 表格右键菜单
+    // contextMenu: F.contextMenu(),
+    // 表格显示的数据
+    data: vm.data,
+    //表格的列
+    colHeaders: [{
+      label: '基本设置',
+      colspan: 5
+    }, {
+      label: '任务一',
+      colspan: 4
+    }, {
+      label: '任务二',
+      colspan: 4
+    }, {
+      label: '任务三',
+      colspan: 4
+    }],
+    //表格的列头自定义
+    nestedHeaders: [[{
+      label: '基本设置',
+      colspan: 5
+    }, {
+      label: '任务一',
+      colspan: 4
+    }, {
+      label: '任务二',
+      colspan: 4
+    }, {
+      label: '任务三',
+      colspan: 4
+    }], ['组织名称', '机组名称', '监测采集器', '测点名称', '测点类型', '测点', '特征值', '阈值', '系数', '测点', '特征值', '阈值', '系数', '测点', '特征值', '阈值', '系数']],
+    //数据渲染renderData
+    columns: [{
+      data: "t_name",
+      readOnly: true
+    }, //组织名称
+    {
+      data: "mac_me",
+      readOnly: true
+    }, //机组名称
+    {
+      data: "dgm_name",
+      readOnly: true
+    }, //采集器名称
+    {
+      data: "pos_name",
+      readOnly: true
+    }, //测点名称
+    {
+      data: "pos_type_value",
+      readOnly: true
+    }, //测点类型
+    {
+      data: "positionName_0",
+      //任务一测点
+      editor: 'select',
+      selectOptions: function selectOptions(row) {
+        return vm.data[row].positionName_source_0;
+      }
+    }, {
+      data: "codeValue_0",
+      //任务一特征值（下拉框）
+      editor: 'select',
+      selectOptions: function selectOptions(row) {
+        return vm.data[row].code_sources;
+      }
+    }, {
+      data: "threshold_0"
+    }, //任务一阈值
+    {
+      data: "rate_0"
+    }, //任务一系数
+    {
+      data: "positionName_1",
+      //任务二测点
+      editor: 'select',
+      selectOptions: function selectOptions(row) {
+        return vm.data[row].positionName_source_1;
+      }
+    }, {
+      data: "codeValue_1",
+      //任务二特征值（下拉框）
+      editor: 'select',
+      selectOptions: function selectOptions(row) {
+        return vm.data[row].code_sources;
+      }
+    }, {
+      data: "threshold_1"
+    }, //任务二阈值
+    {
+      data: "rate_1"
+    }, //任务二系数
+    {
+      data: "positionName_2",
+      //任务三测点
+      editor: 'select',
+      selectOptions: function selectOptions(row) {
+        return vm.data[row].positionName_source_2;
+      }
+    }, {
+      data: "codeValue_2",
+      //任务三特征值（下拉框）
+      editor: 'select',
+      selectOptions: function selectOptions(row) {
+        return vm.data[row].code_sources;
+      }
+    }, {
+      data: "threshold_2"
+    }, //任务三阈值
+    {
+      data: "rate_2"
+    } //任务三系数
+    ],
+    // //单元格属性设置
+    // cells: F.cells(),
+    // //单击单元格或行/列标题后触发。如果单击行/列标题，则坐标索引为负。
+    afterOnCellMouseUp: F.afterOnCellMouseUp(),
+    // //过滤之后
+    // afterFilter: F.afterFilter(),
+    beforeChange: F.beforeChange(),
+    afterChange: F.afterChange()
+  };
+  return Object(common_hdtable_js__WEBPACK_IMPORTED_MODULE_0__["default"])(el, tableConfig);
+}
+
+var Func =
+/*#__PURE__*/
+function () {
+  function Func(vm) {
+    _classCallCheck(this, Func);
+
+    this.speedList = vm.speedList;
+    this.changeData = vm.changeList.changeData;
+    this.getData = vm.getData;
+    this.getHot = vm.getHot;
+  }
+
+  _createClass(Func, [{
+    key: "afterOnCellMouseUp",
+    value: function afterOnCellMouseUp() {
+      var that = this;
+      return function (e, coords, td) {
+        if (coords.row >= 0) {
+          var row_info = that.getPositionByIndex(coords.row);
+          console.log(row_info);
+        }
+      };
+    }
+  }, {
+    key: "beforeChange",
+    value: function beforeChange() {
+      var that = this;
+      return function (changes, source) {
+        var change_index;
+        var change_prop;
+        var change_oldVal;
+        var change_newVal;
+
+        for (var i = 0; i < changes.length; i++) {
+          change_index = changes[i][0];
+          change_prop = changes[i][1];
+          change_oldVal = changes[i][2];
+          change_newVal = changes[i][3];
+          /* 如果选定的值没有改变 返回false */
+
+          if (change_oldVal == change_newVal) {
+            continue;
+          }
+
+          var position = that.getPositionByIndex(change_index);
+          /* 选择测点 */
+
+          if (change_prop == "positionName_0" || change_prop == "positionName_1" || change_prop == "positionName_2") {
+            //任务一测点
+            var task = change_prop.slice(-1);
+            var sources = position["positionName_source_" + task];
+
+            if (sources.includes(change_newVal)) {
+              that.set_position_name(position, task, change_newVal);
+            } else {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u9009\u9879"),
+                button: "确认"
+              });
+              return false;
+            }
+            /* 选择特征值 */
+
+          } else if (change_prop == "codeValue_0" || change_prop == "codeValue_1" || change_prop == "codeValue_2") {
+            //任务一测点
+            var _task = change_prop.slice(-1);
+
+            var _sources = position.code_sources;
+
+            if (_sources.includes(change_newVal)) {
+              that.set_code(position, _task, change_newVal);
+            } else {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u9009\u9879"),
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "threshold_0" || change_prop == "threshold_1" || change_prop == "threshold_2") {
+            if (Number(change_newVal) != change_newVal) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u9608\u503C\u5FC5\u987B\u662F\u6570\u5B57"),
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "rate_0" || change_prop == "rate_1" || change_prop == "rate_2") {
+            if (Number(change_newVal) != change_newVal) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u7CFB\u6570\u5FC5\u987B\u662F\u6570\u5B57"),
+                button: "确认"
+              });
+              return false;
+            }
+          }
+        }
+      };
+    }
+  }, {
+    key: "set_position_name",
+    value: function set_position_name(position, task, name) {
+      var key = "position_id_" + task;
+
+      if (name == "无") {
+        position[key] = "-1"; //选择无的讲id 置为-1
+      } else {
+        var source = position["positionInfo_" + task];
+        position[key] = String(source[name].pos_id); //设置测点id
+      }
+    }
+  }, {
+    key: "set_code",
+    value: function set_code(position, task, codeValue) {
+      var obj = position.code_sources_map;
+      position['codeKey_' + task] = this.getKey(codeValue, obj);
+    }
+  }, {
+    key: "getKey",
+    value: function getKey(val, obj) {
+      //根据value通过映射找key
+      for (var key in obj) {
+        if (obj[key] === val) {
+          return key;
+        }
+      }
+    }
+  }, {
+    key: "afterChange",
+    value: function afterChange() {
+      var that = this;
+      var changeData = this.changeData;
+      return function (changes) {
+        if (changes) {
+          changes.forEach(function (change) {
+            var task = change[1].slice(-1);
+            var position = that.getPositionByIndex(change[0]);
+            var speed_pos = that.speed_pos(position, task);
+            changeData[speed_pos.mac_id + "_" + speed_pos.pos_type + "_" + speed_pos.pos_id] = speed_pos;
+          });
+        }
+      };
+    }
+    /* 返回转速测点 */
+
+  }, {
+    key: "speed_pos",
+    value: function speed_pos(position, task) {
+      var speedkey = "".concat(position.mac_id, "_").concat(position.pos_type, "_").concat(position.pos_id);
+      var speed = this.speedList[speedkey];
+      var key = position.group * 3 + parseInt(task);
+      var svibs = speed.baseInfo.svibsList[key];
+      svibs.code = position['codeKey_' + task];
+      svibs.rate = position['rate_' + task];
+      svibs.position_name = position['positionName_' + task];
+      svibs.threshold = position['threshold_' + task];
+      svibs.position_id = position['position_id_' + task];
+      return speed;
+    }
+  }, {
+    key: "getPositionByIndex",
+    value: function getPositionByIndex(index) {
+      var hot = this.getHot();
+      var data = this.getData();
+      var physicalRow = hot.toPhysicalRow(index);
+      var info = data[physicalRow];
+      return info;
+    }
+  }]);
+
+  return Func;
+}();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js")))
+
+/***/ })
+
+}]);
+//# sourceMappingURL=54-11215e4f25ed8edbc9aa.js.map

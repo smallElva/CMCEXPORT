@@ -1,0 +1,450 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
+
+/***/ "./src/components/content/system/position/table/js/pos_methods.js":
+/*!************************************************************************!*\
+  !*** ./src/components/content/system/position/table/js/pos_methods.js ***!
+  \************************************************************************/
+/*! exports provided: posType_name, frequencySources, spectralSources, taskId, taskArray, computed__frequency_spectral, addRows, reRenderSelectOption */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "posType_name", function() { return posType_name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "frequencySources", function() { return frequencySources; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "spectralSources", function() { return spectralSources; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "taskId", function() { return taskId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "taskArray", function() { return taskArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "computed__frequency_spectral", function() { return computed__frequency_spectral; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addRows", function() { return addRows; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reRenderSelectOption", function() { return reRenderSelectOption; });
+function addRows(hot, data, row) {
+  if (row == -1) {
+    //通过点击新建按钮进入的方法，默认在最后一行添加
+    row = 0;
+    /* 在第一行添加新增行 */
+  }
+
+  hot.alter('insert_row', row);
+  reRenderSelectOption(hot, data, row, true);
+}
+
+function reRenderSelectOption(hot, data, newRow, isnew) {
+  //重新渲染selectOption,让每个option
+  var cellMeta = hot.getCellMetaAtRow(0);
+  var rows = data.length;
+  cellMeta.forEach(function (item) {
+    if (item.prop == "t_name") {
+      //组织
+      if (isnew) {
+        //新建行的时候的遍历 一条数据
+        hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+          return data[hot.toPhysicalRow(row)].t_sources;
+        });
+      } else {
+        for (var i = 0; i <= rows; i++) {
+          //第一次创建hot时候的遍历 全部数据
+          hot.setCellMeta(i, item.col, "selectOptions", function (row) {
+            return data[hot.toPhysicalRow(row)].t_sources;
+          });
+        }
+      }
+
+      return;
+    }
+
+    if (item.prop == "mac_me") {
+      //机组
+      if (isnew) {
+        //新建行的时候的遍历
+        hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+          return data[hot.toPhysicalRow(row)].macName_sources;
+        });
+      } else {
+        for (var _i = 0; _i < rows; _i++) {
+          hot.setCellMeta(_i, item.col, "selectOptions", function (row) {
+            return data[hot.toPhysicalRow(row)].macName_sources;
+          });
+        }
+      }
+
+      return;
+    }
+
+    if (item.prop == "dgm_name") {
+      //采集器
+      if (isnew) {
+        //新建行的时候的遍历
+        hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+          return data[hot.toPhysicalRow(row)].dgm_sources;
+        });
+      } else {
+        for (var _i2 = 0; _i2 < rows; _i2++) {
+          hot.setCellMeta(_i2, item.col, "selectOptions", function (row) {
+            return data[hot.toPhysicalRow(row)].dgm_sources;
+          });
+        }
+      }
+
+      return;
+    }
+
+    if (item.prop == "ch_name") {
+      //通道
+      if (isnew) {
+        //新建行的时候的遍历
+        hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+          return data[hot.toPhysicalRow(row)].ch_sources;
+        });
+      } else {
+        for (var _i3 = 0; _i3 < rows; _i3++) {
+          hot.setCellMeta(_i3, item.col, "selectOptions", function (row) {
+            return data[hot.toPhysicalRow(row)].ch_sources;
+          });
+        }
+      }
+
+      return;
+    }
+
+    if (item.prop == "task_id_val") {
+      //任务标识
+      if (isnew) {
+        //新建行的时候的遍历
+        hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+          return data[hot.toPhysicalRow(row)].task_id_sources;
+        });
+      } else {
+        for (var _i4 = 0; _i4 < rows; _i4++) {
+          hot.setCellMeta(_i4, item.col, "selectOptions", function (row) {
+            return data[hot.toPhysicalRow(row)].task_id_sources;
+          });
+        }
+      }
+
+      return;
+    }
+
+    if (item.prop == "baseInfo.frequency_val") {
+      //分析频率
+      if (isnew) {
+        //新建行的时候的遍历
+        hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+          return data[hot.toPhysicalRow(row)].baseInfo.frequency_sources;
+        });
+      } else {
+        for (var _i5 = 0; _i5 < rows; _i5++) {
+          hot.setCellMeta(_i5, item.col, "selectOptions", function (row) {
+            return data[hot.toPhysicalRow(row)].baseInfo.frequency_sources;
+          }); // hot.setCellMeta(i,item.col,"selectOptions",row=>{ return  ['12.5','14',4.4]})
+        }
+      }
+
+      return;
+    }
+
+    if (item.prop == "baseInfo.spectral") {
+      //谱线数
+      if (isnew) {
+        //新建行的时候的遍历
+        hot.setCellMeta(newRow, item.col, "selectOptions", function (row) {
+          return data[hot.toPhysicalRow(row)].baseInfo.spectral_sources;
+        });
+      } else {
+        for (var _i6 = 0; _i6 < rows; _i6++) {
+          hot.setCellMeta(_i6, item.col, "selectOptions", function (row) {
+            return data[hot.toPhysicalRow(row)].baseInfo.spectral_sources;
+          });
+        }
+      }
+
+      return;
+    }
+  });
+} //测点类型名称转化
+
+
+function posType_name(type) {
+  var postType_name = '';
+
+  switch (parseInt(type)) {
+    case 3:
+      postType_name = "振动测点";
+      break;
+
+    case 4:
+      postType_name = "包络测点";
+      break;
+
+    case 8:
+      postType_name = "振动阶次测点";
+      break;
+
+    case 9:
+      postType_name = "包络阶次测点";
+      break;
+
+    case 1:
+      postType_name = "转速测点";
+      break;
+
+    case 200:
+      postType_name = "长采样测点";
+      break;
+
+    case 6:
+      postType_name = "晃度测点";
+      break;
+
+    case 11:
+      postType_name = "倾覆测点";
+      break;
+
+    case 12:
+      postType_name = "倾角测点";
+      break;
+
+    case 13:
+      postType_name = "合成倾角测点";
+      break;
+
+    case 7:
+      postType_name = "温度测点";
+      break;
+
+    case 2:
+      postType_name = "过程量测点";
+      break;
+
+    case 5:
+      postType_name = "数字量测点";
+      break;
+
+    case 10:
+      postType_name = "工艺量测点";
+      break;
+
+    case 14:
+      postType_name = "螺栓测点";
+      break;
+
+    case 15:
+      postType_name = "冲击测点";
+      break;
+
+    case 16:
+      postType_name = "冲击阶次测点";
+      break;
+  }
+
+  return postType_name;
+}
+/**
+   * *分析频率下拉选项
+   * dgm_type：采集器类型；
+   * posType：测点类型；分振动系的测点和包络类型测点
+   * filter：滤波器；0,1,2（包络类型测点有）
+   *
+   * **/
+
+
+function frequencySources(position, filter) {
+  var dgm_type = position.dgm_type;
+  var posType = position.pos_type;
+  var frequency_sources = {};
+
+  if (dgm_type == 1 || dgm_type == 2) {
+    frequency_sources = {
+      '10': '10',
+      '20': '20',
+      '50': '50',
+      '100': '100',
+      '200': '200',
+      '500': '500',
+      '1000': '1K',
+      '2000': '2K',
+      '5000': '5K',
+      '10000': '10K'
+    };
+  } else if (dgm_type == 3 || dgm_type == 7) {
+    //v2和tms
+    if (posType == 3 || posType == 6 || posType == 11 || posType == 12 || posType == 13) {
+      //振动系测点
+      frequency_sources = {
+        '10': '10',
+        '20': '20',
+        '50': '50',
+        '100': '100',
+        '200': '200',
+        '500': '500',
+        '1000': '1K',
+        '2000': '2K',
+        '4000': '4K',
+        '8000': '8K',
+        '16000': '16K',
+        '32000': '32K'
+      };
+    } else if (posType == 4 || posType == 15) {
+      //包络测点,冲击测点
+
+      /* 滤波器 */
+      if (filter == 0) {
+        frequency_sources = {
+          '12': '12.5',
+          '25': '25',
+          '50': '50',
+          '100': '100',
+          '200': '200'
+        };
+      } else if (filter == 1) {
+        frequency_sources = {
+          '12': '12.5',
+          '25': '25',
+          '50': '50',
+          '100': '100',
+          '200': '200',
+          '400': '400',
+          '800': '800',
+          '1600': '1.6K',
+          '3200': '3.2K'
+        };
+      } else if (filter == 2) {
+        frequency_sources = {
+          '12': '12.5',
+          '25': '25',
+          '50': '50',
+          '100': '100',
+          '200': '200',
+          '400': '400',
+          '800': '800',
+          '1600': '1.6K',
+          '3200': '3.2K',
+          '6400': '6.4K',
+          '12800': '12.8K'
+        };
+      }
+    } else if (posType == 8 || posType == 16 || posType == 9) {
+      frequency_sources = {
+        '1': '1',
+        '2': '2',
+        '4': '4',
+        '8': '8',
+        '16': '16',
+        '32': '32',
+        '64': '64',
+        '128': '128',
+        '256': '256',
+        '512': '512',
+        '1024': '1024'
+      };
+    }
+  } else if (dgm_type == 4) {
+    frequency_sources = {
+      '10': '10',
+      '20': '20',
+      '50': '50',
+      '100': '100',
+      '200': '200',
+      '500': '500',
+      '1000': '1K',
+      '2000': '2K',
+      '4000': '4K'
+    };
+  }
+
+  if (posType == 13 && position.baseInfo.sourceType == 5) {
+    /* 合成倾角的分析频率只有20 */
+    frequency_sources = {
+      '20': '20'
+    };
+  }
+
+  return frequency_sources;
+}
+/**
+   * *谱线数下拉选项
+   * dgm_type：采集器类型；
+   *
+   * **/
+
+
+function spectralSources(dgm_type, pos_type) {
+  var spectral_source = [];
+
+  if (dgm_type == 3 || dgm_type == 7) {
+    if (pos_type == 8 || pos_type == 9 || pos_type == 16) {
+      spectral_source = ['32', '64', '128', '256', '512', '1024', '2048'];
+    } else {
+      spectral_source = ['100', '200', '400', '800', '1600', '3200', '6400', '12800', '25600', '51200'];
+    }
+  } else if (dgm_type == 4) {
+    spectral_source = ['100', '200', '400', '800', '1600', '3200'];
+  } else {
+    spectral_source = ['100', '200', '400', '800', '1600', '3200', '6400', '12800', '25600', '51200', '102400'];
+  }
+
+  return spectral_source;
+}
+/* 计算采样周期和谱线分辨率 */
+
+
+function computed__frequency_spectral(position) {
+  /* 当是叶轮采集器 */
+  var frequency, spectral;
+
+  if (position.dgm_type == 2) {
+    frequency = position.baseInfo.frequency * 2.5;
+    spectral = position.baseInfo.spectral * 2.56;
+  } else {
+    frequency = position.baseInfo.frequency;
+    spectral = position.baseInfo.spectral;
+  }
+
+  position.baseInfo.order = (spectral / frequency).toFixed(2) + "s";
+  position.baseInfo.specOrder = (frequency / spectral).toFixed(4) + "Hz";
+}
+/**
+ * *任务标识转换
+ * **/
+
+
+function taskId(val) {
+  var taskIdVal = "";
+
+  switch (parseInt(val)) {
+    case 0:
+      taskIdVal = "任务1";
+      break;
+
+    case 1:
+      taskIdVal = "任务2";
+      break;
+
+    case 2:
+      taskIdVal = "任务3";
+      break;
+  }
+
+  return taskIdVal;
+}
+/* 将数字任务数组除去空元素，并排序，并转化为文字数组 */
+
+
+function taskArray(arr) {
+  if (!Array.isArray(arr) || arr.length == 0) {
+    return [];
+  } else {
+    var result = [];
+    arr.sort();
+    arr.forEach(function (el) {
+      result.push(taskId(parseInt(el)));
+    });
+    return result;
+  }
+}
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=6-71fc4b2372c6ecdbbf4a.js.map

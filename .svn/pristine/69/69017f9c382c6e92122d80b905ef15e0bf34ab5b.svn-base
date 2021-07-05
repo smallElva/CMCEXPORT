@@ -1,0 +1,2258 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
+
+/***/ "./node_modules/_moment@2.24.0@moment/locale sync recursive ^\\.\\/.*$":
+/*!*****************************************************************!*\
+  !*** ./node_modules/_moment@2.24.0@moment/locale sync ^\.\/.*$ ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./af": "./node_modules/_moment@2.24.0@moment/locale/af.js",
+	"./af.js": "./node_modules/_moment@2.24.0@moment/locale/af.js",
+	"./ar": "./node_modules/_moment@2.24.0@moment/locale/ar.js",
+	"./ar-dz": "./node_modules/_moment@2.24.0@moment/locale/ar-dz.js",
+	"./ar-dz.js": "./node_modules/_moment@2.24.0@moment/locale/ar-dz.js",
+	"./ar-kw": "./node_modules/_moment@2.24.0@moment/locale/ar-kw.js",
+	"./ar-kw.js": "./node_modules/_moment@2.24.0@moment/locale/ar-kw.js",
+	"./ar-ly": "./node_modules/_moment@2.24.0@moment/locale/ar-ly.js",
+	"./ar-ly.js": "./node_modules/_moment@2.24.0@moment/locale/ar-ly.js",
+	"./ar-ma": "./node_modules/_moment@2.24.0@moment/locale/ar-ma.js",
+	"./ar-ma.js": "./node_modules/_moment@2.24.0@moment/locale/ar-ma.js",
+	"./ar-sa": "./node_modules/_moment@2.24.0@moment/locale/ar-sa.js",
+	"./ar-sa.js": "./node_modules/_moment@2.24.0@moment/locale/ar-sa.js",
+	"./ar-tn": "./node_modules/_moment@2.24.0@moment/locale/ar-tn.js",
+	"./ar-tn.js": "./node_modules/_moment@2.24.0@moment/locale/ar-tn.js",
+	"./ar.js": "./node_modules/_moment@2.24.0@moment/locale/ar.js",
+	"./az": "./node_modules/_moment@2.24.0@moment/locale/az.js",
+	"./az.js": "./node_modules/_moment@2.24.0@moment/locale/az.js",
+	"./be": "./node_modules/_moment@2.24.0@moment/locale/be.js",
+	"./be.js": "./node_modules/_moment@2.24.0@moment/locale/be.js",
+	"./bg": "./node_modules/_moment@2.24.0@moment/locale/bg.js",
+	"./bg.js": "./node_modules/_moment@2.24.0@moment/locale/bg.js",
+	"./bm": "./node_modules/_moment@2.24.0@moment/locale/bm.js",
+	"./bm.js": "./node_modules/_moment@2.24.0@moment/locale/bm.js",
+	"./bn": "./node_modules/_moment@2.24.0@moment/locale/bn.js",
+	"./bn.js": "./node_modules/_moment@2.24.0@moment/locale/bn.js",
+	"./bo": "./node_modules/_moment@2.24.0@moment/locale/bo.js",
+	"./bo.js": "./node_modules/_moment@2.24.0@moment/locale/bo.js",
+	"./br": "./node_modules/_moment@2.24.0@moment/locale/br.js",
+	"./br.js": "./node_modules/_moment@2.24.0@moment/locale/br.js",
+	"./bs": "./node_modules/_moment@2.24.0@moment/locale/bs.js",
+	"./bs.js": "./node_modules/_moment@2.24.0@moment/locale/bs.js",
+	"./ca": "./node_modules/_moment@2.24.0@moment/locale/ca.js",
+	"./ca.js": "./node_modules/_moment@2.24.0@moment/locale/ca.js",
+	"./cs": "./node_modules/_moment@2.24.0@moment/locale/cs.js",
+	"./cs.js": "./node_modules/_moment@2.24.0@moment/locale/cs.js",
+	"./cv": "./node_modules/_moment@2.24.0@moment/locale/cv.js",
+	"./cv.js": "./node_modules/_moment@2.24.0@moment/locale/cv.js",
+	"./cy": "./node_modules/_moment@2.24.0@moment/locale/cy.js",
+	"./cy.js": "./node_modules/_moment@2.24.0@moment/locale/cy.js",
+	"./da": "./node_modules/_moment@2.24.0@moment/locale/da.js",
+	"./da.js": "./node_modules/_moment@2.24.0@moment/locale/da.js",
+	"./de": "./node_modules/_moment@2.24.0@moment/locale/de.js",
+	"./de-at": "./node_modules/_moment@2.24.0@moment/locale/de-at.js",
+	"./de-at.js": "./node_modules/_moment@2.24.0@moment/locale/de-at.js",
+	"./de-ch": "./node_modules/_moment@2.24.0@moment/locale/de-ch.js",
+	"./de-ch.js": "./node_modules/_moment@2.24.0@moment/locale/de-ch.js",
+	"./de.js": "./node_modules/_moment@2.24.0@moment/locale/de.js",
+	"./dv": "./node_modules/_moment@2.24.0@moment/locale/dv.js",
+	"./dv.js": "./node_modules/_moment@2.24.0@moment/locale/dv.js",
+	"./el": "./node_modules/_moment@2.24.0@moment/locale/el.js",
+	"./el.js": "./node_modules/_moment@2.24.0@moment/locale/el.js",
+	"./en-SG": "./node_modules/_moment@2.24.0@moment/locale/en-SG.js",
+	"./en-SG.js": "./node_modules/_moment@2.24.0@moment/locale/en-SG.js",
+	"./en-au": "./node_modules/_moment@2.24.0@moment/locale/en-au.js",
+	"./en-au.js": "./node_modules/_moment@2.24.0@moment/locale/en-au.js",
+	"./en-ca": "./node_modules/_moment@2.24.0@moment/locale/en-ca.js",
+	"./en-ca.js": "./node_modules/_moment@2.24.0@moment/locale/en-ca.js",
+	"./en-gb": "./node_modules/_moment@2.24.0@moment/locale/en-gb.js",
+	"./en-gb.js": "./node_modules/_moment@2.24.0@moment/locale/en-gb.js",
+	"./en-ie": "./node_modules/_moment@2.24.0@moment/locale/en-ie.js",
+	"./en-ie.js": "./node_modules/_moment@2.24.0@moment/locale/en-ie.js",
+	"./en-il": "./node_modules/_moment@2.24.0@moment/locale/en-il.js",
+	"./en-il.js": "./node_modules/_moment@2.24.0@moment/locale/en-il.js",
+	"./en-nz": "./node_modules/_moment@2.24.0@moment/locale/en-nz.js",
+	"./en-nz.js": "./node_modules/_moment@2.24.0@moment/locale/en-nz.js",
+	"./eo": "./node_modules/_moment@2.24.0@moment/locale/eo.js",
+	"./eo.js": "./node_modules/_moment@2.24.0@moment/locale/eo.js",
+	"./es": "./node_modules/_moment@2.24.0@moment/locale/es.js",
+	"./es-do": "./node_modules/_moment@2.24.0@moment/locale/es-do.js",
+	"./es-do.js": "./node_modules/_moment@2.24.0@moment/locale/es-do.js",
+	"./es-us": "./node_modules/_moment@2.24.0@moment/locale/es-us.js",
+	"./es-us.js": "./node_modules/_moment@2.24.0@moment/locale/es-us.js",
+	"./es.js": "./node_modules/_moment@2.24.0@moment/locale/es.js",
+	"./et": "./node_modules/_moment@2.24.0@moment/locale/et.js",
+	"./et.js": "./node_modules/_moment@2.24.0@moment/locale/et.js",
+	"./eu": "./node_modules/_moment@2.24.0@moment/locale/eu.js",
+	"./eu.js": "./node_modules/_moment@2.24.0@moment/locale/eu.js",
+	"./fa": "./node_modules/_moment@2.24.0@moment/locale/fa.js",
+	"./fa.js": "./node_modules/_moment@2.24.0@moment/locale/fa.js",
+	"./fi": "./node_modules/_moment@2.24.0@moment/locale/fi.js",
+	"./fi.js": "./node_modules/_moment@2.24.0@moment/locale/fi.js",
+	"./fo": "./node_modules/_moment@2.24.0@moment/locale/fo.js",
+	"./fo.js": "./node_modules/_moment@2.24.0@moment/locale/fo.js",
+	"./fr": "./node_modules/_moment@2.24.0@moment/locale/fr.js",
+	"./fr-ca": "./node_modules/_moment@2.24.0@moment/locale/fr-ca.js",
+	"./fr-ca.js": "./node_modules/_moment@2.24.0@moment/locale/fr-ca.js",
+	"./fr-ch": "./node_modules/_moment@2.24.0@moment/locale/fr-ch.js",
+	"./fr-ch.js": "./node_modules/_moment@2.24.0@moment/locale/fr-ch.js",
+	"./fr.js": "./node_modules/_moment@2.24.0@moment/locale/fr.js",
+	"./fy": "./node_modules/_moment@2.24.0@moment/locale/fy.js",
+	"./fy.js": "./node_modules/_moment@2.24.0@moment/locale/fy.js",
+	"./ga": "./node_modules/_moment@2.24.0@moment/locale/ga.js",
+	"./ga.js": "./node_modules/_moment@2.24.0@moment/locale/ga.js",
+	"./gd": "./node_modules/_moment@2.24.0@moment/locale/gd.js",
+	"./gd.js": "./node_modules/_moment@2.24.0@moment/locale/gd.js",
+	"./gl": "./node_modules/_moment@2.24.0@moment/locale/gl.js",
+	"./gl.js": "./node_modules/_moment@2.24.0@moment/locale/gl.js",
+	"./gom-latn": "./node_modules/_moment@2.24.0@moment/locale/gom-latn.js",
+	"./gom-latn.js": "./node_modules/_moment@2.24.0@moment/locale/gom-latn.js",
+	"./gu": "./node_modules/_moment@2.24.0@moment/locale/gu.js",
+	"./gu.js": "./node_modules/_moment@2.24.0@moment/locale/gu.js",
+	"./he": "./node_modules/_moment@2.24.0@moment/locale/he.js",
+	"./he.js": "./node_modules/_moment@2.24.0@moment/locale/he.js",
+	"./hi": "./node_modules/_moment@2.24.0@moment/locale/hi.js",
+	"./hi.js": "./node_modules/_moment@2.24.0@moment/locale/hi.js",
+	"./hr": "./node_modules/_moment@2.24.0@moment/locale/hr.js",
+	"./hr.js": "./node_modules/_moment@2.24.0@moment/locale/hr.js",
+	"./hu": "./node_modules/_moment@2.24.0@moment/locale/hu.js",
+	"./hu.js": "./node_modules/_moment@2.24.0@moment/locale/hu.js",
+	"./hy-am": "./node_modules/_moment@2.24.0@moment/locale/hy-am.js",
+	"./hy-am.js": "./node_modules/_moment@2.24.0@moment/locale/hy-am.js",
+	"./id": "./node_modules/_moment@2.24.0@moment/locale/id.js",
+	"./id.js": "./node_modules/_moment@2.24.0@moment/locale/id.js",
+	"./is": "./node_modules/_moment@2.24.0@moment/locale/is.js",
+	"./is.js": "./node_modules/_moment@2.24.0@moment/locale/is.js",
+	"./it": "./node_modules/_moment@2.24.0@moment/locale/it.js",
+	"./it-ch": "./node_modules/_moment@2.24.0@moment/locale/it-ch.js",
+	"./it-ch.js": "./node_modules/_moment@2.24.0@moment/locale/it-ch.js",
+	"./it.js": "./node_modules/_moment@2.24.0@moment/locale/it.js",
+	"./ja": "./node_modules/_moment@2.24.0@moment/locale/ja.js",
+	"./ja.js": "./node_modules/_moment@2.24.0@moment/locale/ja.js",
+	"./jv": "./node_modules/_moment@2.24.0@moment/locale/jv.js",
+	"./jv.js": "./node_modules/_moment@2.24.0@moment/locale/jv.js",
+	"./ka": "./node_modules/_moment@2.24.0@moment/locale/ka.js",
+	"./ka.js": "./node_modules/_moment@2.24.0@moment/locale/ka.js",
+	"./kk": "./node_modules/_moment@2.24.0@moment/locale/kk.js",
+	"./kk.js": "./node_modules/_moment@2.24.0@moment/locale/kk.js",
+	"./km": "./node_modules/_moment@2.24.0@moment/locale/km.js",
+	"./km.js": "./node_modules/_moment@2.24.0@moment/locale/km.js",
+	"./kn": "./node_modules/_moment@2.24.0@moment/locale/kn.js",
+	"./kn.js": "./node_modules/_moment@2.24.0@moment/locale/kn.js",
+	"./ko": "./node_modules/_moment@2.24.0@moment/locale/ko.js",
+	"./ko.js": "./node_modules/_moment@2.24.0@moment/locale/ko.js",
+	"./ku": "./node_modules/_moment@2.24.0@moment/locale/ku.js",
+	"./ku.js": "./node_modules/_moment@2.24.0@moment/locale/ku.js",
+	"./ky": "./node_modules/_moment@2.24.0@moment/locale/ky.js",
+	"./ky.js": "./node_modules/_moment@2.24.0@moment/locale/ky.js",
+	"./lb": "./node_modules/_moment@2.24.0@moment/locale/lb.js",
+	"./lb.js": "./node_modules/_moment@2.24.0@moment/locale/lb.js",
+	"./lo": "./node_modules/_moment@2.24.0@moment/locale/lo.js",
+	"./lo.js": "./node_modules/_moment@2.24.0@moment/locale/lo.js",
+	"./lt": "./node_modules/_moment@2.24.0@moment/locale/lt.js",
+	"./lt.js": "./node_modules/_moment@2.24.0@moment/locale/lt.js",
+	"./lv": "./node_modules/_moment@2.24.0@moment/locale/lv.js",
+	"./lv.js": "./node_modules/_moment@2.24.0@moment/locale/lv.js",
+	"./me": "./node_modules/_moment@2.24.0@moment/locale/me.js",
+	"./me.js": "./node_modules/_moment@2.24.0@moment/locale/me.js",
+	"./mi": "./node_modules/_moment@2.24.0@moment/locale/mi.js",
+	"./mi.js": "./node_modules/_moment@2.24.0@moment/locale/mi.js",
+	"./mk": "./node_modules/_moment@2.24.0@moment/locale/mk.js",
+	"./mk.js": "./node_modules/_moment@2.24.0@moment/locale/mk.js",
+	"./ml": "./node_modules/_moment@2.24.0@moment/locale/ml.js",
+	"./ml.js": "./node_modules/_moment@2.24.0@moment/locale/ml.js",
+	"./mn": "./node_modules/_moment@2.24.0@moment/locale/mn.js",
+	"./mn.js": "./node_modules/_moment@2.24.0@moment/locale/mn.js",
+	"./mr": "./node_modules/_moment@2.24.0@moment/locale/mr.js",
+	"./mr.js": "./node_modules/_moment@2.24.0@moment/locale/mr.js",
+	"./ms": "./node_modules/_moment@2.24.0@moment/locale/ms.js",
+	"./ms-my": "./node_modules/_moment@2.24.0@moment/locale/ms-my.js",
+	"./ms-my.js": "./node_modules/_moment@2.24.0@moment/locale/ms-my.js",
+	"./ms.js": "./node_modules/_moment@2.24.0@moment/locale/ms.js",
+	"./mt": "./node_modules/_moment@2.24.0@moment/locale/mt.js",
+	"./mt.js": "./node_modules/_moment@2.24.0@moment/locale/mt.js",
+	"./my": "./node_modules/_moment@2.24.0@moment/locale/my.js",
+	"./my.js": "./node_modules/_moment@2.24.0@moment/locale/my.js",
+	"./nb": "./node_modules/_moment@2.24.0@moment/locale/nb.js",
+	"./nb.js": "./node_modules/_moment@2.24.0@moment/locale/nb.js",
+	"./ne": "./node_modules/_moment@2.24.0@moment/locale/ne.js",
+	"./ne.js": "./node_modules/_moment@2.24.0@moment/locale/ne.js",
+	"./nl": "./node_modules/_moment@2.24.0@moment/locale/nl.js",
+	"./nl-be": "./node_modules/_moment@2.24.0@moment/locale/nl-be.js",
+	"./nl-be.js": "./node_modules/_moment@2.24.0@moment/locale/nl-be.js",
+	"./nl.js": "./node_modules/_moment@2.24.0@moment/locale/nl.js",
+	"./nn": "./node_modules/_moment@2.24.0@moment/locale/nn.js",
+	"./nn.js": "./node_modules/_moment@2.24.0@moment/locale/nn.js",
+	"./pa-in": "./node_modules/_moment@2.24.0@moment/locale/pa-in.js",
+	"./pa-in.js": "./node_modules/_moment@2.24.0@moment/locale/pa-in.js",
+	"./pl": "./node_modules/_moment@2.24.0@moment/locale/pl.js",
+	"./pl.js": "./node_modules/_moment@2.24.0@moment/locale/pl.js",
+	"./pt": "./node_modules/_moment@2.24.0@moment/locale/pt.js",
+	"./pt-br": "./node_modules/_moment@2.24.0@moment/locale/pt-br.js",
+	"./pt-br.js": "./node_modules/_moment@2.24.0@moment/locale/pt-br.js",
+	"./pt.js": "./node_modules/_moment@2.24.0@moment/locale/pt.js",
+	"./ro": "./node_modules/_moment@2.24.0@moment/locale/ro.js",
+	"./ro.js": "./node_modules/_moment@2.24.0@moment/locale/ro.js",
+	"./ru": "./node_modules/_moment@2.24.0@moment/locale/ru.js",
+	"./ru.js": "./node_modules/_moment@2.24.0@moment/locale/ru.js",
+	"./sd": "./node_modules/_moment@2.24.0@moment/locale/sd.js",
+	"./sd.js": "./node_modules/_moment@2.24.0@moment/locale/sd.js",
+	"./se": "./node_modules/_moment@2.24.0@moment/locale/se.js",
+	"./se.js": "./node_modules/_moment@2.24.0@moment/locale/se.js",
+	"./si": "./node_modules/_moment@2.24.0@moment/locale/si.js",
+	"./si.js": "./node_modules/_moment@2.24.0@moment/locale/si.js",
+	"./sk": "./node_modules/_moment@2.24.0@moment/locale/sk.js",
+	"./sk.js": "./node_modules/_moment@2.24.0@moment/locale/sk.js",
+	"./sl": "./node_modules/_moment@2.24.0@moment/locale/sl.js",
+	"./sl.js": "./node_modules/_moment@2.24.0@moment/locale/sl.js",
+	"./sq": "./node_modules/_moment@2.24.0@moment/locale/sq.js",
+	"./sq.js": "./node_modules/_moment@2.24.0@moment/locale/sq.js",
+	"./sr": "./node_modules/_moment@2.24.0@moment/locale/sr.js",
+	"./sr-cyrl": "./node_modules/_moment@2.24.0@moment/locale/sr-cyrl.js",
+	"./sr-cyrl.js": "./node_modules/_moment@2.24.0@moment/locale/sr-cyrl.js",
+	"./sr.js": "./node_modules/_moment@2.24.0@moment/locale/sr.js",
+	"./ss": "./node_modules/_moment@2.24.0@moment/locale/ss.js",
+	"./ss.js": "./node_modules/_moment@2.24.0@moment/locale/ss.js",
+	"./sv": "./node_modules/_moment@2.24.0@moment/locale/sv.js",
+	"./sv.js": "./node_modules/_moment@2.24.0@moment/locale/sv.js",
+	"./sw": "./node_modules/_moment@2.24.0@moment/locale/sw.js",
+	"./sw.js": "./node_modules/_moment@2.24.0@moment/locale/sw.js",
+	"./ta": "./node_modules/_moment@2.24.0@moment/locale/ta.js",
+	"./ta.js": "./node_modules/_moment@2.24.0@moment/locale/ta.js",
+	"./te": "./node_modules/_moment@2.24.0@moment/locale/te.js",
+	"./te.js": "./node_modules/_moment@2.24.0@moment/locale/te.js",
+	"./tet": "./node_modules/_moment@2.24.0@moment/locale/tet.js",
+	"./tet.js": "./node_modules/_moment@2.24.0@moment/locale/tet.js",
+	"./tg": "./node_modules/_moment@2.24.0@moment/locale/tg.js",
+	"./tg.js": "./node_modules/_moment@2.24.0@moment/locale/tg.js",
+	"./th": "./node_modules/_moment@2.24.0@moment/locale/th.js",
+	"./th.js": "./node_modules/_moment@2.24.0@moment/locale/th.js",
+	"./tl-ph": "./node_modules/_moment@2.24.0@moment/locale/tl-ph.js",
+	"./tl-ph.js": "./node_modules/_moment@2.24.0@moment/locale/tl-ph.js",
+	"./tlh": "./node_modules/_moment@2.24.0@moment/locale/tlh.js",
+	"./tlh.js": "./node_modules/_moment@2.24.0@moment/locale/tlh.js",
+	"./tr": "./node_modules/_moment@2.24.0@moment/locale/tr.js",
+	"./tr.js": "./node_modules/_moment@2.24.0@moment/locale/tr.js",
+	"./tzl": "./node_modules/_moment@2.24.0@moment/locale/tzl.js",
+	"./tzl.js": "./node_modules/_moment@2.24.0@moment/locale/tzl.js",
+	"./tzm": "./node_modules/_moment@2.24.0@moment/locale/tzm.js",
+	"./tzm-latn": "./node_modules/_moment@2.24.0@moment/locale/tzm-latn.js",
+	"./tzm-latn.js": "./node_modules/_moment@2.24.0@moment/locale/tzm-latn.js",
+	"./tzm.js": "./node_modules/_moment@2.24.0@moment/locale/tzm.js",
+	"./ug-cn": "./node_modules/_moment@2.24.0@moment/locale/ug-cn.js",
+	"./ug-cn.js": "./node_modules/_moment@2.24.0@moment/locale/ug-cn.js",
+	"./uk": "./node_modules/_moment@2.24.0@moment/locale/uk.js",
+	"./uk.js": "./node_modules/_moment@2.24.0@moment/locale/uk.js",
+	"./ur": "./node_modules/_moment@2.24.0@moment/locale/ur.js",
+	"./ur.js": "./node_modules/_moment@2.24.0@moment/locale/ur.js",
+	"./uz": "./node_modules/_moment@2.24.0@moment/locale/uz.js",
+	"./uz-latn": "./node_modules/_moment@2.24.0@moment/locale/uz-latn.js",
+	"./uz-latn.js": "./node_modules/_moment@2.24.0@moment/locale/uz-latn.js",
+	"./uz.js": "./node_modules/_moment@2.24.0@moment/locale/uz.js",
+	"./vi": "./node_modules/_moment@2.24.0@moment/locale/vi.js",
+	"./vi.js": "./node_modules/_moment@2.24.0@moment/locale/vi.js",
+	"./x-pseudo": "./node_modules/_moment@2.24.0@moment/locale/x-pseudo.js",
+	"./x-pseudo.js": "./node_modules/_moment@2.24.0@moment/locale/x-pseudo.js",
+	"./yo": "./node_modules/_moment@2.24.0@moment/locale/yo.js",
+	"./yo.js": "./node_modules/_moment@2.24.0@moment/locale/yo.js",
+	"./zh-cn": "./node_modules/_moment@2.24.0@moment/locale/zh-cn.js",
+	"./zh-cn.js": "./node_modules/_moment@2.24.0@moment/locale/zh-cn.js",
+	"./zh-hk": "./node_modules/_moment@2.24.0@moment/locale/zh-hk.js",
+	"./zh-hk.js": "./node_modules/_moment@2.24.0@moment/locale/zh-hk.js",
+	"./zh-tw": "./node_modules/_moment@2.24.0@moment/locale/zh-tw.js",
+	"./zh-tw.js": "./node_modules/_moment@2.24.0@moment/locale/zh-tw.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./node_modules/_moment@2.24.0@moment/locale sync recursive ^\\.\\/.*$";
+
+/***/ }),
+
+/***/ "./node_modules/_moment@2.29.1@moment/locale sync recursive ^\\.\\/.*$":
+/*!*****************************************************************!*\
+  !*** ./node_modules/_moment@2.29.1@moment/locale sync ^\.\/.*$ ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./af": "./node_modules/_moment@2.29.1@moment/locale/af.js",
+	"./af.js": "./node_modules/_moment@2.29.1@moment/locale/af.js",
+	"./ar": "./node_modules/_moment@2.29.1@moment/locale/ar.js",
+	"./ar-dz": "./node_modules/_moment@2.29.1@moment/locale/ar-dz.js",
+	"./ar-dz.js": "./node_modules/_moment@2.29.1@moment/locale/ar-dz.js",
+	"./ar-kw": "./node_modules/_moment@2.29.1@moment/locale/ar-kw.js",
+	"./ar-kw.js": "./node_modules/_moment@2.29.1@moment/locale/ar-kw.js",
+	"./ar-ly": "./node_modules/_moment@2.29.1@moment/locale/ar-ly.js",
+	"./ar-ly.js": "./node_modules/_moment@2.29.1@moment/locale/ar-ly.js",
+	"./ar-ma": "./node_modules/_moment@2.29.1@moment/locale/ar-ma.js",
+	"./ar-ma.js": "./node_modules/_moment@2.29.1@moment/locale/ar-ma.js",
+	"./ar-sa": "./node_modules/_moment@2.29.1@moment/locale/ar-sa.js",
+	"./ar-sa.js": "./node_modules/_moment@2.29.1@moment/locale/ar-sa.js",
+	"./ar-tn": "./node_modules/_moment@2.29.1@moment/locale/ar-tn.js",
+	"./ar-tn.js": "./node_modules/_moment@2.29.1@moment/locale/ar-tn.js",
+	"./ar.js": "./node_modules/_moment@2.29.1@moment/locale/ar.js",
+	"./az": "./node_modules/_moment@2.29.1@moment/locale/az.js",
+	"./az.js": "./node_modules/_moment@2.29.1@moment/locale/az.js",
+	"./be": "./node_modules/_moment@2.29.1@moment/locale/be.js",
+	"./be.js": "./node_modules/_moment@2.29.1@moment/locale/be.js",
+	"./bg": "./node_modules/_moment@2.29.1@moment/locale/bg.js",
+	"./bg.js": "./node_modules/_moment@2.29.1@moment/locale/bg.js",
+	"./bm": "./node_modules/_moment@2.29.1@moment/locale/bm.js",
+	"./bm.js": "./node_modules/_moment@2.29.1@moment/locale/bm.js",
+	"./bn": "./node_modules/_moment@2.29.1@moment/locale/bn.js",
+	"./bn-bd": "./node_modules/_moment@2.29.1@moment/locale/bn-bd.js",
+	"./bn-bd.js": "./node_modules/_moment@2.29.1@moment/locale/bn-bd.js",
+	"./bn.js": "./node_modules/_moment@2.29.1@moment/locale/bn.js",
+	"./bo": "./node_modules/_moment@2.29.1@moment/locale/bo.js",
+	"./bo.js": "./node_modules/_moment@2.29.1@moment/locale/bo.js",
+	"./br": "./node_modules/_moment@2.29.1@moment/locale/br.js",
+	"./br.js": "./node_modules/_moment@2.29.1@moment/locale/br.js",
+	"./bs": "./node_modules/_moment@2.29.1@moment/locale/bs.js",
+	"./bs.js": "./node_modules/_moment@2.29.1@moment/locale/bs.js",
+	"./ca": "./node_modules/_moment@2.29.1@moment/locale/ca.js",
+	"./ca.js": "./node_modules/_moment@2.29.1@moment/locale/ca.js",
+	"./cs": "./node_modules/_moment@2.29.1@moment/locale/cs.js",
+	"./cs.js": "./node_modules/_moment@2.29.1@moment/locale/cs.js",
+	"./cv": "./node_modules/_moment@2.29.1@moment/locale/cv.js",
+	"./cv.js": "./node_modules/_moment@2.29.1@moment/locale/cv.js",
+	"./cy": "./node_modules/_moment@2.29.1@moment/locale/cy.js",
+	"./cy.js": "./node_modules/_moment@2.29.1@moment/locale/cy.js",
+	"./da": "./node_modules/_moment@2.29.1@moment/locale/da.js",
+	"./da.js": "./node_modules/_moment@2.29.1@moment/locale/da.js",
+	"./de": "./node_modules/_moment@2.29.1@moment/locale/de.js",
+	"./de-at": "./node_modules/_moment@2.29.1@moment/locale/de-at.js",
+	"./de-at.js": "./node_modules/_moment@2.29.1@moment/locale/de-at.js",
+	"./de-ch": "./node_modules/_moment@2.29.1@moment/locale/de-ch.js",
+	"./de-ch.js": "./node_modules/_moment@2.29.1@moment/locale/de-ch.js",
+	"./de.js": "./node_modules/_moment@2.29.1@moment/locale/de.js",
+	"./dv": "./node_modules/_moment@2.29.1@moment/locale/dv.js",
+	"./dv.js": "./node_modules/_moment@2.29.1@moment/locale/dv.js",
+	"./el": "./node_modules/_moment@2.29.1@moment/locale/el.js",
+	"./el.js": "./node_modules/_moment@2.29.1@moment/locale/el.js",
+	"./en-au": "./node_modules/_moment@2.29.1@moment/locale/en-au.js",
+	"./en-au.js": "./node_modules/_moment@2.29.1@moment/locale/en-au.js",
+	"./en-ca": "./node_modules/_moment@2.29.1@moment/locale/en-ca.js",
+	"./en-ca.js": "./node_modules/_moment@2.29.1@moment/locale/en-ca.js",
+	"./en-gb": "./node_modules/_moment@2.29.1@moment/locale/en-gb.js",
+	"./en-gb.js": "./node_modules/_moment@2.29.1@moment/locale/en-gb.js",
+	"./en-ie": "./node_modules/_moment@2.29.1@moment/locale/en-ie.js",
+	"./en-ie.js": "./node_modules/_moment@2.29.1@moment/locale/en-ie.js",
+	"./en-il": "./node_modules/_moment@2.29.1@moment/locale/en-il.js",
+	"./en-il.js": "./node_modules/_moment@2.29.1@moment/locale/en-il.js",
+	"./en-in": "./node_modules/_moment@2.29.1@moment/locale/en-in.js",
+	"./en-in.js": "./node_modules/_moment@2.29.1@moment/locale/en-in.js",
+	"./en-nz": "./node_modules/_moment@2.29.1@moment/locale/en-nz.js",
+	"./en-nz.js": "./node_modules/_moment@2.29.1@moment/locale/en-nz.js",
+	"./en-sg": "./node_modules/_moment@2.29.1@moment/locale/en-sg.js",
+	"./en-sg.js": "./node_modules/_moment@2.29.1@moment/locale/en-sg.js",
+	"./eo": "./node_modules/_moment@2.29.1@moment/locale/eo.js",
+	"./eo.js": "./node_modules/_moment@2.29.1@moment/locale/eo.js",
+	"./es": "./node_modules/_moment@2.29.1@moment/locale/es.js",
+	"./es-do": "./node_modules/_moment@2.29.1@moment/locale/es-do.js",
+	"./es-do.js": "./node_modules/_moment@2.29.1@moment/locale/es-do.js",
+	"./es-mx": "./node_modules/_moment@2.29.1@moment/locale/es-mx.js",
+	"./es-mx.js": "./node_modules/_moment@2.29.1@moment/locale/es-mx.js",
+	"./es-us": "./node_modules/_moment@2.29.1@moment/locale/es-us.js",
+	"./es-us.js": "./node_modules/_moment@2.29.1@moment/locale/es-us.js",
+	"./es.js": "./node_modules/_moment@2.29.1@moment/locale/es.js",
+	"./et": "./node_modules/_moment@2.29.1@moment/locale/et.js",
+	"./et.js": "./node_modules/_moment@2.29.1@moment/locale/et.js",
+	"./eu": "./node_modules/_moment@2.29.1@moment/locale/eu.js",
+	"./eu.js": "./node_modules/_moment@2.29.1@moment/locale/eu.js",
+	"./fa": "./node_modules/_moment@2.29.1@moment/locale/fa.js",
+	"./fa.js": "./node_modules/_moment@2.29.1@moment/locale/fa.js",
+	"./fi": "./node_modules/_moment@2.29.1@moment/locale/fi.js",
+	"./fi.js": "./node_modules/_moment@2.29.1@moment/locale/fi.js",
+	"./fil": "./node_modules/_moment@2.29.1@moment/locale/fil.js",
+	"./fil.js": "./node_modules/_moment@2.29.1@moment/locale/fil.js",
+	"./fo": "./node_modules/_moment@2.29.1@moment/locale/fo.js",
+	"./fo.js": "./node_modules/_moment@2.29.1@moment/locale/fo.js",
+	"./fr": "./node_modules/_moment@2.29.1@moment/locale/fr.js",
+	"./fr-ca": "./node_modules/_moment@2.29.1@moment/locale/fr-ca.js",
+	"./fr-ca.js": "./node_modules/_moment@2.29.1@moment/locale/fr-ca.js",
+	"./fr-ch": "./node_modules/_moment@2.29.1@moment/locale/fr-ch.js",
+	"./fr-ch.js": "./node_modules/_moment@2.29.1@moment/locale/fr-ch.js",
+	"./fr.js": "./node_modules/_moment@2.29.1@moment/locale/fr.js",
+	"./fy": "./node_modules/_moment@2.29.1@moment/locale/fy.js",
+	"./fy.js": "./node_modules/_moment@2.29.1@moment/locale/fy.js",
+	"./ga": "./node_modules/_moment@2.29.1@moment/locale/ga.js",
+	"./ga.js": "./node_modules/_moment@2.29.1@moment/locale/ga.js",
+	"./gd": "./node_modules/_moment@2.29.1@moment/locale/gd.js",
+	"./gd.js": "./node_modules/_moment@2.29.1@moment/locale/gd.js",
+	"./gl": "./node_modules/_moment@2.29.1@moment/locale/gl.js",
+	"./gl.js": "./node_modules/_moment@2.29.1@moment/locale/gl.js",
+	"./gom-deva": "./node_modules/_moment@2.29.1@moment/locale/gom-deva.js",
+	"./gom-deva.js": "./node_modules/_moment@2.29.1@moment/locale/gom-deva.js",
+	"./gom-latn": "./node_modules/_moment@2.29.1@moment/locale/gom-latn.js",
+	"./gom-latn.js": "./node_modules/_moment@2.29.1@moment/locale/gom-latn.js",
+	"./gu": "./node_modules/_moment@2.29.1@moment/locale/gu.js",
+	"./gu.js": "./node_modules/_moment@2.29.1@moment/locale/gu.js",
+	"./he": "./node_modules/_moment@2.29.1@moment/locale/he.js",
+	"./he.js": "./node_modules/_moment@2.29.1@moment/locale/he.js",
+	"./hi": "./node_modules/_moment@2.29.1@moment/locale/hi.js",
+	"./hi.js": "./node_modules/_moment@2.29.1@moment/locale/hi.js",
+	"./hr": "./node_modules/_moment@2.29.1@moment/locale/hr.js",
+	"./hr.js": "./node_modules/_moment@2.29.1@moment/locale/hr.js",
+	"./hu": "./node_modules/_moment@2.29.1@moment/locale/hu.js",
+	"./hu.js": "./node_modules/_moment@2.29.1@moment/locale/hu.js",
+	"./hy-am": "./node_modules/_moment@2.29.1@moment/locale/hy-am.js",
+	"./hy-am.js": "./node_modules/_moment@2.29.1@moment/locale/hy-am.js",
+	"./id": "./node_modules/_moment@2.29.1@moment/locale/id.js",
+	"./id.js": "./node_modules/_moment@2.29.1@moment/locale/id.js",
+	"./is": "./node_modules/_moment@2.29.1@moment/locale/is.js",
+	"./is.js": "./node_modules/_moment@2.29.1@moment/locale/is.js",
+	"./it": "./node_modules/_moment@2.29.1@moment/locale/it.js",
+	"./it-ch": "./node_modules/_moment@2.29.1@moment/locale/it-ch.js",
+	"./it-ch.js": "./node_modules/_moment@2.29.1@moment/locale/it-ch.js",
+	"./it.js": "./node_modules/_moment@2.29.1@moment/locale/it.js",
+	"./ja": "./node_modules/_moment@2.29.1@moment/locale/ja.js",
+	"./ja.js": "./node_modules/_moment@2.29.1@moment/locale/ja.js",
+	"./jv": "./node_modules/_moment@2.29.1@moment/locale/jv.js",
+	"./jv.js": "./node_modules/_moment@2.29.1@moment/locale/jv.js",
+	"./ka": "./node_modules/_moment@2.29.1@moment/locale/ka.js",
+	"./ka.js": "./node_modules/_moment@2.29.1@moment/locale/ka.js",
+	"./kk": "./node_modules/_moment@2.29.1@moment/locale/kk.js",
+	"./kk.js": "./node_modules/_moment@2.29.1@moment/locale/kk.js",
+	"./km": "./node_modules/_moment@2.29.1@moment/locale/km.js",
+	"./km.js": "./node_modules/_moment@2.29.1@moment/locale/km.js",
+	"./kn": "./node_modules/_moment@2.29.1@moment/locale/kn.js",
+	"./kn.js": "./node_modules/_moment@2.29.1@moment/locale/kn.js",
+	"./ko": "./node_modules/_moment@2.29.1@moment/locale/ko.js",
+	"./ko.js": "./node_modules/_moment@2.29.1@moment/locale/ko.js",
+	"./ku": "./node_modules/_moment@2.29.1@moment/locale/ku.js",
+	"./ku.js": "./node_modules/_moment@2.29.1@moment/locale/ku.js",
+	"./ky": "./node_modules/_moment@2.29.1@moment/locale/ky.js",
+	"./ky.js": "./node_modules/_moment@2.29.1@moment/locale/ky.js",
+	"./lb": "./node_modules/_moment@2.29.1@moment/locale/lb.js",
+	"./lb.js": "./node_modules/_moment@2.29.1@moment/locale/lb.js",
+	"./lo": "./node_modules/_moment@2.29.1@moment/locale/lo.js",
+	"./lo.js": "./node_modules/_moment@2.29.1@moment/locale/lo.js",
+	"./lt": "./node_modules/_moment@2.29.1@moment/locale/lt.js",
+	"./lt.js": "./node_modules/_moment@2.29.1@moment/locale/lt.js",
+	"./lv": "./node_modules/_moment@2.29.1@moment/locale/lv.js",
+	"./lv.js": "./node_modules/_moment@2.29.1@moment/locale/lv.js",
+	"./me": "./node_modules/_moment@2.29.1@moment/locale/me.js",
+	"./me.js": "./node_modules/_moment@2.29.1@moment/locale/me.js",
+	"./mi": "./node_modules/_moment@2.29.1@moment/locale/mi.js",
+	"./mi.js": "./node_modules/_moment@2.29.1@moment/locale/mi.js",
+	"./mk": "./node_modules/_moment@2.29.1@moment/locale/mk.js",
+	"./mk.js": "./node_modules/_moment@2.29.1@moment/locale/mk.js",
+	"./ml": "./node_modules/_moment@2.29.1@moment/locale/ml.js",
+	"./ml.js": "./node_modules/_moment@2.29.1@moment/locale/ml.js",
+	"./mn": "./node_modules/_moment@2.29.1@moment/locale/mn.js",
+	"./mn.js": "./node_modules/_moment@2.29.1@moment/locale/mn.js",
+	"./mr": "./node_modules/_moment@2.29.1@moment/locale/mr.js",
+	"./mr.js": "./node_modules/_moment@2.29.1@moment/locale/mr.js",
+	"./ms": "./node_modules/_moment@2.29.1@moment/locale/ms.js",
+	"./ms-my": "./node_modules/_moment@2.29.1@moment/locale/ms-my.js",
+	"./ms-my.js": "./node_modules/_moment@2.29.1@moment/locale/ms-my.js",
+	"./ms.js": "./node_modules/_moment@2.29.1@moment/locale/ms.js",
+	"./mt": "./node_modules/_moment@2.29.1@moment/locale/mt.js",
+	"./mt.js": "./node_modules/_moment@2.29.1@moment/locale/mt.js",
+	"./my": "./node_modules/_moment@2.29.1@moment/locale/my.js",
+	"./my.js": "./node_modules/_moment@2.29.1@moment/locale/my.js",
+	"./nb": "./node_modules/_moment@2.29.1@moment/locale/nb.js",
+	"./nb.js": "./node_modules/_moment@2.29.1@moment/locale/nb.js",
+	"./ne": "./node_modules/_moment@2.29.1@moment/locale/ne.js",
+	"./ne.js": "./node_modules/_moment@2.29.1@moment/locale/ne.js",
+	"./nl": "./node_modules/_moment@2.29.1@moment/locale/nl.js",
+	"./nl-be": "./node_modules/_moment@2.29.1@moment/locale/nl-be.js",
+	"./nl-be.js": "./node_modules/_moment@2.29.1@moment/locale/nl-be.js",
+	"./nl.js": "./node_modules/_moment@2.29.1@moment/locale/nl.js",
+	"./nn": "./node_modules/_moment@2.29.1@moment/locale/nn.js",
+	"./nn.js": "./node_modules/_moment@2.29.1@moment/locale/nn.js",
+	"./oc-lnc": "./node_modules/_moment@2.29.1@moment/locale/oc-lnc.js",
+	"./oc-lnc.js": "./node_modules/_moment@2.29.1@moment/locale/oc-lnc.js",
+	"./pa-in": "./node_modules/_moment@2.29.1@moment/locale/pa-in.js",
+	"./pa-in.js": "./node_modules/_moment@2.29.1@moment/locale/pa-in.js",
+	"./pl": "./node_modules/_moment@2.29.1@moment/locale/pl.js",
+	"./pl.js": "./node_modules/_moment@2.29.1@moment/locale/pl.js",
+	"./pt": "./node_modules/_moment@2.29.1@moment/locale/pt.js",
+	"./pt-br": "./node_modules/_moment@2.29.1@moment/locale/pt-br.js",
+	"./pt-br.js": "./node_modules/_moment@2.29.1@moment/locale/pt-br.js",
+	"./pt.js": "./node_modules/_moment@2.29.1@moment/locale/pt.js",
+	"./ro": "./node_modules/_moment@2.29.1@moment/locale/ro.js",
+	"./ro.js": "./node_modules/_moment@2.29.1@moment/locale/ro.js",
+	"./ru": "./node_modules/_moment@2.29.1@moment/locale/ru.js",
+	"./ru.js": "./node_modules/_moment@2.29.1@moment/locale/ru.js",
+	"./sd": "./node_modules/_moment@2.29.1@moment/locale/sd.js",
+	"./sd.js": "./node_modules/_moment@2.29.1@moment/locale/sd.js",
+	"./se": "./node_modules/_moment@2.29.1@moment/locale/se.js",
+	"./se.js": "./node_modules/_moment@2.29.1@moment/locale/se.js",
+	"./si": "./node_modules/_moment@2.29.1@moment/locale/si.js",
+	"./si.js": "./node_modules/_moment@2.29.1@moment/locale/si.js",
+	"./sk": "./node_modules/_moment@2.29.1@moment/locale/sk.js",
+	"./sk.js": "./node_modules/_moment@2.29.1@moment/locale/sk.js",
+	"./sl": "./node_modules/_moment@2.29.1@moment/locale/sl.js",
+	"./sl.js": "./node_modules/_moment@2.29.1@moment/locale/sl.js",
+	"./sq": "./node_modules/_moment@2.29.1@moment/locale/sq.js",
+	"./sq.js": "./node_modules/_moment@2.29.1@moment/locale/sq.js",
+	"./sr": "./node_modules/_moment@2.29.1@moment/locale/sr.js",
+	"./sr-cyrl": "./node_modules/_moment@2.29.1@moment/locale/sr-cyrl.js",
+	"./sr-cyrl.js": "./node_modules/_moment@2.29.1@moment/locale/sr-cyrl.js",
+	"./sr.js": "./node_modules/_moment@2.29.1@moment/locale/sr.js",
+	"./ss": "./node_modules/_moment@2.29.1@moment/locale/ss.js",
+	"./ss.js": "./node_modules/_moment@2.29.1@moment/locale/ss.js",
+	"./sv": "./node_modules/_moment@2.29.1@moment/locale/sv.js",
+	"./sv.js": "./node_modules/_moment@2.29.1@moment/locale/sv.js",
+	"./sw": "./node_modules/_moment@2.29.1@moment/locale/sw.js",
+	"./sw.js": "./node_modules/_moment@2.29.1@moment/locale/sw.js",
+	"./ta": "./node_modules/_moment@2.29.1@moment/locale/ta.js",
+	"./ta.js": "./node_modules/_moment@2.29.1@moment/locale/ta.js",
+	"./te": "./node_modules/_moment@2.29.1@moment/locale/te.js",
+	"./te.js": "./node_modules/_moment@2.29.1@moment/locale/te.js",
+	"./tet": "./node_modules/_moment@2.29.1@moment/locale/tet.js",
+	"./tet.js": "./node_modules/_moment@2.29.1@moment/locale/tet.js",
+	"./tg": "./node_modules/_moment@2.29.1@moment/locale/tg.js",
+	"./tg.js": "./node_modules/_moment@2.29.1@moment/locale/tg.js",
+	"./th": "./node_modules/_moment@2.29.1@moment/locale/th.js",
+	"./th.js": "./node_modules/_moment@2.29.1@moment/locale/th.js",
+	"./tk": "./node_modules/_moment@2.29.1@moment/locale/tk.js",
+	"./tk.js": "./node_modules/_moment@2.29.1@moment/locale/tk.js",
+	"./tl-ph": "./node_modules/_moment@2.29.1@moment/locale/tl-ph.js",
+	"./tl-ph.js": "./node_modules/_moment@2.29.1@moment/locale/tl-ph.js",
+	"./tlh": "./node_modules/_moment@2.29.1@moment/locale/tlh.js",
+	"./tlh.js": "./node_modules/_moment@2.29.1@moment/locale/tlh.js",
+	"./tr": "./node_modules/_moment@2.29.1@moment/locale/tr.js",
+	"./tr.js": "./node_modules/_moment@2.29.1@moment/locale/tr.js",
+	"./tzl": "./node_modules/_moment@2.29.1@moment/locale/tzl.js",
+	"./tzl.js": "./node_modules/_moment@2.29.1@moment/locale/tzl.js",
+	"./tzm": "./node_modules/_moment@2.29.1@moment/locale/tzm.js",
+	"./tzm-latn": "./node_modules/_moment@2.29.1@moment/locale/tzm-latn.js",
+	"./tzm-latn.js": "./node_modules/_moment@2.29.1@moment/locale/tzm-latn.js",
+	"./tzm.js": "./node_modules/_moment@2.29.1@moment/locale/tzm.js",
+	"./ug-cn": "./node_modules/_moment@2.29.1@moment/locale/ug-cn.js",
+	"./ug-cn.js": "./node_modules/_moment@2.29.1@moment/locale/ug-cn.js",
+	"./uk": "./node_modules/_moment@2.29.1@moment/locale/uk.js",
+	"./uk.js": "./node_modules/_moment@2.29.1@moment/locale/uk.js",
+	"./ur": "./node_modules/_moment@2.29.1@moment/locale/ur.js",
+	"./ur.js": "./node_modules/_moment@2.29.1@moment/locale/ur.js",
+	"./uz": "./node_modules/_moment@2.29.1@moment/locale/uz.js",
+	"./uz-latn": "./node_modules/_moment@2.29.1@moment/locale/uz-latn.js",
+	"./uz-latn.js": "./node_modules/_moment@2.29.1@moment/locale/uz-latn.js",
+	"./uz.js": "./node_modules/_moment@2.29.1@moment/locale/uz.js",
+	"./vi": "./node_modules/_moment@2.29.1@moment/locale/vi.js",
+	"./vi.js": "./node_modules/_moment@2.29.1@moment/locale/vi.js",
+	"./x-pseudo": "./node_modules/_moment@2.29.1@moment/locale/x-pseudo.js",
+	"./x-pseudo.js": "./node_modules/_moment@2.29.1@moment/locale/x-pseudo.js",
+	"./yo": "./node_modules/_moment@2.29.1@moment/locale/yo.js",
+	"./yo.js": "./node_modules/_moment@2.29.1@moment/locale/yo.js",
+	"./zh-cn": "./node_modules/_moment@2.29.1@moment/locale/zh-cn.js",
+	"./zh-cn.js": "./node_modules/_moment@2.29.1@moment/locale/zh-cn.js",
+	"./zh-hk": "./node_modules/_moment@2.29.1@moment/locale/zh-hk.js",
+	"./zh-hk.js": "./node_modules/_moment@2.29.1@moment/locale/zh-hk.js",
+	"./zh-mo": "./node_modules/_moment@2.29.1@moment/locale/zh-mo.js",
+	"./zh-mo.js": "./node_modules/_moment@2.29.1@moment/locale/zh-mo.js",
+	"./zh-tw": "./node_modules/_moment@2.29.1@moment/locale/zh-tw.js",
+	"./zh-tw.js": "./node_modules/_moment@2.29.1@moment/locale/zh-tw.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./node_modules/_moment@2.29.1@moment/locale sync recursive ^\\.\\/.*$";
+
+/***/ }),
+
+/***/ "./src/common/hdtable.js":
+/*!*******************************!*\
+  !*** ./src/common/hdtable.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return hdtable; });
+/* harmony import */ var handsontable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! handsontable */ "./node_modules/_handsontable@8.3.2@handsontable/index.mjs");
+/* harmony import */ var handsontable_languages_zh_CN__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! handsontable/languages/zh-CN */ "./node_modules/_handsontable@8.3.2@handsontable/languages/zh-CN.js");
+/* harmony import */ var handsontable_languages_zh_CN__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(handsontable_languages_zh_CN__WEBPACK_IMPORTED_MODULE_1__);
+//vue调用方式
+
+ //本地调用方式
+
+/*import Handsontable from "./handsontable/handsontable.full";//
+
+import './handsontable/zh-CN';*/
+
+function hdtable(el, config) {
+  // 行头
+  config.rowHeaders = true; // 数据过滤
+
+  config.filters = true; // 列头下拉菜单
+
+  config.dropdownMenu = ['filter_by_value', 'filter_action_bar']; // 列排序
+
+  config.columnSorting = true; // config.contextMenu = true
+  // 列隐藏
+  // config.hiddenColumns=true
+  // 行隐藏
+  // config.hiddenRows=true
+  //设置表格的高
+
+  config.height = '100%'; //设置表格的宽度
+
+  config.width = '100%'; // 列宽自适应
+  // config.autoColumnSize = {syncLimit: '10%'}
+
+  /* 固定列宽度 */
+  // config.colWidths = '200'
+
+  /* 允许拖动改变列宽 */
+
+  config.manualColumnResize = true; //设置单元格的高
+
+  config.rowHeights = '30px'; //合并单元格
+  // config.mergeCells=true
+  //手动固定某一列
+
+  config.manualColumnFreeze = true; //一次性加载全部行
+  // config.renderAllRows=true
+  //所有列延伸
+
+  config.stretchH = "all"; //空出多少行
+  // config.minSpareRows=5
+
+  config.observeChanges = false; //禁用或启用CopyPaste插件以提供复制/剪切/粘贴功能
+
+  config.copyPaste = true; //如果为true，则按TAB最后一列中的或向右箭头将移至下一行的第一列
+
+  config.autoWrapRow = true; //右下角只允许向下拉动
+
+  config.fillHandle = {
+    // enable plugin in vertical direction and with autoInsertRow as false
+    autoInsertRow: false,
+    direction: 'vertical'
+  }, // 该HiddenRows插件允许隐藏某些行。
+  config.hiddenRows = {
+    rows: [],
+    indicators: true
+  }, // 语言
+  config.language = 'zh-CN'; // 密钥
+
+  config.licenseKey = 'non-commercial-and-evaluation';
+  config.manualRowMove = true;
+  /* 行和行之间能够拖动换行 */
+
+  return Object(handsontable__WEBPACK_IMPORTED_MODULE_0__["default"])(el, config);
+}
+
+/***/ }),
+
+/***/ "./src/components/content/system/position/table/js/pos_info.js":
+/*!*********************************************************************!*\
+  !*** ./src/components/content/system/position/table/js/pos_info.js ***!
+  \*********************************************************************/
+/*! exports provided: over_pos_loc_ch, syn_pos_loc_ch, tmsPosList, getPositionInfo, createPosition, changePosition */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "over_pos_loc_ch", function() { return over_pos_loc_ch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "syn_pos_loc_ch", function() { return syn_pos_loc_ch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tmsPosList", function() { return tmsPosList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPositionInfo", function() { return getPositionInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPosition", function() { return createPosition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changePosition", function() { return changePosition; });
+/* harmony import */ var _pos_methods_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pos_methods.js */ "./src/components/content/system/position/table/js/pos_methods.js");
+
+/* 固定参数 */
+
+var isalarm_choose = {
+  '0': '不报警',
+  '1': '报警'
+};
+var isalarm_vib_choose = {
+  '0': '不报警',
+  '1': '报警',
+  '2': '仅屏蔽故障频率报警',
+  '3': '仅屏蔽特征值报警'
+}; //振动、包络、阶次、倾角、晃度  这些测点有波形显示这四个选项
+
+var resampling_choose = {
+  '0': '是',
+  '1': '否'
+};
+var pos_activity_choose = {
+  '0': '有效',
+  '1': '无效'
+};
+var task_id_choose = {};
+/*金风现场，'任务3'改为'长采样'*/
+
+if (config.company === 1) {
+  task_id_choose = {
+    '0': '任务1',
+    '1': '任务2',
+    '2': '长采样'
+  };
+} else {
+  task_id_choose = {
+    '0': '任务1',
+    '1': '任务2',
+    '2': '任务3'
+  };
+}
+
+var optfreq_type_choose = {
+  '0': '能量有效值',
+  '1': '速度值',
+  '2': '加速度值'
+};
+var band_factor_type_choose = {
+  '0': '频段因数',
+  '1': '速度值',
+  '2': '加速度值'
+};
+var filter_choose = {
+  '0': '滤波器1',
+  '1': '滤波器2',
+  '2': '滤波器3'
+};
+var dip_model_choose = {
+  '0': 'WindIT 2917BV',
+  '1': 'WindIT 2917BH',
+  '2': 'WindIT 2917TV-9',
+  '3': 'WindIT 2917TV-18',
+  '4': 'WindIT 2914BH',
+  '5': 'WindIT 2918TH'
+};
+var sourceType_choose = {
+  '0': '振动通道',
+  '5': '串口'
+};
+var datamode_choose = {
+  '0': '读保持寄存器',
+  '1': '输入寄存器',
+  '2': '亚当模块'
+};
+var calc_method_choose = {
+  '0': '计数',
+  '1': '高低电平'
+};
+var method_choose = {
+  '0': '定时采样',
+  '1': '手动采样'
+};
+var tt_pos_loc_source = {
+  '0': '机舱',
+  '1': '塔顶',
+  '2': '塔底',
+  '3': '塔筒1',
+  '4': '塔筒2',
+  '5': '塔筒3',
+  '6': '塔筒4',
+  '7': '塔筒5'
+};
+var if_show_source = {
+  '0': '不显示',
+  '1': '显示'
+};
+var over_pos_loc_ch = ["机舱", "塔顶", "塔筒1", "塔筒2", "塔筒3", "塔筒4", "塔筒5"];
+var syn_pos_loc_ch = ["机舱", "塔顶", "塔底", "塔筒1", "塔筒2", "塔筒3", "塔筒4", "塔筒5"];
+var pos_loc = {
+  "15": "机舱X",
+  "16": "机舱Y",
+  "17": "塔顶X",
+  "18": "塔顶Y",
+  "24": "塔底X",
+  "25": "塔底Y",
+  "45": "塔筒1X",
+  "46": "塔筒1Y",
+  "47": "塔筒2X",
+  "48": "塔筒2Y",
+  "49": "塔筒3X",
+  "50": "塔筒3Y",
+  "51": "塔筒4X",
+  "52": "塔筒4Y",
+  "53": "塔筒5X",
+  "54": "塔筒5Y",
+  'dd': "module_name",
+  'kk': "module_id"
+};
+var tmsPosList = [3, 4, 8, 9, 15, 16, 1, 7, 17]; //tms采集器的测点类型集合
+
+var trendAlarm_source = {
+  '1000': '转速',
+  '2000': '有效值',
+  '3000': '峰值',
+  '4000': '峰峰值',
+  '19000': '能量有效值',
+  '15000': '峰值因数',
+  '14000': '偏置电压',
+  '24000': '峭度',
+  '25000': '裕度',
+  '26000': '歪度',
+  '46000': '冲击值',
+  '53000': '1x幅值',
+  '54000': '1x相位',
+  '12001': '频段1-1',
+  '13001': '频段1-2',
+  '12002': '频段2-1',
+  '13002': '频段2-2',
+  '12003': '频段3-1',
+  '13003': '频段3-2',
+  '12004': '频段4-1',
+  '13004': '频段4-2',
+  '12005': '频段5-1',
+  '13005': '频段5-2',
+  '12006': '频段6-1',
+  '13006': '频段6-2',
+  '12007': '频段7-1',
+  '13007': '频段7-2',
+  '12008': '频段8-1',
+  '13008': '频段8-2'
+};
+var sensor_id_source = {
+  '0': '无',
+  '1': 'ZXA07油液传感器',
+  '101': '电表',
+  '102': '变频器',
+  '103': '智能电表',
+  '104': '斯伦贝谢传感器',
+  '105': '海利普变频器'
+};
+var datatypeSource = {
+  "1": "Float",
+  "2": "Byte",
+  "3": "Short",
+  "4": "Int",
+  "5": "Double"
+};
+var shock_threshold_source = [60, 80, 100]; //脱轨的冲击阈值
+
+function getPositionInfo(res, type) {
+  if (type == 17) {
+    optfreq_type_choose = {
+      '0': '有效值'
+    };
+    band_factor_type_choose = {
+      '0': '频段因数'
+    };
+  } else {
+    optfreq_type_choose = {
+      '0': '能量有效值',
+      '1': '速度值',
+      '2': '加速度值'
+    };
+    band_factor_type_choose = {
+      '0': '频段因数',
+      '1': '速度值',
+      '2': '加速度值'
+    };
+  }
+
+  if (res.msg == 0) {
+    var pos_folderList = {}; //所有的组织列表，组织里面存组织ID和组织name
+
+    var pos_machineList = {}; //所有的机组列表,（组织id：[{机组type，机组name，机组ID}]）
+
+    var pos_dgmList = {}; //所有的采集器列表（机组id：[{采集器id,采集器name，采集器type}]）
+
+    var pos_chaList = {}; //所有的通道列表{采集器id:[所有通道]key:ch_name,value:ch_id,ch_type
+
+    var pos_chaIdList = {}; //所有的通道列表{采集器id:[所有通道]key:ch_id,ch_type,value:ch_name
+
+    var cap_chaList = {}; //长采样序号对应振动的通道列表，根据ID来查询
+
+    var cap_sequenceNum = {}; //长采样序号列表
+
+    var rock_chaList = {}; //晃度的通道列表
+
+    var pos_dgmIdList = []; //临时存储（tId_macId_dgmID）唯一的采集器
+
+    var mac_pos_id_list = {}; //一个机组下面的该类型所有通道id，保证新建测点的id不冲突
+
+    var rock_pos_id_list = {}; //一个机组下面 存放晃度和倾角的pos_id的列表
+
+    var task_idSources = {}; //一个通道下面所有的任务，保证任务不冲突{dgm_id:{ch_name:{[task_id_sources],[indexs]}}}
+
+    var invalidPos = []; //失效测点集合
+
+    var data = []; //测点集合
+
+    var position = {}; //单个测点
+
+    var rock_list = {}; //存放倾角测点
+
+    var cc_mod_id_list = {}; //工艺量的关联组态结合（工艺量通道集合）
+
+    if (!res.new_position_list.length > 0) {
+      return;
+    } else {
+      //组织数据结构（多machine_info.positions属性）
+      res.new_position_list.forEach(function (new_position) {
+        pos_folderList[new_position.t_name] = new_position.t_id;
+        pos_machineList[new_position.t_name] = {};
+        new_position.machine_info.forEach(function (machine_info) {
+          pos_machineList[new_position.t_name][machine_info.mac_me] = {
+            'mac_id': machine_info.mac_id,
+            'm_type': machine_info.m_type
+          };
+          mac_pos_id_list[machine_info.mac_id] = []; //获得所有mac_id 的集合对象(额外用途)测点Id列表
+
+          rock_pos_id_list[machine_info.mac_id] = [];
+          pos_dgmList[machine_info.mac_id] = {};
+
+          if (type == 10 || type == 13 || type == 12) {
+            //倾角、合成倾角、工艺量测点需要加上虚拟采集器的通道
+            if (res.model != undefined) {
+              machine_info.bindDgm_list.push(res.model);
+            }
+          }
+
+          machine_info.bindDgm_list.forEach(function (bindDgm_list) {
+            pos_dgmIdList.push(new_position.t_id + '_' + machine_info.mac_id + '_' + bindDgm_list.dgm_id); //获取所有的采集器id，不存在采集器的测点屏蔽
+
+            pos_dgmList[machine_info.mac_id][bindDgm_list.dgm_name] = {
+              "dgm_id": bindDgm_list.dgm_id,
+              "dgm_type": bindDgm_list.dgm_type
+            };
+
+            if (type == 11 || type == 13) {
+              //倾覆或者倾角的组织结构方式不一样
+              rock_chaList[bindDgm_list.dgm_id] = {};
+
+              for (var key in pos_loc) {
+                rock_chaList[bindDgm_list.dgm_id][pos_loc[key]] = {};
+              }
+            }
+
+            pos_chaList[bindDgm_list.dgm_id] = {};
+            pos_chaIdList[bindDgm_list.dgm_id] = {};
+            cap_chaList[bindDgm_list.dgm_id] = {};
+            cap_sequenceNum[bindDgm_list.dgm_id] = {};
+            task_idSources[bindDgm_list.dgm_id] = {};
+            cc_mod_id_list[bindDgm_list.dgm_id] = {};
+            var taskArr = [3, 4, 8, 9, 15, 16]; //振动、包络、阶次,冲击
+
+            if (type == 10) {
+              bindDgm_list.ch_list.forEach(function (channel) {
+                var ch_name = channel.ch_name;
+                var ch_id = channel.ch_id;
+                var ch_type = channel.ch_type;
+                cc_mod_id_list[bindDgm_list.dgm_id][ch_name] = {
+                  "ch_id": ch_id,
+                  "ch_type": ch_type
+                };
+              });
+            }
+
+            bindDgm_list.channel_list.forEach(function (channel) {
+              var ch_name = channel.ch_name;
+              var ch_id = channel.ch_id;
+              var ch_type = channel.ch_type;
+
+              if (type == 11) {
+                //如果是倾覆测点
+                over_pos_loc_ch.forEach(function (item) {
+                  if (bindDgm_list.dgm_type == 1 || bindDgm_list.dgm_type == 4) {
+                    task_idSources[bindDgm_list.dgm_id][item] = ["0"];
+                  } else {
+                    task_idSources[bindDgm_list.dgm_id][item] = ["0", "1", "2"];
+                  }
+                });
+              } else if (taskArr.indexOf(type) > -1 && (bindDgm_list.dgm_type == 2 || bindDgm_list.dgm_type == 3 || bindDgm_list.dgm_type == 7 || bindDgm_list.dgm_type == 9)) {
+                task_idSources[bindDgm_list.dgm_id][ch_name] = ["0", "1", "2"]; //制造一个全满的任务,DGU2200 DGU2000V2 tms2000三个任务
+              } else {
+                task_idSources[bindDgm_list.dgm_id][ch_name] = ["0"]; //其他只有一个任务（暂时没用）
+              }
+
+              if (type == 11 || type == 13) {
+                //仅在机舱、塔顶、塔底形成任务
+                if (pos_loc[channel.pos_loc] !== undefined) {
+                  rock_chaList[bindDgm_list.dgm_id][pos_loc[channel.pos_loc]] = {
+                    "ch_id": ch_id,
+                    "ch_name": ch_name,
+                    "ch_type": ch_type
+                  };
+                }
+
+                if (ch_type == "5" || ch_type == '14') {
+                  //串口||虚拟采集器
+                  rock_chaList[bindDgm_list.dgm_id]["module_name"][ch_name] = {
+                    "ch_id": ch_id,
+                    "ch_type": ch_type
+                  };
+                  rock_chaList[bindDgm_list.dgm_id]["module_id"][ch_id] = {
+                    "ch_name": ch_name,
+                    "ch_type": ch_type
+                  };
+                }
+              }
+
+              if (type == 200) {
+                //长采样的通道
+                if (ch_type == "0") {
+                  //振动通道
+                  pos_chaList[bindDgm_list.dgm_id][ch_name] = {
+                    "ch_id": ch_id,
+                    "ch_type": ch_type
+                  };
+                  pos_chaIdList[bindDgm_list.dgm_id][ch_id + '_' + ch_type] = {
+                    "ch_id": ch_id,
+                    "ch_type": ch_type,
+                    "ch_name": ch_name
+                  };
+                  cap_chaList[bindDgm_list.dgm_id][ch_id] = {
+                    "ch_name": ch_name
+                  };
+                } else if (ch_type == "11" && channel.ch1 != 255 && channel.ch1 != null) {
+                  //长采样序号通道
+                  cap_sequenceNum[bindDgm_list.dgm_id][ch_id] = {
+                    "vib_id": channel.ch1
+                  };
+                }
+              } else {
+                pos_chaList[bindDgm_list.dgm_id][ch_name] = {
+                  "ch_id": ch_id,
+                  "ch_type": ch_type
+                };
+                pos_chaIdList[bindDgm_list.dgm_id][ch_id + '_' + ch_type] = {
+                  "ch_id": ch_id,
+                  "ch_type": ch_type,
+                  "ch_name": ch_name
+                };
+              }
+            });
+          });
+        });
+      });
+      res.position_list.forEach(function (position_list) {
+        //第一遍遍历在任务集合中删除已经存在的任务
+        position_list.machine_info.forEach(function (machine_info) {
+          machine_info.positions.forEach(function (positions) {
+            if (!pos_dgmIdList.includes(position_list.t_id + '_' + positions.mac_id + '_' + positions.dgm_id)) {
+              //如果这个测点绑定的采集器不存在则跳过这个测点
+              return;
+            } else if (!mac_pos_id_list[machine_info.mac_id]) {
+              //没机组的测点直接删除
+              console.log("没有机组" + position_list.t_id, positions);
+              return;
+            } else {
+              var pos_tast = task_idSources[positions.dgm_id][positions.ch_name]; //删除集合中对应的任务
+
+              if (pos_tast instanceof Array && pos_tast.indexOf(positions.task_id) != -1) {
+                //集合中存在这个测点的任务
+                pos_tast.splice(pos_tast.indexOf(positions.task_id), 1); //删除这个任务
+              } else if (positions.task_id === "") {
+                console.log('没有task_id');
+              } else if (positions.task_id == 0) {
+                console.log('任务1', positions);
+              } else {
+                console.log('重复任务,或没有该通道', positions);
+              }
+            }
+          });
+        });
+      });
+      res.position_list.forEach(function (position_list) {
+        position_list.machine_info.forEach(function (machine_info) {
+          if (type == 11 || type == 13) {
+            //如果是倾覆和倾角测点，需要循环出rock_list
+            machine_info.rock_list.forEach(function (rock_pos) {
+              var key = "".concat(rock_pos.mac_id, "_").concat(rock_pos.pos_type, "_").concat(rock_pos.pos_id);
+              rock_list[key] = rock_pos;
+            });
+          }
+
+          machine_info.positions.forEach(function (positions) {
+            //获取每个机组的测点ID,id就是数组的下标
+            if (positions.baseInfo && Object.keys(positions.baseInfo).length == 0) {
+              positions.t_name = position_list.t_name;
+              positions.mac_name = machine_info.mac_me;
+              invalidPos.push(positions);
+              console.log("baseInfo为空", positions);
+              return;
+            }
+
+            var baseInfo = positions.baseInfo;
+
+            if (!mac_pos_id_list[machine_info.mac_id]) {
+              //没机组的测点直接忽略
+              console.log("缺少机组" + position_list.t_id, positions);
+              /* 将失效测点保存起来统一处理 */
+
+              positions.t_name = position_list.t_name;
+              positions.mac_name = machine_info.mac_me;
+              invalidPos.push(positions);
+              return;
+            }
+            /* 搜集rock pos_id */
+
+
+            if (type == 11 || type == 13) {
+              //如果是倾覆和合成倾角，需要保存对应的晃度和倾角的pos_id
+              rock_pos_id_list[machine_info.mac_id][baseInfo.rock1_id] = baseInfo.rock1_id;
+              rock_pos_id_list[machine_info.mac_id][baseInfo.rock2_id] = baseInfo.rock2_id;
+            }
+
+            mac_pos_id_list[machine_info.mac_id][positions.pos_id] = positions.pos_id; // 组装测点id 的集合，保证新建测点的id不重复
+
+            /* 不显示没有采集器的测点 */
+
+            if (!pos_dgmIdList.includes(position_list.t_id + '_' + positions.mac_id + '_' + positions.dgm_id)) {
+              //没采集器的测点屏蔽
+              console.log("缺少采集器", positions);
+              positions.t_name = position_list.t_name;
+              positions.mac_name = machine_info.mac_me;
+              invalidPos.push(positions);
+              return;
+            }
+            /* 不显示没有通道的测点 */
+
+
+            if (pos_chaIdList[positions.dgm_id][positions.ch_id + '_' + positions.ch_type] === undefined) {
+              console.log('该测点缺少通道', positions);
+              positions.t_name = position_list.t_name;
+              positions.mac_name = machine_info.mac_me;
+              invalidPos.push(positions);
+              return;
+            }
+
+            var task_id_sources = task_idSources[positions.dgm_id][positions.ch_name]; //克隆这个数组
+
+            if (task_id_sources) {
+              task_id_sources = task_id_sources.slice(); //添加上自己任务的id
+
+              task_id_sources.push(positions.task_id);
+              task_id_sources = Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["taskArray"])(task_id_sources); //数组排序
+            } //获取每个测点的可选通道 ch_sources
+
+
+            var ch_sources = [];
+            var cc_mod_sources = [];
+
+            if (type == 11) {
+              ch_sources = over_pos_loc_ch;
+            } else if (type == 13) {
+              ch_sources = syn_pos_loc_ch;
+            } else {
+              ch_sources = Object.keys(pos_chaList[positions.dgm_id]);
+
+              if (type == 10) {
+                cc_mod_sources = Object.keys(cc_mod_id_list[positions.dgm_id]).sort();
+              }
+            }
+
+            position = {
+              operate: 0,
+              //可修改行标记
+              oldInfo: {},
+              //标记测点修改之前的信息
+              updateTime: positions.updateTime,
+              t_id: position_list.t_id,
+              t_name: position_list.t_name,
+              t_sources: Object.keys(pos_folderList).sort(),
+              m_type: positions.m_type,
+              mac_id: positions.mac_id,
+              mac_me: machine_info.mac_me,
+              macName_sources: [],
+              dgm_id: positions.dgm_id,
+              dgm_type: positions.dgm_type,
+              dgm_name: positions.dgm_name,
+              dgm_sources: [],
+              ch_id: positions.ch_id,
+              ch_type: positions.ch_type,
+              ch_name: positions.ch_name,
+              ch_sources: ch_sources.sort(),
+              pos_id: positions.pos_id,
+              pos_name: positions.pos_name,
+              pos_type: type,
+              pos_type_name: Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["posType_name"])(type),
+              pos_activity: positions.pos_activity == "" ? "0" : positions.pos_activity,
+              pos_activity_val: positions.pos_activity == "" ? pos_activity_choose["0"] : pos_activity_choose[positions.pos_activity],
+              //是否有效
+              pos_activity_sources: Object.values(pos_activity_choose),
+              pos_activity_sources_key: Object.keys(pos_activity_choose),
+              isalarm: positions.isalarm == "" ? "0" : positions.isalarm,
+              isalarm_val: positions.isalarm == "" ? isalarm_vib_choose["0"] : isalarm_vib_choose[positions.isalarm],
+              //是否报警
+              isalarm_sources: Object.values(isalarm_choose),
+              isalarm_sources_key: Object.keys(isalarm_choose),
+              task_id: positions.task_id,
+              task_id_val: task_id_choose[positions.task_id],
+              //任务Id
+              task_id_sources: task_id_sources,
+              //每个通道的任务id源，不包括自身的任务
+              task_id_choose: Object.values(task_id_choose),
+              task_id_choose_key: Object.keys(task_id_choose),
+              // alarm_smooth_a:baseInfo.alarm_smooth_a,//报警投票机制a
+              // alarm_smooth_b:baseInfo.alarm_smooth_b,//报警投票机制b
+              baseInfo: {}
+            };
+
+            if (type == 3 || type == 15 || type == 4 || type == 8 || type == 16 || type == 9 || type == 6 || type == 11 || type == 12 || type == 13 || type == 17) {
+              //振动系列测点
+              //组测点数据
+              position.isalarm_sources = Object.values(isalarm_vib_choose);
+              position.isalarm_sources_key = Object.keys(isalarm_vib_choose);
+              var frequency_source = Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["frequencySources"])(positions, baseInfo.filter);
+              position.baseInfo = {
+                alarmList: baseInfo.alarmList,
+                alarm_smooth_a: baseInfo.alarm_smooth_a,
+                //报警投票机制a
+                alarm_smooth_b: baseInfo.alarm_smooth_b,
+                //报警投票机制b
+                filter: baseInfo.filter,
+                filter_val: filter_choose[baseInfo.filter],
+                filter_sources: Object.values(filter_choose),
+                filter_sources_key: Object.keys(filter_choose),
+                frequency: baseInfo.frequency,
+                //分析频率 采样周期(order)
+                frequency_val: frequency_source[baseInfo.frequency],
+                frequency_sources: Object.values(frequency_source),
+                frequency_sources_key: Object.keys(frequency_source),
+                spectral: baseInfo.spectral,
+                //谱线数 采样点数(order)
+                spectral_sources: Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["spectralSources"])(positions.dgm_type, positions.pos_type),
+                resampling: baseInfo.resampling,
+                resampling_val: resampling_choose[baseInfo.resampling],
+                resampling_sources: Object.values(resampling_choose),
+                resampling_sources_key: Object.keys(resampling_choose)
+              };
+
+              if (type == 3) {
+                //振动测点微信报警信息
+                if (baseInfo.trendAlarm == undefined || baseInfo.trendAlarm == null) {
+                  baseInfo.trendAlarm = 2000;
+                }
+
+                Object.assign(position.baseInfo, {
+                  levelRms: baseInfo.levelRms,
+                  //过滤阈值：这个可以填小数
+                  areaRatio: baseInfo.areaRatio,
+                  //增长百分比：正数，填20，就是20%的意思
+                  sampHours: baseInfo.sampHours,
+                  //平均值计算时间：正整数，多少小时的意思
+                  death_time: baseInfo.death_time,
+                  //死区时间，单位小时，新增：正整数
+                  packn: baseInfo.packn,
+                  //连续n包，新增：正整数
+                  trendAlarm: baseInfo.trendAlarm,
+                  //趋势报警特征值
+                  trendAlarm_val: trendAlarm_source[baseInfo.trendAlarm],
+                  trendAlarm_sources: Object.values(trendAlarm_source),
+                  trendAlarm_sources_key: Object.keys(trendAlarm_source)
+                });
+              }
+
+              Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["computed__frequency_spectral"])(position);
+
+              for (var k = 0; k < 8; k++) {
+                var band = baseInfo.band;
+                position.baseInfo["band".concat(k)] = {
+                  dwOpt_freq_selected: band[k].dwOpt_freq_selected == "" ? "0" : band[k].dwOpt_freq_selected,
+                  //是否选择频段
+                  dwOpt_freq_name: band[k].dwOpt_freq_name == "" ? "\u9891\u6BB51-".concat(k + 1) : band[k].dwOpt_freq_name,
+                  //是否有频段名称
+                  optfreq_type: band[k].optfreq_type == "" ? "0" : band[k].optfreq_type,
+                  //频段类型，如果没有默认给能量有效值
+                  optfreq_type_val: band[k].optfreq_type == "" ? optfreq_type_choose['0'] : optfreq_type_choose[band[k].optfreq_type],
+                  optfreq_type_sources: Object.values(optfreq_type_choose),
+                  optfreq_type_sources_key: Object.keys(optfreq_type_choose),
+                  band_factor_name: band[k].band_factor_name == "" ? "\u9891\u6BB52-".concat(k + 1) : band[k].band_factor_name,
+                  //是否有频段名称
+                  band_factor_type: band[k].band_factor_type == "" ? "0" : band[k].band_factor_type,
+                  //频段类型，如果没有默认给能量有效值
+                  band_factor_type_val: band[k].band_factor_type == "" ? band_factor_type_choose['0'] : band_factor_type_choose[band[k].band_factor_type],
+                  band_factor_type_sources: Object.values(band_factor_type_choose),
+                  band_factor_type_sources_key: Object.keys(band_factor_type_choose),
+                  dwOpt_freq_begin: band[k].dwOpt_freq_begin == "" ? "0.1" : band[k].dwOpt_freq_begin,
+                  dwOpt_freq_end: band[k].dwOpt_freq_end == "" ? "10" : band[k].dwOpt_freq_end
+                };
+              }
+
+              if (type == 6 || type == 12) {
+                // 晃度和倾角的共同属性
+                Object.assign(position.baseInfo, {
+                  tower_H: baseInfo.tower_H,
+                  //安装高度
+                  tt_sensor_name: baseInfo.tt_sensor_name,
+                  //传感器名称
+                  tt_ch_type: baseInfo.tt_ch_type,
+                  // 关联通道（虚拟） 倾覆或合成倾角的测点类型
+                  tt_ch_id: baseInfo.tt_ch_id,
+                  //关联通道（虚拟） 倾覆或合成倾角的测点id
+                  tt_pos_loc: baseInfo.tt_pos_loc //安装位置 塔顶、机舱、塔底
+
+                });
+              }
+
+              if (type == 11 || type == 13) {
+                //倾覆和合成倾角共有部分
+                Object.assign(position.baseInfo, {
+                  tt_sensor_name: baseInfo.tt_sensor_name,
+                  //传感器名称
+                  tt_ch_type: baseInfo.tt_ch_type,
+                  // 关联通道（虚拟） 倾覆或合成倾角的测点类型
+                  tt_ch_id: baseInfo.tt_ch_id,
+                  //关联通道（虚拟） 倾覆或合成倾角的测点id
+                  tt_pos_loc: baseInfo.tt_pos_loc,
+                  //安装位置 塔顶、机舱、塔底
+                  tt_pos_loc_source: Object.values(tt_pos_loc_source),
+                  tt_pos_loc_source_key: Object.keys(tt_pos_loc_source),
+                  rock1_id: baseInfo.rock1_id,
+                  rock1_pos_name: baseInfo.rock1_pos_name,
+                  // 晃度X名称
+                  rock1_ch_id: baseInfo.rock1_ch_id,
+                  rock2_id: baseInfo.rock2_id,
+                  rock2_pos_name: baseInfo.rock2_pos_name,
+                  // 晃度Y名称
+                  rock2_ch_id: baseInfo.rock2_ch_id,
+                  tower_H: baseInfo.tower_H //安装高度
+
+                });
+
+                if (type == 11) {
+                  //倾覆独有部分
+                  Object.assign(position.baseInfo, {
+                    rock1_ch_name: rock_chaList[positions.dgm_id][positions.ch_name + "X"].ch_name,
+                    //晃度X关联通道名称
+                    rock1_ch_type: rock_chaList[positions.dgm_id][positions.ch_name + "X"].ch_type,
+                    //关联通道的类型
+                    rock2_ch_name: rock_chaList[positions.dgm_id][positions.ch_name + "Y"].ch_name,
+                    //晃度Y关联通道
+                    rock2_ch_type: rock_chaList[positions.dgm_id][positions.ch_name + "Y"].ch_type,
+                    //关联通道的类型
+                    sUnitName: baseInfo.sUnitName,
+                    self1: baseInfo.self1,
+                    self2: baseInfo.self2
+                  });
+                }
+
+                if (type == 13) {
+                  //合成倾角独有部分
+                  var rock1_ch_name;
+                  var rock2_ch_name;
+                  var rock_ch_type;
+                  var rockSource;
+
+                  if (baseInfo.sourceType == 5) {
+                    //串口
+                    var moduleList = rock_chaList[position.dgm_id]['module_name'];
+                    rockSource = Object.keys(moduleList);
+                    rock1_ch_name = rock2_ch_name = rock_chaList[positions.dgm_id]["module_id"][baseInfo.rock1_ch_id].ch_name;
+                    rock_ch_type = 5; //串口通道
+                  } else if (baseInfo.sourceType == 0) {
+                    //振动
+                    rock1_ch_name = rock_chaList[positions.dgm_id][positions.ch_name + "X"].ch_name;
+                    rock2_ch_name = rock_chaList[positions.dgm_id][positions.ch_name + "Y"].ch_name;
+                    rock_ch_type = 0; //振动通道
+                  }
+
+                  Object.assign(position.baseInfo, {
+                    rock1_ch_name: rock1_ch_name,
+                    //
+                    rock1_ch_type: rock_ch_type,
+                    rock2_ch_name: rock2_ch_name,
+                    //晃度Y关联通道
+                    rock2_ch_type: rock_ch_type,
+                    rock1_ch_sources: rockSource,
+                    //rock可选通道
+                    rock2_ch_sources: rockSource,
+                    offset_angle: baseInfo.offset_angle,
+                    //偏置角度
+                    dip_model: baseInfo.dip_model,
+                    //传感器类型
+                    dip_model_val: dip_model_choose[baseInfo.dip_model],
+                    dip_model_sources: Object.values(dip_model_choose),
+                    dip_model_sources_key: Object.keys(dip_model_choose),
+                    sourceType: baseInfo.sourceType,
+                    //数据来源
+                    sourceType_val: sourceType_choose[baseInfo.sourceType],
+                    sourceType_sources: Object.values(sourceType_choose),
+                    sourceType_sources_key: Object.keys(sourceType_choose),
+                    diameter: baseInfo.diameter,
+                    //基础直径
+                    offset1: baseInfo.offset1,
+                    //偏移量1
+                    slaveid1: baseInfo.slaveid1,
+                    //从设备号1
+                    offset2: baseInfo.offset2,
+                    //偏移量2
+                    slaveid2: baseInfo.slaveid2,
+                    //从设备号2
+                    datamode1: baseInfo.datamode1,
+                    //过程量类型
+                    datamode1_val: datamode_choose[baseInfo.datamode1],
+                    datamode1_sources: Object.values(datamode_choose),
+                    datamode1_sources_key: Object.keys(datamode_choose),
+                    datamode2: baseInfo.datamode2,
+                    datamode2_val: datamode_choose[baseInfo.datamode2],
+                    datamode2_sources: Object.values(datamode_choose),
+                    datamode2_sources_key: Object.keys(datamode_choose)
+                  });
+                }
+              }
+            }
+
+            if (type == 1) {
+              //转速测点
+              position.baseInfo = {
+                baseRate: baseInfo.baseRate,
+                byUnit: baseInfo.byUnit,
+                speedRate: baseInfo.speedRate,
+                min_speed: baseInfo.min_speed,
+                max_speed: baseInfo.max_speed,
+                svibsList: baseInfo.svibsList
+              };
+
+              if (positions.dgm_type == 7) {
+                position.baseInfo.speedRate = ''; //tms的转速测点的转速比放到了通道设置里面，将转速测点的转速比置空
+              }
+            }
+
+            if (type == 7 || type == 2) {
+              //温度过程量测点
+              position.baseInfo = {
+                h_limit: baseInfo.h_limit,
+                hh_limit: baseInfo.hh_limit,
+                hhh_limit: baseInfo.hhh_limit,
+                l_limit: baseInfo.l_limit,
+                ll_limit: baseInfo.ll_limit,
+                lll_limit: baseInfo.lll_limit
+              };
+            }
+
+            if (type == 5) {
+              //数字量
+              position.baseInfo = {
+                hh_limit: baseInfo.hh_limit,
+                h_limit: baseInfo.h_limit,
+                calc_method: baseInfo.calc_method,
+                calc_method_val: calc_method_choose[baseInfo.calc_method],
+                calc_method_sources: Object.values(calc_method_choose),
+                calc_method_sources_key: Object.keys(calc_method_choose)
+              };
+            }
+
+            if (type == 14) {
+              //螺栓测点
+              position.baseInfo = {
+                alarmList: baseInfo.alarmList,
+                alarm_smooth_a: baseInfo.alarm_smooth_a,
+                alarm_smooth_b: baseInfo.alarm_smooth_b,
+                posShow: baseInfo.posShow,
+                alarm_grow: baseInfo.alarm_grow,
+                warn_grow: baseInfo.warn_grow
+              };
+            }
+
+            if (type == 10) {
+              //工艺量测点
+              position.baseInfo = {
+                byUnit: baseInfo.byUnit,
+                //单位索引
+                normal: baseInfo.normal,
+                //过程量正常类型转换
+                byUnitName: baseInfo.byUnitName,
+                //名称
+                unitNum: baseInfo.unitNum,
+                //数据有效位
+                hh_limit: baseInfo.hh_limit,
+                //报警高
+                h_limit: baseInfo.h_limit,
+                //预警高
+                l_limit: baseInfo.l_limit,
+                //预警低
+                ll_limit: baseInfo.ll_limit,
+                //报警低
+                hi_value: baseInfo.hi_value,
+                //工程量输入范围高
+                low_value: baseInfo.low_value,
+                //工程量输入范围低
+                ref_vol: baseInfo.ref_vol,
+                //信号输入范围高
+                ref_eng: baseInfo.ref_eng,
+                //信号输入范围低
+                scale: baseInfo.scale,
+                //校正参数
+                corr: baseInfo.corr,
+                //零点偏移
+                dataaddress: baseInfo.dataaddress,
+                //数据地址
+                datatype: baseInfo.datatype,
+                //数据类型
+                datatype_val: datatypeSource[baseInfo.datatype],
+                datatype_sources: Object.values(datatypeSource),
+                datatype_sources_key: Object.keys(datatypeSource),
+                datamode: baseInfo.datamode,
+                //过程量类型
+                datamode_val: datamode_choose[baseInfo.datamode],
+                datamode_sources: Object.values(datamode_choose),
+                datamode_sources_key: Object.keys(datamode_choose),
+                slaveid: baseInfo.slaveid,
+                //从设备号
+                value_left: baseInfo.value_left,
+                //左比较值
+                value_right: baseInfo.value_right,
+                //右比较值
+                sensor_id: baseInfo.sensor_id,
+                //传感器类型
+                sensor_id_val: sensor_id_source[baseInfo.sensor_id],
+                sensorId_sources: Object.values(sensor_id_source),
+                sensorId_sources_key: Object.keys(sensor_id_source),
+                cc_mod_id: baseInfo.cc_mod_id,
+                cc_mod_id_val: cc_mod_sources[baseInfo.cc_mod_id],
+                cc_mod_id_sources: cc_mod_sources
+              };
+            }
+
+            if (type == 200) {
+              //长采样测点
+              var capture_byId = baseInfo.capture_byId;
+              var capture_sources = [];
+              var capture_chName_sources = [];
+
+              if (baseInfo.capture_mode == 0) {
+                //定时采样
+
+                /* 序号可选 */
+                capture_sources = Object.keys(cap_sequenceNum[positions.dgm_id]);
+                /* 通道不可选 */
+
+                capture_chName_sources = [positions.ch_name];
+              } else if (baseInfo.capture_mode == 1) {
+                /* 序号不可选 */
+                capture_sources = [];
+                /* 通道可选 */
+
+                capture_chName_sources = Object.keys(pos_chaList[positions.dgm_id]);
+              }
+
+              position.baseInfo = {
+                capture_mode: baseInfo.capture_mode,
+                //采样方式 0=定时 1=手动
+                method_val: method_choose[baseInfo.capture_mode],
+                method_sources: Object.values(method_choose),
+                method_sources_key: Object.keys(method_choose),
+                capture_byId: capture_byId,
+                //定时长采样序号
+                capture_sources: capture_sources,
+                //定时长采样序号可选
+                capture_chName: positions.ch_name,
+                //定时长采样通道
+                capture_chName_sources: capture_chName_sources //长采样通道的可选
+
+              };
+            }
+
+            if (type == 18) {
+              //脱轨检测测点
+              position.isalarm = "1";
+              position.isalarm_val = "报警";
+              position.baseInfo = {
+                sleeper_len: baseInfo.sleeper_len,
+                shock_threshold: baseInfo.shock_threshold,
+                shock_threshold_sources: shock_threshold_source,
+                shock_num: baseInfo.shock_num
+              };
+            }
+
+            if (tmsPosList.includes(type)) {
+              //tms采集器包含的测点类型加上‘数码管显示’
+              if (positions.dgm_type != 7) {
+                baseInfo.if_show = ""; //非tms采集器下的测点这个属性值置空
+              }
+
+              Object.assign(position.baseInfo, {
+                if_show: baseInfo.if_show,
+                //数码管显示
+                if_show_val: if_show_source[baseInfo.if_show],
+                if_show_sources: Object.values(if_show_source),
+                if_show_sources_key: Object.keys(if_show_source)
+              });
+            }
+
+            data.push(position);
+          });
+        });
+      });
+      return {
+        pos_folderList: pos_folderList,
+        pos_machineList: pos_machineList,
+        pos_dgmList: pos_dgmList,
+        pos_chaList: pos_chaList,
+        mac_pos_id_list: mac_pos_id_list,
+        task_idSources: task_idSources,
+        rock_chaList: rock_chaList,
+        cap_sequenceNum: cap_sequenceNum,
+        cap_chaList: cap_chaList,
+        rock_pos_id_list: rock_pos_id_list,
+        rock_list: rock_list,
+        invalidPos: invalidPos,
+        cc_mod_id_list: cc_mod_id_list,
+        data: data
+      };
+    }
+  }
+}
+function createPosition(type) {
+  if (type == 17) {
+    optfreq_type_choose = {
+      '0': '有效值'
+    };
+    band_factor_type_choose = {
+      '0': '频段因数'
+    };
+  } else {
+    optfreq_type_choose = {
+      '0': '能量有效值',
+      '1': '速度值',
+      '2': '加速度值'
+    };
+    band_factor_type_choose = {
+      '0': '频段因数',
+      '1': '速度值',
+      '2': '加速度值'
+    };
+  }
+
+  var position = {
+    operate: 1,
+    oldInfo: {},
+    //标记测点修改之前的信息
+    updateTime: 0,
+    //未添加的属性在后续函数中添加
+    t_id: '',
+    t_name: '',
+    t_sources: '',
+    //下拉列表
+    mac_id: '',
+    m_type: '',
+    mac_me: '',
+    macName_sources: {},
+    //下拉列表
+    dgm_id: '',
+    dgm_type: '',
+    dgm_name: '',
+    dgm_sources: {},
+    //下拉列表
+    ch_id: "",
+    ch_type: "",
+    ch_name: '',
+    ch_sources: {},
+    pos_id: "",
+    pos_name: "",
+    pos_type: type,
+    pos_type_name: Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["posType_name"])(type),
+    pos_activity: "0",
+    pos_activity_val: "有效",
+    pos_activity_sources: Object.values(pos_activity_choose),
+    pos_activity_sources_key: Object.keys(pos_activity_choose),
+    isalarm: "0",
+    isalarm_val: "不报警",
+    isalarm_sources: Object.values(isalarm_choose),
+    isalarm_sources_key: Object.keys(isalarm_choose),
+    task_id: "",
+    task_id_old: "",
+    task_id_val: "",
+    task_id_sources: "",
+    task_id_choose: Object.values(task_id_choose),
+    task_id_choose_key: Object.keys(task_id_choose),
+    baseInfo: {
+      posShow: "0",
+      //是否显示在总貌图
+      alarm_smooth_a: '5',
+      alarm_smooth_b: '5',
+      alarmList: [],
+      //报警值
+
+      /* 转速 */
+      speedRate: '1',
+      baseRate: '1',
+      byUnit: 'rpm',
+      min_speed: 7,
+      max_speed: 25,
+      svibsList: [],
+
+      /* 温度过程量系列 */
+      hhh_limit: "30",
+      hh_limit: "20",
+      h_limit: "10",
+      l_limit: "-10",
+      ll_limit: "-20",
+      lll_limit: "-30",
+
+      /* 数字量系列 */
+      calc_method: "0",
+      //计算方式
+      calc_method_val: "计数",
+      calc_method_sources: Object.values(calc_method_choose),
+      calc_method_sources_key: Object.keys(calc_method_choose),
+      // hh_limit:"20",//报警（高）
+      // h_limit:"10",//预警（高）
+
+      /* 振动测点 */
+      levelRms: '0',
+      //过滤阈值：这个可以填小数
+      areaRatio: '20',
+      //增长百分比：正数，填20，就是20%的意思
+      sampHours: '24',
+      //平均值计算时间：正整数，多少小时的意思
+      death_time: '4',
+      //死区时间，单位小时，新增：正整数
+      packn: '2',
+      //连续n包，新增：正整数
+      trendAlarm: 2000,
+      //趋势报警特征值
+      trendAlarm_val: trendAlarm_source[2000],
+      trendAlarm_sources: Object.values(trendAlarm_source),
+      trendAlarm_sources_key: Object.keys(trendAlarm_source),
+
+      /* 振动系列 */
+      frequency: "",
+      frequency_val: "",
+      frequency_sources: "",
+      spectral: "",
+      spectral_val: "",
+      spectral_sources: "",
+      filter: "0",
+      filter_val: "滤波器1",
+      filter_sources: Object.values(filter_choose),
+      filter_sources_key: Object.keys(filter_choose),
+      order: "",
+      specOrder: "",
+      //过采样
+      resampling: '0',
+      resampling_val: '是',
+      resampling_sources: Object.values(resampling_choose),
+      resampling_sources_key: Object.keys(resampling_choose),
+
+      /* 工艺量 */
+      // byUnit: "0",//单位索引
+      byUnitName: "m",
+      //名称
+      unitNum: "4",
+      //数据有效位
+      // hh_limit: "20",//报警高 (上面有)
+      // h_limit: "10",//预警高
+      // l_limit:"-10",//预警低
+      // ll_limit:"-20",//报警低
+      hi_value: "1000",
+      //工程量输入范围高
+      low_value: "-1000",
+      //工程量输入范围低
+      ref_vol: "1000",
+      //信号输入范围高
+      ref_eng: "-1000",
+      //信号输入范围低
+      corr: "1",
+      //校正参数
+      scale: "0",
+      //零点偏移
+      dataaddress: "40001",
+      //数据地址
+      datamode: "0",
+      //过程量类型
+      datamode_val: "读保持寄存器",
+      datamode_sources: Object.values(datamode_choose),
+      datamode_sources_key: Object.keys(datamode_choose),
+      slaveid: "1",
+      //从设备号
+      normal: "0",
+      //正常
+      value_left: "0",
+      //左比较值
+      value_right: "0",
+      //右比较值
+
+      /* 倾覆和合成倾角的测点 */
+      tt_sensor_name: "",
+      //传感器名称
+      tt_ch_type: type,
+      // 关联通道（虚拟） 倾覆或合成倾角的测点类型
+      tt_ch_id: "",
+      //关联通道（虚拟） 倾覆或合成倾角的测点id
+      tt_pos_loc: "",
+      //安装位置 塔顶、机舱、塔底
+      tt_pos_loc_source: Object.values(tt_pos_loc_source),
+      tt_pos_loc_source_key: Object.keys(tt_pos_loc_source),
+      rock1_id: "",
+      rock1_pos_name: "",
+      // 晃度倾角X名称
+      rock1_ch_id: "",
+      rock1_ch_name: " ",
+      //晃度倾角X关联通道名称
+      rock1_ch_sources: "",
+      rock2_id: "",
+      rock2_pos_name: "",
+      // 晃度倾角Y名称
+      rock2_ch_id: "",
+      rock2_ch_name: "  ",
+      //晃度倾角Y关联通道
+      rock2_ch_sources: "",
+      sUnitName: "mm",
+      self1: "0",
+      self2: "0",
+
+      /* 合成倾角部分 */
+      offset_angle: 0,
+      //偏置角度
+      dip_model: "0",
+      //传感器类型
+      dip_model_val: "WindIT 2917BV",
+      dip_model_sources: Object.values(dip_model_choose),
+      dip_model_sources_key: Object.keys(dip_model_choose),
+      sourceType: '5',
+      //数据来源
+      sourceType_val: '串口',
+      sourceType_sources: Object.values(sourceType_choose),
+      sourceType_sources_key: Object.keys(sourceType_choose),
+      diameter: 4000,
+      //基础直径
+      offset1: 0,
+      //偏移量1
+      slaveid1: 1,
+      //从设备号1
+      offset2: 0,
+      //偏移量2
+      slaveid2: 1,
+      //从设备号2
+      datamode1: '0',
+      //过程量类型 '读保持寄存器'
+      datamode1_val: '读保持寄存器',
+      datamode1_sources: Object.values(datamode_choose),
+      datamode1_sources_key: Object.keys(datamode_choose),
+      datamode2: '0',
+      datamode2_val: '读保持寄存器',
+      datamode2_sources: Object.values(datamode_choose),
+      datamode2_sources_key: Object.keys(datamode_choose),
+
+      /* 长采样默认值 */
+      capture_mode: "1",
+      method_val: "手动采样",
+      method_sources: Object.values(method_choose),
+      method_sources_key: Object.keys(method_choose),
+      capture_byId: '1',
+      //定时长采样序号
+      capture_sources: "",
+      //定时长采样序号可选
+      capture_chName: "",
+      //定时长采样通道
+      capture_chName_sources: [] //长采样通道的可选
+
+    }
+  };
+  var dwOpt_freq_begin, dwOpt_freq_end;
+
+  for (var i = 0; i < 8; i++) {
+    if (i == 0) {
+      dwOpt_freq_begin = '0.1';
+      dwOpt_freq_end = '10';
+    } else if (i == 1) {
+      dwOpt_freq_begin = '10';
+      dwOpt_freq_end = '2000';
+    } else if (i == 2) {
+      dwOpt_freq_begin = '10';
+      dwOpt_freq_end = '5000';
+    } else {
+      dwOpt_freq_begin = "".concat(i * 10);
+      dwOpt_freq_end = "".concat((i + 1) * 10);
+    }
+
+    position.baseInfo["band".concat(i)] = {
+      dwOpt_freq_selected: "0",
+      dwOpt_freq_name: "\u9891\u6BB5".concat(i + 1, "-1"),
+      optfreq_type_val: optfreq_type_choose['0'],
+      optfreq_type: "0",
+      optfreq_type_sources: Object.values(optfreq_type_choose),
+      optfreq_type_sources_key: Object.keys(optfreq_type_choose),
+      band_factor_name: "\u9891\u6BB5".concat(i + 1, "-2"),
+      band_factor_type_val: "频段因数",
+      band_factor_type: "0",
+      band_factor_type_sources: Object.values(band_factor_type_choose),
+      band_factor_type_sources_key: Object.keys(band_factor_type_choose),
+      dwOpt_freq_begin: dwOpt_freq_begin,
+      dwOpt_freq_end: dwOpt_freq_end
+    };
+  }
+
+  if (type == 10) {
+    position.baseInfo.byUnit = "0";
+    position.baseInfo.sensor_id = "0";
+    position.baseInfo.sensor_id_val = "无";
+    position.baseInfo.sensorId_sources = Object.values(sensor_id_source);
+    position.baseInfo.sensorId_sources_key = Object.keys(sensor_id_source);
+    position.baseInfo.datatype = '1'; //数据类型
+
+    position.baseInfo.datatype_val = 'Float';
+    position.baseInfo.datatype_sources = Object.values(datatypeSource);
+    position.baseInfo.datatype_sources_key = Object.keys(datatypeSource);
+    position.baseInfo.cc_mod_id = '0'; //关联组态
+
+    position.baseInfo.cc_mod_id_val = '';
+    position.baseInfo.cc_mod_id_sources = [];
+  }
+
+  if (type == 3 || type == 15 || type == 4 || type == 8 || type == 16 || type == 9 || type == 6 || type == 11 || type == 12 || type == 13 || type == 17) {
+    //振动系报警值较多
+    position.isalarm_sources = Object.values(isalarm_vib_choose);
+    position.isalarm_sources_key = Object.keys(isalarm_vib_choose);
+  }
+
+  if (type == 6 || type == 12 || type == 13 || type == 11) {
+    position.baseInfo.tower_H = '65'; //安装高度
+  }
+
+  if (tmsPosList.includes(type)) {
+    //tms采集器包含的测点类型加上‘数码管显示’
+    position.baseInfo.if_show = '0'; //数码管显示
+
+    position.baseInfo.if_show_val = "不显示";
+    position.baseInfo.if_show_sources = Object.values(if_show_source);
+    position.baseInfo.if_show_sources_key = Object.keys(if_show_source);
+  }
+
+  if (type == 18) {
+    /* 脱轨监测测点 */
+    position.isalarm = "1";
+    position.isalarm_val = "报警";
+    position.baseInfo.sleeper_len = 500;
+    position.baseInfo.shock_threshold = 80;
+    position.baseInfo.shock_threshold_sources = shock_threshold_source;
+    position.baseInfo.shock_num = 2;
+  }
+
+  if (position.dgm_type != 7) {
+    //非tms采集器这个属性值置空
+    position.baseInfo.if_show = ''; //数码管显示
+
+    position.baseInfo.if_show_val = ''; //数码管显示
+  } else {
+    position.baseInfo.speedRate = ''; //tms的转速测点的转速比放到了通道设置里面，将转速测点的转速比置空
+
+    position.baseInfo.if_show = '0'; //数码管显示
+
+    position.baseInfo.if_show_val = '不显示'; //数码管显示
+  }
+
+  return position;
+}
+function changePosition(type, oldPosition) {
+  var position = {};
+  position.index = oldPosition.index;
+  position.updateTime = oldPosition.updateTime;
+  position.mac_id = oldPosition.mac_id; //机组uid
+
+  position.m_type = Number(oldPosition.m_type); //机组uid
+
+  position.dgm_type = Number(oldPosition.dgm_type); //采集站类型：处理测点设置的差异化、测点数目等
+
+  position.dgm_id = Number(oldPosition.dgm_id);
+  position.dgm_name = oldPosition.dgm_name;
+
+  if (oldPosition.ch_id != '') {
+    position.ch_id = Number(oldPosition.ch_id); //通道
+  } else {
+    position.ch_id = oldPosition.ch_id; //通道
+  }
+
+  position.ch_type = Number(oldPosition.ch_type);
+  position.ch_name = oldPosition.ch_name;
+  position.pos_id = Number(oldPosition.pos_id);
+  position.pos_type = Number(type);
+  position.pos_name = oldPosition.pos_name; //测点名称
+
+  if (oldPosition.task_id != '') {
+    position.task_id = oldPosition.task_id; //任务
+  } else {
+    position.task_id = oldPosition.task_id; //任务
+  }
+
+  position.pos_activity = Number(oldPosition.pos_activity); //是否有效
+
+  position.isalarm = Number(oldPosition.isalarm); //报警
+
+  if (type == 3 || type == 15 || type == 4 || type == 8 || type == 16 || type == 9 || type == 6 || type == 12 || type == 11 || type == 13 || type == 17) {
+    //振动系列
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      alarmList: oldPosition.baseInfo.alarmList,
+      // resampling: '0',//重新采样
+      posShow: "0",
+      //是否显示在总貌图
+      filter: oldPosition.baseInfo.filter,
+      hanning: "1",
+      //是否汉宁窗
+      warn_grow: "20",
+      //预警梯度
+      alarm_grow: "20",
+      //报警梯度
+      frequency: oldPosition.baseInfo.frequency,
+      spectral: oldPosition.baseInfo.spectral,
+      resampling: oldPosition.baseInfo.resampling,
+      //过采样
+      band: []
+    };
+
+    for (var i = 0; i < 8; i++) {
+      position.baseInfo.band[i] = {
+        lineNum: String(i + 1),
+        dwOpt_freq_selected: oldPosition.baseInfo["band".concat(i)].dwOpt_freq_selected,
+        dwOpt_freq_name: oldPosition.baseInfo["band".concat(i)].dwOpt_freq_name,
+        optfreq_type: oldPosition.baseInfo["band".concat(i)].optfreq_type,
+        band_factor_name: oldPosition.baseInfo["band".concat(i)].band_factor_name,
+        band_factor_type: oldPosition.baseInfo["band".concat(i)].band_factor_type,
+        dwOpt_freq_begin: oldPosition.baseInfo["band".concat(i)].dwOpt_freq_begin,
+        dwOpt_freq_end: oldPosition.baseInfo["band".concat(i)].dwOpt_freq_end
+      };
+    }
+
+    if (type == 3) {
+      //微信报警信息
+      Object.assign(position.baseInfo, {
+        levelRms: oldPosition.baseInfo.levelRms,
+        //过滤阈值：这个可以填小数
+        areaRatio: oldPosition.baseInfo.areaRatio,
+        //增长百分比：正数，填20，就是20%的意思
+        sampHours: oldPosition.baseInfo.sampHours,
+        //平均值计算时间：正整数，多少小时的意思
+        death_time: oldPosition.baseInfo.death_time,
+        //死区时间，单位小时，新增：正整数
+        packn: oldPosition.baseInfo.packn,
+        //连续n包，新增：正整数
+        trendAlarm: oldPosition.baseInfo.trendAlarm //趋势报警特征值
+
+      });
+    }
+
+    if (type == 6 || type == 12) {
+      // 晃度和倾角的共同属性
+      Object.assign(position.baseInfo, {
+        tower_H: oldPosition.baseInfo.tower_H,
+        //安装高度
+        tt_sensor_name: oldPosition.baseInfo.tt_sensor_name,
+        //传感器名称
+        tt_ch_type: oldPosition.baseInfo.tt_ch_type,
+        // 关联通道（虚拟） 倾覆或合成倾角的测点类型
+        tt_ch_id: oldPosition.baseInfo.tt_ch_id,
+        //关联通道（虚拟） 倾覆或合成倾角的测点id
+        tt_pos_loc: oldPosition.baseInfo.tt_pos_loc //安装位置 塔顶、机舱、塔底
+
+      });
+    }
+
+    if (type == 11 || type == 13) {
+      //倾覆和合成倾角
+      Object.assign(position.baseInfo, {
+        tt_sensor_name: oldPosition.baseInfo.tt_sensor_name,
+        //传感器名称
+        tt_ch_type: oldPosition.baseInfo.tt_ch_type,
+        // 关联通道（虚拟） 倾覆或合成倾角的测点类型
+        tt_ch_id: oldPosition.baseInfo.tt_ch_id,
+        //关联通道（虚拟） 倾覆或合成倾角的测点id
+        tt_pos_loc: oldPosition.baseInfo.tt_pos_loc,
+        //安装位置 塔顶、机舱、塔底
+        rock1_id: oldPosition.baseInfo.rock1_id,
+        rock1_pos_name: oldPosition.baseInfo.rock1_pos_name,
+        rock1_ch_id: oldPosition.baseInfo.rock1_ch_id,
+        rock1_ch_name: oldPosition.baseInfo.rock1_ch_name,
+        rock1_ch_type: oldPosition.baseInfo.rock1_ch_type,
+        rock2_id: oldPosition.baseInfo.rock2_id,
+        rock2_pos_name: oldPosition.baseInfo.rock2_pos_name,
+        rock2_ch_id: oldPosition.baseInfo.rock2_ch_id,
+        rock2_ch_name: oldPosition.baseInfo.rock2_ch_name,
+        rock2_ch_type: oldPosition.baseInfo.rock2_ch_type,
+        tower_H: oldPosition.baseInfo.tower_H //安装高度
+
+      });
+
+      if (type == 11) {
+        //倾覆独有部分
+        Object.assign(position.baseInfo, {
+          sUnitName: oldPosition.baseInfo.sUnitName,
+          self1: oldPosition.baseInfo.self1,
+          self2: oldPosition.baseInfo.self2
+        });
+      }
+
+      if (type == 13) {
+        //合成倾角独有部分
+        Object.assign(position.baseInfo, {
+          offset_angle: oldPosition.baseInfo.offset_angle,
+          //偏置角度
+          dip_model: oldPosition.baseInfo.dip_model,
+          //传感器类型
+          sourceType: oldPosition.baseInfo.sourceType,
+          //数据来源
+          diameter: oldPosition.baseInfo.diameter,
+          //基础直径
+          offset1: oldPosition.baseInfo.offset1,
+          //偏移量1
+          slaveid1: oldPosition.baseInfo.slaveid1,
+          //从设备号1
+          offset2: oldPosition.baseInfo.offset2,
+          //偏移量2
+          slaveid2: oldPosition.baseInfo.slaveid2,
+          //从设备号2
+          datamode1: oldPosition.baseInfo.datamode1,
+          //过程量类型
+          datamode2: oldPosition.baseInfo.datamode2
+        });
+      }
+    }
+  } else if (type == 1) {
+    //转速系列
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      speedRate: oldPosition.baseInfo.speedRate,
+      baseRate: oldPosition.baseInfo.baseRate,
+      byUnit: oldPosition.baseInfo.byUnit,
+      min_speed: oldPosition.baseInfo.min_speed,
+      max_speed: oldPosition.baseInfo.max_speed,
+      svibsList: oldPosition.baseInfo.svibsList
+    };
+  } else if (type == 7 || type == 2) {
+    //温度过程量测点
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      h_limit: oldPosition.baseInfo.h_limit,
+      hh_limit: oldPosition.baseInfo.hh_limit,
+      hhh_limit: oldPosition.baseInfo.hhh_limit,
+      l_limit: oldPosition.baseInfo.l_limit,
+      ll_limit: oldPosition.baseInfo.ll_limit,
+      lll_limit: oldPosition.baseInfo.lll_limit
+    };
+  } else if (type == 5) {
+    //数字量
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      hh_limit: oldPosition.baseInfo.hh_limit,
+      h_limit: oldPosition.baseInfo.h_limit,
+      calc_method: oldPosition.baseInfo.calc_method
+    };
+  } else if (type == 10) {
+    //工艺量
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      posShow: oldPosition.baseInfo.posShow,
+      //是否显示在总貌图
+      byUnit: oldPosition.baseInfo.byUnit,
+      //单位索引
+      byUnitName: oldPosition.baseInfo.byUnitName,
+      //名称
+      unitNum: oldPosition.baseInfo.unitNum,
+      //数据有效位
+      hh_limit: oldPosition.baseInfo.hh_limit,
+      //报警高
+      h_limit: oldPosition.baseInfo.h_limit,
+      //预警高
+      l_limit: oldPosition.baseInfo.l_limit,
+      //预警低
+      ll_limit: oldPosition.baseInfo.ll_limit,
+      //报警低
+      hi_value: oldPosition.baseInfo.hi_value,
+      //工程量输入范围高
+      low_value: oldPosition.baseInfo.low_value,
+      //工程量输入范围低
+      ref_vol: oldPosition.baseInfo.ref_vol,
+      //信号输入范围高
+      ref_eng: oldPosition.baseInfo.ref_eng,
+      //信号输入范围低
+      scale: oldPosition.baseInfo.scale,
+      //校正参数
+      corr: oldPosition.baseInfo.corr,
+      //零点偏移
+      dataaddress: oldPosition.baseInfo.dataaddress,
+      //数据地址
+      datamode: oldPosition.baseInfo.datamode,
+      slaveid: oldPosition.baseInfo.slaveid,
+      //从设备号
+      normal: oldPosition.baseInfo.normal,
+      value_left: oldPosition.baseInfo.value_left,
+      //左比较值
+      value_right: oldPosition.baseInfo.value_right,
+      //右比较值
+      sensor_id: oldPosition.baseInfo.sensor_id,
+      //传感器类型
+      datatype: oldPosition.baseInfo.datatype,
+      //数据类型
+      cc_mod_id: oldPosition.baseInfo.cc_mod_id //关联组态
+
+    };
+  } else if (type == 200) {
+    //长采样
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      capture_mode: oldPosition.baseInfo.capture_mode,
+      capture_byId: oldPosition.baseInfo.capture_byId
+    };
+  } else if (type == 14) {
+    //螺栓测点
+    position.baseInfo = {
+      alarmList: oldPosition.baseInfo.alarmList,
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      posShow: oldPosition.baseInfo.posShow,
+      alarm_grow: oldPosition.baseInfo.alarm_grow,
+      warn_grow: oldPosition.baseInfo.warn_grow
+    };
+  } else if (type == 18) {
+    //脱轨监测测点
+    position.isalarm = "1";
+    position.isalarm_val = "报警";
+    position.baseInfo = {
+      sleeper_len: oldPosition.baseInfo.sleeper_len,
+      shock_threshold: oldPosition.baseInfo.shock_threshold,
+      shock_num: oldPosition.baseInfo.shock_num
+    };
+  }
+
+  if (tmsPosList.includes(type)) {
+    //tms采集器包含的测点类型加上‘数码管显示’
+    position.baseInfo.if_show = oldPosition.baseInfo.if_show; //数码管显示
+  }
+  /* 加入共同的baseInfo属性 */
+
+
+  position.baseInfo.alarmList = oldPosition.baseInfo.alarmList; // console.log(position)
+
+  return position;
+}
+
+/***/ })
+
+}]);
+//# sourceMappingURL=8-101bfa40.js.map

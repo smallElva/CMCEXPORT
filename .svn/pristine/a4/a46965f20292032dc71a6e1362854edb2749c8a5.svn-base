@@ -1,0 +1,1612 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
+
+/***/ "./node_modules/_babel-loader@8.2.2@babel-loader/lib/index.js?!./node_modules/_vue-loader@15.9.6@vue-loader/lib/index.js?!./src/components/common/MyContentTitle.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/_babel-loader@8.2.2@babel-loader/lib??ref--1-0!./node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./src/components/common/MyContentTitle.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "MyContentTitle",
+  props: ["title"],
+  data: function data() {
+    return {
+      flag: true
+    };
+  },
+  methods: {
+    dblclick: function dblclick() {
+      //放大
+      var homeHeader = document.getElementById("homeHeader");
+      var aside = document.getElementById("aside");
+      var content = document.getElementById("content");
+      var wHeight = document.documentElement.clientHeight;
+
+      if (this.flag) {
+        homeHeader.style.display = "none";
+        aside.style.display = "none";
+
+        if (wHeight < 800) {
+          content.style.height = "calc(100vh - 20px)"; //中间内容加大
+        } else {
+          content.style.height = "calc(100vh - 40px)"; //中间内容加大
+        }
+
+        this.$bus.$emit("reloadtable"); //主动渲染table
+
+        this.flag = !this.flag;
+      } else {
+        //缩小
+        homeHeader.style.display = "block";
+        aside.style.display = "block";
+        content.style.width = "100px"; //改变宽让宽自动渲染
+
+        if (wHeight < 800) {
+          content.style.height = "calc(100vh - 90px)"; //中间内容加大
+        } else {
+          content.style.height = "calc(100vh - 120px)"; //中间内容加大
+        }
+
+        this.$bus.$emit("reloadtable"); //主动渲染table
+
+        this.flag = !this.flag;
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/_mini-css-extract-plugin@0.8.2@mini-css-extract-plugin/dist/loader.js?!./node_modules/_css-loader@3.6.0@css-loader/dist/cjs.js!./node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/stylePostLoader.js!./node_modules/_vue-loader@15.9.6@vue-loader/lib/index.js?!./src/components/common/MyContentTitle.vue?vue&type=style&index=0&id=e68802e2&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/_mini-css-extract-plugin@0.8.2@mini-css-extract-plugin/dist/loader.js??ref--2-0!./node_modules/_css-loader@3.6.0@css-loader/dist/cjs.js!./node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/stylePostLoader.js!./node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./src/components/common/MyContentTitle.vue?vue&type=style&index=0&id=e68802e2&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/templateLoader.js?!./node_modules/_vue-loader@15.9.6@vue-loader/lib/index.js?!./src/components/common/MyContentTitle.vue?vue&type=template&id=e68802e2&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./src/components/common/MyContentTitle.vue?vue&type=template&id=e68802e2&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "my-content-header", on: { dblclick: _vm.dblclick } },
+    [_c("span", { staticClass: "page-title" }, [_vm._v(_vm._s(_vm.title))])]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./src/assets/img/cement_machines sync recursive ^\\.\\/.*\\.png$":
+/*!***********************************************************!*\
+  !*** ./src/assets/img/cement_machines sync ^\.\/.*\.png$ ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./fengji.png": "./src/assets/img/cement_machines/fengji.png",
+	"./gunyaji.png": "./src/assets/img/cement_machines/gunyaji.png",
+	"./huizhuanyao.png": "./src/assets/img/cement_machines/huizhuanyao.png",
+	"./jiansuji.png": "./src/assets/img/cement_machines/jiansuji.png",
+	"./limo.png": "./src/assets/img/cement_machines/limo.png",
+	"./posuiji.png": "./src/assets/img/cement_machines/posuiji.png",
+	"./shuinimo.png": "./src/assets/img/cement_machines/shuinimo.png",
+	"./tishengji.png": "./src/assets/img/cement_machines/tishengji.png",
+	"./yurefadianji.png": "./src/assets/img/cement_machines/yurefadianji.png"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./src/assets/img/cement_machines sync recursive ^\\.\\/.*\\.png$";
+
+/***/ }),
+
+/***/ "./src/assets/img/cement_machines/fengji.png":
+/*!***************************************************!*\
+  !*** ./src/assets/img/cement_machines/fengji.png ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAxCAYAAAChzEtEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAmJJREFUeNpiZEAABbuilvmcgsIMpID3928znJrX58hAJ8CC7GBJXROHn18+Ea35F1Atr6QMAz0BsoMZQI6VNrQkyYDT8/rp6mAmhiEGRh086uBRB486eNTBow4edfCog0eUg1nQBZ6ePz5kQvjDLxIa7zDAxsNHVwczogsETF71n9hGPCg2NuSGMdI7hA2GVKbTD0s+71DWMR/IFqC24fIWjgUqjj4J1DSHhZ2Hn0HbLzpBTF0v4Mb21Y1UdK+DYXRm/6dnjy7c2b/lASUGIZlzAF5KiKrrCvBJy/e/uX2VZANBvhdSVIsXVFRlOLdk2kR+KXkB9+bp80FpnE9KziD7yOP9lDgYZo5Pz6L9KMUaO5k5HuhYBSlDCwdQZn1///ZBmpXB7BwKQ7/iICetfn3zUh7GQWYPSgeD0idy7ajq6p9ASwePNn5GHUxtB5+e19/47PyJAzA+iI3MH3QOPjWvrwFIIZe9B9H4ow14isHLa+c/wNrFIDa/jAJNHPvv758PcAeDBrOvbV6+QUxDL4BUgx6e2D8BhJGEwC0/JXvP/n/vXn4QObqYopbgUy4Vhq+vXzx4duFkIQvUwgfnl05PBFYAB0ANeCoExodLa+ZPYGZls9eT5Ffw0lOlqM29adXeDf///XtwddPSDYzA6Cv4+OTBBHJ7HJUyHwuBTH88ygSo0EmAlzosyI4lE9BjksMB7uCT62cjh8CD9ieDv5QAOXY/etCPVs2jDh518KiDsbYlBIA1XiGweUhUVcr34TE/Q6xbwUA62GBVeRTIsUQOfGgaDEQIf6Cg/L1AbwcDBBgAATjcQRPDrDkAAAAASUVORK5CYII="
+
+/***/ }),
+
+/***/ "./src/assets/img/cement_machines/gunyaji.png":
+/*!****************************************************!*\
+  !*** ./src/assets/img/cement_machines/gunyaji.png ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAZCAYAAABHLbxYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAsJJREFUeNq0V79PVEEQ3ntcoMADYg4FPZMjiiaPaLxOChKwsdBCGhNqC2Nlbek/YGNvjImNhT/otBFDgaE5C7kCiiP+1qh3ciYGGt3vxTF782b3dtdzEnJk38zsN7PzzewWVKAcW7jQ2j91fEz9o6zfvrmgf1Z89YuhG/xsf108denys6F9I9EgN5bv3QkBCRkI3aTz8e32+ImT8zqr1RiQ2l49vra0qP9th9glMZu9enD3xu6Pnahsvl5/jmxuh9oNRGYlKqux2YQUaktXHh5IT4vkaDW31LfmZm5dA1SjlWp1eHwiCOiePoXNp4/E2jx69rzV7nPjZbtw8db9X4drs10fvmxtKBztyOQRVZqoiJnZ+fBGgVDl6ZmeAOELPiF8L5J39bXsF/44UfGtKBlAuexgNcDjDwCgb9ucgtrtfHfqmAEgoL3SaC5BXWRqrj7JDHxbD/SgT9mQQFKWfIV0yTYHFJtNzZ2LYrIEFtlGJqXS6SXZaWlbs7MUCT3qkQvVKhepdpFd6NJpwFY6blv2uS4ya5ZVBhTEkAhV0oCkWkVg+G4eqelYCpwI5SITJxIFb2342GhIF7StVimbtqaPwHnGXSApo9QZzOBpLXlff5FzIG0kFT137GK+VFoSOW3BR43QEFL5Bt4r+L4C/Z/SV6CcYH0FWp5OvWvNZ1RKBHQNBc58G+GSQaGAfYjiciqRwkUUW5DmWmLbCO1JygLNd37EplMpUKx1NKn4aKSugG/cp1lKRfNozAzRxYODpfku1ae5zifVX7AaFPeJ1uUKvOvNBGU44W2k163HRiI+AnkCfHyatgmfNqHEolHrIlHIs8V2dUxy0epNoSjVEq8r6NlAmmBRf76s7wj3juwpMnv1eutgWhuTC5zuk6lCdzDXSpOV4CscxjVkMHsZpH9OpJE9USCHamdEu0+Nevu3AAMAJTWTEthiilcAAAAASUVORK5CYII="
+
+/***/ }),
+
+/***/ "./src/assets/img/cement_machines/huizhuanyao.png":
+/*!********************************************************!*\
+  !*** ./src/assets/img/cement_machines/huizhuanyao.png ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAAVCAYAAADy3zinAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA/dJREFUeNpiMAhP7TdLKtrPMMIBo3vz9P3MLKwObDx8cME/P388+P396wMY/++vnx8+PX10EVnj/aO7L7y+efkDkhBI/QNtv+j5bNw8AueXzwxEVg8KbA4BIYZDfTWJULWDCrCACFAgSBtaIosrQDEyCEDmmCYVokh+fvGE4d6hnQx8kjJg84Cefs8nJXcBJPfq+iUBoHqDp+ePgwIkAabn3f1bD+7s34IeKAeIdbyGV2jDn+/fQWYsoEpAUAPwSsgwiKhqwfniWoYCwMB1ALE5BYSRA7AeWZ87w3QUc0CBhQx+ff184e/vXx/QU+f3D2/tlR29HX59+cQADAgBoNQF9NSJzZ0gN4HwqXl9G6B6QHoNWAZbEkVLmSBggEVZwP3DOxnYodk5YPKqfmR9oNT56fljOP/f3z8ffn7+CA6oF5fPOIBS8+eXT/15xaU3vrp5Sd6usDmBBRhbDkOxcHtz+xqDoq07RgqCpU4QRgKgWAf78/392xA14tIGsOwKCjSmoV7agwJERFWbYnOGfECAygh2pBoPf6BdRSnHaBYQ1IodWoGfwEBjwxJooDKEBRSaJ+f0LHhwZPcHcR0jlIKJnZffgImZRQDG55OURc97ZMfOQAJQuSBlaIEIIGBByrIy0cMRWo18YFhJ0AyM9gWwXeDw9c1L+Q+P7yXwAtsQIEtubF/NwCchy/D27o0H/DIKDP9+/1KAleYgeSw1w6BoUB0gQT1G/Qysj0H6HYBVWAKs+gN5GJRyNuSGLVR3D9YXUlITUASW3M8unLzw5s78C9Y5tQkgNZ+fA6u5F48Z2Lh4Cjn4BOEpj5Wbh59HTBIldcJqt1/Q5P3zy0cGUBUK0g/J+9oUBwTFYGFPjcC9b3cYmL9/fvB983EBGyFRga9sPxhSI/wYvkgoOXx5+1zg4c5VD35/+6ogpW9mgJwiQCkEGGAH0BpE+EADMNDrQVUnyBxQvr9/eBfDtqqURk3PMBSFgoqq9jA2sNp0eA0MMCU7d0hbAxgJyNmYkdJAOLl+Nigm18PqaULgysPnDH+1bBk+f/3GcPv+Y1Az+8CqyX2OxNo3qb5w/W8Dl4CDS+ddkNTQ+cDIJ2Lwi5VLYF5hsiK+PgywOf5fREWbQT8sGZxigSmZ4cWVcxcUbdwYvn94s5GRGikCGBgNQKqeTO0HzANTHYmwA1TO9KP3eZDABFDiBJp1AYteg/7dl9YzsnEI8PFwXXj54J6CTniawpKOxgUPju5JpEqKoEJAgGIxEJsHcNj1H5s4UD8jDvUFQCoeR1MdZGcjKDIGQ1/jAy275cAAmgDNvtgCYiNQfsNgaVl+ADrmw0A7Ysg3sUcDYjQgaAMAAgwA8dmjXQwNLEcAAAAASUVORK5CYII="
+
+/***/ }),
+
+/***/ "./src/assets/img/cement_machines/jiansuji.png":
+/*!*****************************************************!*\
+  !*** ./src/assets/img/cement_machines/jiansuji.png ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAeCAYAAABaKIzgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABDdJREFUeNrUWH1IE2EYv+XYNNuazGxlH2fNNIdxFlki1bRCikqFiiKISyroj0AjogIL6Y+kDxL6oz8qtCACk4w+KUIXEZYFzpmWqbhMXZnlchZzrex9zr3X7brb3ZllPXC823vvx+95nt/zu/dORcgzMjVvDx09x5KtidRR0NHb0kRExycR75rq3PqpM+wDPS77q3uVD943N9jQbTcxyqaSuG9I333o8Oxlq/J1pmlBN7rqaojYlDS2xYaAunuaHddsx/YXob/O0QKqFrthzlhDUZt3Vk5OSiGVLDgpIdmALnpG6jK6o/ZB2WgBDhPqhDQjkJeNsxJNYhM9bzsJ/ZTpbMs37QQ9EZMwj5q7emN+FBlPOh/dr/8dSozj8hBdVhSNnMTVG0oR7wyjkTKgjGXdFnprRU27dV9xaWCfkUd0RWFJaebBk8Wx1KJNUTPNkhOlIhoqwn6vl0Rc/qSEEixHwzRaQ29LY1Bh/AmDCMevzKZNyQtodXiE7fnVi0WoIG2yI2qMS6Bj56eR4LmcaHbVPSa++QYZmTJZ5isCC/NhHzJtORm3NItGdLN63R9fo36npDyhKq/OOnLGKrVBv+sNk2quXIFEgcnNhtD4wYF+ov3hXcLj6iR0U6Yxjtw+sD0O00PFqfTqhXkFQUCBCi/vXEHCbmEmQsvXU67BRhpORsAxWCNuSdYvDmMaiAUEAPs+e0qGhr7no6wVsUBRNKtRVK1Coi70m2vcCPMfAFyDqAFwH2rBNAHnIQg4W1zj7gfFlI/k6FTPC4c9wmAU9FwMcFAE0BUq2jhD4BQGBL/5fWKBUuecLj8V+EOJcYkbEaFiA4AwFlqIEGwOLX8t6PMgQHyn68vPM+cGIc4OBqI/Tkm1CgEQ0ku8uNR8fFYAkELrgOMwRzFQLPAjNf58DFxszeET2rBjYd7+PvK7/yvVXV/r9A96DZhv+MILwSbgJeYUnxKgqeONMaLFpNVNJL586GHG9XW0MWuqNVqmsNDDZlgrVSqWWpB2kCl4SsJYqHp4plOo6g+LVT0AAW4BaFy5/DRhz0NVvVBlY8WANXtbmxhZApuasphVBFhTUp6wlABA0MNQTy48HmspV4aU6Ci2/u4Oe7jeQLkcT6+pQw38SXYLm3YP6ucXFI4yHsfv50dYzpOs8folOMtugxMduuxqqQLgLoZTDxth3WR4bE4S5iUCPZJDjqvhmR2BLAj8tSmueu7mABK3UpKlxFC63Vd35ebyD9ks0LaqWxfE9O9vGexfdXRvrtA5lQXaWn2zrLXqRtlYAq09d6JA7GwalHogL5B4LEDCvo6K0hI570xjBpZXPPJflwOyQJgz19JyTvy/Y/AdQKh4FH2AQG+POevTLZVC93weJOw6PdsqMZgD5tdGOo8XFmbIecmT+lJCPKk8O/QHA2pblLsjQ+l7/T9t/w3QHwIMAIpATAobqJ0rAAAAAElFTkSuQmCC"
+
+/***/ }),
+
+/***/ "./src/assets/img/cement_machines/limo.png":
+/*!*************************************************!*\
+  !*** ./src/assets/img/cement_machines/limo.png ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAA1CAYAAADLVlLfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABGtJREFUeNpiZCAeKICwpK5Jv6ypnQExGk7N6ysEUhuA+AEx6hmJdIiAbUHTeb2QRAUGEsGlNfMfHJ5QlwhkHiCklpkYA1Ucfdqtc2o8GMgA4lqGAuw8/Am84tIXX9+8fAOfWhYizHMwjsspYKAASBtaMDAyMfVDQ+cD2SFjlVW1XtnBS4ISx3AJizF8e/tKQEzLgOPxqYM7caljwu8jywYtv2gDBioAKUNLhpdXziWQE00KGl6hCSIq2vVvbl9Fkfj15RMDGw8fWWISuiYCLJycDTe2rV6ALYdhzU1mSUX7TZMKHdDFn54/DgotBmLEfwId8/n5YwYRVW0M9afn9R8AZntHgtEkpKiWoBeWjOEQkOHsaD7FB0BqQXqwAZD5IHsIOkbbP6Yem6Wg6MLmSwJpDhxq2BwKsgevY0AJVt0jGKNg+/ziCQOfpCxZCRdXCIHsAdmHyzECOkFx+dhC5RMw7nklZMhyDCg00TMBzJEg+0D2YjhG2y+6H1jSClAjetABKFRBoYulZBcA2YvuGAVVV3+sZQCpCRcbAIUqKHSxAai9CnDH6AbFzyc2y5JfJWBPzCBxkP3gckZCx6hfQE65gE9CFkuofASGCj9BiyhV9+nFY4YPj+5OABd6Vtk16w0j0wPIDRlK1Z1fPnPDsaktgeBoAjImYktguHICOQBX8QASB9mPnIAPAOuLA6SUoqQCXMUD1N4DKFkbWFc0YgsdWocKyF5shd6B+0d2PyA2F1AjVKD2HcBaHVzduKSRWtFCqJwCiYPsw1k3vbt/a8HNHWsfUNMxuEpwkD0g+/A2rh6d2D9RWFmjH1384qq5QEO1cFh4DY9jsMuB7CHY0nt4Yv8Fn55FOEtRfCUsKXIbcsMukNQGpjcY1I4x0A9L3k8Pi6H2GOBzjICirTtdQgFqj8BomhnyjnlwceWcC/SwGGrPA7yOuX9kVyE9HAO158GgjSZQsxPcXZAxtQG30H9/+yrAJyWHMfKArSNPidynZ48usHJxg8dqnpw+8uDqpqWFLCCHOJR1JNA7FID1lQFS/wkSTbAQGWgAcsdoOUPqyBVKo3lva1EjsB18gIL04eBc3VdPaPCAoGOenD16AeiQBixSAvIWjgnyVs7+nILCDHf3bb1wZ/+WidiGx0AeAZrjr+kdbkCRY2DZD72pAcyB+4E5UQApRzjonI8rONRXk4jetsVjDsVpRsG9eTqKQ5Cbl651k0CdeAe6JGBgCORjG8dB7hID++75dHGMspM3wXFhXglph0GTtTkFhAXo4pj3928T7OS9un7hAl0cA+yob8Q3TALutm5atpAejhEwjMqsBxWE2BwEcsiNbasZLNLL69Fb/lQpgZGBZWblfaPoLAHYKNSN7avhowsgB4I6+MAuCKTV38ywf2dtpiEDkbNwRDmGX0reAFSugNh/fnwXQB4eQS7eYWyYPDMLq4BTZc96WGEHMoegY4AJkuGpAN7xFwFg7iA5q4IaVEAMd8Cvb1/wjvOA3AEQYADmZdvdckd3oAAAAABJRU5ErkJggg=="
+
+/***/ }),
+
+/***/ "./src/assets/img/cement_machines/posuiji.png":
+/*!****************************************************!*\
+  !*** ./src/assets/img/cement_machines/posuiji.png ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAiCAYAAADVhWD8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA/tJREFUeNq8mElME1EYx1/ZWvZhEYqA7IpFoFWIcIAUEoOiMfUAYiQKGKMhXvRivEA4aDwYQQ8mHtgSE4NwEBMkGAlo44KoLAqySqGCxQBWwFAIgu978MhQOu0MUL5k0rfM5Pu9//e9b+YVIQsWnnJCLj99sRjtgIksgYSlHm9aNMwxc78n2nvqa+5NDfVpNulLs3oJh6Egtnb2TEhS2pZX3VlTrlGXFChwU891j+1OgID5yhTMosFwVPfl40MhMExMZl6b2Nl120Co+eyPleIwB+u132v5wDCpN+40OTKewdsNAmbnIEZ+0XFybat6eE4/2W48b8MGSb9d2rTwd1ZuDRBqrtIAdKTgfjluKrmUISDTY1p5bOYFq29hJy8f5BmyVzXYVNeAuzo2zJZA5men0UDjM+TqF0jCwNcwjMRe4piAQ1aFuwYCozhz6fHy0pJysyA9z6vRAVU20rY0I4+g8HVz412fkRuG5DK/6HipQT+V8OtbRyWB0X39VOXuH6QMSkwNFgoDigDIjO4HGml5Rcag3Vtfg/4tzBO4sbZ3ZA7appSTRscFT4+OMFOavgaSM5is1tnb97LPvhiJEBhwPN7dRtqR6RlEBbi8I6LQxEA3Gd9zWIn0I4OcMDDGBIYk/Oz8MEwT2KB587IlNCktB5KLb4iG1C8QhNc4FOAAgEQiEWotu0uAzIULfDp6eDHsOqPBKxCFJKcp+SRi19NH6GB2vtl7xC5uyMlzFwE3BwOGw6SxNZK9WeLGqCCxTD0wiuMPoQFFQpPTiDPjuUkcHjuxZG0OVj3W/p4oZQnGxnjw7YNbRVwPLOAV+isS8SoDSPFig9B52p9fbdNC1/GkdN2YKbMxMaa3FCIHliIUAlSByg0KeIfL0ER/19o8LMA7QkbKgFAYTgNHQ+oG84k982eDArQPQObUsRH6XoFror97g1KQIwAKCsE8qEENag304WIrtmGbCy10oI7Y1Z3kBXUIvysQK46MqzmoAfdDOM0lsmAYqhBNUrprqGqmdiDkkKXdJDhM63Nj5b1kLgcABELGB2TTyoATqDOgRE99NVFnNw4VVQnCBa+DFUVk/D++NgMD1RSAwDlNaAeXrrVtDmpFHsswm6zbmjPgjF1H2Aa7iiaskK9GO2QFA1jYcaYSesdh+CYsr91k6R1iLTN1btIsLy2rAuOTpDsFAYmuLiks4jreMoHxyeWHzl1RWRsEKnfjzWspuNnMlTN6bevr3LCUdGXUybOMNWHqrudWAAjnWZv1KdqAjxRZcKywBgj8GdBZXXpq7ahi4X7d9NhIr69MnsX321hIFX9RmJ/C/ptExPPAlROfd/X8dsK0lhVXTg31VbDH/gswAAN/ukj+eAZuAAAAAElFTkSuQmCC"
+
+/***/ }),
+
+/***/ "./src/assets/img/cement_machines/shuinimo.png":
+/*!*****************************************************!*\
+  !*** ./src/assets/img/cement_machines/shuinimo.png ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAAVCAYAAADy3zinAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABQ9JREFUeNrsWFtsFFUYPm1aSpfudipbXJaunZreuGiXq2CoO0SxsRi7YMQHjdugRsMD2jejUcQH9cG48EB4qFCQaKIQfaEoPrCtSsolcbdGkFigW3uNXXDahW232xLPP3v+6ZmTmYLZatDwJ7Mz853/nPPf/zObRf5bJLNLJJVekUwWzrnTNS+uesC/4vntr10+2Rq5FDp2aOlTzwUqNjY04nhPRygSH+zdQ8dm1xD3lFU2rt7WFBgd+N3rcN8XSSVuSKmxhGSbXxzNBEtcHZbhDhjsk2ubpyIfjOXm21QzDOaXb3hSzpfmK1TZpqnJiZ5Fy9fp8t4YHpLCn+87mKnBRUN46aYt9CKdX+4n9K7Eh/pIrOs8Kautk82wi98c0bHRwV5ChdT5gCd5fVTDGJ8MGJCzYqm+R3+4gzgWeojdVUJwve4fTmg8sCZPC6prfILjMF2imRpCrq5/ptHh8sC7z718rTZAMe0Ows0pcBgweHczr6B3AAPBge5/pC49F5RjGyEfYEjIh/N4PjfndY6kgmKXwgMwlxpDudb9W0ZRkUM3bnn0zY+1xcEzSAP0mXpc8yjNQZJHN0RsgmLJ+IiGgYfBWLfCwLOIAeVRwyGftr690BQTqBEMzssJNM/paqCGaGOvEBne+g8+CaMDkcKf7WvqOR3abWoImnumFhod7NPuIDiEPRiEFwJwEDTJFAOF8Rnn8hisgRhGms7HeERMNMQLRzuCLP10DPgqH/f7PavXy9eiXd6Lx49kQeSAw0QaCJ+WqCH+XtdYxFIEQ14UACPIWb5ED/k8plBmqZHeF2qG6FEwFEQMGBWegajipGbriyCLd3J8nLiWrQhOpVLSTGlgX1jy7sPb39JqTecXzZGhX35qyrZiRi/xXrxdPr7AxdkzYhBJE3rk9Bp4+PWs9gRPX/n+RNoItLBi3UJyuEv9RaXlitlcta87QOtJaPETW3dCQYZr7StvvE6HlOwx9arphrGuC4bUsCIzPh5DxSZMFER+uOM4zuUxkUD5cweCWlTkCVFD27MKl9m8m6lUlNaS9uT1aRnYHmoODaldYBFxkrNiiZ4aWvGigvFFChYAXORLh3WJzoeCYpjzeY9jOI/fl+9WfCqKfICBLIk/Y6C8NNIf3ZMaT0A79ZqckdrP7Gj2ne38VY2dOqylT+lIPzlOT6WWNYK3NAjvZN0A7kkW3mig6dzzGHIeFEFlHGyMVw75+LqBfDyGRKNXpeFsmv+Htqw5mF/klFgbBcfutFBNWVOzmD+7ar+WNSJ26QLXQXoNGOQ0YpivgOFhyQxDbwIWF+ZqBXAGjCPLY/RLm2rJsQ93yGe+bg5992kw6Ph2L3GeOmy4Xq2eG7A8R7Qe+CjwI500x+4gQz+fJ2PLNhgYzPKUD29Mg1thGP6mfDRKEBexpEWdEGmBs8iLKV5oLyD+lQVmXy6ypSGcRYWyf2VaiPpKhWx5b38brcwK9mE+V80wN3eyRCyT1HBzbRaiAhyBdQC+Q8TDFBbWKptNndWPLrrR5r3rPWhdOK1J7CwfmSVMZp/NKod52YnQgFXVPe177O3dfl3hoy3qzalJ4llVK/HtlnaQXe+/sw1e/bP5Ga4yQdpMxv4prM0Me7bG3fDH2dbpL8LcEXLv8Lno5ZN9Xizmc6+E1a/SRvD9b/+P2LTuQWNbL6vWcnyjAVslzdAhbpuyyV26awgxNdqF+nDH0EObX876t/b6S4ABAFjv8oP8Ez+AAAAAAElFTkSuQmCC"
+
+/***/ }),
+
+/***/ "./src/assets/img/cement_machines/tishengji.png":
+/*!******************************************************!*\
+  !*** ./src/assets/img/cement_machines/tishengji.png ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAABICAYAAAAOJS52AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABJFJREFUeNpiZGBgKADiCwykAQF5C8d+cS1DBXyKHp8+dOH55TMTgcwH2OQZgdgBiA+QYrO0oWVDwORV9cSofXr+OMOJmR0TXlw5V0gNyxWAFt8HOoBoDZ9fPGFYFGLpiG4PE4nBzaDuHtxPisUgwCshw2CWVIQRUswgn4DiREhRLUE3KD7g+4e3CkCMKw0kaHqHV3x/95rhGxC/vXMNTPNJyhJ0gIiqtsKDo3seIpsNDnagb/JtC5sC2Hn4GH5++cRwuL9uw82dawOhagKArvYXVFQNkDW1EwCpAQXjp+ePwZK/gOpBQNHWnaADLq2Z/+DwhDpDIPMDzOcB3p3zCriERMEKWNjYGUTVdTQurpr70Lagab1bw5QMQXkVg39/fnOAfMnIyAjzCdjHf3/9BDsGxCcEgLlD4Nn5Ez+B6g/A4lyADegbZADi64clz+cVl1J4BkytoBQLimcQvrFtNTgOkYITTL+5fZWo+AeaWw+NarDlB27uWIuSD0H8N7evNYIcAcLsUMeBogTdoWDxz58Y2Hn5ibIcFD2gRAtPcP///lVg4+bRuLN3MzgOb+1af+DJ2aMrnav7EkBBCwx2sO9BQSxtZMnw8uo5cJCDHPP45AFwyiElB0Cj9SAjMB7uS+gYKbDzIFz+88tHhg+P7j3AV4KBHAMKBVFgsINoEVUtkrLf3f1bD7D8+/vnANDihzDBr29eykvoGif8+fEDlCgewsRUXf0TkDVLGVowUAJ+ff3yAWsJBwxCByCu//Hp/UZg9pgAUpN95PF+BiqC0/P6G5lwBOmBU/P6HDn4BAWssqrO88soGDDQALDgkwQ6oEHF0WeDlL75fHIMRy6M0MGrm5fkia1YyAp2YIpm4BYVx2r2+/u38fucUgDKARtywxxxyTMxDCAYUMvJDvYb21HLeFgNR0ztRrHlIIvRi1RQqTdkgn1oxjm2YGbHUt3SxHJSG5GjcT5oLCemYjEANvrOI7d0SAHv7t/6cGf/FkFK+mpk1Wqg3ACsWBhH43zUcopLuPuHd2LtvZBS8pFtOcji0SqV7nEOapOjBzNsoIDmlmt4ho7m81HLh19WE1CwdokntfSCZUd5C8eChyf2TyDX5wLcwuJk+45TSESAkmbUaEtm8JTtoCEP9LE3UAIjpdhFt1wBijGaz9iGPCitz1Es1/AKTXCu6qsn1CGkSbDf2LZ6gpCCqr9hVCbBcbc3t69hzdeUxPmHY9PaEnklZferOPoI4NMI7MXQJLVf2Fmb6Qjs4nwYqKxGFwfgy+cXzi2ZlkjsDALVC5nXNy9v2N2Ul4gtcdGlhAN2cRccmdRQiD3FXwV3HkCY1JROSvF6AVuPBTbnAsKg0WWKChlSaiuQhaDo4JOUATsCBkBsYkelyKpYYO1zkMWg4U5YeQ4alSQlgQ69KhU0kQfy/afnT8BxD6rhYNOcpPRSybIcNtoMqtkgvVULcFyLqGjRPsGBACiuYXMoP6FD3XQb/oSFAPqY+2ingaol3NVNS0mu4UDzpdSI8w8Huiocf339Us8rIS1AjIYnp488ADq4EJ8agAADAHH/6+3oJf0tAAAAAElFTkSuQmCC"
+
+/***/ }),
+
+/***/ "./src/assets/img/cement_machines/yurefadianji.png":
+/*!*********************************************************!*\
+  !*** ./src/assets/img/cement_machines/yurefadianji.png ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEMAAAAXCAYAAABQ1fKSAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3dJREFUeNpiZKASkLdwLDCMzuwnpO7Z+RMHTs3rc2QYhICFWgaJaxkKSBtaElT3/cNbhsEKKAkMA7OkogAkT9ozDHFAdmCAAsI0qbAexn96/jjDiA0MEHhz+yrDmzvXGNh5+BjYgHioAyaKAgMYEBqeoQxSwLLi/uGdIzsw2KGpgX0YpAqq1CY3tq9m+Pn5EwMxNcmwDYyX185/kDK0AJcVvBIMDJ9fPCG7VgJiAXRBu6KWeiFFNQdyDf3z88eDk7O7C1/fvPwBi/QBqgYGn5ScP3JqILM2cQifv2O/iKo2iiDILCqkNAUWdo716Ob8/PKJ4fi0tgVXNy1NpFaZYWAYleFAqWuB1bMDekDQGoDKNxlTGwWqFaDaftH5vBIyDMMNIGcTQjH9AdTQ+vX1M7+6R3ACpRarOPqAzLAfdIEB6mS5Nkzpx1dF7qzN/ABscQpQy2I1t4D5A9xQMwAW0v2cgsIM7+/fZgB2HgPBgcEjJqVPqK0ALNmpEhC/v30FmeMwkAEBcgMoq+sGxUNyA7APDQwMA1BgOEjoGifQyyHAWsgg+8jj/QPZlwG5AYSxFaAH3t27uYFeDvn6+sWD0/P6Gwcyf4DccHf/1gNYaxNWTu6LdGv/s7I+ACbJBmCX/8OA9UGAbri8bmEg346pDCJHFzMwbZzwACh8gWWgHAQskB1B+RbYKEoYCPtPrp+NqD3VRBVi1s8WYBrA1HqBW0T84QDa74/GD2Ap9VFROHdy8YdXf5+C+xn/+SUYfr15xsDOyoTcbGP4vW/egbdfrsFrlP+cfAw/Pr5nYGNn+8D8/6/An6/fFFhYPgogtXvhepHFpF5eUQDaWQDkPbh5cRn/v/38DGy8fHC1/zl4GLhv7GNgAboHm35SxLgfPWIAuglVHcjtxzcLrDn56CCQiVw8bGAEkUDHgUrWD9AOE8xDH5BoBTQxGBCAiT1++10AiBU4WJnB+p+8+/5BhJcNrAgm9v7bLwYZIc4D6pI8ML0Mx269A5v95ccfoHp2BZg6Ke+keF5ZFYOfXz4ysLMwAw3hQfIrVAzkMWDkMQI9iiwGUvvz91+GX4eXJX5/chduNycr8weQPfry/Azi/OwfkP3YveXOA0ZQyoB1bAgEggBagH1Ak0MOxAdQvchiH3AELK7AJmTPAzR16HYzEGEPWAwYEOCaBSDAAPflSEiH7e6VAAAAAElFTkSuQmCC"
+
+/***/ }),
+
+/***/ "./src/components/common/MyContentTitle.vue":
+/*!**************************************************!*\
+  !*** ./src/components/common/MyContentTitle.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MyContentTitle_vue_vue_type_template_id_e68802e2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MyContentTitle.vue?vue&type=template&id=e68802e2&scoped=true& */ "./src/components/common/MyContentTitle.vue?vue&type=template&id=e68802e2&scoped=true&");
+/* harmony import */ var _MyContentTitle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyContentTitle.vue?vue&type=script&lang=js& */ "./src/components/common/MyContentTitle.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _MyContentTitle_vue_vue_type_style_index_0_id_e68802e2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MyContentTitle.vue?vue&type=style&index=0&id=e68802e2&scoped=true&lang=css& */ "./src/components/common/MyContentTitle.vue?vue&type=style&index=0&id=e68802e2&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_15_9_6_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/_vue-loader@15.9.6@vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/_vue-loader@15.9.6@vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_15_9_6_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _MyContentTitle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MyContentTitle_vue_vue_type_template_id_e68802e2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MyContentTitle_vue_vue_type_template_id_e68802e2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "e68802e2",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/components/common/MyContentTitle.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/components/common/MyContentTitle.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./src/components/common/MyContentTitle.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_8_2_2_babel_loader_lib_index_js_ref_1_0_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_MyContentTitle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/_babel-loader@8.2.2@babel-loader/lib??ref--1-0!../../../node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./MyContentTitle.vue?vue&type=script&lang=js& */ "./node_modules/_babel-loader@8.2.2@babel-loader/lib/index.js?!./node_modules/_vue-loader@15.9.6@vue-loader/lib/index.js?!./src/components/common/MyContentTitle.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_8_2_2_babel_loader_lib_index_js_ref_1_0_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_MyContentTitle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/components/common/MyContentTitle.vue?vue&type=style&index=0&id=e68802e2&scoped=true&lang=css&":
+/*!***********************************************************************************************************!*\
+  !*** ./src/components/common/MyContentTitle.vue?vue&type=style&index=0&id=e68802e2&scoped=true&lang=css& ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_2_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_MyContentTitle_vue_vue_type_style_index_0_id_e68802e2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/_mini-css-extract-plugin@0.8.2@mini-css-extract-plugin/dist/loader.js??ref--2-0!../../../node_modules/_css-loader@3.6.0@css-loader/dist/cjs.js!../../../node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./MyContentTitle.vue?vue&type=style&index=0&id=e68802e2&scoped=true&lang=css& */ "./node_modules/_mini-css-extract-plugin@0.8.2@mini-css-extract-plugin/dist/loader.js?!./node_modules/_css-loader@3.6.0@css-loader/dist/cjs.js!./node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/stylePostLoader.js!./node_modules/_vue-loader@15.9.6@vue-loader/lib/index.js?!./src/components/common/MyContentTitle.vue?vue&type=style&index=0&id=e68802e2&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_2_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_MyContentTitle_vue_vue_type_style_index_0_id_e68802e2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_2_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_MyContentTitle_vue_vue_type_style_index_0_id_e68802e2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_2_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_MyContentTitle_vue_vue_type_style_index_0_id_e68802e2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_2_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_MyContentTitle_vue_vue_type_style_index_0_id_e68802e2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./src/components/common/MyContentTitle.vue?vue&type=template&id=e68802e2&scoped=true&":
+/*!*********************************************************************************************!*\
+  !*** ./src/components/common/MyContentTitle.vue?vue&type=template&id=e68802e2&scoped=true& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_MyContentTitle_vue_vue_type_template_id_e68802e2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./MyContentTitle.vue?vue&type=template&id=e68802e2&scoped=true& */ "./node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/templateLoader.js?!./node_modules/_vue-loader@15.9.6@vue-loader/lib/index.js?!./src/components/common/MyContentTitle.vue?vue&type=template&id=e68802e2&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_MyContentTitle_vue_vue_type_template_id_e68802e2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_MyContentTitle_vue_vue_type_template_id_e68802e2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./src/components/common/overviewCoalCommon.js":
+/*!*****************************************************!*\
+  !*** ./src/components/common/overviewCoalCommon.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(swal, $) {/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/utils/utils */ "./src/utils/utils.js");
+
+var overviewCoal = {
+  data: function data() {
+    return {
+      choosePumpList: [],
+      choosePosList: [],
+      //选择的机组的测点列表
+      overviewUrl: "",
+      //总貌图背景路径
+      dragMsg: null,
+      // 拖动的机泵的信息
+      MoveMsg: [],
+      //移动的机泵的信息
+      isRightClick: false,
+      // 是否显示右键信息
+      rightClickMsg: {
+        // 右键选中机泵组件
+        index: -1,
+        // 右键选中组件下标
+        data: null // 右键选中组件信息
+
+      },
+      isTip: false,
+      //是否显示提示框
+      overviewFont: 20,
+      //总貌图名称字号大小
+      bg_width: 1366,
+      //背景宽
+      bg_height: 768,
+      //背景高
+      bg_pwidth: 0,
+      //背景图片的宽
+      bg_pheight: 0,
+      //背景图片的高
+      bg_px: 0,
+      //背景图相对于画图区域的百分比x
+      bg_py: 0,
+      //背景图相对于画图区域的百分比y
+      origBlock: {
+        //总貌图背景区域
+        oriW: "",
+        oriH: ""
+      },
+      isShow: {
+        //机泵
+        macIsShow: false //机组下拉框显示隐藏
+
+      },
+      //搜索下拉是否显示
+      folderList1: [],
+      //初始1级组织列表
+      folderList2: [],
+      //初始2级组织列表
+      folderList3: [],
+      //初始3级组织列表
+      folderList4: [],
+      //初始4级组织列表
+      searchFolderList1: [],
+      //1级组织搜索匹配到的组织列表
+      searchFolderList2: [],
+      //2级组织
+      searchFolderList3: [],
+      //3级组织
+      searchFolderList4: [],
+      //4级组织
+      searchInput1: '',
+      //1级组织输入值
+      searchInput2: '',
+      //2级组织输入值
+      searchInput3: '',
+      //3级组织输入值
+      searchInput4: '',
+      //4级组织输入值
+      isShow1: false,
+      //搜索1级组织下拉是否显示
+      isShow2: false,
+      //搜索2级组织下拉是否显示
+      isShow3: false,
+      //搜索3级组织下拉是否显示
+      isShow4: false,
+      //搜索4级组织下拉是否显示
+      moveDivMsg: {
+        index: 0,
+        //当前操作的下标
+        width: 170,
+        height: 80,
+        x: 0,
+        y: 0,
+        circleD: 0,
+        circleX: 0,
+        circleY: 0,
+        focusX: 0,
+        focusY: 0
+      },
+      fontList: [10, 11, 12, 14, 16, 18, 20, 24, 30, 36, 48, 60, 72],
+      //字号选择
+      chooseItemList: [],
+      //按住ctrl多选中的机泵/测点
+      ratio_w: 1,
+      //宽度的比例
+      ratio_p: 1,
+      //高度的比例
+      isShowFont: false,
+      //是否展示字号面板
+      dragMoveBg: null //移动的背景的信息
+
+    };
+  },
+  mounted: function mounted() {
+    if (this.$store.state.tids.length > 0) {
+      this.getTidData(); //获取所有的机组设置数据
+    }
+
+    ;
+  },
+  watch: {
+    overviewFont: function overviewFont(val, oldVal) {
+      //标题字号改变
+      this.$refs.fontInput.style.fontSize = this.overviewFont + 'px';
+    }
+  },
+  computed: {
+    sortFolderList1: function sortFolderList1() {
+      return this.searchFolderList1.sort(Object(_utils_utils__WEBPACK_IMPORTED_MODULE_0__["compareName"])('t_name'));
+    },
+    sortFolderList2: function sortFolderList2() {
+      return this.searchFolderList2.sort(Object(_utils_utils__WEBPACK_IMPORTED_MODULE_0__["compareName"])('t_name'));
+    },
+    sortFolderList3: function sortFolderList3() {
+      return this.searchFolderList3.sort(Object(_utils_utils__WEBPACK_IMPORTED_MODULE_0__["compareName"])('t_name'));
+    },
+    sortFolderList4: function sortFolderList4() {
+      return this.searchFolderList4.sort(Object(_utils_utils__WEBPACK_IMPORTED_MODULE_0__["compareName"])('t_name'));
+    },
+    sortPumpList: function sortPumpList() {
+      return this.searchPumpList.sort(Object(_utils_utils__WEBPACK_IMPORTED_MODULE_0__["compareName"])('pump_name'));
+    }
+  },
+  methods: {
+    //保存总貌图
+
+    /**
+     * type: 1组织总貌；3：机泵总貌
+     * **/
+    keepOverview: function keepOverview(type) {
+      var overViewObj = {},
+          w,
+          ppx,
+          ppy;
+
+      if (type === 1) {
+        //组织总貌图
+        overViewObj = {
+          o_id: this.chooseFolder.t_id,
+          //总貌图uid（=组织/机组/机泵uid）
+          mac_id: "A",
+          overview_info: {},
+          itemList: [] //节点列表
+
+        }; //总貌图
+      } else if (type === 3) {
+        //机泵总貌图
+        overViewObj = {
+          o_id: this.chooseMac.pump_id,
+          //总貌图uid（=组织/机组/机泵uid）
+          mac_id: this.chooseMac.mac_id,
+          overview_info: {},
+          itemList: [] //节点列表
+
+        }; //总貌图
+      }
+
+      overViewObj.overview_info = {
+        version: 1,
+        o_name: this.o_name,
+        //总貌图名称
+        overviewFont: this.overviewFont,
+        //总貌图名称字号大小
+        bg_width: this.origBlock.oriW,
+        //背景宽
+        bg_height: this.origBlock.oriH //背景高
+
+      };
+      var obj = {},
+          finalX,
+          finalY,
+          finalCircleX,
+          finalCircleY;
+
+      for (var i = 0; i < this.MoveMsg.length; i++) {
+        var item = this.MoveMsg[i];
+        finalX = item.x + item.moveX;
+        finalY = item.y + item.moveY;
+        finalCircleX = item.oriCircleX + item.moveCircleX;
+        finalCircleY = item.oriCircleY + item.moveCircleY;
+        obj = {
+          id: i,
+          //计数id
+          type: type,
+          //类型 1=组织 2=机组 3=机泵 4=测点
+          itemType: this.MoveMsg[i].itemType,
+          //设备类型 如1=破碎机
+          uid: this.MoveMsg[i].uid,
+          //节点uid，如"3_05"，表示id=05的振动测点
+          px: (finalX / this.origBlock.oriW).toFixed(2),
+          //相对于背景图的x位置
+          py: (finalY / this.origBlock.oriH).toFixed(2),
+          //相对于背景图的y位置
+          width: this.MoveMsg[i].width,
+          height: this.MoveMsg[i].height,
+          itemName: this.MoveMsg[i].text,
+          //编辑的部件名
+          circleD: this.MoveMsg[i].circleD,
+          //圆点的直径
+          circleX: (finalCircleX / this.origBlock.oriW).toFixed(2),
+          //小圆百分比的x位置
+          circleY: (finalCircleY / this.origBlock.oriH).toFixed(2) //小圆百分比的y
+
+        };
+        overViewObj.itemList.push(obj);
+      }
+
+      this.$axios.post('updateTreeOverview', overViewObj).then(function (res) {
+        if (res.msg == 0) {
+          swal({
+            title: "提示",
+            text: '保存成功',
+            button: "确认"
+          });
+        } else if (res.msg == 1) {
+          console.log('参数为空');
+          swal({
+            title: "提示",
+            text: '保存失败',
+            button: "确认"
+          });
+        } else if (res.msg == 2) {
+          console.log('后台运行错误');
+          swal({
+            title: "提示",
+            text: '保存失败',
+            button: "确认"
+          });
+        }
+      })["catch"](function (err) {
+        console.log('请求失败', err);
+      });
+    },
+    //上传总貌图背景图
+
+    /**
+     * type: 1组织总貌；2：机泵总貌
+     * **/
+    selectImg: function selectImg(type) {
+      var that = this;
+      var imgFile = $('#imgLocal')[0].files[0]; //取到上传的图片
+
+      var param = new FormData(); // 创建form对象
+
+      param.append('files', imgFile); //对应后台接收图片名
+
+      if (type === 1) {
+        param.append('id', this.chooseFolder.t_id);
+        param.append('mac_id', "A");
+      } else if (type === 2) {
+        param.append('id', this.chooseMac.pump_id);
+        param.append('mac_id', this.chooseMac.mac_id);
+      }
+
+      var overview_json = {
+        version: 1,
+        o_name: that.o_name,
+        overviewFont: that.overviewFont
+      };
+      overview_json = JSON.stringify(overview_json);
+      param.append('overview_json', overview_json);
+      this.$axios.post('createTreeOverview', param, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (res) {
+        // console.log(res);//
+        $('#imgLocal')[0].value = "";
+        that.overviewUrl = '';
+
+        if (res.msg == 0) {
+          that.overviewUrl = res.bgurl; // 图片地址
+
+          var img_url = res.bgurl; // let img_url = require("assets/img/test/timg.jpg");
+          // 创建对象
+
+          var img = new Image(); // 改变图片的src
+
+          img.src = img_url; // 加载完成执行
+
+          img.onload = function () {
+            /* 获取图片的真实宽高，计算背景图区域 */
+            that.computePicWidth(img);
+            that.MoveMsg.forEach(function (item) {
+              item.style.left = parseInt(item.px * that.origBlock.oriW) + 'px';
+              item.style.top = parseInt(item.py * that.origBlock.oriH) + 'px';
+              item.x = parseInt(item.px * that.origBlock.oriW);
+              item.y = parseInt(item.py * that.origBlock.oriH);
+            });
+            that.$forceUpdate();
+            swal({
+              title: "提示",
+              text: '上传成功',
+              button: "确认"
+            });
+          };
+        } else if (res.msg == 1) {
+          console.log("参数为空");
+          swal({
+            title: "提示",
+            text: '上传失败',
+            button: "确认"
+          });
+        } else if (res.msg == 2) {
+          console.log("后台运行错误");
+          swal({
+            title: "提示",
+            text: '上传失败',
+            button: "确认"
+          });
+        } else if (res.msg == 3) {
+          console.log("获取json数据时为空");
+          swal({
+            title: "提示",
+            text: '上传失败',
+            button: "确认"
+          });
+        }
+      })["catch"](function (error) {
+        console.log(error);
+        $('#imgLocal')[0].value = "";
+      })["catch"](function (err) {
+        console.log('请求错误', err);
+      });
+    },
+    //获取组织信息
+    getTidData: function getTidData() {
+      var that = this;
+      var paramObj = null;
+      paramObj = {
+        t_ids: this.$store.state.tids
+      };
+      this.$axios.post('queryAllT_OverviewInfo', paramObj).then(function (res) {
+        that.folderList1 = [];
+        that.folderList2 = [];
+        that.folderList3 = [];
+        that.folderList4 = [];
+
+        for (var i = 0; i < res.length; i++) {
+          if (res[i].t_root == 1) {
+            that.folderList1.push(res[i]);
+          }
+        }
+
+        that.searchFolderList1 = that.folderList1.concat();
+      })["catch"](function (err) {
+        console.log('请求错误', err);
+      });
+    },
+    //确定选择组织
+
+    /**
+     * chooseInfo:所选中的组织信息；
+     * e:点击元素；
+     * type:1一级组织，2二级组织，3三级组织，4四级组织；
+     * pageType：1组织设置，2机泵设置
+     * **/
+    selectFolder: function selectFolder(chooseInfo, e, type, pageType) {
+      $('pump_li').siblings().removeClass('active');
+      var num = Number(type + 1);
+
+      if (chooseInfo.child && chooseInfo.child.length) {
+        this["folderList".concat(num)] = chooseInfo.child.concat();
+        this["searchFolderList".concat(num)] = chooseInfo.child;
+        this.$refs["searchInput".concat(num)].value = '';
+      } else {
+        this["searchFolderList".concat(num)] = [];
+        this.$refs["searchInput".concat(num)].value = '';
+      }
+
+      if (e !== null) {
+        $(e.currentTarget).addClass('active').siblings().removeClass('active');
+      }
+
+      this.chooseFolder = chooseInfo;
+      this.choosePumpList.length = 0; //切换组织时机泵列表清空
+
+      if (type) this.$refs["searchInput".concat(type)].value = this.chooseFolder.t_name;
+      this["isShow".concat(type)] = false;
+      var that = this;
+      var tidObj = {
+        t_id: this.chooseFolder.t_id,
+        type: pageType
+      };
+      this.$axios.post('queryPumpOverviewInfoByTId', tidObj).then(function (res) {
+        if (pageType === 1) {
+          that.overviewUrl = '';
+
+          if (res.msg == 0) {
+            that.MoveMsg = [];
+            var result = res.folder.overview;
+
+            if (!$.isEmptyObject(result)) {
+              that.overviewUrl = result.bgurl;
+
+              if (result.o_name) {
+                that.o_name = result.o_name;
+              } else {
+                that.o_name = that.chooseFolder.t_name;
+              }
+
+              if (result.overviewFont) {
+                that.overviewFont = result.overviewFont;
+              } else {
+                that.overviewFont = 20;
+              } // that.overviewUrl = require("assets/img/overview_pump.jpg");
+
+
+              var img_url = result.bgurl; // let img_url = require("assets/img/overview_pump.jpg");
+              // 创建对象
+
+              var img = new Image(); // 改变图片的src
+
+              img.src = img_url; // 加载完成执行
+
+              img.onload = function () {
+                /* 获取图片的真实宽高，计算背景图区域 */
+                that.computePicWidth(img);
+                var oriItemList = result.itemList;
+
+                for (var i = 0; i < oriItemList.length; i++) {
+                  if (typeof oriItemList[i].circleD === "undefined") {
+                    oriItemList[i].circleD = 14; //设置小圆点的默认值为14
+                  }
+
+                  var obj = {
+                    index: i,
+                    text: oriItemList[i].itemName,
+                    //输入框中文字
+                    px: oriItemList[i].px,
+                    //框框百分比的x
+                    py: oriItemList[i].py,
+                    //框框百分比的y
+                    x: parseInt(oriItemList[i].px * that.origBlock.oriW),
+                    //页面的x
+                    y: parseInt(oriItemList[i].py * that.origBlock.oriH),
+                    //页面的y
+                    uid: oriItemList[i].uid,
+                    itemType: oriItemList[i].pump_type,
+                    //机泵类型
+                    width: oriItemList[i].width,
+                    //旧：机泵图标宽；新：框框的宽
+                    height: oriItemList[i].height,
+                    //旧：机泵图标高；新：框框的高
+                    circleD: oriItemList[i].circleD,
+                    //小圆的直径
+                    circleX: oriItemList[i].circleX,
+                    //小圆百分比的x
+                    circleY: oriItemList[i].circleY,
+                    //小圆百分比的y
+                    moveX: 0,
+                    //相对原来的框的移动位置x
+                    moveY: 0,
+                    //相对原来的框的移动位置y
+                    moveCircleX: 0,
+                    //圆点相对原来的框的移动位置x
+                    moveCircleY: 0,
+                    //圆点相对原来的框的移动位置y
+                    oriCircleX: parseInt(oriItemList[i].circleX * that.origBlock.oriW),
+                    //圆点初始x
+                    oriCircleY: parseInt(oriItemList[i].circleY * that.origBlock.oriH),
+                    //圆点初始y
+                    style: {
+                      left: parseInt(oriItemList[i].px * that.origBlock.oriW) + 'px',
+                      top: parseInt(oriItemList[i].py * that.origBlock.oriH) + 'px',
+                      zIndex: 2
+                    },
+                    circleStyle: {
+                      left: parseInt(oriItemList[i].circleX * that.origBlock.oriW) + 'px',
+                      top: parseInt(oriItemList[i].circleY * that.origBlock.oriH) + 'px',
+                      zIndex: 2
+                    }
+                  };
+
+                  for (var j = 0; j < res.pump_list.length; j++) {
+                    if (oriItemList[i].uid == res.pump_list[j].pump_id) {
+                      res.pump_list[j].dragFlag = false;
+                      obj.dragFlag = false;
+                      obj.mac_id = res.pump_list[j].mac_id;
+                      obj.ch_class = res.pump_list[j].ch_class;
+                      obj.pump_name = res.pump_list[j].pump_name;
+                      obj.url = __webpack_require__("./src/assets/img/cement_machines sync recursive ^\\.\\/.*\\.png$")("./" + that.getPumpImg(res.pump_list[j].pump_type).machine + ".png");
+                    }
+                  }
+
+                  that.MoveMsg.push(obj);
+                }
+              };
+            } else {
+              that.overviewUrl = "";
+              that.o_name = that.chooseFolder.t_name;
+            }
+
+            that.choosePumpList = res.pump_list;
+
+            if (that.choosePumpList.length > 0) {
+              for (var i = 0; i < that.choosePumpList.length; i++) {
+                that.choosePumpList[i].url = __webpack_require__("./src/assets/img/cement_machines sync recursive ^\\.\\/.*\\.png$")("./" + that.getPumpImg(that.choosePumpList[i].pump_type).machine + ".png");
+                that.choosePumpList[i].width = that.getPumpImg(that.choosePumpList[i].pump_type).width;
+                that.choosePumpList[i].height = that.getPumpImg(that.choosePumpList[i].pump_type).height;
+                that.choosePumpList[i].itemType = that.getPumpImg(that.choosePumpList[i].pump_type).itemType;
+
+                if (that.choosePumpList[i].dragFlag === false) {
+                  return;
+                } else {
+                  that.choosePumpList[i].dragFlag = true;
+                }
+              }
+            } // that.o_name +=that.chooseMac.pump_name;
+
+          }
+        } else if (pageType === 2) {
+          if (res.msg == 0) {
+            that.choosePumpList = res.pump_list;
+            that.searchPumpList = that.choosePumpList;
+
+            if (that.choosePumpList.length > 0) {
+              that.$refs.searchMacInput.value = that.sortPumpList[0].pump_name;
+
+              if (that.chooseMac.pump_id != "" && e === null) {
+                //从总貌图带过来的pump信息
+                that.selectMac(that.chooseMac);
+              } else {
+                that.chooseMac = that.sortPumpList[0];
+                that.selectMac(that.chooseMac, 0);
+              }
+            } else {
+              that.$refs.searchMacInput.value = '';
+              that.choosePosList = [];
+              that.MoveMsg = [];
+              that.overviewUrl = '';
+              that.chooseMac = {
+                ch_class: "",
+                mac_id: "",
+                pump_id: "",
+                pump_name: ""
+              };
+            }
+          }
+        }
+      })["catch"](function (err) {
+        console.log('请求错误', err);
+      });
+    },
+    //获取图片的真实宽高，计算背景图区域
+    computePicWidth: function computePicWidth(img) {
+      var imgW = img.width;
+      var imgH = img.height;
+      var p_w = $('#overview-pic').width();
+      var p_h = $('#overview-pic').height();
+
+      if (imgW <= p_w && imgH <= p_h) {
+        this.origBlock.oriW = imgW;
+        this.origBlock.oriH = imgH;
+      } else {
+        if (p_w / p_h > imgW / imgH) {
+          this.origBlock.oriW = parseInt(imgW * p_h / imgH);
+          this.origBlock.oriH = p_h;
+        } else {
+          this.origBlock.oriW = p_w;
+          this.origBlock.oriH = parseInt(imgH * p_w / imgW);
+        }
+      }
+
+      $('#move-block').css({
+        'width': this.origBlock.oriW + 'px',
+        'height': this.origBlock.oriH + 'px'
+      });
+    },
+    // 选择标题字号
+    pickFont: function pickFont(item) {
+      this.overviewFont = item;
+      this.isShowFont = false;
+    },
+    //选择机泵
+    clickPump: function clickPump(pump, index) {
+      $('.pump-li').eq(index).addClass('active').siblings().removeClass('active');
+      this.choosePump = pump;
+    },
+    //点击选择组织输入框，选中状态改变
+    addClass: function addClass(e) {
+      $('.search').removeClass('active');
+      e.currentTarget.classList.add('active');
+    },
+    openList: function openList(type, num) {
+      for (var i = 1; i <= 4; i++) {
+        if (i !== type) {
+          //将其他选框下拉选项关闭
+          this["isShow".concat(i)] = false;
+        }
+      }
+
+      this["isShow".concat(type)] = !this["isShow".concat(type)];
+
+      if (this["isShow".concat(type)]) {
+        //如果组织下拉展开了，那么关闭机泵下拉选项
+        this.isShow.macIsShow = false;
+      }
+
+      if (num === 2) {
+        //机泵总貌图
+        this.isShow.macIsShow = !this.isShow.macIsShow;
+      }
+    },
+    // 左侧机组拖到总貌图位置
+
+    /**
+     * type: 1组织总貌；2：机泵总貌
+     * **/
+    drop: function drop(e, type) {
+      console.log(e);
+      var msg = this.dragMsg,
+          x,
+          y;
+
+      if (msg) {
+        x = e.offsetX - msg.left;
+        y = e.offsetY - msg.top;
+
+        if (this.overviewUrl != '') {
+          var obj = {};
+
+          if (type === 1) {
+            msg.pump.dragFlag = false;
+            obj = {
+              x: x,
+              y: y,
+              uid: msg.uid,
+              mac_id: msg.mac_id,
+              ch_class: msg.ch_class,
+              pump_name: msg.pump_name,
+              itemType: msg.itemType,
+              width: msg.width,
+              height: msg.height,
+              text: msg.text,
+              url: msg.url,
+              oriCircleX: x + 15,
+              oriCircleY: y + 55,
+              circleD: 14,
+              //小圆的直径
+              circleX: 0,
+              //小圆百分比的x
+              circleY: 0,
+              //小圆百分比的y
+              moveCircleX: 0,
+              moveCircleY: 0,
+              moveX: 0,
+              moveY: 0,
+              style: {
+                left: x + 'px',
+                top: y + 'px',
+                zIndex: 2
+              },
+              circleStyle: {
+                left: x + 15 + 'px',
+                top: y + 55 + 'px',
+                zIndex: 2
+              }
+            };
+          } else if (type === 2) {
+            msg.pos.dragFlag = false;
+            obj = {
+              x: e.offsetX - msg.left,
+              y: e.offsetY - msg.top,
+              uid: msg.uid,
+              itemType: msg.itemType,
+              width: msg.width,
+              height: msg.height,
+              text: msg.text,
+              url: msg.url,
+              oriCircleX: x + 15,
+              oriCircleY: y + 55,
+              circleD: 14,
+              //小圆的直径
+              circleX: 0,
+              //小圆百分比的x
+              circleY: 0,
+              //小圆百分比的y
+              moveCircleX: 0,
+              moveCircleY: 0,
+              moveX: 0,
+              moveY: 0,
+              style: {
+                left: x + 'px',
+                top: y + 'px',
+                zIndex: 2
+              },
+              circleStyle: {
+                left: x + 15 + 'px',
+                top: y + 55 + 'px',
+                zIndex: 2
+              }
+            };
+          }
+
+          this.MoveMsg.push(obj);
+        }
+        /*else{
+            let item = this.MoveMsg[msg.index];
+            if(!("width" in item)){
+                item.width=$('.move-div').eq(msg.index).width();
+                item.height=$('.move-div').eq(msg.index).height();
+            }
+            for (let i = 0, l = this.MoveMsg.length; i < l; i++) {
+                if (i !== msg.index)
+                    this.MoveMsg[i].style.zIndex = 2;
+            }
+            let tag = e.target;
+              if (x <= item.width && y <= item.height) {
+                if ($(tag).hasClass('move-div')) {
+                    if (tag.style.left === item.style.left && tag.style.top === item.style.top) {
+                        x += item.x;
+                        y += item.y;
+                    } else {
+                        x += Number(tag.style.left.slice(0, -2)); y += Number(tag.style.top.slice(0, -2));
+                    }
+                }
+                if (tag.tagName === 'IMG' || tag.tagName === 'P') {
+                    let p = tag.parentNode;
+                    if (p.style.left === item.style.left && p.style.top === item.style.top) {
+                        x += (item.x + tag.offsetLeft);
+                        y += (item.y + tag.offsetTop);
+                    } else {
+                        x += (Number(p.style.left.slice(0, -2)) + tag.offsetLeft);
+                        y += (Number(p.style.top.slice(0, -2)) + tag.offsetTop);
+                    }
+                }
+            }
+            item.x = x;
+            item.y = y;
+            item.px = (x/this.origBlock.oriW).toFixed(2);//相对于背景图的x位置
+            item.py = (y/this.origBlock.oriH).toFixed(2);//相对于背景图的y位置
+            item.style = {
+                left: x + 'px',
+                top: y + 'px',
+                zIndex: 3,
+            }
+        }*/
+
+      }
+    },
+
+    /**
+     * 按住ctrl键多选用于位置操作
+     * **/
+    addChooseItem: function addChooseItem(item, index) {
+      if (window.event.ctrlKey) {
+        //按住ctrl键
+        item.index = index;
+        this.chooseItemList.push(item);
+      } else {
+        this.chooseItemList = [];
+      }
+
+      console.log(this.chooseItemList);
+    },
+
+    /**
+     * type: 1左对齐；2：水平居中，3：右对齐，4：顶部对齐，5：垂直居中，6：底部对齐
+     * **/
+    calcPos: function calcPos(type) {
+      var referL, referM, referR, referT, referMH, referB, width, height, moveX0, moveY0;
+      var choosePos = this.chooseItemList;
+      var divList = document.getElementsByClassName('move-div');
+
+      if (!choosePos.length) {
+        return;
+      }
+
+      var referItem = choosePos[0]; //第一个为基准
+
+      width = referItem.width; //第一个的框宽
+
+      height = referItem.height; //第一个的框高
+
+      referL = referItem.x; //第一个左边
+
+      referT = referItem.y; //第一个上边
+
+      if (typeof referItem.moveX !== "undefined") {
+        //如果有移动，需要加上移动后的坐标
+        referL = referItem.x + referItem.moveX;
+        referT = referItem.y + referItem.moveY;
+      }
+
+      referMH = referT + height / 2; //垂直的中间距离
+
+      referR = referL + width; //右侧的坐标
+
+      referM = referL + width / 2; //中间的坐标
+
+      referB = referT + height; //底部的坐标
+
+      var l = 0;
+
+      switch (type) {
+        case 0:
+          //左对齐
+          for (var i = 0; i < choosePos.length; i++) {
+            var item = choosePos[i];
+
+            if (item.index != referItem.index) {
+              l = referL - choosePos[i].x;
+              choosePos[i].moveX = l;
+
+              if (typeof choosePos[i].moveY === "undefined") {
+                choosePos[i].moveY = 0;
+              }
+
+              for (var j = 0; j < divList.length; j++) {
+                var index = divList[j].getAttribute('custom-id');
+
+                if (index == item.index) {
+                  divList[j].style.transform = "translate(".concat(l, "px,").concat(choosePos[i].moveY, "px)");
+                }
+              }
+            }
+          }
+
+          break;
+
+        case 1:
+          //中对齐
+          for (var _i = 0; _i < choosePos.length; _i++) {
+            var _item = choosePos[_i];
+
+            if (_item.index != referItem.index) {
+              l = referM - choosePos[_i].width / 2 - choosePos[_i].x;
+              choosePos[_i].moveX = l;
+
+              if (typeof choosePos[_i].moveY === "undefined") {
+                choosePos[_i].moveY = 0;
+              }
+
+              divList[_i].style.transform = "translate(".concat(l, "px,").concat(choosePos[_i].moveY, "px)");
+            }
+          }
+
+          break;
+
+        case 2:
+          //右对齐
+          for (var _i2 = 0; _i2 < choosePos.length; _i2++) {
+            var _item2 = choosePos[_i2];
+
+            if (_item2.index != referItem.index) {
+              l = referR - choosePos[_i2].width - choosePos[_i2].x;
+              choosePos[_i2].moveX = l;
+
+              if (typeof choosePos[_i2].moveY === "undefined") {
+                choosePos[_i2].moveY = 0;
+              }
+
+              divList[_i2].style.transform = "translate(".concat(l, "px,").concat(choosePos[_i2].moveY, "px)");
+            }
+          }
+
+          break;
+
+        case 3:
+          //上对齐
+          for (var _i3 = 0; _i3 < choosePos.length; _i3++) {
+            var _item3 = choosePos[_i3];
+
+            if (_item3.index != referItem.index) {
+              l = referT - choosePos[_i3].y;
+              choosePos[_i3].moveY = l;
+
+              if (typeof choosePos[_i3].moveX === "undefined") {
+                choosePos[_i3].moveX = 0;
+              }
+
+              divList[_i3].style.transform = "translate(".concat(choosePos[_i3].moveX, "px,").concat(l, "px)");
+            }
+          }
+
+          break;
+
+        case 4:
+          //垂直居中对齐
+          for (var _i4 = 0; _i4 < choosePos.length; _i4++) {
+            var _item4 = choosePos[_i4];
+
+            if (_item4.index != referItem.index) {
+              l = referMH - choosePos[_i4].height / 2 - choosePos[_i4].y;
+              choosePos[_i4].moveY = l;
+
+              if (typeof choosePos[_i4].moveX === "undefined") {
+                choosePos[_i4].moveX = 0;
+              }
+
+              divList[_i4].style.transform = "translate(".concat(choosePos[_i4].moveX, "px,").concat(l, "px)");
+            }
+          }
+
+          break;
+
+        case 5:
+          //下对齐
+          for (var _i5 = 0; _i5 < choosePos.length; _i5++) {
+            var _item5 = choosePos[_i5];
+
+            if (_item5.index != referItem.index) {
+              l = referB - choosePos[_i5].height - choosePos[_i5].y;
+              choosePos[_i5].moveY = l;
+
+              if (typeof choosePos[_i5].moveX === "undefined") {
+                choosePos[_i5].moveX = 0;
+              }
+
+              divList[_i5].style.transform = "translate(".concat(choosePos[_i5].moveX, "px,").concat(l, "px)");
+            }
+          }
+
+          break;
+      }
+    },
+
+    /*
+    * 拖拽按钮type:1向上，2向右上，3右，4，右下，5下，6左下，7，左，8左上
+    * */
+    onResize: function onResize(x, y, width, height) {
+      this.moveDivMsg.width = width;
+      this.moveDivMsg.height = height;
+      this.moveDivMsg.x = x;
+      this.moveDivMsg.y = y;
+    },
+    onDrag: function onDrag(x, y) {
+      this.moveDivMsg.x = x;
+      this.moveDivMsg.y = y;
+    },
+    // 拖动左侧组件
+
+    /**
+     * type: 1组织总貌；2：机泵总貌
+     * **/
+    dragstart: function dragstart(item, index, e, type) {
+      if (item.dragFlag) {
+        this.dragMsg = null;
+        var tag = e.target;
+        this.dragMsg = {
+          url: item.url,
+          uid: item.pos_type + "_" + item.pos_id,
+          itemType: item.pos_type,
+          left: e.offsetX,
+          top: e.offsetY,
+          width: 80,
+          height: 60,
+          text: item.pos_name,
+          type: index + 1,
+          inputStyle: {
+            height: '30px'
+          }
+        };
+
+        if (type === 1) {
+          this.dragMsg.itemType = item.pump_type;
+          this.dragMsg.uid = item.pump_id;
+          this.dragMsg.pump = item;
+          this.dragMsg.text = item.pump_name;
+          this.dragMsg.mac_id = item.mac_id;
+          this.dragMsg.ch_class = item.ch_class;
+          this.dragMsg.pump_name = item.pump_name;
+        } else if (type === 2) {
+          this.dragMsg.pos = item;
+        }
+      } else {
+        var name = '';
+
+        if (type === 1) {
+          name = '机泵';
+        } else if (type === 2) {
+          name = '测点';
+        }
+
+        swal({
+          title: "提示",
+          text: "\u5F53\u524D".concat(name, "\u5DF2\u5B58\u5728\uFF01"),
+          button: "确认"
+        });
+      }
+    },
+    dragover: function dragover() {},
+    onDragstop: function onDragstop(item, index) {
+      console.log(item);
+      item.moveX = this.moveDivMsg.x;
+      item.moveY = this.moveDivMsg.y;
+      console.log(this.MoveMsg[index]);
+    },
+    onResizstop: function onResizstop(item, index) {
+      item.moveX = this.moveDivMsg.x;
+      item.moveY = this.moveDivMsg.y;
+      item.width = this.moveDivMsg.width;
+      item.height = this.moveDivMsg.height;
+      item.inputStyle = {
+        //更新input的高
+        height: this.moveDivMsg.height / 2 + 'px'
+      };
+      this.$forceUpdate();
+    },
+    onDragcircle: function onDragcircle(x, y) {
+      this.moveDivMsg.circleX = x;
+      this.moveDivMsg.circleY = y;
+    },
+    onResizecircle: function onResizecircle(x, y, width, height) {
+      this.moveDivMsg.circleD = width;
+      this.moveDivMsg.circleX = x;
+      this.moveDivMsg.circleY = y;
+    },
+    onResizstopcircle: function onResizstopcircle(item) {
+      item.moveCircleX = this.moveDivMsg.circleX;
+      item.moveCircleY = this.moveDivMsg.circleY;
+      item.circleD = this.moveDivMsg.circleD;
+    },
+    onDragstopcircle: function onDragstopcircle(item) {
+      item.moveCircleX = this.moveDivMsg.circleX;
+      item.moveCircleY = this.moveDivMsg.circleY;
+    },
+    // 总貌图内部拖动
+
+    /**
+     * type: 1组织总貌；2：机泵总貌
+     * **/
+    dragScreen: function dragScreen(index, e, item, type) {
+      this.dragMsg = null;
+      var tag = e.currentTarget;
+
+      if (type === 1) {
+        this.dragMsg = {
+          mac_id: item.mac_id,
+          pump_id: item.pump_id,
+          pump_name: item.pump_name,
+          ch_class: item.ch_class,
+          index: index,
+          left: e.layerX,
+          top: e.layerY,
+          w: item.w,
+          h: item.h,
+          pump: item,
+          inputStyle: item.inputStyle
+        };
+      } else if (type === 2) {
+        this.dragMsg = {
+          index: index,
+          left: e.layerX,
+          top: e.layerY,
+          w: item.w,
+          h: item.h,
+          inputStyle: item.inputStyle
+        };
+      }
+
+      this.MoveMsg[index].px = (e.layerX / this.origBlock.oriW).toFixed(2); //相对于背景图的x位置
+
+      this.MoveMsg[index].py = (e.layerY / this.origBlock.oriH).toFixed(2); //相对于背景图的y位置
+    },
+    //禁止拖动背景图
+    stopDrag: function stopDrag() {
+      this.dragMsg = null;
+      return false;
+    },
+    // 右键点击部件
+    rightClick: function rightClick(item, index, e) {
+      // console.log(item)
+      this.isRightClick = true;
+      this.rightClickMsg = {
+        index: index,
+        data: item
+      };
+      this.$refs.rightMsg.style.left = item.x + e.layerX + 'px';
+      this.$refs.rightMsg.style.top = item.y + e.layerY + 'px';
+    },
+    // 删除组件
+    delModelPos: function delModelPos() {
+      this.isTip = true;
+    },
+    // 确定删除组件
+    confirmTip: function confirmTip(type) {
+      var rcm = this.rightClickMsg,
+          model = this.MoveMsg,
+          id,
+          list = [];
+
+      switch (type) {
+        case 1:
+          list = this.choosePumpList;
+          break;
+
+        case 2:
+          list = this.choosePosList;
+          break;
+      }
+
+      if (rcm.index >= 0 && rcm.data) {
+        model.splice(rcm.index, 1);
+        list.forEach(function (item) {
+          if (type === 1) {
+            id = item.pump_id;
+          } else if (type === 2) {
+            id = item.pos_type + '_' + item.pos_id;
+          }
+
+          if (id == rcm.data.uid) {
+            item.dragFlag = true; //删除了该机泵，该机泵需要变更为可拖动状态
+          }
+        });
+      }
+
+      this.cancelClick();
+      this.isTip = false;
+    },
+    // 取消点击机组组态效果
+    cancelClick: function cancelClick() {
+      this.isShow1 = false;
+      this.isShow2 = false;
+      this.isShow3 = false;
+      this.isShow4 = false;
+      this.isShow.macIsShow = false; //机组下拉框显示隐藏= false;
+
+      if (this.isRightClick) this.isRightClick = false;
+      if (this.isShowFont) this.isShowFont = false;
+    },
+    //  机组组态保存警告框关闭
+    closeAlarm: function closeAlarm() {
+      this.isTip = false;
+    },
+    // 关闭搜索
+    closeSearch: function closeSearch() {
+      this.isShow1 = false;
+      this.isShow2 = false;
+      this.isShow3 = false;
+      this.isShow4 = false;
+      this.isShow.macIsShow = false; //机组下拉框显示隐藏= false;
+    },
+    //模拟点击
+    monidianji: function monidianji() {
+      document.getElementById('imgLocal').click();
+    },
+
+    /**测点排序方法**/
+    sortPositionsName: function sortPositionsName(arr) {
+      var that = this;
+      var sortArr = [];
+      var pos_speed = []; //转速测点
+
+      var pos_vibrate = []; //振动测点
+
+      var pos_envelope = []; //包络测点
+
+      var pos_vibrateOrder = []; //振动阶次测点
+
+      var pos_envelopeOrder = []; //包络阶次测点
+
+      var pos_samp = []; //长采样测点
+
+      var pos_slosh = []; //晃度测点
+
+      var pos_overturn = []; //倾覆测点
+
+      var pos_inclinate = []; //倾角测点
+
+      var pos_synthetic = []; //合成倾角测点
+
+      var pos_temp = []; //合成倾角测点
+
+      var pos_process = []; //过程量测点
+
+      var pos_digital = []; //数字量测点
+
+      var pos_crafts = []; //工艺量测点
+
+      var pos_bolt = []; //螺栓测点
+
+      for (var m = 0, posLen = arr.length; m < posLen; m++) {
+        switch (Number(arr[m].pos_type)) {
+          case 1:
+            pos_speed.push(arr[m]);
+            break;
+
+          case 3:
+            pos_vibrate.push(arr[m]);
+            break;
+
+          case 4:
+            pos_envelope.push(arr[m]);
+            break;
+
+          case 8:
+            pos_vibrateOrder.push(arr[m]);
+            break;
+
+          case 9:
+            pos_envelopeOrder.push(arr[m]);
+            break;
+
+          case 200:
+            pos_samp.push(arr[m]);
+            break;
+
+          case 6:
+            pos_slosh.push(arr[m]);
+            break;
+
+          case 11:
+            pos_overturn.push(arr[m]);
+            break;
+
+          case 12:
+            pos_inclinate.push(arr[m]);
+            break;
+
+          case 13:
+            pos_synthetic.push(arr[m]);
+            break;
+
+          case 7:
+            pos_temp.push(arr[m]);
+            break;
+
+          case 2:
+            pos_process.push(arr[m]);
+            break;
+
+          case 5:
+            pos_digital.push(arr[m]);
+            break;
+
+          case 10:
+            pos_crafts.push(arr[m]);
+            break;
+
+          case 14:
+            pos_bolt.push(arr[m]);
+            break;
+
+          default:
+            pos_speed.push(arr[m]);
+            break;
+        }
+      }
+
+      sortArr = pos_speed.concat(pos_vibrate, pos_envelope, pos_vibrateOrder, pos_envelopeOrder, pos_slosh, pos_samp, pos_overturn, pos_inclinate, pos_synthetic, pos_temp, pos_process, pos_digital, pos_crafts, pos_bolt);
+      return sortArr;
+    }
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (overviewCoal);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! sweetalert */ "./node_modules/_sweetalert@2.1.2@sweetalert/dist/sweetalert.min.js"), __webpack_require__(/*! jquery */ "./node_modules/_jquery@3.6.0@jquery/dist/jquery.js")))
+
+/***/ })
+
+}]);
+//# sourceMappingURL=13-8fb3a52a.js.map

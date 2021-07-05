@@ -1,0 +1,797 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[65],{
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/components/content/regulate/regulateV1.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/content/regulate/regulateV1.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var network_getApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! network/getApi */ "./src/network/getApi.js");
+/* harmony import */ var assets_lib_pinyin_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! assets/lib/pinyin.js */ "./src/assets/lib/pinyin.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "regulateV1",
+  data: function data() {
+    return {
+      selectDgm: {
+        dgm_id: '',
+        dgm_type: '',
+        dgm_name: "",
+        machine_id: ""
+      },
+      //所选中的dgm
+      selectChTypeVal: '',
+      //所选中的通道类型
+      rowList: [],
+      dgmList: [],
+      //采集器列表
+      searchDgmList: [],
+      chList: []
+    };
+  },
+  created: function created() {
+    this.$emit('ievent', this.activeNum);
+    this.getDgmInfo();
+  },
+  methods: {
+    // 过滤采集器
+    searchDgm: function searchDgm() {
+      var search_text = this.$refs.searchInput.value;
+
+      if (search_text.length > 0) {
+        var test_atr = new RegExp(search_text);
+        this.searchDgmList = [];
+
+        for (var i = 0; i < this.dgmList.length; i++) {
+          if (test_atr.test(this.dgmList[i].dgm_id) || Object(assets_lib_pinyin_js__WEBPACK_IMPORTED_MODULE_1__["ConvertPinyin"])(this.dgmList[i].dgm_id).indexOf(search_text) >= 0) {
+            this.searchDgmList.push(this.dgmList[i]);
+          }
+        }
+      } else {
+        this.searchDgmList = this.dgmList.concat();
+      }
+    },
+    // 获取采集器信息
+    getDgmInfo: function getDgmInfo() {
+      var _this = this;
+
+      network_getApi__WEBPACK_IMPORTED_MODULE_0__["default"].getCorrectionFactor(1).then(function (res) {
+        _this.dgmList = res;
+        _this.searchDgmList = _this.dgmList.concat();
+      })["catch"](function (err) {
+        console.log('请求错误', err);
+      });
+    },
+    //获取采集器通道信息
+    getChList: function getChList() {
+      var _this2 = this;
+
+      var params = {
+        dgm_id: this.selectDgm.dgm_id,
+        dgm_type: 1,
+        machine_id: this.selectDgm.machine_id
+      };
+      network_getApi__WEBPACK_IMPORTED_MODULE_0__["default"].getCorrectionFactorByDgmId(params).then(function (res) {
+        _this2.chList = res.list;
+      })["catch"](function (err) {
+        console.log('请求错误', err);
+      });
+    },
+    //新建行
+    addRow: function addRow() {
+      var obj = {
+        selectChType: 1,
+        chTypeList: {
+          '1': '振动通道',
+          '2': '过程量通道'
+        },
+        selectRangeType: 1,
+        rangeTypeList: this.getRangeTypeList(1),
+        input1: '',
+        input2: '',
+        range: '0.9-1.0',
+        active: 0
+      };
+      this.rowList.push(obj);
+    },
+    //量程下拉选项
+    getRangeTypeList: function getRangeTypeList(chType) {
+      var obj = {};
+
+      switch (Number(chType)) {
+        case 1:
+          obj = {
+            '1': '10000g',
+            '2': '10000g',
+            '3': '2000g',
+            '4': '400g',
+            '5': '80g',
+            '6': '50000g'
+          };
+          break;
+
+        case 2:
+          obj = {
+            '0': '1~5V',
+            '1': '-20~20V',
+            '2': '4~20mA'
+          };
+          break;
+
+        default:
+          console.log('数据错误');
+          break;
+      }
+
+      ;
+      return obj;
+    },
+    //修改通道类型，更改量程下拉选项
+    changeChType: function changeChType(item) {
+      var chType = Number(item.selectChType);
+      item.rangeTypeList = this.getRangeTypeList(chType);
+      item.selectRangeType = '';
+    },
+    // 删除行
+    deleteRow: function deleteRow(index) {
+      this.rowList.splice(index, 1);
+      this.selectChTypeVal = '';
+    },
+    // 点击表格效果
+    addClass: function addClass(item) {
+      this.rowList.forEach(function (item) {
+        item.active = 0;
+      });
+      item.active = 1;
+      this.selectChTypeVal = item.rangeTypeList[item.selectRangeType];
+    },
+    // 选择采集器
+    chooseDgm: function chooseDgm(dgm) {
+      this.selectDgm = dgm;
+      this.getChList();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/content/regulate/regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/content/regulate/regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "regulate-block" }, [
+    _c("div", { staticClass: "regulate-left" }, [
+      _c(
+        "div",
+        {
+          staticClass: "search",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+            }
+          }
+        },
+        [
+          _c("input", {
+            ref: "searchInput",
+            staticClass: "over-search-input",
+            attrs: { type: "text", placeholder: "搜索" }
+          }),
+          _vm._v(" "),
+          _c("i", {
+            staticClass: "iconfont icon-zhongzi-sousuo search-icon",
+            on: { click: _vm.searchDgm }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "ul",
+        { staticClass: "search-result" },
+        _vm._l(_vm.searchDgmList, function(dgm) {
+          return _c(
+            "li",
+            {
+              staticClass: "search-li",
+              on: {
+                click: function($event) {
+                  return _vm.chooseDgm(dgm)
+                }
+              }
+            },
+            [_vm._v(_vm._s(dgm.dgm_id))]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "regulate-right" }, [
+      _c("div", { staticClass: "setRegulate" }, [
+        _c("div", { staticClass: "header" }, [
+          _c("div", { staticClass: "header-text" }, [
+            _vm._v(
+              "\n                    校正系数设置 - " +
+                _vm._s(_vm.selectDgm.dgm_id) +
+                "\n                "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "regulate-btn" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn",
+                on: {
+                  click: function($event) {
+                    return _vm.addRow()
+                  }
+                }
+              },
+              [_vm._v("新建行")]
+            ),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn" }, [_vm._v("开始")]),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn" }, [_vm._v("重置")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("table", { staticClass: "regulate-table" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.rowList, function(item, index) {
+              return _c(
+                "tr",
+                {
+                  class: item.active === 1 ? "active" : "",
+                  on: {
+                    click: function($event) {
+                      return _vm.addClass(item)
+                    }
+                  }
+                },
+                [
+                  _c("td", { staticClass: "indexNum" }, [
+                    _vm._v(_vm._s(Number(index + 1)))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: item.selectChType,
+                            expression: "item.selectChType"
+                          }
+                        ],
+                        staticClass: "rangeSelect",
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                item,
+                                "selectChType",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            function($event) {
+                              return _vm.changeChType(item)
+                            }
+                          ]
+                        }
+                      },
+                      _vm._l(item.chTypeList, function(value, key) {
+                        return _c("option", { domProps: { value: key } }, [
+                          _vm._v(_vm._s(value))
+                        ])
+                      }),
+                      0
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: item.selectRangeType,
+                            expression: "item.selectRangeType"
+                          }
+                        ],
+                        staticClass: "rangeSelect",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              item,
+                              "selectRangeType",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(item.rangeTypeList, function(value, key) {
+                        return _c("option", { domProps: { value: key } }, [
+                          _vm._v(_vm._s(value))
+                        ])
+                      }),
+                      0
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: item.input1,
+                          expression: "item.input1"
+                        }
+                      ],
+                      staticClass: "table-input",
+                      domProps: { value: item.input1 },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(item, "input1", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: item.input2,
+                          expression: "item.input2"
+                        }
+                      ],
+                      staticClass: "table-input",
+                      domProps: { value: item.input2 },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(item, "input2", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: item.range,
+                          expression: "item.range"
+                        }
+                      ],
+                      staticClass: "table-input",
+                      domProps: { value: item.range },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(item, "range", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "deleteBtn",
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            return _vm.deleteRow(index)
+                          }
+                        }
+                      },
+                      [_vm._v("删除")]
+                    )
+                  ])
+                ]
+              )
+            }),
+            0
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "setRegulate" }, [
+        _c("div", { staticClass: "header" }, [
+          _c("div", { staticClass: "header-text" }, [
+            _vm._v(
+              "\n                    校正系数计算 - " +
+                _vm._s(_vm.selectChTypeVal) +
+                "\n                "
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
+        ]),
+        _vm._v(" "),
+        _c("table", { staticClass: "regulate-table" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.chList, function(ch) {
+              return _c("tr", [
+                _c("td", [_vm._v(_vm._s(ch.ch_name))]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(ch.output1) +
+                      "\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(ch.output2))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: ch.ac_corr,
+                        expression: "ch.ac_corr"
+                      }
+                    ],
+                    staticClass: "table-input",
+                    domProps: { value: ch.ac_corr },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(ch, "ac_corr", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: ch.null_shift,
+                        expression: "ch.null_shift"
+                      }
+                    ],
+                    staticClass: "table-input",
+                    domProps: { value: ch.null_shift },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(ch, "null_shift", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(ch.c_output))])
+              ])
+            }),
+            0
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "indexNum" }, [_vm._v("序号")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("通道类型")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("量程")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("输入1(mV)")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("输入2(mV)")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("误差范围")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("操作")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "regulate-btn" }, [
+      _c("button", { staticClass: "btn" }, [_vm._v("保存输出1")]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn" }, [_vm._v("保存输出2")]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn" }, [_vm._v("计算")]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn" }, [_vm._v("保存")]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn" }, [_vm._v("校正输出2")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("通道名称")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("输出1")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("输出2")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("交流校正系数")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("零点漂移")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("校正输出2")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./src/components/content/regulate/regulateV1.vue":
+/*!********************************************************!*\
+  !*** ./src/components/content/regulate/regulateV1.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _regulateV1_vue_vue_type_template_id_a2f65d18_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true& */ "./src/components/content/regulate/regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true&");
+/* harmony import */ var _regulateV1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./regulateV1.vue?vue&type=script&lang=js& */ "./src/components/content/regulate/regulateV1.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _regulateV1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _regulateV1_vue_vue_type_template_id_a2f65d18_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _regulateV1_vue_vue_type_template_id_a2f65d18_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "a2f65d18",
+  null
+  
+)
+
+/* hot reload */
+if (true) {
+  var api = __webpack_require__(/*! ./node_modules/vue-hot-reload-api/dist/index.js */ "./node_modules/vue-hot-reload-api/dist/index.js")
+  api.install(__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"))
+  if (api.compatible) {
+    module.hot.accept()
+    if (!api.isRecorded('a2f65d18')) {
+      api.createRecord('a2f65d18', component.options)
+    } else {
+      api.reload('a2f65d18', component.options)
+    }
+    module.hot.accept(/*! ./regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true& */ "./src/components/content/regulate/regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true&", function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ _regulateV1_vue_vue_type_template_id_a2f65d18_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true& */ "./src/components/content/regulate/regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true&");
+(function () {
+      api.rerender('a2f65d18', {
+        render: _regulateV1_vue_vue_type_template_id_a2f65d18_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+        staticRenderFns: _regulateV1_vue_vue_type_template_id_a2f65d18_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]
+      })
+    })(__WEBPACK_OUTDATED_DEPENDENCIES__); }.bind(this))
+  }
+}
+component.options.__file = "src/components/content/regulate/regulateV1.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/components/content/regulate/regulateV1.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./src/components/content/regulate/regulateV1.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_regulateV1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--1-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./regulateV1.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/components/content/regulate/regulateV1.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_regulateV1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/components/content/regulate/regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./src/components/content/regulate/regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_regulateV1_vue_vue_type_template_id_a2f65d18_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/content/regulate/regulateV1.vue?vue&type=template&id=a2f65d18&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_regulateV1_vue_vue_type_template_id_a2f65d18_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_regulateV1_vue_vue_type_template_id_a2f65d18_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=65-76dedf041704a1e82e4a.[ext].js.map

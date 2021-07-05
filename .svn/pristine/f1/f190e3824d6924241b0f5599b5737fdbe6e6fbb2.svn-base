@@ -1,0 +1,1653 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[40],{
+
+/***/ "./node_modules/_babel-loader@8.1.0@babel-loader/lib/index.js?!./node_modules/_vue-loader@15.9.3@vue-loader/lib/index.js?!./src/viewInterface/components/all/All.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/_babel-loader@8.1.0@babel-loader/lib??ref--1-0!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/viewInterface/components/all/All.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/utils/utils */ "./src/utils/utils.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "All",
+  components: {},
+  data: function data() {
+    return {
+      dataResult: [],
+      //获取组织、机组原始信息
+      folderList: [],
+      //初始组织列表
+      macList: {},
+      //初始机组列表
+      dgmList: {},
+      //初始采集器列表
+      chooseMacList: [],
+      //选择的机组列表
+      chooseDgmList: [],
+      //选择的采集器列表
+      chooseTid: '',
+      //所选的组织id
+      chooseMacId: '',
+      //所选的机组id
+      chooseDgmType: "",
+      //所选的采集器类型
+      posListType: [{
+        posType: -1,
+        posName: '全部'
+      }, {
+        posType: 1,
+        posName: '转速测点'
+      }, {
+        posType: 3,
+        posName: '振动测点'
+      }, {
+        posType: 4,
+        posName: '包络测点'
+      }, {
+        posType: 8,
+        posName: '振动阶次测点'
+      }, {
+        posType: 9,
+        posName: '包络阶次测点'
+      }, {
+        posType: 200,
+        posName: '长采样测点'
+      }, {
+        posType: 6,
+        posName: '晃度测点'
+      }, {
+        posType: 11,
+        posName: '倾覆测点'
+      }, {
+        posType: 12,
+        posName: '倾角测点'
+      }, {
+        posType: 13,
+        posName: '合成倾角测点'
+      }, {
+        posType: 7,
+        posName: '温度测点'
+      }, {
+        posType: 2,
+        posName: '过程量测点'
+      }, {
+        posType: 5,
+        posName: '数字量测点'
+      }, {
+        posType: 10,
+        posName: '工艺量测点'
+      }, {
+        posType: 14,
+        posName: '螺栓测点'
+      }, {
+        posType: 15,
+        posName: '冲击测点'
+      }, {
+        posType: 16,
+        posName: '冲击阶次测点'
+      }],
+      //初始测点列表
+      dgmListType: [//DGU2000V1=1,dgu2200=2,DGU2000V2=3,mhd=4,dgu2600=5
+      {
+        dgmType: -1,
+        dgmTypeName: '全部'
+      }, {
+        dgmType: 0,
+        dgmTypeName: '虚拟采集器'
+      }, {
+        dgmType: 1,
+        dgmTypeName: 'DGU2000V1'
+      }, {
+        dgmType: 2,
+        dgmTypeName: 'DGU2200'
+      }, {
+        dgmType: 3,
+        dgmTypeName: 'DGU2000V2'
+      }, {
+        dgmType: 4,
+        dgmTypeName: 'DGU2100E'
+      }, {
+        dgmType: 5,
+        dgmTypeName: 'DGU2600'
+      }, {
+        dgmType: 6,
+        dgmTypeName: 'E821'
+      }, {
+        dgmType: 7,
+        dgmTypeName: 'TMU2000'
+      }, {
+        dgmType: 8,
+        dgmTypeName: 'WHD'
+      }],
+      //采集器类型列表
+      choosePosType: -1,
+      //所选的测点类型
+      posInfoList: [],
+      //获取的测点实时、历史、波形数据
+      oriPosInfoList: [],
+      //获取的原始测点实时、历史、波形数据
+      classObj2: ['iconfont', 'icon-zhongzi-chakanjiemian-wushuju-', 'icon-grey'],
+      classObj0: ['iconfont', 'icon-zhongzi-chakanjiemian-duihao', 'icon-green'],
+      classObj1: ['iconfont', 'icon-zhongzi-chakanjiemian-cuowu-', 'icon-red'],
+      activeNum: 0,
+      //当前界面的index
+      paramsConfig: {},
+      params: {}
+    };
+  },
+  created: function created() {
+    this.$emit('ievent', this.activeNum); // window.document.title = '查看数据';
+  },
+  mounted: function mounted() {
+    this.getHeadData();
+    this.getPosDataState();
+  },
+  watch: {
+    chooseMacId: function chooseMacId() {
+      if (this.chooseMacId != "") {
+        this.getPosDataState();
+        this.choosePosType = -1;
+      }
+    }
+  },
+  destroyed: function destroyed() {
+    if ($.isEmptyObject(this.params)) {
+      if (this.chooseTid != "") {
+        this.paramsConfig = {
+          chooseTid: this.chooseTid,
+          chooseMacId: this.chooseMacId
+        };
+      }
+    } else {
+      this.paramsConfig = this.params;
+    }
+
+    sessionStorage.setItem('paramsConfig', JSON.stringify(this.paramsConfig));
+  },
+  computed: {
+    sortFolderList: function sortFolderList() {
+      return this.folderList.sort(Object(_utils_utils__WEBPACK_IMPORTED_MODULE_0__["compareName"])('t_name'));
+    },
+    sortMacList: function sortMacList() {
+      return this.chooseMacList.sort(Object(_utils_utils__WEBPACK_IMPORTED_MODULE_0__["compareName"])('mac_me'));
+    }
+  },
+  methods: {
+    //获取组织、机组信息
+    getHeadData: function getHeadData() {
+      var that = this;
+      var params = null;
+      params = {
+        type: 3,
+        t_ids: JSON.parse(sessionStorage.getItem('getTidList'))
+      };
+      this.$axios.post('getPositionDataConfig', params).then(function (res) {
+        if (res.msg === 0) {
+          that.dataResult = res.list;
+          var result = res.list.concat();
+
+          if (result.length > 0) {
+            for (var i = 0; i < result.length; i++) {
+              that.folderList.push({
+                't_id': result[i].t_id,
+                't_name': result[i].t_name
+              });
+              that.macList[result[i].t_id] = [];
+
+              if ('mac_list' in result[i] && result[i].mac_list.length > 0) {
+                for (var j = 0; j < result[i].mac_list.length; j++) {
+                  that.macList[result[i].t_id].push({
+                    'mac_id': result[i].mac_list[j].mac_id,
+                    'mac_me': result[i].mac_list[j].mac_me
+                  });
+                  that.dgmList[result[i].mac_list[j].mac_id] = [];
+
+                  if ('dgms_list' in result[i].mac_list[j]) {
+                    if (res.model !== undefined) {
+                      result[i].mac_list[j].dgms_list.push(res.model);
+                    }
+
+                    for (var m = 0; m < result[i].mac_list[j].dgms_list.length; m++) {
+                      var obj = {
+                        dgm_id: result[i].mac_list[j].dgms_list[m].dgm_id,
+                        dgm_type: result[i].mac_list[j].dgms_list[m].dgm_type,
+                        dgm_name: result[i].mac_list[j].dgms_list[m].dgm_name,
+                        dgmTypeName: that.transDgmName(result[i].mac_list[j].dgms_list[m].dgm_type, result[i].t_root)
+                      };
+                      that.dgmList[result[i].mac_list[j].mac_id].push(obj);
+                    }
+                  }
+                }
+              }
+            }
+
+            that.chooseTid = that.sortFolderList[0].t_id;
+          }
+
+          if (!$.isEmptyObject(that.macList)) {
+            that.chooseMacList = that.macList[that.sortFolderList[0].t_id].concat();
+
+            if (that.chooseMacList.length > 0) {
+              that.chooseMacId = that.sortMacList[0].mac_id;
+
+              if (!$.isEmptyObject(that.dgmList)) {
+                that.chooseDgmList = that.dgmList[that.sortMacList[0].mac_id].concat();
+
+                if (that.chooseDgmList.length > 0) {
+                  that.chooseDgmType = that.chooseDgmList[0].dgm_type;
+                  that.getPosTypeList(that.chooseDgmType);
+                }
+              }
+            }
+          }
+
+          var linkInfo = JSON.parse(sessionStorage.getItem('paramsConfig'));
+
+          if (!$.isEmptyObject(linkInfo)) {
+            if (linkInfo.chooseTid != undefined && linkInfo.chooseMacId != undefined && linkInfo.chooseTid != "" && linkInfo.chooseMacId != "" && that.macList[linkInfo.chooseTid].length > 0 && that.dgmList[linkInfo.chooseMacId].length > 0) {
+              that.chooseTid = linkInfo.chooseTid; //所选的组织id
+
+              that.chooseMacId = linkInfo.chooseMacId; //所选的机组id
+
+              that.chooseMacList = that.macList[that.chooseTid].concat();
+              that.chooseDgmList = that.dgmList[that.chooseMacId].concat();
+              that.chooseDgmType = that.chooseDgmList[0].dgm_type;
+              that.getPosTypeList(that.chooseDgmType);
+            }
+          }
+        } else {
+          console.log('请求失败');
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    //改变所选组织
+    selectFolder: function selectFolder() {
+      this.chooseMacList.length = 0;
+      this.chooseDgmList.length = 0;
+      this.posInfoList.length = 0;
+      this.oriPosInfoList.length = 0;
+      this.choosePosType = -1;
+
+      if (!$.isEmptyObject(this.macList)) {
+        this.chooseMacList = this.macList[this.chooseTid].concat();
+
+        if (this.chooseMacList.length > 0) {
+          this.chooseMacId = this.sortMacList[0].mac_id;
+
+          if (!$.isEmptyObject(this.dgmList)) {
+            this.chooseDgmList = this.dgmList[this.sortMacList[0].mac_id].concat();
+
+            if (this.chooseDgmList.length > 0) {
+              this.chooseDgmType = this.chooseDgmList[0].dgm_type;
+              this.getPosTypeList(this.chooseDgmType);
+            }
+          }
+        }
+      }
+    },
+    //改变机组选择
+    selectMac: function selectMac() {
+      this.chooseDgmList.length = 0;
+      this.posInfoList.length = 0;
+
+      if (!$.isEmptyObject(this.dgmList)) {
+        this.chooseDgmList = this.dgmList[this.chooseMacId].concat();
+
+        if (this.chooseDgmList.length > 0) {
+          this.chooseDgmType = this.chooseDgmList[0].dgm_type;
+          this.getPosTypeList(this.chooseDgmType);
+        }
+      }
+    },
+    //改变采集器类型
+    selectDgmType: function selectDgmType() {
+      this.getPosTypeList(this.chooseDgmType);
+      this.getPosDataState();
+    },
+    //改变测点类型选择
+    selectPosType: function selectPosType() {
+      if (this.choosePosType != -1) {
+        this.posInfoList.length = 0;
+
+        for (var i = 0; i < this.oriPosInfoList.length; i++) {
+          if (this.oriPosInfoList[i].pos_type == this.choosePosType) {
+            this.posInfoList.push(this.oriPosInfoList[i]);
+          }
+        }
+      } else {
+        this.posInfoList = this.oriPosInfoList.concat();
+      }
+    },
+    //转换采集器类型名称
+    transDgmName: function transDgmName(dgmType, t_root) {
+      var dgmTypeName = "";
+
+      switch (parseInt(dgmType)) {
+        case 0:
+          dgmTypeName = "虚拟采集器";
+          break;
+
+        case 1:
+          dgmTypeName = "DGU2000V1";
+          break;
+
+        case 2:
+          dgmTypeName = "DGU2200";
+          break;
+
+        case 3:
+          dgmTypeName = "DGU2000V2";
+          break;
+
+        case 4:
+          if (t_root == 0) {
+            dgmTypeName = "DGU2100E";
+          } else if (t_root == 1) {
+            dgmTypeName = "MHD";
+          }
+
+          break;
+
+        case 5:
+          dgmTypeName = "DGU2600";
+          break;
+
+        case 6:
+          dgmTypeName = "E821";
+          break;
+
+        case 7:
+          dgmTypeName = "TMU2000";
+          break;
+
+        case 8:
+          dgmTypeName = "WHD";
+          break;
+      }
+
+      return dgmTypeName;
+    },
+    //获取测点信息
+    getPosDataState: function getPosDataState() {
+      var that = this;
+      that.posInfoList = [];
+      that.oriPosInfoList = [];
+      var params = null;
+      params = {
+        machine_id: that.chooseMacId,
+        dgm_type: that.chooseDgmType
+      };
+
+      if (that.chooseMacId != '') {
+        this.$axios.post('getPositionData', params).then(function (res) {
+          if (res.msg === 0) {
+            if (res.list.length > 0) {
+              for (var i = 0; i < res.list.length; i++) {
+                var obj = {};
+
+                switch (Number(res.list[i].current_wave)) {
+                  case 0:
+                    obj.curWaveClass = that.classObj0;
+                    break;
+
+                  case 1:
+                    obj.curWaveClass = that.classObj1;
+                    break;
+
+                  case 2:
+                    //没有实时波形的显示横杠
+                    obj.curWaveClass = that.classObj2;
+                    break;
+
+                  default:
+                    //没有实时波形的显示横杠
+                    obj.curWaveClass = that.classObj2;
+                    break;
+                }
+
+                switch (Number(res.list[i].history_wave)) {
+                  case 0:
+                    obj.hisWaveClass = that.classObj0;
+                    break;
+
+                  case 1:
+                    obj.hisWaveClass = that.classObj1;
+                    break;
+
+                  case 2:
+                    //没有实时波形的显示横杠
+                    obj.hisWaveClass = that.classObj2;
+                    break;
+
+                  default:
+                    //没有实时波形的显示横杠
+                    obj.hisWaveClass = that.classObj2;
+                    break;
+                }
+
+                switch (Number(res.list[i].current_data)) {
+                  case 0:
+                    obj.curDataClass = that.classObj0;
+                    break;
+
+                  case 1:
+                    obj.curDataClass = that.classObj1;
+                    break;
+
+                  case 2:
+                    //没有实时数据的显示横杠
+                    obj.curDataClass = that.classObj2;
+                    break;
+
+                  default:
+                    //没有实时数据的显示横杠
+                    obj.curDataClass = that.classObj2;
+                    break;
+                }
+
+                switch (Number(res.list[i].history_data)) {
+                  case 0:
+                    obj.hisDataClass = that.classObj0;
+                    break;
+
+                  case 1:
+                    obj.hisDataClass = that.classObj1;
+                    break;
+
+                  case 2:
+                    //没有历史数据的显示横杠
+                    obj.hisDataClass = that.classObj2;
+                    break;
+
+                  default:
+                    //没有历史数据的显示横杠
+                    obj.hisDataClass = that.classObj2;
+                    break;
+                }
+
+                obj.current_data = res.list[i].current_data;
+                obj.current_wave = res.list[i].current_wave;
+                obj.history_data = res.list[i].history_data;
+                obj.history_wave = res.list[i].history_wave;
+                obj.pos_id = res.list[i].pos_id;
+                obj.pos_name = res.list[i].pos_name;
+                obj.pos_type = res.list[i].pos_type;
+                that.posInfoList.push(obj);
+              }
+
+              that.posInfoList = that.sortPositionsName(that.posInfoList);
+              that.oriPosInfoList = that.posInfoList.concat();
+            }
+          } else {
+            console.log('请求失败');
+          }
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
+    },
+    //双击数据跳转至数据页面
+    linkToData: function linkToData(item, type) {
+      if (item.current_data === 0 && type) {
+        this.params = {
+          chooseTid: this.chooseTid,
+          chooseMacId: this.chooseMacId,
+          choosePosId: item.pos_id,
+          choosePosType: item.pos_type,
+          choosePosName: item.pos_name,
+          choosePosTypeId: item.pos_type + "_" + item.pos_id,
+          chooseIsRealType: 2,
+          toggleText: '实时',
+          isReal: true
+        };
+        this.$router.push({
+          name: "data",
+          params: this.params
+        });
+      } else if (item.history_data === 0 && type === 0) {
+        this.params = {
+          chooseTid: this.chooseTid,
+          chooseMacId: this.chooseMacId,
+          choosePosId: item.pos_id,
+          choosePosType: item.pos_type,
+          choosePosName: item.pos_name,
+          choosePosTypeId: item.pos_type + "_" + item.pos_id,
+          chooseIsRealType: 1,
+          toggleText: '历史',
+          isReal: false
+        };
+        this.$router.push({
+          name: "data",
+          params: this.params
+        });
+      }
+    },
+    //双击波形跳转至波形页面
+    linkToWave: function linkToWave(item, type) {
+      if (item.current_wave === 0 && type) {
+        this.params = {
+          chooseTid: this.chooseTid,
+          chooseMacId: this.chooseMacId,
+          choosePosId: item.pos_id,
+          choosePosType: item.pos_type,
+          choosePosName: item.pos_name,
+          choosePosTypeId: item.pos_type + "_" + item.pos_id,
+          toggleText: '实时',
+          isReal: 1
+        };
+        this.$router.push({
+          name: "wave",
+          params: this.params
+        });
+      } else if (item.history_wave === 0 && type === 0) {
+        this.params = {
+          chooseTid: this.chooseTid,
+          chooseMacId: this.chooseMacId,
+          choosePosId: item.pos_id,
+          choosePosType: item.pos_type,
+          choosePosName: item.pos_name,
+          choosePosTypeId: item.pos_type + "_" + item.pos_id,
+          toggleText: '历史',
+          isReal: 0
+        };
+        this.$router.push({
+          name: "wave",
+          params: this.params
+        });
+      }
+    },
+    //获取不同采集器下测点类型列表
+    getPosTypeList: function getPosTypeList(dgmType) {
+      this.posListType = [];
+
+      switch (parseInt(dgmType)) {
+        case 0:
+          this.posListType = [{
+            posType: -1,
+            posName: '全部'
+          }, {
+            posType: 12,
+            posName: '倾角测点'
+          }, {
+            posType: 13,
+            posName: '合成倾角测点'
+          }, {
+            posType: 10,
+            posName: '工艺量测点'
+          }];
+          break;
+
+        case 1:
+          this.posListType = [{
+            posType: -1,
+            posName: '全部'
+          }, {
+            posType: 1,
+            posName: '转速测点'
+          }, {
+            posType: 3,
+            posName: '振动测点'
+          }, {
+            posType: 4,
+            posName: '包络测点'
+          }, {
+            posType: 6,
+            posName: '晃度测点'
+          }, {
+            posType: 11,
+            posName: '倾覆测点'
+          }, {
+            posType: 12,
+            posName: '倾角测点'
+          }, {
+            posType: 13,
+            posName: '合成倾角测点'
+          }, {
+            posType: 2,
+            posName: '过程量测点'
+          }, {
+            posType: 5,
+            posName: '数字量测点'
+          }, {
+            posType: 10,
+            posName: '工艺量测点'
+          }];
+          break;
+
+        case 2:
+          this.posListType = [{
+            posType: -1,
+            posName: '全部'
+          }, {
+            posType: 1,
+            posName: '转速测点'
+          }, {
+            posType: 3,
+            posName: '振动测点'
+          }, {
+            posType: 7,
+            posName: '温度/过程量测点'
+          }, {
+            posType: 5,
+            posName: '数字量测点'
+          }, {
+            posType: 10,
+            posName: '工艺量测点'
+          }];
+          break;
+
+        case 3:
+          this.posListType = [{
+            posType: -1,
+            posName: '全部'
+          }, {
+            posType: 1,
+            posName: '转速测点'
+          }, {
+            posType: 3,
+            posName: '振动测点'
+          }, {
+            posType: 4,
+            posName: '包络测点'
+          }, {
+            posType: 8,
+            posName: '振动阶次测点'
+          }, {
+            posType: 9,
+            posName: '包络阶次测点'
+          }, {
+            posType: 200,
+            posName: '长采样测点'
+          }, {
+            posType: 6,
+            posName: '晃度测点'
+          }, {
+            posType: 11,
+            posName: '倾覆测点'
+          }, {
+            posType: 12,
+            posName: '倾角测点'
+          }, {
+            posType: 13,
+            posName: '合成倾角测点'
+          }, {
+            posType: 7,
+            posName: '温度测点'
+          }, {
+            posType: 2,
+            posName: '过程量测点'
+          }, {
+            posType: 5,
+            posName: '数字量测点'
+          }, {
+            posType: 10,
+            posName: '工艺量测点'
+          }];
+          break;
+
+        case 4:
+          this.posListType = [{
+            posType: -1,
+            posName: '全部'
+          }, {
+            posType: 1,
+            posName: '转速测点'
+          }, {
+            posType: 3,
+            posName: '振动测点'
+          }, {
+            posType: 6,
+            posName: '晃度测点'
+          }, {
+            posType: 11,
+            posName: '倾覆测点'
+          }, {
+            posType: 12,
+            posName: '倾角测点'
+          }, {
+            posType: 13,
+            posName: '合成倾角测点'
+          }];
+          break;
+
+        case 5:
+          this.posListType = [{
+            posType: -1,
+            posName: '全部'
+          }, {
+            posType: 14,
+            posName: '螺栓测点'
+          }];
+          break;
+
+        case 6:
+          this.posListType = [{
+            posType: -1,
+            posName: '全部'
+          }, {
+            posType: 2,
+            posName: '过程量测点'
+          }];
+          break;
+
+        case 7:
+          this.posListType = [{
+            posType: -1,
+            posName: '全部'
+          }, {
+            posType: 1,
+            posName: '转速测点'
+          }, {
+            posType: 3,
+            posName: '振动测点'
+          }, {
+            posType: 4,
+            posName: '包络测点'
+          }, {
+            posType: 8,
+            posName: '振动阶次测点'
+          }, {
+            posType: 9,
+            posName: '包络阶次测点'
+          }, {
+            posType: 7,
+            posName: '温度测点'
+          }, {
+            posType: 15,
+            posName: '冲击测点'
+          }, {
+            posType: 16,
+            posName: '冲击阶次测点'
+          }];
+          break;
+      }
+    },
+
+    /**测点排序方法**/
+    sortPositionsName: function sortPositionsName(arr) {
+      var sortArr = [];
+      var pos_speed = []; //转速测点
+
+      var pos_vibrate = []; //振动测点
+
+      var pos_envelope = []; //包络测点
+
+      var pos_vibrateOrder = []; //振动阶次测点
+
+      var pos_envelopeOrder = []; //包络阶次测点
+
+      var pos_samp = []; //长采样测点
+
+      var pos_slosh = []; //晃度测点
+
+      var pos_overturn = []; //倾覆测点
+
+      var pos_inclinate = []; //倾角测点
+
+      var pos_synthetic = []; //合成倾角测点
+
+      var pos_temp = []; //合成倾角测点
+
+      var pos_process = []; //过程量测点
+
+      var pos_digital = []; //数字量测点
+
+      var pos_crafts = []; //工艺量测点
+
+      var pos_bolt = []; //螺栓测点
+
+      for (var m = 0, posLen = arr.length; m < posLen; m++) {
+        switch (arr[m].pos_type) {
+          case 1:
+            pos_speed.push(arr[m]);
+            break;
+
+          case 3:
+            pos_vibrate.push(arr[m]);
+            break;
+
+          case 4:
+            pos_envelope.push(arr[m]);
+            break;
+
+          case 8:
+            pos_vibrateOrder.push(arr[m]);
+            break;
+
+          case 9:
+            pos_envelopeOrder.push(arr[m]);
+            break;
+
+          case 200:
+            pos_samp.push(arr[m]);
+            break;
+
+          case 6:
+            pos_slosh.push(arr[m]);
+            break;
+
+          case 11:
+            pos_overturn.push(arr[m]);
+            break;
+
+          case 12:
+            pos_inclinate.push(arr[m]);
+            break;
+
+          case 13:
+            pos_synthetic.push(arr[m]);
+            break;
+
+          case 7:
+            pos_temp.push(arr[m]);
+            break;
+
+          case 2:
+            pos_process.push(arr[m]);
+            break;
+
+          case 5:
+            pos_digital.push(arr[m]);
+            break;
+
+          case 10:
+            pos_crafts.push(arr[m]);
+            break;
+
+          case 14:
+            pos_bolt.push(arr[m]);
+            break;
+
+          default:
+            pos_speed.push(arr[m]);
+            break;
+        }
+      } //长采样没有数据，将长采样测点去掉
+
+
+      sortArr = pos_speed.concat(pos_vibrate, pos_envelope, pos_vibrateOrder, pos_envelopeOrder, pos_samp, pos_slosh, pos_overturn, pos_inclinate, pos_synthetic, pos_temp, pos_process, pos_digital, pos_crafts, pos_bolt);
+      return sortArr;
+    }
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/_jquery@3.5.1@jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./node_modules/_mini-css-extract-plugin@0.8.2@mini-css-extract-plugin/dist/loader.js?!./node_modules/_css-loader@3.6.0@css-loader/dist/cjs.js!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/stylePostLoader.js!./node_modules/_sass-loader@8.0.2@sass-loader/dist/cjs.js!./node_modules/_vue-loader@15.9.3@vue-loader/lib/index.js?!./src/viewInterface/components/all/All.vue?vue&type=style&index=0&lang=scss&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/_mini-css-extract-plugin@0.8.2@mini-css-extract-plugin/dist/loader.js??ref--3-0!./node_modules/_css-loader@3.6.0@css-loader/dist/cjs.js!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/stylePostLoader.js!./node_modules/_sass-loader@8.0.2@sass-loader/dist/cjs.js!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/viewInterface/components/all/All.vue?vue&type=style&index=0&lang=scss& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js?!./node_modules/_vue-loader@15.9.3@vue-loader/lib/index.js?!./src/viewInterface/components/all/All.vue?vue&type=template&id=1b3e634e&":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./src/viewInterface/components/all/All.vue?vue&type=template&id=1b3e634e& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "index-content" } }, [
+    _c("header", { staticClass: "myHeader" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "select-group" }, [
+          _c("span", { staticClass: "lableName" }, [_vm._v("组织：")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.chooseTid,
+                  expression: "chooseTid"
+                }
+              ],
+              staticClass: "select-header",
+              attrs: { id: "select-folder" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.chooseTid = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  _vm.selectFolder
+                ]
+              }
+            },
+            _vm._l(_vm.sortFolderList, function(item) {
+              return _c(
+                "option",
+                {
+                  attrs: { title: item.t_name },
+                  domProps: { value: item.t_id }
+                },
+                [_vm._v(_vm._s(item.t_name))]
+              )
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "select-group" }, [
+          _c("span", { staticClass: "lableName" }, [_vm._v("机组：")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.chooseMacId,
+                  expression: "chooseMacId"
+                }
+              ],
+              staticClass: "select-header",
+              attrs: { id: "select-mac" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.chooseMacId = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  _vm.selectMac
+                ]
+              }
+            },
+            _vm._l(_vm.sortMacList, function(item) {
+              return _c(
+                "option",
+                {
+                  attrs: { title: item.mac_me },
+                  domProps: { value: item.mac_id }
+                },
+                [_vm._v(_vm._s(item.mac_me))]
+              )
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "select-group" }, [
+          _c("span", { staticClass: "lableName" }, [_vm._v("采集器类型：")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.chooseDgmType,
+                  expression: "chooseDgmType"
+                }
+              ],
+              staticClass: "select-header",
+              attrs: { id: "select-dgm" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.chooseDgmType = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  _vm.selectDgmType
+                ]
+              }
+            },
+            _vm._l(_vm.chooseDgmList, function(item) {
+              return _c(
+                "option",
+                {
+                  attrs: { title: item.dgmTypeName },
+                  domProps: { value: item.dgm_type }
+                },
+                [_vm._v(_vm._s(item.dgmTypeName))]
+              )
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "select-group" }, [
+          _c("span", { staticClass: "lableName" }, [_vm._v("测点类型：")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.choosePosType,
+                  expression: "choosePosType"
+                }
+              ],
+              staticClass: "select-header",
+              attrs: { id: "select-position" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.choosePosType = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  _vm.selectPosType
+                ]
+              }
+            },
+            _vm._l(_vm.posListType, function(item) {
+              return _c(
+                "option",
+                {
+                  attrs: { title: item.pos_name },
+                  domProps: { value: item.posType }
+                },
+                [_vm._v(_vm._s(item.posName))]
+              )
+            }),
+            0
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "table_block" }, [
+        _c("table", { staticClass: "index_table" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.posInfoList, function(item) {
+              return _c("tr", [
+                _c("td", [_vm._v(_vm._s(item.pos_name))]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  {
+                    on: {
+                      dblclick: function($event) {
+                        return _vm.linkToData(item, 1)
+                      }
+                    }
+                  },
+                  [_c("i", { class: item.curDataClass })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  {
+                    on: {
+                      dblclick: function($event) {
+                        return _vm.linkToData(item, 0)
+                      }
+                    }
+                  },
+                  [_c("i", { class: item.hisDataClass })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  {
+                    on: {
+                      dblclick: function($event) {
+                        return _vm.linkToWave(item, 1)
+                      }
+                    }
+                  },
+                  [_c("i", { class: item.curWaveClass })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  {
+                    on: {
+                      dblclick: function($event) {
+                        return _vm.linkToWave(item, 0)
+                      }
+                    }
+                  },
+                  [_c("i", { class: item.hisWaveClass })]
+                )
+              ])
+            }),
+            0
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.posInfoList.length === 0,
+              expression: "posInfoList.length===0"
+            }
+          ],
+          staticClass: "noData"
+        },
+        [_vm._v("无数据")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("测点")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("实时数据")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("历史数据")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("实时波形")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("历史波形")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./src/utils/utils.js":
+/*!****************************!*\
+  !*** ./src/utils/utils.js ***!
+  \****************************/
+/*! exports provided: translateTree, addSessionStorage, find_key, getRowInfoByIndex, setChangeCellResult, addRows, m_formate, compareName, isStatic, cloneObj, distinct */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(swal) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "translateTree", function() { return translateTree; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addSessionStorage", function() { return addSessionStorage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "find_key", function() { return find_key; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRowInfoByIndex", function() { return getRowInfoByIndex; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setChangeCellResult", function() { return setChangeCellResult; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addRows", function() { return addRows; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m_formate", function() { return m_formate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compareName", function() { return compareName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStatic", function() { return isStatic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cloneObj", function() { return cloneObj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "distinct", function() { return distinct; });
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function translateTree(data) {
+  //通过t_pid来组树结构
+  var array = [];
+
+  var insert = function insert(children, parents) {
+    parents.forEach(function (parent) {
+      children.forEach(function (child, index) {
+        if (child.t_pid == parent.t_id) {
+          var temp = JSON.parse(JSON.stringify(children));
+          temp.splice(index, 1);
+          insert(temp, [child]);
+          typeof parent.children !== 'undefined' ? parent.children.push(child) : parent.children = [child];
+        }
+      });
+    });
+  };
+  /* 含有顶级组织的排序有顶级组织的权限 */
+
+
+  var parents = data.filter(function (item) {
+    return !parseInt(item.t_pid);
+  });
+  var children = data.filter(function (item) {
+    return item.t_pid;
+  });
+  insert(children, parents);
+  array.push.apply(array, _toConsumableArray(parents));
+  return array;
+} //处理sessionstorage超出限制的问题
+
+function addSessionStorage(key, storeObj) {
+  //定义一个前缀，表示只删除自己定义的缓存
+  var cachePrefix = 'SERVICE_QR_'; // sessionStorage对大小是有限制的，所以要进行try catch
+  // 500KB左右的东西保存起来就会令到Resources变卡
+  // 2M左右就可以令到Resources卡死，操作不了
+  // 5M就到了Chrome的极限
+  // 超过之后会抛出如下异常：
+  // DOMException: Failed to execute 'setItem' on 'Storage': Setting the value of 'basket-http://file.com/ykq/wap/v3Templates/timeout/timeout/large.js' exceeded the quota
+
+  try {
+    sessionStorage.setItem(cachePrefix + key, JSON.stringify(storeObj));
+  } catch (e) {
+    // sessionStorage容量不够，根据保存的时间删除已缓存到 sessionStorage
+    if (e.name.toUpperCase().indexOf('QUOTA') >= 0) {
+      var item;
+      var tempArr = []; // 先把所有的缓存对象来出来，放到 tempArr 里
+
+      for (item in sessionStorage) {
+        if (item.indexOf(cachePrefix) === 0) {
+          tempArr.push(JSON.parse(sessionStorage[item]));
+        }
+      } // 如果有缓存对象
+
+
+      if (tempArr.length) {
+        // 按缓存时间升序排列数组
+        tempArr.sort(function (a, b) {
+          return a.stamp - b.stamp;
+        }); // 删除缓存时间最早的
+
+        sessionStorage.removeItem(tempArr[0].key); // 删除后在再添加，利用递归完成
+
+        addSessionStorage(key, storeObj);
+      }
+    }
+  }
+}
+function find_key(value, valueArr, keyArr) {
+  //h-下拉框选key的方法
+  if (valueArr.indexOf(value) != -1) {
+    return keyArr[valueArr.indexOf(value)];
+  }
+
+  console.log('下拉框取key失败，返回undefined');
+  return;
+}
+function getRowInfoByIndex(index, data, hot) {
+  //获取hdtable,行真实信息的方法
+  var physicalRow = hot.toPhysicalRow(index);
+  var info = data[physicalRow];
+  return info;
+}
+/*
+ 修改下拉选项前判断幅值
+ @param valueSource下拉选项的值列表
+ @param valueSource_key下拉选项的key列表
+ @param change_newVal下拉选项更改后的值
+ @param change_index更改的行号
+ * */
+
+function setChangeCellResult(valueSource, valueSource_key, change_newVal, change_index) {
+  var valueArr = valueSource;
+  var keyArr = valueSource_key;
+  var index = valueArr.indexOf(change_newVal);
+
+  if (index == -1) {
+    swal({
+      title: "提示",
+      text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u9009\u9879!"),
+      button: "确认"
+    });
+    return false;
+  } else {
+    return keyArr[index];
+  }
+}
+function addRows(hot, data, row) {
+  if (row == -1) {
+    //通过点击新建按钮进入的方法，默认在最后一行添加
+    row = 0;
+  }
+
+  hot.alter('insert_row', row);
+}
+/**
+ * 四舍五入
+ * 返回数值
+ */
+
+function m_formate(value, num) {
+  if (value == null) {
+    return "无数据";
+  } else {
+    var t_value = Math.abs(value);
+
+    if (t_value >= Math.pow(10, 8) || t_value <= -Math.pow(10, 8)) {
+      //超出8位用科学计数法表示
+      return "无数据";
+    }
+
+    if (num == 255) {
+      //num=255，采用默认规则保留有效位
+      if (value == 0) {
+        //直接返回0值
+        return 0;
+      } else if (value >= 1000) {
+        //保留整数
+        num = 0;
+      } else if (value >= 10) {
+        //保留1位小数
+        num = 1;
+      } else {
+        //保留3个有效数字
+        num = 0;
+        t_value = value;
+
+        while (Math.abs(t_value) < 1) {
+          t_value *= 10;
+          num++;
+        }
+
+        num += 2;
+      }
+    }
+
+    var len_value = Math.pow(10, num);
+    return Math.round(value * len_value) / len_value;
+  }
+}
+/**
+ * 对象根据值进行排序名称
+ * */
+
+function compareName(property) {
+  return function (a, b) {
+    var nameA = a[property].toUpperCase(); // ignore upper and lowercase
+
+    var nameB = b[property].toUpperCase(); // ignore upper and lowercase
+
+    if (nameA < nameB) {
+      return -1;
+    }
+
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    return 0;
+  };
+} // 判断数据是否为原始类型
+
+function isStatic(val) {
+  return typeof val === 'string' || typeof val === 'number' || typeof val === 'boolean' || typeof val === 'undefined' || val === null;
+} // 深度复制对象
+
+function cloneObj(val, deep) {
+  if (isStatic(val)) return val;
+
+  if (Array.isArray(val)) {
+    return val.map(function (item) {
+      return deep ? cloneObj(item, deep) : item;
+    });
+  } else if (_typeof(val) === 'object') {
+    var wType = ['Error', 'Date', 'RegExp'];
+    var type = Object.prototype.toString.call(val).slice(8, -1);
+    if (wType.includes(type)) return new window[type](val);
+    var tag = {};
+
+    for (var key in val) {
+      tag[key] = deep ? cloneObj(val[key], deep) : val[key];
+    }
+
+    return tag;
+  }
+} // 数组去重方法
+
+function distinct(a, b) {
+  var arr = a.concat(b);
+  var result = [];
+  var obj = {};
+
+  var _iterator = _createForOfIteratorHelper(arr),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var i = _step.value;
+
+      if (!obj[i]) {
+        result.push(i);
+        obj[i] = 1;
+      }
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  return result;
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! sweetalert */ "./node_modules/_sweetalert@2.1.2@sweetalert/dist/sweetalert.min.js")))
+
+/***/ }),
+
+/***/ "./src/viewInterface/components/all/All.vue":
+/*!**************************************************!*\
+  !*** ./src/viewInterface/components/all/All.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _All_vue_vue_type_template_id_1b3e634e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./All.vue?vue&type=template&id=1b3e634e& */ "./src/viewInterface/components/all/All.vue?vue&type=template&id=1b3e634e&");
+/* harmony import */ var _All_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./All.vue?vue&type=script&lang=js& */ "./src/viewInterface/components/all/All.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _All_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./All.vue?vue&type=style&index=0&lang=scss& */ "./src/viewInterface/components/all/All.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_15_9_3_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/_vue-loader@15.9.3@vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/_vue-loader@15.9.3@vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_15_9_3_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _All_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _All_vue_vue_type_template_id_1b3e634e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _All_vue_vue_type_template_id_1b3e634e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (true) {
+  var api = __webpack_require__(/*! ./node_modules/_vue-hot-reload-api@2.3.4@vue-hot-reload-api/dist/index.js */ "./node_modules/_vue-hot-reload-api@2.3.4@vue-hot-reload-api/dist/index.js")
+  api.install(__webpack_require__(/*! vue */ "./node_modules/_vue@2.6.11@vue/dist/vue.esm.js"))
+  if (api.compatible) {
+    module.hot.accept()
+    if (!api.isRecorded('1b3e634e')) {
+      api.createRecord('1b3e634e', component.options)
+    } else {
+      api.reload('1b3e634e', component.options)
+    }
+    module.hot.accept(/*! ./All.vue?vue&type=template&id=1b3e634e& */ "./src/viewInterface/components/all/All.vue?vue&type=template&id=1b3e634e&", function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ _All_vue_vue_type_template_id_1b3e634e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./All.vue?vue&type=template&id=1b3e634e& */ "./src/viewInterface/components/all/All.vue?vue&type=template&id=1b3e634e&");
+(function () {
+      api.rerender('1b3e634e', {
+        render: _All_vue_vue_type_template_id_1b3e634e___WEBPACK_IMPORTED_MODULE_0__["render"],
+        staticRenderFns: _All_vue_vue_type_template_id_1b3e634e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]
+      })
+    })(__WEBPACK_OUTDATED_DEPENDENCIES__); }.bind(this))
+  }
+}
+component.options.__file = "src/viewInterface/components/all/All.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/viewInterface/components/all/All.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./src/viewInterface/components/all/All.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_8_1_0_babel_loader_lib_index_js_ref_1_0_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/_babel-loader@8.1.0@babel-loader/lib??ref--1-0!../../../../node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./All.vue?vue&type=script&lang=js& */ "./node_modules/_babel-loader@8.1.0@babel-loader/lib/index.js?!./node_modules/_vue-loader@15.9.3@vue-loader/lib/index.js?!./src/viewInterface/components/all/All.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_8_1_0_babel_loader_lib_index_js_ref_1_0_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/viewInterface/components/all/All.vue?vue&type=style&index=0&lang=scss&":
+/*!************************************************************************************!*\
+  !*** ./src/viewInterface/components/all/All.vue?vue&type=style&index=0&lang=scss& ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_3_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_8_0_2_sass_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/_mini-css-extract-plugin@0.8.2@mini-css-extract-plugin/dist/loader.js??ref--3-0!../../../../node_modules/_css-loader@3.6.0@css-loader/dist/cjs.js!../../../../node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/_sass-loader@8.0.2@sass-loader/dist/cjs.js!../../../../node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./All.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/_mini-css-extract-plugin@0.8.2@mini-css-extract-plugin/dist/loader.js?!./node_modules/_css-loader@3.6.0@css-loader/dist/cjs.js!./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/stylePostLoader.js!./node_modules/_sass-loader@8.0.2@sass-loader/dist/cjs.js!./node_modules/_vue-loader@15.9.3@vue-loader/lib/index.js?!./src/viewInterface/components/all/All.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_3_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_8_0_2_sass_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_3_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_8_0_2_sass_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_3_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_8_0_2_sass_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_3_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_8_0_2_sass_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_mini_css_extract_plugin_0_8_2_mini_css_extract_plugin_dist_loader_js_ref_3_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_8_0_2_sass_loader_dist_cjs_js_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./src/viewInterface/components/all/All.vue?vue&type=template&id=1b3e634e&":
+/*!*********************************************************************************!*\
+  !*** ./src/viewInterface/components/all/All.vue?vue&type=template&id=1b3e634e& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_15_9_3_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_template_id_1b3e634e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/_vue-loader@15.9.3@vue-loader/lib??vue-loader-options!./All.vue?vue&type=template&id=1b3e634e& */ "./node_modules/_vue-loader@15.9.3@vue-loader/lib/loaders/templateLoader.js?!./node_modules/_vue-loader@15.9.3@vue-loader/lib/index.js?!./src/viewInterface/components/all/All.vue?vue&type=template&id=1b3e634e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_15_9_3_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_template_id_1b3e634e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_15_9_3_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_15_9_3_vue_loader_lib_index_js_vue_loader_options_All_vue_vue_type_template_id_1b3e634e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=40-8aed2fe063bd16fc6d9b.js.map

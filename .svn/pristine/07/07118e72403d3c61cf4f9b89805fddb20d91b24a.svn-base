@@ -1,0 +1,4043 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
+
+/***/ "./src/components/content/system/position/table/js/pos_columns.js":
+/*!************************************************************************!*\
+  !*** ./src/components/content/system/position/table/js/pos_columns.js ***!
+  \************************************************************************/
+/*! exports provided: setHeaders, setColumns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setHeaders", function() { return setHeaders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setColumns", function() { return setColumns; });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+/* 表头部分
+ */
+//设置 列头(公共)
+function setHeaders(type) {
+  var _header$;
+
+  var header;
+
+  if (type == 200) {
+    //长采样（特殊）
+    header = [[{
+      label: '基本设置',
+      colspan: 8
+    }], ['组织名称', '机组名称', '检测采集器', '测点名称', '采集方式', '是否有效', '序号', '关联通道']];
+    return header;
+  } // 除长采样之外其他测点的共同头部
+
+
+  header = [[{
+    label: '基本设置',
+    colspan: 6
+  }], ['组织名称', '机组名称', '监测采集器', '测点名称', '关联通道', '是否有效', '是否报警']];
+
+  (_header$ = header[1]).push.apply(_header$, _toConsumableArray(selectHeader(parseInt(type))));
+
+  header[0][0].colspan = header[1].length; //是否加入频段
+
+  setHeaderFrequency(header, type);
+  return header;
+} //除公共部分之外的列表头
+
+function selectHeader(type) {
+  var header = [];
+
+  switch (type) {
+    case 3:
+      //振动
+      header = ['任务标识', '分析频率', '谱线数', '采样周期', '谱线分辨率', '过采样', '报警投票机制a', '报警投票机制b', '过滤阈值', '增长百分比', '平均值计算时间(h)', '死区时间(h)', '连续n包'];
+      break;
+
+    case 6:
+    case 12:
+      //振动，晃度，倾角
+      header = ['任务标识', '分析频率', '谱线数', '采样周期', '谱线分辨率', '过采样'];
+      break;
+
+    case 4:
+      //包络
+      header = ['任务标识', '滤波器', '分析频率', '谱线数', '采样周期', '谱线分辨率', '过采样'];
+      break;
+
+    case 15:
+      //冲击测点
+      header = ['任务标识', '滤波器', '分析频率', '谱线数', '采样周期', '谱线分辨率', '过采样'];
+      break;
+
+    case 8:
+      //振动阶次
+      header = ['任务标识', '采样周期', '采样点数', '过采样'];
+      break;
+
+    case 9:
+    case 16:
+      //包络阶次、冲击阶次
+      header = ['任务标识', '滤波器', '采样周期', '采样点数', '过采样'];
+      break;
+
+    case 1:
+      //转速
+      header = ['转速比', '最小转速', '最大转速'];
+      break;
+
+    case 11:
+      //倾覆
+      header = ['任务标识', '位移单位', '分析频率', '谱线数', '采样周期', '谱线分辨率', '过采样', '传感器名称', '晃度X名称', '关联通道X', '自振频率1', '晃度Y名称', '关联通道Y', '自振频率2'];
+      break;
+
+    case 13:
+      //合成倾角
+      header = ['分析频率', '谱线数', '采样周期', '谱线分辨率', '过采样', '传感器名称', '传感类型', '数据来源', '偏置角度', '基础直径', '倾角X名称', '关联通道X', '偏移量X', '从设备号X', '过程量类型X', '倾角Y名称', '关联通道Y', '偏移量Y', '从设备号Y', '过程量类型Y'];
+      break;
+
+    case 7:
+    case 2:
+      //温度和过程量
+      header = ['Ⅰ级报警(高)', '预警(高)', '预警(低)', 'Ⅰ级报警(低)'];
+      break;
+
+    case 5:
+      //数字量
+      header = ['计算方式', '报警(高)', '预警(高)'];
+      break;
+
+    case 10:
+      //工艺量
+      header = ['单位', '单位精度', '报警(高)', '预警(高)', '预警(低)', '报警(低)', '工程量输入范围高', '工程量输入范围低', '信号输入范围高', '信号输入范围低', '校正参数', '零点偏移', '数据地址', '过程量类型', '从设备号'];
+      break;
+  }
+
+  return header;
+} //频段列表头
+
+
+function setHeaderFrequency(headers, type) {
+  //设置频段列表头
+  if (type == 3 || type == 15 || type == 4 || type == 8 || type == 16 || type == 9 || type == 6 || type == 11 || type == 12 || type == 13) {
+    var _headers$, _headers$2;
+
+    var obj0 = [],
+        obj1 = [];
+
+    for (var i = 1; i <= 8; i++) {
+      obj0.push({
+        label: "\u9891\u6BB5".concat(i),
+        colspan: 5
+      });
+      obj1.push.apply(obj1, ["\u9891\u6BB5".concat(i, "\u9009\u62E9"), "\u9891\u6BB5".concat(i, "\u540D\u79F0"), "\u9891\u6BB5".concat(i, "\u7C7B\u578B"), "\u9891\u6BB5".concat(i, "\u8D77\u59CB\u503C(Hz)"), "\u9891\u6BB5".concat(i, "\u7ED3\u675F\u503C(Hz)")]);
+    } // obj1.push('')
+
+
+    (_headers$ = headers[0]).push.apply(_headers$, obj0);
+
+    (_headers$2 = headers[1]).push.apply(_headers$2, obj1);
+  }
+}
+/* 表数据部分
+ */
+//设置columns（公共）（组织名称、机组名称、测点名称、采集器名称、测点类型、通道名称、是否有效、是否报警）
+
+
+function setColumns(type, data) {
+  var _columns;
+
+  var columns;
+
+  if (type == 200) {
+    //长采样（特殊）
+    columns = [{
+      data: "t_name",
+      //组织名称
+      editor: 'select',
+      readOnly: true,
+      selectOptions: function selectOptions(row) {
+        return data[row].t_sources;
+      }
+    }, {
+      data: "mac_me",
+      //机组名称
+      editor: 'select',
+      readOnly: true,
+      selectOptions: function selectOptions(row) {
+        return data[row].macName_sources;
+      }
+    }, {
+      data: "dgm_name",
+      //采集器名称
+      editor: 'select',
+      readOnly: true,
+      selectOptions: function selectOptions(row) {
+        return data[row].dgm_sources;
+      }
+    }, {
+      data: "pos_name"
+    }, //测点名称
+    {
+      data: "baseInfo.method_val",
+      //采集方式
+      editor: 'select',
+      readOnly: true,
+      selectOptions: function selectOptions(row) {
+        return data[row].baseInfo.method_sources;
+      }
+    }, {
+      data: "pos_activity_val",
+      //是否有效
+      editor: 'select',
+      selectOptions: function selectOptions(row) {
+        return data[row].pos_activity_sources;
+      }
+    }, {
+      data: "baseInfo.capture_byId",
+      //序号
+      editor: 'select',
+      readOnly: true,
+      selectOptions: function selectOptions(row) {
+        return data[row].baseInfo.capture_sources;
+      }
+    }, {
+      data: "baseInfo.capture_chName",
+      //关联通道
+      editor: 'select',
+      readOnly: true,
+      selectOptions: function selectOptions(row) {
+        return data[row].baseInfo.capture_chName_sources;
+      }
+    }];
+    return columns;
+  } // 除长采样之外的数据表部分
+
+
+  columns = [{
+    data: "t_name",
+    //组织名称
+    editor: 'select',
+    readOnly: true,
+    selectOptions: function selectOptions(row) {
+      return data[row].t_sources;
+    }
+  }, {
+    data: "mac_me",
+    //机组名称
+    editor: 'select',
+    readOnly: true,
+    selectOptions: function selectOptions(row) {
+      return data[row].macName_sources;
+    }
+  }, {
+    data: "dgm_name",
+    //采集器名称
+    editor: 'select',
+    readOnly: true,
+    selectOptions: function selectOptions(row) {
+      return data[row].dgm_sources;
+    }
+  }, {
+    data: "pos_name"
+  }, //测点名称
+  // {
+  //     data: `pos_type_name`, //测点类型
+  // },
+  {
+    data: "ch_name",
+    //通道名称
+    editor: 'select',
+    selectOptions: function selectOptions(row) {
+      return data[row].ch_sources;
+    }
+  }, {
+    data: "pos_activity_val",
+    //是否有效
+    editor: 'select',
+    selectOptions: function selectOptions(row) {
+      return data[row].pos_activity_sources;
+    }
+  }, {
+    data: "isalarm_val",
+    //是否报警
+    editor: 'select',
+    selectOptions: function selectOptions(row) {
+      return data[row].isalarm_sources;
+    }
+  }];
+
+  (_columns = columns).push.apply(_columns, _toConsumableArray(selectColumns(parseInt(type), data))); //是否加入频段
+
+
+  setColumnFrequency(columns, type);
+  return columns;
+} //列表渲染的选择
+
+function selectColumns(type, data) {
+  var col;
+
+  switch (type) {
+    case 3:
+      //振动,
+      col = [{
+        data: "task_id_val",
+        //任务标识
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].task_id_sources;
+        }
+      }, {
+        data: "baseInfo.frequency_val",
+        //分析频率
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.frequency_sources;
+        }
+      }, {
+        data: "baseInfo.spectral",
+        //谱线数
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.spectral_sources;
+        }
+      }, {
+        data: "baseInfo.order",
+        //采样周期
+        readOnly: true
+      }, {
+        data: "baseInfo.specOrder",
+        //谱线分辨率
+        readOnly: true
+      }, {
+        data: "baseInfo.resampling_val",
+        //过采样
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.resampling_sources;
+        }
+      }, {
+        data: "baseInfo.alarm_smooth_a" //报警投票机制a
+
+      }, {
+        data: "baseInfo.alarm_smooth_b" //报警投票机制b
+
+      }, {
+        data: "baseInfo.levelRms" //过滤阈值
+
+      }, {
+        data: "baseInfo.areaRatio" //增长百分比
+
+      }, {
+        data: "baseInfo.sampHours" //平均值计算时间
+
+      }, {
+        data: "baseInfo.death_time" //死区时间
+
+      }, {
+        data: "baseInfo.packn" //连续n包
+
+      }];
+      break;
+
+    case 6:
+    case 12:
+      // 晃度，倾角
+      col = [{
+        data: "task_id_val",
+        //任务标识
+        readOnly: true
+      }, {
+        data: "baseInfo.frequency_val",
+        //分析频率
+        editor: 'select',
+        readOnly: true,
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.frequency_sources;
+        }
+      }, {
+        data: "baseInfo.spectral",
+        //谱线数
+        editor: 'select',
+        readOnly: true,
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.spectral_sources;
+        }
+      }, {
+        data: "baseInfo.order",
+        //采样周期
+        readOnly: true
+      }, {
+        data: "baseInfo.specOrder",
+        //谱线分辨率
+        readOnly: true
+      }, {
+        data: "baseInfo.resampling_val",
+        //过采样
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.resampling_sources;
+        }
+      }];
+      break;
+
+    case 4:
+      //包络
+      col = [{
+        data: "task_id_val",
+        //任务标识
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].task_id_sources;
+        }
+      }, {
+        data: "baseInfo.filter_val",
+        //滤波器
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.filter_sources;
+        }
+      }, {
+        data: "baseInfo.frequency_val",
+        //分析频率
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.frequency_sources;
+        }
+      }, {
+        data: "baseInfo.spectral",
+        //谱线数
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.spectral_sources;
+        }
+      }, {
+        data: "baseInfo.order",
+        //采样周期
+        readOnly: true
+      }, {
+        data: "baseInfo.specOrder",
+        //谱线分辨率
+        readOnly: true
+      }, {
+        data: "baseInfo.resampling_val",
+        //过采样
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.resampling_sources;
+        }
+      }];
+      break;
+
+    case 15:
+      //冲击
+      col = [{
+        data: "task_id_val",
+        //任务标识
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].task_id_sources;
+        }
+      }, {
+        data: "baseInfo.filter_val",
+        //滤波器
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.filter_sources;
+        }
+      }, {
+        data: "baseInfo.frequency_val",
+        //分析频率
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.frequency_sources;
+        }
+      }, {
+        data: "baseInfo.spectral",
+        //谱线数
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.spectral_sources;
+        }
+      }, {
+        data: "baseInfo.order",
+        //采样周期
+        readOnly: true
+      }, {
+        data: "baseInfo.specOrder",
+        //谱线分辨率
+        readOnly: true
+      }, {
+        data: "baseInfo.resampling_val",
+        //过采样
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.resampling_sources;
+        }
+      }];
+      break;
+
+    case 8:
+      //振动阶次、冲击阶次
+      col = [{
+        data: "task_id_val",
+        //任务标识
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].task_id_sources;
+        }
+      }, {
+        data: "baseInfo.frequency_val",
+        //分析频率
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.frequency_sources;
+        }
+      }, {
+        data: "baseInfo.spectral",
+        //谱线数
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.spectral_sources;
+        }
+      }, {
+        data: "baseInfo.resampling_val",
+        //过采样
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.resampling_sources;
+        }
+      }];
+      break;
+
+    case 9:
+    case 16:
+      //包络阶次
+      col = [{
+        data: "task_id_val",
+        //任务标识
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].task_id_sources;
+        }
+      }, {
+        data: "baseInfo.filter_val",
+        //滤波器
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.filter_sources;
+        }
+      }, {
+        data: "baseInfo.frequency_val",
+        //分析频率
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.frequency_sources;
+        }
+      }, {
+        data: "baseInfo.spectral",
+        //谱线数
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.spectral_sources;
+        }
+      }, {
+        data: "baseInfo.resampling_val",
+        //过采样
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.resampling_sources;
+        }
+      }];
+      break;
+
+    case 1:
+      //转速
+      col = [{
+        data: "baseInfo.speedRate"
+      }, //转速比
+      {
+        data: "baseInfo.min_speed"
+      }, {
+        data: 'baseInfo.max_speed'
+      }];
+      break;
+
+    case 11:
+      //倾覆
+      col = [{
+        data: "task_id_val",
+        //任务标识
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].task_id_sources;
+        }
+      }, {
+        data: "baseInfo.sUnitName" //位移单位
+
+      }, {
+        data: "baseInfo.frequency_val",
+        //分析频率
+        editor: 'select',
+        order: true,
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.frequency_sources;
+        }
+      }, {
+        data: "baseInfo.spectral",
+        //谱线数
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.spectral_sources;
+        }
+      }, {
+        data: "baseInfo.order",
+        //采样周期
+        readOnly: true
+      }, {
+        data: "baseInfo.specOrder",
+        //谱线分辨率
+        readOnly: true
+      }, {
+        data: "baseInfo.resampling_val",
+        //过采样
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.resampling_sources;
+        }
+      }, {
+        data: "baseInfo.tt_sensor_name"
+      }, //传感器名称
+      {
+        data: "baseInfo.rock1_pos_name" // 晃度X名称
+
+      }, {
+        data: "baseInfo.rock1_ch_name",
+        //晃度X关联通道名称
+        readOnly: true
+      }, {
+        data: "baseInfo.self1" //晃度自振频率1
+
+      }, {
+        data: "baseInfo.rock2_pos_name"
+      }, {
+        data: "baseInfo.rock2_ch_name",
+        readOnly: true
+      }, {
+        data: "baseInfo.self2"
+      }];
+      break;
+
+    case 13:
+      //合成倾角
+      col = [{
+        data: "baseInfo.frequency_val",
+        //分析频率
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.frequency_sources;
+        }
+      }, {
+        data: "baseInfo.spectral",
+        //谱线数
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.spectral_sources;
+        }
+      }, {
+        data: "baseInfo.order",
+        //采样周期
+        readOnly: true
+      }, {
+        data: "baseInfo.specOrder",
+        //谱线分辨率
+        readOnly: true
+      }, {
+        data: "baseInfo.resampling_val",
+        //过采样
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.resampling_sources;
+        }
+      }, {
+        data: "baseInfo.tt_sensor_name"
+      }, //传感器名称
+      {
+        data: "baseInfo.dip_model_val",
+        //传感器类型
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.dip_model_sources;
+        }
+      }, {
+        data: "baseInfo.sourceType_val",
+        //数据来源
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.sourceType_sources;
+        }
+      }, {
+        data: "baseInfo.offset_angle" //偏置角度
+
+      }, {
+        data: "baseInfo.diameter" //基础直径
+
+      }, {
+        data: "baseInfo.rock1_pos_name" // 倾角X名称
+
+      }, {
+        data: "baseInfo.rock1_ch_name",
+        //倾角X关联通道名称
+        editor: 'select',
+        readOnly: true,
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.rock1_ch_sources;
+        }
+      }, {
+        data: "baseInfo.offset1"
+      }, {
+        data: "baseInfo.slaveid1"
+      }, {
+        data: "baseInfo.datamode1_val",
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.datamode1_sources;
+        }
+      }, {
+        data: "baseInfo.rock2_pos_name"
+      }, {
+        data: "baseInfo.rock2_ch_name",
+        editor: 'select',
+        readOnly: true,
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.rock2_ch_sources;
+        }
+      }, {
+        data: "baseInfo.offset2"
+      }, {
+        data: "baseInfo.slaveid2"
+      }, {
+        data: "baseInfo.datamode2_val",
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.datamode2_sources;
+        }
+      }];
+      break;
+
+    case 7:
+    case 2:
+      //温度和过程量
+      col = [{
+        data: "baseInfo.hh_limit"
+      }, {
+        data: "baseInfo.h_limit"
+      }, {
+        data: "baseInfo.l_limit"
+      }, {
+        data: "baseInfo.ll_limit"
+      }];
+      break;
+
+    case 5:
+      //数字量
+      col = [{
+        data: "baseInfo.calc_method_val",
+        //计算方式
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.calc_method_sources;
+        }
+      }, {
+        data: "baseInfo.hh_limit"
+      }, {
+        data: "baseInfo.h_limit"
+      }];
+      break;
+
+    case 10:
+      //工艺量
+      col = [{
+        data: "baseInfo.byUnitName"
+      }, {
+        data: "baseInfo.unitNum"
+      }, {
+        data: "baseInfo.hh_limit"
+      }, {
+        data: "baseInfo.h_limit"
+      }, {
+        data: "baseInfo.l_limit"
+      }, {
+        data: "baseInfo.ll_limit"
+      }, {
+        data: "baseInfo.hi_value"
+      }, {
+        data: "baseInfo.low_value"
+      }, {
+        data: "baseInfo.ref_vol"
+      }, {
+        data: "baseInfo.ref_eng"
+      }, {
+        data: "baseInfo.corr"
+      }, {
+        data: "baseInfo.scale"
+      }, {
+        data: "baseInfo.dataaddress"
+      }, {
+        data: "baseInfo.datamode_val",
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].baseInfo.datamode_sources;
+        }
+      }, {
+        data: "baseInfo.slaveid"
+      }];
+      break;
+
+    case 14:
+      col = [];
+      break;
+  }
+
+  return col;
+} //设置频段
+
+
+function setColumnFrequency(col, type) {
+  if (type == 3 || type == 15 || type == 4 || type == 8 || type == 16 || type == 9 || type == 6 || type == 11 || type == 12 || type == 13) {
+    for (var i = 0; i <= 7; i++) {
+      col.push.apply(col, [{
+        data: "baseInfo.band".concat(i, ".dwOpt_freq_selected"),
+        type: 'checkbox',
+        checkedTemplate: '1',
+        uncheckedTemplate: '0'
+      }, {
+        data: "baseInfo.band".concat(i, ".dwOpt_freq_name")
+      }, {
+        data: "baseInfo.band".concat(i, ".optfreq_type_val"),
+        editor: 'select',
+        selectOptions: ['能量有效值', '速度值', '加速度值']
+      }, {
+        data: "baseInfo.band".concat(i, ".dwOpt_freq_begin")
+      }, {
+        data: "baseInfo.band".concat(i, ".dwOpt_freq_end")
+      }]);
+    }
+  }
+}
+
+/***/ }),
+
+/***/ "./src/components/content/system/position/table/js/pos_hdtable.js":
+/*!************************************************************************!*\
+  !*** ./src/components/content/system/position/table/js/pos_hdtable.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(swal, $) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return poshdtable; });
+/* harmony import */ var network_getApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! network/getApi */ "./src/network/getApi.js");
+/* harmony import */ var common_hdtable_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! common/hdtable.js */ "./src/common/hdtable.js");
+/* harmony import */ var _pos_info_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pos_info.js */ "./src/components/content/system/position/table/js/pos_info.js");
+/* harmony import */ var _pos_methods_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pos_methods.js */ "./src/components/content/system/position/table/js/pos_methods.js");
+/* harmony import */ var _pos_columns_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pos_columns.js */ "./src/components/content/system/position/table/js/pos_columns.js");
+/* harmony import */ var utils_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! utils/utils */ "./src/utils/utils.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+
+
+function poshdtable(el, vm) {
+  var data = vm.getData(); //创建表格属性的实例
+
+  var T = new tableData(vm);
+  /* 初始化所有通道可选项 */
+
+  T.initChannel(data); // 组装振动表格数据
+
+  var vibTable = {
+    // 表格右键菜单
+    contextMenu: T.contextMenu(),
+    // 表格显示的数据
+    data: data,
+    //表格的列
+    colHeaders: T.colHeaders(),
+    //表格的列头自定义
+    // nestedHeaders: T.nestedHeaders(),
+    //数据渲染renderData
+    columns: T.columns(),
+    //单元格属性设置
+    cells: T.cells(),
+    //单击单元格或行/列标题后触发。如果单击行/列标题，则坐标索引为负。
+    afterOnCellMouseUp: T.afterOnCellMouseUp(),
+    //过滤之后
+    afterFilter: T.afterFilter(),
+    //新建行
+    afterCreateRow: T.afterCreateRow(),
+    beforeChange: T.beforeChange(),
+    afterChange: T.afterChange(),
+    //移除行事件
+    beforeRemoveRow: T.beforeRemoveRow(),
+    afterRemoveRow: T.afterRemoveRow()
+  };
+  return Object(common_hdtable_js__WEBPACK_IMPORTED_MODULE_1__["default"])(el, vibTable);
+}
+var TASK_POS = [3, 4, 8, 9, 11, 15, 16]; //振动 包络 振动阶次 包络阶次 倾覆 冲击、冲击阶次
+
+var NORMAL_POS = [1, 2, 7, 5]; //转速、过程量、数组量、温度
+//表格的方法
+
+var tableData = /*#__PURE__*/function () {
+  function tableData(vm) {
+    _classCallCheck(this, tableData);
+
+    this.type = vm.type;
+    this.getData = vm.getData;
+    this.getHot = vm.getHot;
+    this.$store = vm.$store;
+
+    for (var key in vm.initList) {
+      this[key] = vm.initList[key];
+    }
+
+    for (var _key in vm.changeList) {
+      this[_key] = vm.changeList[_key];
+    }
+  }
+  /* 初始化通道选项的方法 */
+
+
+  _createClass(tableData, [{
+    key: "initChannel",
+    value: function initChannel(data) {
+      var _this = this;
+
+      /* 任务类型的测点初始化 */
+
+      /* 过程量 温度 数字量 转速通道的初始化 */
+      if (NORMAL_POS.indexOf(this.type) > -1) {
+        data.forEach(function (pos) {
+          delete _this.pos_chaList[pos.dgm_id][pos.ch_name];
+        });
+      }
+    }
+    /**handsontable 初始化方法
+     * ******************************************
+     */
+
+  }, {
+    key: "contextMenu",
+    value: function contextMenu() {
+      var that = this;
+
+      if (this.type == 6 || this.type == 12) {
+        return;
+      } else {
+        return {
+          items: {
+            "row_above": {
+              name: '上方新建',
+              callback: function callback(key, options) {
+                Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_3__["addRows"])(that.getHot(), that.getData(), options[0].start.row);
+              }
+            },
+            "remove_row": {
+              name: '删除这行'
+            },
+            'freeze_column': {
+              name: '固定列'
+            },
+            "unfreeze_column": {
+              name: '取消列固定'
+            }
+          }
+        };
+      }
+    }
+    /* 表格的数据渲染 */
+
+  }, {
+    key: "colHeaders",
+    value: function colHeaders() {
+      return Object(_pos_columns_js__WEBPACK_IMPORTED_MODULE_4__["setHeaders"])(this.type)[1];
+    }
+  }, {
+    key: "nestedHeaders",
+    value: function nestedHeaders() {
+      return Object(_pos_columns_js__WEBPACK_IMPORTED_MODULE_4__["setHeaders"])(this.type);
+    }
+  }, {
+    key: "columns",
+    value: function columns() {
+      return Object(_pos_columns_js__WEBPACK_IMPORTED_MODULE_4__["setColumns"])(this.type, this.getData());
+    }
+    /* 单元格渲染 */
+
+  }, {
+    key: "cells",
+    value: function cells() {
+      var that = this;
+      return function (row, col, prop) {
+        var data = that.getData();
+        if (data.length == 0) return;
+        var type = that.type;
+        var cellProperties = this; //0组织名称 1机组名称 2检测采集器
+
+        if (row != -1 && (col == 0 || col == 1 || col == 2)) {
+          if (data[row].operate == 1) {
+            //operate 1：新建测点  0：已建测点
+            cellProperties.readOnly = false;
+          } else if (data[row].operate == 0) {
+            cellProperties.readOnly = true;
+          }
+        }
+        /* 转速通道 */
+
+
+        if (type == 1) {
+          if (row != -1 && col >= 8) {
+            //最大最小转速
+            if (data[row].ch_type == 13) {
+              cellProperties.readOnly = false;
+            } else {
+              cellProperties.readOnly = true;
+            }
+          }
+        }
+        /* 振动测点 */
+
+
+        if (type == 3) {
+          if (row != -1 && col >= 13) {
+            //MHD 屏蔽频段
+            if (data[row].dgm_type == 4) {
+              cellProperties.readOnly = true;
+            } else {
+              cellProperties.readOnly = false;
+            }
+          }
+        }
+        /* 数字量 */
+
+
+        if (type == 5) {
+          /* V1数字量，计算方式报警禁止修改且置空 */
+          if (row != -1 && col == 7 || col == 8 || col == 9) {
+            if (data[row].dgm_type == 1 || data[row].dgm_type == 2) {
+              cellProperties.readOnly = true;
+            } else {
+              cellProperties.readOnly = false;
+            }
+          }
+        }
+        /* 晃度 和倾角测点测点 */
+
+
+        if (type == 6 || type == 12) {
+          if (row != -1 && (col == 3 || col == 4 || col == 5)) {
+            //晃度和倾角的通道禁止编辑 是否有效 测点名称
+            cellProperties.readOnly = true;
+          } //MHD频段禁止编辑
+
+
+          if (row != -1 && col >= 13) {
+            if (data[row].dgm_type == 4) {
+              cellProperties.readOnly = true;
+            } else {
+              cellProperties.readOnly = false;
+            }
+          }
+        }
+        /* 倾覆 */
+
+
+        if (type == 11) {
+          //MHD频段禁止编辑
+          if (row != -1 && col >= 21) {
+            if (data[row].dgm_type == 4) {
+              cellProperties.readOnly = true;
+            } else {
+              cellProperties.readOnly = false;
+            }
+          }
+        }
+        /* 合成倾角 */
+
+
+        if (type == 13) {
+          //18X关联通道 、23Y关联通道,13传感器类型、20X从设备号 、21过程量类型 25Y从设备号、26Y过程量类型
+          if (row != -1) {
+            if (col == 18 || col == 23 || col == 13 || col == 20 || col == 21 || col == 25 || col == 26) {
+              if (data[row].baseInfo.sourceType == 0) {
+                //振动通道
+                cellProperties.readOnly = true;
+              } else {
+                cellProperties.readOnly = false;
+              }
+            }
+          } //MHD频段禁止编辑
+
+
+          if (row != -1 && col >= 27) {
+            if (data[row].dgm_type == 4) {
+              cellProperties.readOnly = true;
+            } else {
+              cellProperties.readOnly = false;
+            }
+          }
+        }
+        /* 长采样 */
+
+
+        if (type == 200) {
+          /* 新建测点采集方式可以更改 */
+          if (row != -1 && col == 4) {
+            //
+            if (data[row].operate == 1) {
+              cellProperties.readOnly = false;
+            } else if (data[row].operate == 0) {
+              cellProperties.readOnly = true;
+            }
+          }
+          /* 定时采集 */
+
+
+          if (data[row].baseInfo.capture_mode == 0) {
+            if (col == 6) {
+              /* 序号可以编辑 */
+              cellProperties.readOnly = false;
+            }
+
+            if (col == 7) {
+              /* 通道禁止编辑 */
+              cellProperties.readOnly = true;
+            }
+          }
+          /* 手动采集 */
+
+
+          if (data[row].baseInfo.capture_mode == 1) {
+            if (col == 6) {
+              /* 序号禁止编辑 */
+              cellProperties.readOnly = true;
+            }
+
+            if (col == 7) {
+              /* 通道可以编辑 */
+              cellProperties.readOnly = false;
+            }
+          }
+        }
+
+        return cellProperties;
+      };
+    }
+    /* 点击单元格之后输出该行信息（共用） */
+
+  }, {
+    key: "afterOnCellMouseUp",
+    value: function afterOnCellMouseUp() {
+      var that = this;
+      return function (e, coords, td) {
+        if (coords.row >= 0) {
+          var row_info = that.getPositionByIndex(coords.row);
+          var linkObj = [row_info.mac_id, row_info.mac_name];
+          that.$store.commit('setTreePosition', linkObj);
+          console.log(row_info, coords.col);
+        }
+      };
+    }
+    /*过滤的方法(有待优化)（共用）*/
+
+  }, {
+    key: "afterFilter",
+    value: function afterFilter() {
+      var that = this;
+      return function (condition) {
+        var hot = that.getHot();
+        var dgm_id_list = [];
+        var machineList = that.pos_machineList;
+        var dgmList = that.pos_dgmList;
+        var machine_id_list = [];
+        /**
+         * 根据 组织、机组、采集器来过滤，最终转化为最小单位为采集器
+         */
+
+        condition.forEach(function (item) {
+          if (/t_name/.test(hot.colToProp(item.column))) {
+            /* 如果过滤的是组织 */
+            item.conditions[0].args[0].forEach(function (folder_name) {
+              //获取组织名称
+              var machine = machineList[folder_name];
+
+              for (var key in machine) {
+                machine_id_list.push(machine[key].mac_id);
+              }
+            });
+            dgm_id_list = that.filter_dgmId_byMachineName(machine_id_list);
+          }
+
+          if (/mac_me/.test(hot.colToProp(item.column))) {
+            var machine_name_list = item.conditions[0].args[0]; //获取机组名称
+
+            machine_name_list.forEach(function (mac) {
+              for (var t_name in machineList) {
+                for (var mac_name in machineList[t_name]) {
+                  if (mac == mac_name) {
+                    machine_id_list.push(machineList[t_name][mac_name].mac_id);
+                  }
+                }
+              }
+            });
+            dgm_id_list = that.filter_dgmId_byMachineName(machine_id_list);
+          }
+
+          if (/dgm_name/.test(hot.colToProp(item.column))) {
+            var dgmArray = item.conditions[0].args[0]; //获取采集器名称
+
+            dgmArray.forEach(function (dgm_name) {
+              for (var macId in dgmList) {
+                for (var dgmName in dgmList[macId]) {
+                  if (dgm_name == dgmName) {
+                    dgm_id_list.push(dgmList[macId][dgmName].dgm_id);
+                  }
+                }
+              }
+            });
+          }
+        });
+        sessionStorage.setItem('dgm_id', JSON.stringify(dgm_id_list));
+      };
+    }
+  }, {
+    key: "filter_dgmId_byMachineName",
+    value: function filter_dgmId_byMachineName(machine_id_list) {
+      var dgm_id_list = [];
+      var pos_dgmList = this.pos_dgmList;
+      machine_id_list.forEach(function (machine_id) {
+        for (var key in pos_dgmList[machine_id]) {
+          dgm_id_list.push(pos_dgmList[machine_id][key].dgm_id);
+        }
+      });
+      return dgm_id_list;
+    } //创建测点之后的方法(共用)
+
+  }, {
+    key: "afterCreateRow",
+    value: function afterCreateRow() {
+      var that = this;
+      var type = this.type;
+      var creatIndex = 0;
+      return function (index, amount, source) {
+        //添加行事件
+        if (type == 6 || type == 12) {
+          //晃度和倾角禁止单独添加
+          return;
+        }
+
+        var data = that.getData();
+        var position = Object(_pos_info_js__WEBPACK_IMPORTED_MODULE_2__["createPosition"])(type); // 默认第一个组织
+
+        var t_sources = Object.keys(that.pos_folderList);
+        var t_name = t_sources[0];
+        var t_id = that.pos_folderList[t_name];
+        position.t_id = t_id;
+        position.t_name = t_name;
+        position.t_sources = t_sources;
+        position.index = creatIndex;
+        that.update_t_name(position, t_name);
+        data[index] = position;
+        /* 将测点添加到addData */
+
+        var sendPosition = Object(_pos_info_js__WEBPACK_IMPORTED_MODULE_2__["changePosition"])(type, position);
+        var addData = that.addData;
+        addData[creatIndex++] = sendPosition;
+      };
+    } //删除测点之前的方法,将要删除的测点存到deleteVData（共用）
+
+  }, {
+    key: "beforeRemoveRow",
+    value: function beforeRemoveRow() {
+      var that = this;
+      return function (index, amount) {
+        if (index != null) {
+          for (var i = 0; i < amount; i++) {
+            var position = that.getPositionByIndex(index + i);
+            that.deleteData.push(position);
+          }
+        }
+      };
+    } //删除测点方法 发送请求（共用）
+
+  }, {
+    key: "afterRemoveRow",
+    value: function afterRemoveRow() {
+      var that = this;
+      return function () {
+        var deleteDataArray = that.beforeRemove();
+
+        if (deleteDataArray) {
+          network_getApi__WEBPACK_IMPORTED_MODULE_0__["default"].deletePosition(deleteDataArray).then(function (res) {
+            if (res.msg == 0) {
+              swal({
+                title: "提示",
+                text: "\u5220\u9664\u6D4B\u70B9\u6210\u529F",
+                button: "确认"
+              }).then(function () {
+                that.remove_remake(deleteDataArray);
+              });
+            } else if (res.msg == 1) {
+              console.log('参数为空！');
+            } else if (res.msg == 2) {
+              console.log('后台运行错误！');
+            }
+          })["catch"](function (err) {
+            console.log('请求错误', err);
+          });
+        }
+      };
+    }
+    /* 自定义-在删除之前组织结构 */
+
+  }, {
+    key: "beforeRemove",
+    value: function beforeRemove() {
+      if (this.deleteData.length == 0) {
+        return false;
+      }
+
+      var deleteDataArray = [];
+      var dataArr = this.deleteData;
+
+      for (var i = 0; i < dataArr.length; i++) {
+        var obj = {},
+            rock1 = {},
+            rock2 = {};
+        obj.mac_id = dataArr[i].mac_id;
+        obj.position_type = dataArr[i].pos_type;
+        obj.position_id = dataArr[i].pos_id;
+        obj.position_type_id = dataArr[i].pos_type + "_" + dataArr[i].pos_id;
+        deleteDataArray.push(obj);
+
+        if (this.type == 11 || this.type == 13) {
+          rock1.mac_id = dataArr[i].mac_id;
+          rock1.position_id = dataArr[i].baseInfo.rock1_id;
+          rock1.position_type = dataArr[i].pos_type == 11 ? 6 : 12;
+          rock1.position_type_id = rock1.position_type + "_" + rock1.position_id;
+          deleteDataArray.push(rock1);
+          rock2.mac_id = dataArr[i].mac_id;
+          rock2.position_id = dataArr[i].baseInfo.rock2_id;
+          rock2.position_type = dataArr[i].pos_type == 11 ? 6 : 12;
+          rock2.position_type_id = rock2.position_type + "_" + rock2.position_id;
+          deleteDataArray.push(rock2);
+        }
+      }
+      /* 如果是倾覆或者是合成倾角测点 ，需要删除下面的子测点*/
+
+
+      return deleteDataArray;
+    }
+    /**
+     * 删除测点之后要做的一些还原素组的方法
+     */
+
+  }, {
+    key: "remove_remake",
+    value: function remove_remake() {
+      var delArray = this.deleteData;
+      var position,
+          isRefresh = false;
+      /* 在删除之后还原数组中的task_id (pos_id不重复就行) */
+
+      if (TASK_POS.indexOf(this.type) > -1) {
+        for (var i = 0; i < delArray.length; i++) {
+          position = delArray[i];
+          /* 还原任务 */
+
+          this.clear_taskId(position) && (isRefresh = true);
+        }
+
+        isRefresh && this.updateTaskSource();
+      } else if (NORMAL_POS.indexOf(this.type) > -1) {
+        for (var _i = 0; _i < delArray.length; _i++) {
+          position = delArray[_i];
+          /* 还原通道 */
+
+          this.restore_channel(position, true);
+        }
+
+        this.refresh_channel();
+      }
+      /* 删除changeData 和addData里面的数据 */
+
+
+      for (var _i2 = 0; _i2 < delArray.length; _i2++) {
+        position = delArray[_i2];
+
+        if (position.operate == 0) {
+          //旧测点
+          delete this.changeData[position.mac_id + "_" + this.type + "_" + position.pos_id];
+        } else if (position.operate == 1) {
+          //新建测点
+          delete this.addData[position.index];
+        }
+      }
+      /* 重置删除数据的数组 */
+
+
+      this.deleteData = [];
+    }
+    /* 还原被删除的通道 */
+
+  }, {
+    key: "restore_channel",
+    value: function restore_channel(position, del_res) {
+      //del_res：true =>删除时候的通道还原
+      var dgm_id = position.oldInfo['dgm_id'] ? del_res ? position.dgm_id : position.oldInfo['dgm_id'] : position.dgm_id;
+      position.ch_name && (this.pos_chaList[dgm_id][position.ch_name] = {
+        "ch_id": position.ch_id,
+        "ch_type": position.ch_type
+      });
+    }
+    /* 刷新所有的通道 */
+
+  }, {
+    key: "refresh_channel",
+    value: function refresh_channel() {
+      var _this2 = this;
+
+      var data = this.getData(); //遍历data，将所有的task_id_sources都更新
+
+      data.forEach(function (position) {
+        //遍历所有数据
+        if (position.mac_id) {
+          position.oldInfo = {};
+          var ch_sources = Object.keys(_this2.pos_chaList[position.dgm_id]);
+
+          if (_this2.pos_chaList[position.dgm_id][position.ch_name] == undefined && position.ch_name) {
+            //集合中没自己的通道
+            ch_sources.push(position.ch_name);
+          }
+
+          ch_sources.sort();
+          position.ch_sources = ch_sources;
+        }
+      });
+    } //改变数据的时候拼装数据结构（共用）
+
+  }, {
+    key: "beforeChange",
+    value: function beforeChange() {
+      var that = this;
+      return function (changes, source) {
+        var change_index;
+        var change_prop;
+        var change_oldVal;
+        var change_newVal;
+        var sources;
+        var keys; //创建更改组织、机组、采集器、通道、任务的联动实例
+
+        for (var i = 0; i < changes.length; i++) {
+          change_index = changes[i][0];
+          change_prop = changes[i][1];
+          change_oldVal = changes[i][2];
+          change_newVal = changes[i][3];
+          /* 如果选定的值没有改变 返回false */
+
+          if (change_oldVal == change_newVal) {
+            continue;
+          }
+
+          var reg = new RegExp("^[0-9]*$"); //判断字符串是否为数字
+
+          var regPositiveNum = new RegExp(/^[1-9]+[0-9]*]*$/); // 判断正整数
+
+          var reg2 = new RegExp(/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/); //判断正数
+
+          var position = that.getPositionByIndex(change_index);
+
+          if (change_prop == "t_name") {
+            //组织
+            var t_sources = position.t_sources;
+
+            if (t_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u7EC4\u7EC7"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              that.update_t_name(position, change_newVal);
+            }
+          }
+
+          if (change_prop == "mac_me") {
+            //机组
+            var macName_sources = position.macName_sources;
+
+            if (macName_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u673A\u7EC4"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              that.update_mac(position, change_newVal);
+            }
+          }
+
+          if (change_prop == "dgm_name") {
+            //采集器
+            var dgm_sources = position.dgm_sources;
+
+            if (dgm_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u91C7\u96C6\u5668"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              that.update_dgm(position, change_newVal);
+            }
+          }
+
+          if (change_prop == "ch_name") {
+            //通道
+            var ch_sources = position.ch_sources;
+
+            if (ch_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u901A\u9053"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              that.update_channel(position, change_newVal);
+            }
+          }
+
+          if (change_prop == "task_id_val") {
+            //任务
+            var task_id_sources = position.task_id_sources;
+
+            if (change_newVal === "") {
+              return false;
+            } //任务未做修改的时候，保持原样
+
+
+            if (task_id_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u4EFB\u52A1"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              that.update_taskId(position, change_newVal);
+            }
+          }
+
+          if (change_prop == "baseInfo.filter_val") {
+            //滤波器 包络测点
+            var filter_sources = position.baseInfo.filter_sources;
+
+            if (filter_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u6EE4\u6CE2\u5668"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.baseInfo.filter_sources;
+              keys = position.baseInfo.filter_sources_key;
+              position.baseInfo.filter_val = change_newVal;
+              position.baseInfo.filter = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+              /* 更改滤波器的时候改变分析频率 */
+
+              that.update_frequency_spectral_sources(position);
+            }
+          }
+
+          if (change_prop == "baseInfo.frequency_val") {
+            // 分析频率 采样周期
+            var frequency_sources = position.baseInfo.frequency_sources;
+
+            if (frequency_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u5206\u6790\u9891\u7387"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.baseInfo.frequency_sources;
+              keys = position.baseInfo.frequency_sources_key;
+              position.baseInfo.frequency_val = change_newVal;
+              position.baseInfo.frequency = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+              Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_3__["computed__frequency_spectral"])(position);
+            }
+          }
+
+          if (change_prop == "baseInfo.spectral") {
+            //谱线数 采样点数
+            var spectral_sources = position.baseInfo.spectral_sources;
+
+            if (spectral_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u8C31\u7EBF\u6570"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              position.baseInfo.spectral = change_newVal;
+              Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_3__["computed__frequency_spectral"])(position);
+            }
+          }
+
+          if (change_prop == "pos_activity_val") {
+            //是否有效
+            var pos_activity_sources = position.pos_activity_sources;
+
+            if (pos_activity_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u503C"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.pos_activity_sources;
+              keys = position.pos_activity_sources_key;
+              position.pos_activity_val = change_newVal;
+              position.pos_activity = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+            }
+          }
+
+          if (change_prop == "isalarm_val") {
+            //是否报警
+            var isalarm_sources = position.isalarm_sources;
+
+            if (isalarm_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u503C"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.isalarm_sources;
+              keys = position.isalarm_sources_key;
+              position.isalarm_val = change_newVal;
+              position.isalarm = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+            }
+          }
+
+          if (change_prop == "baseInfo.resampling_val") {
+            //过采样
+            var resampling_sources = position.baseInfo.resampling_sources;
+
+            if (resampling_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u503C"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.baseInfo.resampling_sources;
+              keys = position.baseInfo.resampling_sources_key;
+              position.baseInfo.isalarm_val = change_newVal;
+              position.baseInfo.resampling = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+            }
+          }
+
+          for (var _i3 = 0; _i3 < 8; _i3++) {
+            if (change_prop == "baseInfo.band".concat(_i3, ".optfreq_type_val")) {
+              //频段
+              var optfreq_type_sources = position.baseInfo["band".concat(_i3)].optfreq_type_sources;
+
+              if (optfreq_type_sources.indexOf(change_newVal) == -1) {
+                swal({
+                  title: "提示",
+                  text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u9891\u6BB5\u7C7B\u578B"),
+                  button: "确认"
+                });
+                return false;
+              } else {
+                sources = position.baseInfo["band".concat(_i3)].optfreq_type_sources;
+                keys = position.baseInfo["band".concat(_i3)].optfreq_type_sources_key;
+                position.baseInfo["band".concat(_i3)].optfreq_type_val = change_newVal;
+                position.baseInfo["band".concat(_i3)].optfreq_type = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+              }
+            }
+          }
+
+          if (change_prop == "baseInfo.datamode1_val") {
+            //过程量1 合成倾角
+            var datamode1_val_sources = position.baseInfo.datamode1_sources;
+
+            if (datamode1_val_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u8FC7\u7A0B\u91CF\u7C7B\u578B"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.baseInfo.datamode1_sources;
+              keys = position.baseInfo.datamode1_sources_key;
+              position.baseInfo.datamode1_val = change_newVal;
+              position.baseInfo.datamode1 = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+            }
+          }
+
+          if (change_prop == "baseInfo.datamode2_val") {
+            //过程量2合成倾角
+            var datamode2_val_sources = position.baseInfo.datamode2_sources;
+
+            if (datamode2_val_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u8FC7\u7A0B\u91CF\u7C7B\u578B"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.baseInfo.datamode2_sources;
+              keys = position.baseInfo.datamode2_sources_key;
+              position.baseInfo.datamode2_val = change_newVal;
+              position.baseInfo.datamode2 = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+            }
+          }
+
+          if (change_prop == "baseInfo.rock1_ch_name") {
+            //倾角X关联通道名称
+            var rock1_ch_name_sources = position.baseInfo.rock1_ch_sources;
+
+            if (rock1_ch_name_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u5173\u8054\u901A\u9053X"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              that.update_rock_ch(position, change_newVal);
+            }
+          }
+
+          if (change_prop == "baseInfo.rock2_ch_name") {
+            //倾角Y关联通道名称
+            var rock2_ch_name_sources = position.baseInfo.rock2_ch_sources;
+
+            if (rock2_ch_name_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u5173\u8054\u901A\u9053Y"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              that.update_rock_ch(position, change_newVal);
+            }
+          }
+
+          if (change_prop == "baseInfo.sourceType_val") {
+            //数据来源 合成倾角
+            var sourceType_val_sources = position.baseInfo.sourceType_sources;
+
+            if (sourceType_val_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u4F20\u6570\u636E\u6765\u6E90"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.baseInfo.sourceType_sources;
+              keys = position.baseInfo.sourceType_sources_key;
+              position.baseInfo.sourceType = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+              that.update_sourceType(position);
+            }
+          }
+
+          if (change_prop == "baseInfo.dip_model_val") {
+            //传感器类型 合成倾角
+            var dip_model_val_sources = position.baseInfo.dip_model_sources;
+
+            if (dip_model_val_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u4F20\u611F\u5668\u7C7B\u578B"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.baseInfo.dip_model_sources;
+              keys = position.baseInfo.dip_model_sources_key;
+              position.baseInfo.dip_model_val = change_newVal;
+              position.baseInfo.dip_model = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+            }
+          }
+
+          if (change_prop == "baseInfo.calc_method_val") {
+            //计算方式 数字量测点
+            var calc_method_val_sources = position.baseInfo.calc_method_sources;
+
+            if (calc_method_val_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u8BA1\u7B97\u65B9\u5F0F"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.baseInfo.calc_method_sources;
+              keys = position.baseInfo.calc_method_sources_key;
+              position.baseInfo.calc_method_val = change_newVal;
+              position.baseInfo.calc_method = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+            }
+          }
+
+          if (change_prop == "baseInfo.datamode_val") {
+            //过程量类型  工艺量测点
+            var datamode_val_sources = position.baseInfo.datamode_sources;
+
+            if (datamode_val_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u8FC7\u7A0B\u91CF\u7C7B\u578B"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.baseInfo.datamode_sources;
+              keys = position.baseInfo.datamode_sources_key;
+              position.baseInfo.datamode_val = change_newVal;
+              position.baseInfo.datamode = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+            }
+          }
+          /* 长采样的序号、关联通道、 采集方式*/
+
+
+          if (change_prop == "baseInfo.method_val") {
+            //采集方式 长采样测点
+            var method_val = position.baseInfo.method_sources;
+
+            if (method_val.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u91C7\u96C6\u65B9\u5F0F"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              sources = position.baseInfo.method_sources;
+              keys = position.baseInfo.method_sources_key;
+              position.baseInfo.method_val = change_newVal;
+              position.baseInfo.capture_mode = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(change_newVal, sources, keys);
+              /* 方法：选择对应通道更改关联通道 */
+
+              that.capture_mode(position);
+            }
+          }
+
+          if (change_prop == "baseInfo.capture_byId") {
+            //序号 长采样测点
+            var capture_sources = position.baseInfo.capture_sources;
+
+            if (capture_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u5E8F\u53F7"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              that.update_capCh_byNumber(position, change_newVal);
+            }
+          }
+
+          if (change_prop == "baseInfo.capture_chName") {
+            //通道名字 长采样测点
+            var capture_chName_sources = position.baseInfo.capture_chName_sources;
+
+            if (capture_chName_sources.indexOf(change_newVal) == -1) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u4E0D\u5B58\u5728\u8BE5\u901A\u9053"),
+                button: "确认"
+              });
+              return false;
+            } else {
+              that.update_channel(position, change_newVal);
+            }
+          }
+          /* 振动测点微信报警参数 */
+
+
+          if (change_prop == "baseInfo.levelRms") {
+            //过滤阈值：这个可以填小数
+            if (change_newVal === '') {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u8FC7\u6EE4\u9608\u503C\u4E0D\u80FD\u4E3A\u7A7A"),
+                button: "确认"
+              });
+              return false;
+            }
+
+            if (!reg.test(change_newVal)) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u8BF7\u8F93\u5165\u6570\u5B57"),
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == "baseInfo.areaRatio") {
+            //增长百分比：正数，填20，就是20%的意思
+            if (change_newVal === '') {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u589E\u957F\u767E\u5206\u6BD4\u4E0D\u80FD\u4E3A\u7A7A"),
+                button: "确认"
+              });
+              return false;
+            }
+
+            if (!reg2.test(change_newVal)) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u8BF7\u8F93\u5165\u6B63\u6570"),
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == "baseInfo.sampHours") {
+            //平均值计算时间：正整数，多少小时的意思
+            if (change_newVal === '') {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u5E73\u5747\u503C\u8BA1\u7B97\u65F6\u95F4\u4E0D\u80FD\u4E3A\u7A7A"),
+                button: "确认"
+              });
+              return false;
+            }
+
+            if (!regPositiveNum.test(change_newVal)) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u8BF7\u8F93\u5165\u6B63\u6574\u6570"),
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == "baseInfo.death_time") {
+            //死区时间，单位小时，新增：正整数
+            if (change_newVal === '') {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u6B7B\u533A\u65F6\u95F4\u4E0D\u80FD\u4E3A\u7A7A"),
+                button: "确认"
+              });
+              return false;
+            }
+
+            if (!regPositiveNum.test(change_newVal)) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u8BF7\u8F93\u5165\u6B63\u6574\u6570"),
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == "baseInfo.packn") {
+            //连续n包，新增：正整数
+            if (change_newVal === '') {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u8FDE\u7EEDn\u5305\u4E0D\u80FD\u4E3A\u7A7A"),
+                button: "确认"
+              });
+              return false;
+            }
+
+            if (!regPositiveNum.test(change_newVal)) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u8BF7\u8F93\u5165\u6B63\u6574\u6570"),
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == "baseInfo.alarm_smooth_a") {
+            //报警投票机制a，新增：正整数
+            if (change_newVal === '') {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u62A5\u8B66\u6295\u7968\u673A\u5236a\u4E0D\u80FD\u4E3A\u7A7A"),
+                button: "确认"
+              });
+              return false;
+            }
+
+            if (!regPositiveNum.test(change_newVal)) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u8BF7\u8F93\u5165\u6B63\u6574\u6570"),
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == "baseInfo.alarm_smooth_b") {
+            //报警投票机制b，新增：正整数
+            if (change_newVal === '') {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u62A5\u8B66\u6295\u7968\u673A\u5236b\u4E0D\u80FD\u4E3A\u7A7A"),
+                button: "确认"
+              });
+              return false;
+            }
+
+            if (!regPositiveNum.test(change_newVal)) {
+              swal({
+                title: "提示",
+                text: "\u7B2C".concat(change_index + 1, "\u884C\u8BF7\u8F93\u5165\u6B63\u6574\u6570"),
+                button: "确认"
+              });
+              return false;
+            }
+          }
+        }
+      };
+    } //改变数据后的方法 （共用）
+
+  }, {
+    key: "afterChange",
+    value: function afterChange() {
+      var that = this;
+      return function (changes, source) {
+        //修改数据事件
+        var changeData = that.changeData;
+        var addData = that.addData;
+
+        if (changes) {
+          changes.forEach(function (change) {
+            var position = that.getPositionByIndex(change[0]);
+            var sendPosition = Object(_pos_info_js__WEBPACK_IMPORTED_MODULE_2__["changePosition"])(that.type, position);
+
+            if (position.operate == 0) {
+              changeData[position.mac_id + "_" + that.type + "_" + position.pos_id] = sendPosition;
+            } else if (position.operate == 1) {
+              addData[position.index] = sendPosition;
+            }
+          });
+        }
+      };
+    }
+    /* beforeRender: ()=>{
+          },
+        afterRender: ()=>{
+      },  */
+
+    /**
+     * 工具方法
+     * ************************************************
+     */
+
+    /* 根据索引行获取真实数据和物理行 (共用)*/
+
+  }, {
+    key: "getPositionByIndex",
+    value: function getPositionByIndex(index) {
+      var hot = this.getHot();
+      var data = this.getData();
+      var physicalRow = hot.toPhysicalRow(index);
+      var info = data[physicalRow];
+      return info;
+    }
+    /* 改变组织 */
+
+  }, {
+    key: "update_t_name",
+    value: function update_t_name(position, t_name) {
+      position.t_name = t_name;
+      position.t_id = this.pos_folderList[t_name];
+      this.update_mac_source(position);
+    }
+    /* 更改机组源 */
+
+  }, {
+    key: "update_mac_source",
+    value: function update_mac_source(position) {
+      var pos_machineList = this.pos_machineList[position.t_name];
+      var macName_source = Object.keys(pos_machineList);
+      position.macName_sources = macName_source; //保存机组源
+      //选取第一个机组为默认机组
+
+      var mac_me = macName_source[0];
+      this.update_mac(position, mac_me);
+    }
+    /* 更改机组 */
+
+  }, {
+    key: "update_mac",
+    value: function update_mac(position, mac_me) {
+      position.mac_me = mac_me;
+      position.mac_id = this.pos_machineList[position.t_name][mac_me].mac_id;
+      position.m_type = this.pos_machineList[position.t_name][mac_me].m_type; //在更改机组的时候更改测点ID
+
+      position.pos_id = this.setPosId(position.mac_id);
+
+      if (this.type == 11 || this.type == 13) {
+        //如果是倾覆和合成倾角还需要为两个晃度或倾角测点添加ID
+
+        /* tt_ch_id */
+        position.baseInfo.tt_ch_id = position.pos_id;
+        position.baseInfo.rock1_id = this.set_rock_posId(position.mac_id);
+        position.baseInfo.rock2_id = this.set_rock_posId(position.mac_id);
+      } //更改采集器源
+
+
+      this.update_dgm_source(position);
+    }
+    /* 更改采集器源 */
+
+  }, {
+    key: "update_dgm_source",
+    value: function update_dgm_source(position) {
+      var pos_dgmList = this.pos_dgmList[position.mac_id];
+      var dgmName_sources = Object.keys(pos_dgmList);
+      position.dgm_sources = dgmName_sources; //保存采集器源
+      //选取第一个采集器为默认采集器
+
+      var dgm_name = dgmName_sources[0];
+      this.update_dgm(position, dgm_name);
+    }
+    /* 更改采集器 */
+
+  }, {
+    key: "update_dgm",
+    value: function update_dgm(position, dgm_name) {
+      /* 记录旧采集器的信息 */
+      position.oldInfo['dgm_id'] = position.dgm_id;
+      position.oldInfo['dgm_name'] = position.dgm_name;
+      position.dgm_name = dgm_name;
+      position.dgm_id = this.pos_dgmList[position.mac_id][dgm_name].dgm_id;
+      position.dgm_type = this.pos_dgmList[position.mac_id][dgm_name].dgm_type;
+      var arr = [3, 4, 6, 8, 9, 11, 12, 13, 15, 16]; //振动、 包络、 阶次、 晃度、 倾覆、 倾角 、 合成倾角,冲击
+
+      if (arr.indexOf(this.type) > -1) {
+        //在更改采集器的时候更改分析频率和谱线数(如果有谱线数的话)
+        this.update_frequency_spectral_sources(position);
+      } //更改通道源
+
+
+      this.update_ch_source(position);
+    }
+    /* 更改采集器 -> 更改通道源并选择默认通道 */
+
+  }, {
+    key: "update_ch_source",
+    value: function update_ch_source(position) {
+      var chList = this.pos_chaList[position.dgm_id];
+      var ch_sources = [];
+      var ch_name;
+
+      if (this.type == 200) {
+        //长采样测点
+        this.capture_mode(position);
+      } else {
+        //其他类型测点
+        if (this.type == 11) {
+          //倾覆的可选通道只有塔顶和机舱
+          ch_sources = _pos_info_js__WEBPACK_IMPORTED_MODULE_2__["over_pos_loc_ch"]; // ch_sources = ['机舱','塔顶','塔筒1',"塔筒2","塔筒3","塔筒4","塔筒5"]
+        } else if (this.type == 13) {
+          ch_sources = _pos_info_js__WEBPACK_IMPORTED_MODULE_2__["syn_pos_loc_ch"];
+        } else {
+          ch_sources = Object.keys(chList);
+        }
+
+        position.ch_sources = ch_sources.sort(); //保存通道源
+        //选取第一个通道为默认通道
+
+        if (ch_sources.length == 0) {
+          ch_name = "";
+        } else {
+          ch_name = ch_sources[0];
+        }
+
+        this.update_channel(position, ch_name);
+      }
+    }
+    /* 更改通道 */
+
+  }, {
+    key: "update_channel",
+    value: function update_channel(position, ch_name) {
+      position.oldInfo["ch_id"] = position.ch_id;
+      position.oldInfo['ch_name'] = position.ch_name;
+      position.oldInfo['ch_type'] = position.ch_type;
+      /* 温度、过程量、转速、数字量测点 */
+
+      var flag = NORMAL_POS.indexOf(this.type) > -1;
+      /* 普通类型测点，需要删除通道 */
+
+      if (flag && position.ch_id !== '') {
+        /* 之前的通道，先要在数组中还原之前的通道 */
+        this.restore_channel(position);
+      }
+      /* 所有测点-设置新的通道 */
+
+
+      this.set_channel(position, ch_name, flag);
+      /* 任务类测点 */
+
+      if (TASK_POS.indexOf(this.type) > -1) {
+        /* 清空任务是否更改了数组，要全部遍历 */
+        this.clear_taskId(position) && this.updateTaskSource(position);
+        /* 为这个测点设置选项 */
+
+        var source = this.task_idSources[position.dgm_id][position.ch_name];
+        position.task_id_sources = Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_3__["taskArray"])(source);
+      }
+      /* 倾覆和倾角测点用其他方法 */
+
+
+      if (this.type == 11 || this.type == 13) {
+        this.update_virtual_chaName(position);
+      }
+    }
+    /* 通道的值的设置 */
+
+  }, {
+    key: "set_channel",
+    value: function set_channel(position, ch_name, del_pos) {
+      //del 4种类型换通道的时候要将通道删除
+      if (ch_name === "" || ch_name === undefined) {
+        //采集器下面没有通道，直接返回
+        position.ch_id = position.ch_name = position.ch_type = "";
+        return;
+      } else {
+        position.ch_name = ch_name;
+        position.ch_id = this.pos_chaList[position.dgm_id][ch_name].ch_id;
+        position.ch_type = this.pos_chaList[position.dgm_id][ch_name].ch_type;
+        /* 如果是要删除通道的测点 */
+
+        if (del_pos) {
+          delete this.pos_chaList[position.dgm_id][ch_name];
+          this.refresh_channel();
+        }
+      }
+    }
+    /* 改变任务  "" 空为没有任务*/
+
+  }, {
+    key: "update_taskId",
+    value: function update_taskId(position, task_val) {
+      var task_id = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(task_val, position.task_id_choose, position.task_id_choose_key);
+      /* 设置新值 */
+
+      this.set_taskId(position, task_id, task_val, this.clear_taskId(position));
+    }
+    /* 清空任务 */
+
+  }, {
+    key: "clear_taskId",
+    value: function clear_taskId(position) {
+      var isChange = false;
+      position.oldInfo['task_id'] = position.task_id;
+      position.task_id = position.task_id_val = '';
+      /* 之前存在任务，还原 */
+
+      if (position.oldInfo['task_id'] !== "") {
+        var dgm_id = position.oldInfo['dgm_id'] || position.dgm_id;
+        var ch_name = position.oldInfo['ch_name'] || position.ch_name;
+        this.task_idSources[dgm_id][ch_name].push(position.oldInfo['task_id']);
+        /* 如果是删除测点，就遍历全部测点的任务 */
+
+        isChange = true; //测点修改，需要遍历
+      }
+
+      position.oldInfo = {}; //将信息置空
+
+      return isChange;
+    }
+  }, {
+    key: "set_taskId",
+    value: function set_taskId(position, task_id, task_val, isChange) {
+      /* 无新任务 */
+      if (task_id === undefined || task_id === "") {
+        if (!isChange) return; //无旧任务，直接返回
+      } else {
+        var source = this.task_idSources[position.dgm_id][position.ch_name];
+        source.splice(source.indexOf(task_id), 1);
+        position.task_id = task_id;
+        position.task_id_val = task_val;
+      }
+      /* 刷新所有测点的任务 */
+
+
+      this.updateTaskSource();
+    }
+    /* 遍历全部测点，更新任务 */
+
+  }, {
+    key: "updateTaskSource",
+    value: function updateTaskSource() {
+      var data = this.getData();
+      var task_idSources = this.task_idSources;
+      /* 新建测点的时候，这个测点不在data中 */
+
+      var self_task_id_sources; //遍历data，将所有的task_id_sources都更新
+
+      data.forEach(function (position) {
+        //遍历所有数据
+        if (position.mac_id) {
+          //新建的测点
+          if (position.ch_id === "") return;
+          self_task_id_sources = _toConsumableArray(task_idSources[position.dgm_id][position.ch_name]); //克隆这个数组
+
+          if (position.task_id !== "") {
+            //如果自己的task_id为空则不添加
+            self_task_id_sources.push(position.task_id); //加入自己的id
+          }
+
+          position.task_id_sources = Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_3__["taskArray"])(self_task_id_sources); //将任务转化为文字
+        }
+      });
+    }
+    /* 更改采集器联动更改分析频率和谱线数 */
+
+  }, {
+    key: "update_frequency_spectral_sources",
+    value: function update_frequency_spectral_sources(position) {
+      var frequency_object = Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_3__["frequencySources"])(position, position.baseInfo.filter);
+      position.baseInfo.frequency = Object.keys(frequency_object)[0]; //取第一个值
+
+      position.baseInfo.frequency_val = Object.values(frequency_object)[0];
+      position.baseInfo.frequency_sources = Object.values(frequency_object);
+      position.baseInfo.frequency_sources_key = Object.keys(frequency_object);
+      position.baseInfo.spectral = Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_3__["spectralSources"])(position.dgm_type, position.pos_type)[0];
+      position.baseInfo.spectral_sources = Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_3__["spectralSources"])(position.dgm_type, position.pos_type);
+      Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_3__["computed__frequency_spectral"])(position);
+    }
+    /* 长采样测点 */
+
+  }, {
+    key: "capture_mode",
+    value: function capture_mode(position) {
+      var capture_mode = position.baseInfo.capture_mode;
+
+      if (capture_mode == 0) {
+        //定时长采样
+        this.update_cap_number(position);
+      } else if (capture_mode == 1) {
+        //手动长采样
+        this.update_cap_channel(position);
+      }
+    }
+    /* 定时采样 更改长采样的序号源 */
+
+  }, {
+    key: "update_cap_number",
+    value: function update_cap_number(position) {
+      /*  清空关联通道和通道源 */
+      position.baseInfo.capture_byId = "";
+      position.baseInfo.capture_sources = [];
+      position.baseInfo.capture_chName = "";
+      var chList = this.cap_sequenceNum[position.dgm_id];
+      var sequenceNums = Object.keys(chList);
+      position.baseInfo.capture_sources = sequenceNums; //选定的一个序号
+
+      this.update_capCh_byNumber(position, sequenceNums[0]);
+    }
+    /* 长采样根据序号改变关联通道 */
+
+  }, {
+    key: "update_capCh_byNumber",
+    value: function update_capCh_byNumber(position, capture_byId) {
+      if (typeof capture_byId !== "undefined") {
+        //如果有选中的序号
+        position.baseInfo.capture_byId = capture_byId;
+        /* 获取序号对应的振动通道ID */
+
+        var vib_id = this.cap_sequenceNum[position.dgm_id][capture_byId].vib_id;
+        /* 获取振动通道的name */
+
+        var ch_name = this.cap_chaList[position.dgm_id][vib_id].ch_name;
+        position.baseInfo.capture_chName = ch_name;
+        this.update_channel(position, ch_name);
+      }
+    }
+    /* 手动采样 更改长采样的通道 */
+
+  }, {
+    key: "update_cap_channel",
+    value: function update_cap_channel(position) {
+      /* 清空序号 */
+      position.baseInfo.capture_byId = "1";
+      position.baseInfo.capture_sources = [];
+      /* 更改关联通道源 */
+
+      var ch_sources = Object.keys(this.pos_chaList[position.dgm_id]).sort();
+      position.baseInfo.capture_chName = ch_sources[0];
+      position.baseInfo.capture_chName_sources = ch_sources; //保存通道源
+
+      /* 保存选定通道的 type name id*/
+
+      this.update_channel(position, ch_sources[0]);
+    }
+    /* 更改倾覆等虚拟通道 */
+
+  }, {
+    key: "update_virtual_chaName",
+    value: function update_virtual_chaName(position) {
+      /* 改变通道ID */
+      var sources = position.baseInfo.tt_pos_loc_source;
+      var keys = position.baseInfo.tt_pos_loc_source_key;
+      position.baseInfo.tt_pos_loc = Object(utils_utils__WEBPACK_IMPORTED_MODULE_5__["find_key"])(position.ch_name, sources, keys);
+
+      if (this.type == 11) {
+        //倾覆测点
+
+        /* 判断选中的虚拟通道下面有没有 rock_ch，没有则置空 */
+        this.updateRock(position);
+      } else if (this.type == 13) {
+        //合成倾角
+        position.baseInfo.sourceType = 5; //改变数据源默认为串口
+
+        this.update_sourceType(position);
+      }
+    }
+    /* 合成倾角测点 */
+
+    /* 更改合成倾角的数据来源 */
+
+  }, {
+    key: "update_sourceType",
+    value: function update_sourceType(position) {
+      /* 串口 */
+      var ch_name;
+      var sourceType = position.baseInfo.sourceType;
+
+      if (sourceType == 5) {
+        position.baseInfo.sourceType_val = "串口";
+        /* 选择串口通道 */
+
+        var moduleList = this.rock_chaList[position.dgm_id]['module_name'];
+        var source = Object.keys(moduleList);
+        /* 更改通道源 */
+
+        position.baseInfo.rock1_ch_sources = position.baseInfo.rock2_ch_sources = source;
+        /* 选择第一个通道为默认通道 */
+
+        ch_name = source[0];
+        this.update_rock_ch(position, ch_name);
+      }
+      /* 振动 */
+
+
+      if (sourceType == 0) {
+        this.updateRock(position);
+      }
+      /* 串口和振动的分析频率不同 */
+
+
+      this.update_frequency_spectral_sources(position);
+    }
+    /* 串口的条件下更改rock_ch */
+
+  }, {
+    key: "update_rock_ch",
+    value: function update_rock_ch(position, ch_name) {
+      var moduleList = this.rock_chaList[position.dgm_id]['module_name'];
+      position.baseInfo.rock1_ch_name = position.baseInfo.rock2_ch_name = ch_name;
+      position.baseInfo.rock1_ch_id = position.baseInfo.rock2_ch_id = moduleList[ch_name].ch_id;
+      position.baseInfo.rock1_ch_type = position.baseInfo.rock2_ch_type = moduleList[ch_name].ch_type;
+    }
+    /* 倾覆测点 */
+
+    /* 根据倾覆的通道自动计算出 晃度xy的通道 */
+
+  }, {
+    key: "updateRock",
+    value: function updateRock(position) {
+      var list1 = this.rock_chaList[position.dgm_id][position.ch_name + "X"];
+      var list2 = this.rock_chaList[position.dgm_id][position.ch_name + "Y"];
+
+      if ($.isEmptyObject(list1)) {
+        //如果是空对象，把rock_ch通道置空
+        position.baseInfo.rock1_ch_name = '';
+        position.baseInfo.rock1_ch_id = '';
+        position.baseInfo.rock1_ch_type = '';
+        position.baseInfo.rock2_ch_name = '';
+        position.baseInfo.rock2_ch_id = '';
+        position.baseInfo.rock2_ch_type = '';
+      } else {
+        position.baseInfo.rock1_ch_name = list1.ch_name;
+        position.baseInfo.rock1_ch_id = list1.ch_id;
+        position.baseInfo.rock1_ch_type = list1.ch_type;
+        position.baseInfo.rock2_ch_name = list2.ch_name;
+        position.baseInfo.rock2_ch_id = list2.ch_id;
+        position.baseInfo.rock2_ch_type = list2.ch_type;
+      }
+    }
+    /* 设置测点ID */
+
+  }, {
+    key: "setPosId",
+    value: function setPosId(macId) {
+      var arr = this.mac_pos_id_list[macId];
+      var pos_id; //遍历数组，undefined的就进去站位
+
+      if (arr.length > 0) {
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] == undefined) {
+            pos_id = i;
+            arr[i] = pos_id;
+            break;
+          }
+        }
+      } //如果数组是满的，就在数组后面加1就是pos_id
+
+
+      if (!pos_id) {
+        pos_id = arr.length;
+        arr[pos_id] = pos_id;
+      }
+
+      return pos_id;
+    }
+    /* 设置rock 测点ID */
+
+  }, {
+    key: "set_rock_posId",
+    value: function set_rock_posId(macId) {
+      var arr = this.rock_pos_id_list[macId];
+      var pos_id; //遍历数组，undefined的就进去站位
+
+      if (arr.length > 0) {
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] == undefined) {
+            pos_id = i;
+            arr[i] = pos_id;
+            break;
+          }
+        }
+      } //如果数组是满的，就在数组后面加1就是pos_id
+
+
+      if (!pos_id) {
+        pos_id = arr.length;
+        arr[pos_id] = pos_id;
+      }
+
+      return pos_id;
+    }
+  }, {
+    key: "deepClone",
+    value: function deepClone(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
+  }]);
+
+  return tableData;
+}();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! sweetalert */ "./node_modules/_sweetalert@2.1.2@sweetalert/dist/sweetalert.min.js"), __webpack_require__(/*! jquery */ "./node_modules/_jquery@3.5.1@jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./src/components/content/system/position/table/js/pos_info.js":
+/*!*********************************************************************!*\
+  !*** ./src/components/content/system/position/table/js/pos_info.js ***!
+  \*********************************************************************/
+/*! exports provided: over_pos_loc_ch, syn_pos_loc_ch, getPositionInfo, createPosition, changePosition */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "over_pos_loc_ch", function() { return over_pos_loc_ch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "syn_pos_loc_ch", function() { return syn_pos_loc_ch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPositionInfo", function() { return getPositionInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPosition", function() { return createPosition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changePosition", function() { return changePosition; });
+/* harmony import */ var _pos_methods_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pos_methods.js */ "./src/components/content/system/position/table/js/pos_methods.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+/* 固定参数 */
+
+var isalarm_choose = {
+  '0': '不报警',
+  '1': '报警'
+};
+var isalarm_vib_choose = {
+  '0': '不报警',
+  '1': '报警',
+  '2': '仅屏蔽故障频率报警',
+  '3': '仅屏蔽特征值报警'
+}; //振动、包络、阶次、倾角、晃度  这些测点有波形显示这四个选项
+
+var resampling_choose = {
+  '0': '是',
+  '1': '否'
+};
+var pos_activity_choose = {
+  '0': '有效',
+  '1': '无效'
+};
+var task_id_choose = {
+  '0': '任务1',
+  '1': '任务2',
+  '2': '任务3'
+};
+var optfreq_type_choose = {
+  '0': '能量有效值',
+  '1': '速度值',
+  '2': '加速度值'
+};
+var filter_choose = {
+  '0': '滤波器1',
+  '1': '滤波器2',
+  '2': '滤波器3'
+};
+var dip_model_choose = {
+  '0': 'WindIT 2917BV',
+  '1': 'WindIT 2917BH',
+  '2': 'WindIT 2917TV-9',
+  '3': 'WindIT 2917TV-18',
+  '4': 'WindIT 2914BH',
+  '5': 'WindIT 2918TH'
+};
+var sourceType_choose = {
+  '0': '振动通道',
+  '5': '串口'
+};
+var datamode_choose = {
+  '0': '读保持寄存器',
+  '1': '输入寄存器',
+  '2': '亚当模块'
+};
+var calc_method_choose = {
+  '0': '计数',
+  '1': '高低电平'
+};
+var method_choose = {
+  '0': '定时采样',
+  '1': '手动采样'
+};
+var tt_pos_loc_source = {
+  '0': '机舱',
+  '1': '塔顶',
+  '2': '塔底'
+};
+var over_pos_loc_ch = ["机舱", "塔顶"];
+var syn_pos_loc_ch = ["机舱", "塔顶", "塔底"];
+var pos_loc = {
+  "15": "机舱X",
+  "16": "机舱Y",
+  "17": "塔顶X",
+  "18": "塔顶Y",
+  "24": "塔底X",
+  "25": "塔底Y",
+  "45": "塔筒1X",
+  "46": "塔筒1Y",
+  "47": "塔筒2X",
+  "48": "塔筒2Y",
+  "49": "塔筒3X",
+  "50": "塔筒3Y",
+  "51": "塔筒4X",
+  "52": "塔筒4Y",
+  "53": "塔筒5X",
+  "54": "塔筒5Y",
+  'dd': "module_name",
+  'kk': "module_id"
+};
+function getPositionInfo(res, type) {
+  if (res.msg == 0) {
+    var pos_folderList = {}; //所有的组织列表，组织里面存组织ID和组织name
+
+    var pos_machineList = {}; //所有的机组列表,（组织id：[{机组type，机组name，机组ID}]）
+
+    var pos_dgmList = {}; //所有的采集器列表（机组id：[{采集器id,采集器name，采集器type}]）
+
+    var pos_chaList = {}; //所有的通道列表{采集器id:[所有通道]
+
+    var cap_chaList = {}; //长采样序号对应振动的通道列表，根据ID来查询
+
+    var cap_sequenceNum = {}; //长采样序号列表
+
+    var rock_chaList = {}; //晃度的通道列表
+
+    var pos_dgmIdList = []; //临时存储（tId_macId_dgmID）唯一的采集器
+
+    var mac_pos_id_list = {}; //一个机组下面的该类型所有通道id，保证新建测点的id不冲突
+
+    var rock_pos_id_list = {}; //一个机组下面 存放晃度和倾角的pos_id的列表
+
+    var task_idSources = {}; //一个通道下面所有的任务，保证任务不冲突{dgm_id:{ch_name:{[task_id_sources],[indexs]}}}
+
+    var invalidPos = []; //失效测点集合
+
+    var data = []; //测点集合
+
+    var position = {}; //单个测点
+
+    var rock_list = {}; //存放倾角测点
+
+    if (!res.new_position_list.length > 0) {
+      return;
+    } else {
+      //组织数据结构（多machine_info.positions属性）
+      res.new_position_list.forEach(function (new_position) {
+        pos_folderList[new_position.t_name] = new_position.t_id;
+        pos_machineList[new_position.t_name] = {};
+        new_position.machine_info.forEach(function (machine_info) {
+          pos_machineList[new_position.t_name][machine_info.mac_me] = {
+            'mac_id': machine_info.mac_id,
+            'm_type': machine_info.m_type
+          };
+          mac_pos_id_list[machine_info.mac_id] = []; //获得所有mac_id 的集合对象(额外用途)测点Id列表
+
+          rock_pos_id_list[machine_info.mac_id] = [];
+          pos_dgmList[machine_info.mac_id] = {};
+
+          if (type == 10 || type == 13 || type == 12) {
+            //倾角、合成倾角、工艺量测点需要加上虚拟采集器的通道
+            if (res.model != undefined) {
+              machine_info.bindDgm_list.push(res.model);
+            }
+          }
+
+          machine_info.bindDgm_list.forEach(function (bindDgm_list) {
+            pos_dgmIdList.push(new_position.t_id + '_' + machine_info.mac_id + '_' + bindDgm_list.dgm_id); //获取所有的采集器id，不存在采集器的测点屏蔽
+
+            pos_dgmList[machine_info.mac_id][bindDgm_list.dgm_name] = {
+              "dgm_id": bindDgm_list.dgm_id,
+              "dgm_type": bindDgm_list.dgm_type
+            };
+
+            if (type == 11 || type == 13) {
+              //倾覆或者倾角的组织结构方式不一样
+              rock_chaList[bindDgm_list.dgm_id] = {};
+
+              for (var key in pos_loc) {
+                rock_chaList[bindDgm_list.dgm_id][pos_loc[key]] = {};
+              }
+            }
+
+            pos_chaList[bindDgm_list.dgm_id] = {};
+            cap_chaList[bindDgm_list.dgm_id] = {};
+            cap_sequenceNum[bindDgm_list.dgm_id] = {};
+            task_idSources[bindDgm_list.dgm_id] = {};
+            var taskArr = [3, 4, 8, 9, 15, 16]; //振动、包络、阶次,冲击
+
+            bindDgm_list.channel_list.forEach(function (channel) {
+              var ch_name = channel.ch_name;
+              var ch_id = channel.ch_id;
+              var ch_type = channel.ch_type;
+
+              if (type == 11) {
+                //如果是倾覆测点
+                over_pos_loc_ch.forEach(function (item) {
+                  if (bindDgm_list.dgm_type == 1 || bindDgm_list.dgm_type == 4) {
+                    task_idSources[bindDgm_list.dgm_id][item] = ["0"];
+                  } else {
+                    task_idSources[bindDgm_list.dgm_id][item] = ["0", "1", "2"];
+                  }
+                });
+              } else if (taskArr.indexOf(type) > -1 && (bindDgm_list.dgm_type == 2 || bindDgm_list.dgm_type == 3 || bindDgm_list.dgm_type == 7)) {
+                task_idSources[bindDgm_list.dgm_id][ch_name] = ["0", "1", "2"]; //制造一个全满的任务,DGU2200 DGU2000V2 tms2000三个任务
+              } else {
+                task_idSources[bindDgm_list.dgm_id][ch_name] = ["0"]; //其他只有一个任务（暂时没用）
+              }
+
+              if (type == 11 || type == 13) {
+                //仅在机舱、塔顶、塔底形成任务
+                if (pos_loc[channel.pos_loc] !== undefined) {
+                  rock_chaList[bindDgm_list.dgm_id][pos_loc[channel.pos_loc]] = {
+                    "ch_id": ch_id,
+                    "ch_name": ch_name,
+                    "ch_type": ch_type
+                  };
+                }
+
+                if (ch_type == "5" || ch_type == '14') {
+                  //串口||虚拟采集器
+                  rock_chaList[bindDgm_list.dgm_id]["module_name"][ch_name] = {
+                    "ch_id": ch_id,
+                    "ch_type": ch_type
+                  };
+                  rock_chaList[bindDgm_list.dgm_id]["module_id"][ch_id] = {
+                    "ch_name": ch_name,
+                    "ch_type": ch_type
+                  };
+                }
+              }
+
+              if (type == 200) {
+                //长采样的通道
+                if (ch_type == "0") {
+                  //振动通道
+                  pos_chaList[bindDgm_list.dgm_id][ch_name] = {
+                    "ch_id": ch_id,
+                    "ch_type": ch_type
+                  };
+                  cap_chaList[bindDgm_list.dgm_id][ch_id] = {
+                    "ch_name": ch_name
+                  };
+                } else if (ch_type == "11" && channel.ch1 != 255 && channel.ch1 != null) {
+                  //长采样序号通道
+                  cap_sequenceNum[bindDgm_list.dgm_id][ch_id] = {
+                    "vib_id": channel.ch1
+                  };
+                }
+              } else {
+                pos_chaList[bindDgm_list.dgm_id][ch_name] = {
+                  "ch_id": ch_id,
+                  "ch_type": ch_type
+                };
+              }
+            });
+          });
+        });
+      });
+      res.position_list.forEach(function (position_list) {
+        //第一遍遍历在任务集合中删除已经存在的任务
+        position_list.machine_info.forEach(function (machine_info) {
+          machine_info.positions.forEach(function (positions) {
+            if (!pos_dgmIdList.includes(position_list.t_id + '_' + positions.mac_id + '_' + positions.dgm_id)) {
+              //如果这个测点绑定的采集器不存在则跳过这个测点
+              return;
+            } else if (!mac_pos_id_list[machine_info.mac_id]) {
+              //没机组的测点直接删除
+              console.log("没有机组" + position_list.t_id, positions);
+              return;
+            } else {
+              var pos_tast = task_idSources[positions.dgm_id][positions.ch_name]; //删除集合中对应的任务
+
+              if (pos_tast instanceof Array && pos_tast.indexOf(positions.task_id) != -1) {
+                //集合中存在这个测点的任务
+                pos_tast.splice(pos_tast.indexOf(positions.task_id), 1); //删除这个任务
+              } else if (positions.task_id === "") {
+                console.log('没有task_id');
+              } else if (positions.task_id == 0) {
+                console.log('任务1', positions);
+              } else {
+                console.log('重复任务,或没有该通道', positions);
+              }
+            }
+          });
+        });
+      });
+      res.position_list.forEach(function (position_list) {
+        position_list.machine_info.forEach(function (machine_info) {
+          if (type == 11 || type == 13) {
+            //如果是倾覆和倾角测点，需要循环出rock_list
+            machine_info.rock_list.forEach(function (rock_pos) {
+              var key = "".concat(rock_pos.mac_id, "_").concat(rock_pos.pos_type, "_").concat(rock_pos.pos_id);
+              rock_list[key] = rock_pos;
+            });
+          }
+
+          machine_info.positions.forEach(function (positions) {
+            //获取每个机组的测点ID,id就是数组的下标
+            if (positions.baseInfo && Object.keys(positions.baseInfo).length == 0) {
+              positions.t_name = position_list.t_name;
+              positions.mac_name = machine_info.mac_me;
+              invalidPos.push(positions);
+              console.log("baseInfo为空", positions);
+              return;
+            }
+
+            var baseInfo = positions.baseInfo;
+
+            if (!mac_pos_id_list[machine_info.mac_id]) {
+              //没机组的测点直接忽略
+              console.log("缺少机组" + position_list.t_id, positions);
+              /* 将失效测点保存起来统一处理 */
+
+              positions.t_name = position_list.t_name;
+              positions.mac_name = machine_info.mac_me;
+              invalidPos.push(positions);
+              return;
+            }
+            /* 搜集rock pos_id */
+
+
+            if (type == 11 || type == 13) {
+              //如果是倾覆和合成倾角，需要保存对应的晃度和倾角的pos_id
+              rock_pos_id_list[machine_info.mac_id][baseInfo.rock1_id] = baseInfo.rock1_id;
+              rock_pos_id_list[machine_info.mac_id][baseInfo.rock2_id] = baseInfo.rock2_id;
+            }
+
+            mac_pos_id_list[machine_info.mac_id][positions.pos_id] = positions.pos_id; // 组装测点id 的集合，保证新建测点的id不重复
+
+            /* 不显示没有采集器的测点 */
+
+            if (!pos_dgmIdList.includes(position_list.t_id + '_' + positions.mac_id + '_' + positions.dgm_id)) {
+              //没采集器的测点屏蔽
+              console.log("缺少采集器", positions);
+              positions.t_name = position_list.t_name;
+              positions.mac_name = machine_info.mac_me;
+              invalidPos.push(positions);
+              return;
+            }
+            /* 不显示没有通道的测点 */
+
+
+            if (pos_chaList[positions.dgm_id][positions.ch_name] === undefined) {
+              console.log('该测点缺少通道', positions);
+              positions.t_name = position_list.t_name;
+              positions.mac_name = machine_info.mac_me;
+              invalidPos.push(positions);
+              return;
+            }
+
+            var task_id_sources = task_idSources[positions.dgm_id][positions.ch_name]; //克隆这个数组
+
+            task_id_sources = task_id_sources.slice(); //添加上自己任务的id
+
+            task_id_sources.push(positions.task_id);
+            task_id_sources = Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["taskArray"])(task_id_sources); //数组排序
+            //获取每个测点的可选通道 ch_sources
+
+            var ch_sources = [];
+
+            if (type == 11) {
+              ch_sources = over_pos_loc_ch;
+            } else if (type == 13) {
+              ch_sources = syn_pos_loc_ch;
+            } else {
+              ch_sources = Object.keys(pos_chaList[positions.dgm_id]);
+            }
+
+            position = {
+              operate: 0,
+              //可修改行标记
+              oldInfo: {},
+              //标记测点修改之前的信息
+              updateTime: positions.updateTime,
+              t_id: position_list.t_id,
+              t_name: position_list.t_name,
+              t_sources: Object.keys(pos_folderList).sort(),
+              m_type: positions.m_type,
+              mac_id: positions.mac_id,
+              mac_me: machine_info.mac_me,
+              macName_sources: [],
+              dgm_id: positions.dgm_id,
+              dgm_type: positions.dgm_type,
+              dgm_name: positions.dgm_name,
+              dgm_sources: [],
+              ch_id: positions.ch_id,
+              ch_type: positions.ch_type,
+              ch_name: positions.ch_name,
+              ch_sources: ch_sources.sort(),
+              pos_id: positions.pos_id,
+              pos_name: positions.pos_name,
+              pos_type: type,
+              pos_type_name: Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["posType_name"])(type),
+              pos_activity: positions.pos_activity == "" ? "0" : positions.pos_activity,
+              pos_activity_val: positions.pos_activity == "" ? pos_activity_choose["0"] : pos_activity_choose[positions.pos_activity],
+              //是否有效
+              pos_activity_sources: Object.values(pos_activity_choose),
+              pos_activity_sources_key: Object.keys(pos_activity_choose),
+              isalarm: positions.isalarm == "" ? "0" : positions.isalarm,
+              isalarm_val: positions.isalarm == "" ? isalarm_vib_choose["0"] : isalarm_vib_choose[positions.isalarm],
+              //是否报警
+              isalarm_sources: Object.values(isalarm_choose),
+              isalarm_sources_key: Object.keys(isalarm_choose),
+              task_id: positions.task_id,
+              task_id_val: task_id_choose[positions.task_id],
+              //任务Id
+              task_id_sources: task_id_sources,
+              //每个通道的任务id源，不包括自身的任务
+              task_id_choose: Object.values(task_id_choose),
+              task_id_choose_key: Object.keys(task_id_choose),
+              alarm_smooth_a: baseInfo.alarm_smooth_a,
+              //报警投票机制a
+              alarm_smooth_b: baseInfo.alarm_smooth_b,
+              //报警投票机制b
+              baseInfo: {}
+            };
+
+            if (type == 3 || type == 15 || type == 4 || type == 8 || type == 16 || type == 9 || type == 6 || type == 11 || type == 12 || type == 13) {
+              //振动系列测点
+              //组测点数据
+              position.isalarm_sources = Object.values(isalarm_vib_choose);
+              position.isalarm_sources_key = Object.keys(isalarm_vib_choose);
+              var frequency_source = Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["frequencySources"])(positions, baseInfo.filter);
+              position.baseInfo = {
+                alarmList: baseInfo.alarmList,
+                filter: baseInfo.filter,
+                filter_val: filter_choose[baseInfo.filter],
+                filter_sources: Object.values(filter_choose),
+                filter_sources_key: Object.keys(filter_choose),
+                frequency: baseInfo.frequency,
+                //分析频率 采样周期(order)
+                frequency_val: frequency_source[baseInfo.frequency],
+                frequency_sources: Object.values(frequency_source),
+                frequency_sources_key: Object.keys(frequency_source),
+                spectral: baseInfo.spectral,
+                //谱线数 采样点数(order)
+                spectral_sources: Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["spectralSources"])(positions.dgm_type, positions.pos_type),
+                resampling: baseInfo.resampling,
+                resampling_val: resampling_choose[baseInfo.resampling],
+                resampling_sources: Object.values(resampling_choose),
+                resampling_sources_key: Object.keys(resampling_choose)
+              };
+
+              if (type == 3) {
+                //振动测点微信报警信息
+                Object.assign(position.baseInfo, {
+                  levelRms: baseInfo.levelRms,
+                  //过滤阈值：这个可以填小数
+                  areaRatio: baseInfo.areaRatio,
+                  //增长百分比：正数，填20，就是20%的意思
+                  sampHours: baseInfo.sampHours,
+                  //平均值计算时间：正整数，多少小时的意思
+                  death_time: baseInfo.death_time,
+                  //死区时间，单位小时，新增：正整数
+                  packn: baseInfo.packn //连续n包，新增：正整数
+
+                });
+              }
+
+              Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["computed__frequency_spectral"])(position);
+
+              for (var k = 0; k < 8; k++) {
+                var band = baseInfo.band;
+                position.baseInfo["band".concat(k)] = {
+                  dwOpt_freq_selected: band[k].dwOpt_freq_selected == "" ? "0" : band[k].dwOpt_freq_selected,
+                  //是否选择频段
+                  dwOpt_freq_name: band[k].dwOpt_freq_name == "" ? "\u9891\u6BB5".concat(k + 1) : band[k].dwOpt_freq_name,
+                  //是否有频段名称
+                  optfreq_type: band[k].optfreq_type == "" ? "0" : band[k].optfreq_type,
+                  //频段类型，如果没有默认给能量有效值
+                  optfreq_type_val: band[k].optfreq_type == "" ? optfreq_type_choose['0'] : optfreq_type_choose[band[k].optfreq_type],
+                  optfreq_type_sources: Object.values(optfreq_type_choose),
+                  optfreq_type_sources_key: Object.keys(optfreq_type_choose),
+                  dwOpt_freq_begin: band[k].dwOpt_freq_begin == "" ? "0.1" : band[k].dwOpt_freq_begin,
+                  dwOpt_freq_end: band[k].dwOpt_freq_end == "" ? "10" : band[k].dwOpt_freq_end
+                };
+              }
+
+              if (type == 11 || type == 13) {
+                //倾覆和合成倾角共有部分
+                Object.assign(position.baseInfo, {
+                  tt_sensor_name: baseInfo.tt_sensor_name,
+                  //传感器名称
+                  tt_ch_type: baseInfo.tt_ch_type,
+                  // 关联通道（虚拟） 倾覆或合成倾角的测点类型
+                  tt_ch_id: baseInfo.tt_ch_id,
+                  //关联通道（虚拟） 倾覆或合成倾角的测点id
+                  tt_pos_loc: baseInfo.tt_pos_loc,
+                  //安装位置 塔顶、机舱、塔底
+                  tt_pos_loc_source: Object.values(tt_pos_loc_source),
+                  tt_pos_loc_source_key: Object.keys(tt_pos_loc_source),
+                  rock1_id: baseInfo.rock1_id,
+                  rock1_pos_name: baseInfo.rock1_pos_name,
+                  // 晃度X名称
+                  rock1_ch_id: baseInfo.rock1_ch_id,
+                  rock2_id: baseInfo.rock2_id,
+                  rock2_pos_name: baseInfo.rock2_pos_name,
+                  // 晃度Y名称
+                  rock2_ch_id: baseInfo.rock2_ch_id
+                });
+
+                if (type == 11) {
+                  //倾覆独有部分
+                  Object.assign(position.baseInfo, {
+                    rock1_ch_name: rock_chaList[positions.dgm_id][positions.ch_name + "X"].ch_name,
+                    //晃度X关联通道名称
+                    rock1_ch_type: rock_chaList[positions.dgm_id][positions.ch_name + "X"].ch_type,
+                    //关联通道的类型
+                    rock2_ch_name: rock_chaList[positions.dgm_id][positions.ch_name + "Y"].ch_name,
+                    //晃度Y关联通道
+                    rock2_ch_type: rock_chaList[positions.dgm_id][positions.ch_name + "Y"].ch_type,
+                    //关联通道的类型
+                    sUnitName: baseInfo.sUnitName,
+                    self1: baseInfo.self1,
+                    self2: baseInfo.self2
+                  });
+                }
+
+                if (type == 13) {
+                  //合成倾角独有部分
+                  var rock1_ch_name;
+                  var rock2_ch_name;
+                  var rock_ch_type;
+                  var rockSource;
+
+                  if (baseInfo.sourceType == 5) {
+                    //串口
+                    var moduleList = rock_chaList[position.dgm_id]['module_name'];
+                    rockSource = Object.keys(moduleList);
+                    rock1_ch_name = rock2_ch_name = rock_chaList[positions.dgm_id]["module_id"][baseInfo.rock1_ch_id].ch_name;
+                    rock_ch_type = 5; //串口通道
+                  } else if (baseInfo.sourceType == 0) {
+                    //振动
+                    rock1_ch_name = rock_chaList[positions.dgm_id][positions.ch_name + "X"].ch_name;
+                    rock2_ch_name = rock_chaList[positions.dgm_id][positions.ch_name + "Y"].ch_name;
+                    rock_ch_type = 0; //振动通道
+                  }
+
+                  Object.assign(position.baseInfo, {
+                    rock1_ch_name: rock1_ch_name,
+                    //
+                    rock1_ch_type: rock_ch_type,
+                    rock2_ch_name: rock2_ch_name,
+                    //晃度Y关联通道
+                    rock2_ch_type: rock_ch_type,
+                    rock1_ch_sources: rockSource,
+                    //rock可选通道
+                    rock2_ch_sources: rockSource,
+                    offset_angle: baseInfo.offset_angle,
+                    //偏置角度
+                    dip_model: baseInfo.dip_model,
+                    //传感器类型
+                    dip_model_val: dip_model_choose[baseInfo.dip_model],
+                    dip_model_sources: Object.values(dip_model_choose),
+                    dip_model_sources_key: Object.keys(dip_model_choose),
+                    sourceType: baseInfo.sourceType,
+                    //数据来源
+                    sourceType_val: sourceType_choose[baseInfo.sourceType],
+                    sourceType_sources: Object.values(sourceType_choose),
+                    sourceType_sources_key: Object.keys(sourceType_choose),
+                    diameter: baseInfo.diameter,
+                    //基础直径
+                    offset1: baseInfo.offset1,
+                    //偏移量1
+                    slaveid1: baseInfo.slaveid1,
+                    //从设备号1
+                    offset2: baseInfo.offset2,
+                    //偏移量2
+                    slaveid2: baseInfo.slaveid2,
+                    //从设备号2
+                    datamode1: baseInfo.datamode1,
+                    //过程量类型
+                    datamode1_val: datamode_choose[baseInfo.datamode1],
+                    datamode1_sources: Object.values(datamode_choose),
+                    datamode1_sources_key: Object.keys(datamode_choose),
+                    datamode2: baseInfo.datamode2,
+                    datamode2_val: datamode_choose[baseInfo.datamode2],
+                    datamode2_sources: Object.values(datamode_choose),
+                    datamode2_sources_key: Object.keys(datamode_choose)
+                  });
+                }
+              }
+            }
+
+            if (type == 1) {
+              //转速测点
+              position.baseInfo = {
+                baseRate: baseInfo.baseRate,
+                byUnit: baseInfo.byUnit,
+                speedRate: baseInfo.speedRate,
+                min_speed: baseInfo.min_speed,
+                max_speed: baseInfo.max_speed,
+                svibsList: baseInfo.svibsList
+              };
+            }
+
+            if (type == 7 || type == 2) {
+              //温度过程量测点
+              position.baseInfo = {
+                h_limit: baseInfo.h_limit,
+                hh_limit: baseInfo.hh_limit,
+                l_limit: baseInfo.l_limit,
+                ll_limit: baseInfo.ll_limit
+              };
+            }
+
+            if (type == 5) {
+              //数字量
+              position.baseInfo = {
+                hh_limit: baseInfo.hh_limit,
+                h_limit: baseInfo.h_limit,
+                calc_method: baseInfo.calc_method,
+                calc_method_val: calc_method_choose[baseInfo.calc_method],
+                calc_method_sources: Object.values(calc_method_choose),
+                calc_method_sources_key: Object.keys(calc_method_choose)
+              };
+            }
+
+            if (type == 14) {
+              //螺栓测点
+              position.baseInfo = {
+                alarmList: baseInfo.alarmList,
+                alarm_smooth_a: baseInfo.alarm_smooth_a,
+                alarm_smooth_b: baseInfo.alarm_smooth_b,
+                posShow: baseInfo.posShow,
+                alarm_grow: baseInfo.alarm_grow,
+                warn_grow: baseInfo.warn_grow
+              };
+            }
+
+            if (type == 10) {
+              //工艺量测点
+              position.baseInfo = {
+                byUnit: baseInfo.byUnit,
+                //单位索引
+                normal: baseInfo.normal,
+                //过程量正常类型转换
+                byUnitName: baseInfo.byUnitName,
+                //名称
+                unitNum: baseInfo.unitNum,
+                //数据有效位
+                hh_limit: baseInfo.hh_limit,
+                //报警高
+                h_limit: baseInfo.h_limit,
+                //预警高
+                l_limit: baseInfo.l_limit,
+                //预警低
+                ll_limit: baseInfo.ll_limit,
+                //报警低
+                hi_value: baseInfo.hi_value,
+                //工程量输入范围高
+                low_value: baseInfo.low_value,
+                //工程量输入范围低
+                ref_vol: baseInfo.ref_vol,
+                //信号输入范围高
+                ref_eng: baseInfo.ref_eng,
+                //信号输入范围低
+                scale: baseInfo.scale,
+                //校正参数
+                corr: baseInfo.corr,
+                //零点偏移
+                dataaddress: baseInfo.dataaddress,
+                //数据地址
+                datamode: baseInfo.datamode,
+                //过程量类型
+                datamode_val: datamode_choose[baseInfo.datamode],
+                datamode_sources: Object.values(datamode_choose),
+                datamode_sources_key: Object.keys(datamode_choose),
+                slaveid: baseInfo.slaveid,
+                //从设备号
+                value_left: baseInfo.value_left,
+                //左比较值
+                value_right: baseInfo.value_right //右比较值
+
+              };
+            }
+
+            if (type == 200) {
+              //长采样测点
+              var capture_byId = baseInfo.capture_byId;
+              var capture_sources = [];
+              var capture_chName_sources = [];
+
+              if (baseInfo.capture_mode == 0) {
+                //定时采样
+
+                /* 序号可选 */
+                capture_sources = Object.keys(cap_sequenceNum[positions.dgm_id]);
+                /* 通道不可选 */
+
+                capture_chName_sources = [positions.ch_name];
+              } else if (baseInfo.capture_mode == 1) {
+                /* 序号不可选 */
+                capture_sources = [];
+                /* 通道可选 */
+
+                capture_chName_sources = Object.keys(pos_chaList[positions.dgm_id]);
+              }
+
+              position.baseInfo = {
+                capture_mode: baseInfo.capture_mode,
+                //采样方式 0=定时 1=手动
+                method_val: method_choose[baseInfo.capture_mode],
+                method_sources: Object.values(method_choose),
+                method_sources_key: Object.keys(method_choose),
+                capture_byId: capture_byId,
+                //定时长采样序号
+                capture_sources: capture_sources,
+                //定时长采样序号可选
+                capture_chName: positions.ch_name,
+                //定时长采样通道
+                capture_chName_sources: capture_chName_sources //长采样通道的可选
+
+              };
+            }
+
+            data.push(position);
+          });
+        });
+      });
+      return {
+        pos_folderList: pos_folderList,
+        pos_machineList: pos_machineList,
+        pos_dgmList: pos_dgmList,
+        pos_chaList: pos_chaList,
+        mac_pos_id_list: mac_pos_id_list,
+        task_idSources: task_idSources,
+        rock_chaList: rock_chaList,
+        cap_sequenceNum: cap_sequenceNum,
+        cap_chaList: cap_chaList,
+        rock_pos_id_list: rock_pos_id_list,
+        rock_list: rock_list,
+        invalidPos: invalidPos,
+        data: data
+      };
+    }
+  }
+}
+function createPosition(type) {
+  var position = {
+    operate: 1,
+    oldInfo: {},
+    //标记测点修改之前的信息
+    updateTime: 0,
+    //未添加的属性在后续函数中添加
+    t_id: '',
+    t_name: '',
+    t_sources: '',
+    //下拉列表
+    mac_id: '',
+    m_type: '',
+    mac_me: '',
+    macName_sources: {},
+    //下拉列表
+    dgm_id: '',
+    dgm_type: '',
+    dgm_name: '',
+    dgm_sources: {},
+    //下拉列表
+    ch_id: "",
+    ch_type: "",
+    ch_name: '',
+    ch_sources: {},
+    pos_id: "",
+    pos_name: "",
+    pos_type: type,
+    pos_type_name: Object(_pos_methods_js__WEBPACK_IMPORTED_MODULE_0__["posType_name"])(type),
+    pos_activity: "0",
+    pos_activity_val: "有效",
+    pos_activity_sources: Object.values(pos_activity_choose),
+    pos_activity_sources_key: Object.keys(pos_activity_choose),
+    isalarm: "0",
+    isalarm_val: "不报警",
+    isalarm_sources: Object.values(isalarm_choose),
+    isalarm_sources_key: Object.keys(isalarm_choose),
+    task_id: "",
+    task_id_old: "",
+    task_id_val: "",
+    task_id_sources: "",
+    task_id_choose: Object.values(task_id_choose),
+    task_id_choose_key: Object.keys(task_id_choose),
+    baseInfo: _defineProperty({
+      posShow: "0",
+      //是否显示在总貌图
+      alarm_smooth_a: '1',
+      alarm_smooth_b: '1',
+      alarmList: [],
+      //报警值
+
+      /* 转速 */
+      speedRate: '1',
+      baseRate: '1',
+      byUnit: 'rpm',
+      min_speed: 7,
+      max_speed: 25,
+      svibsList: [],
+
+      /* 温度过程量系列 */
+      hh_limit: "20",
+      h_limit: "10",
+      l_limit: "-10",
+      ll_limit: "-20",
+
+      /* 数字量系列 */
+      calc_method: "0",
+      //计算方式
+      calc_method_val: "计数",
+      calc_method_sources: Object.values(calc_method_choose),
+      calc_method_sources_key: Object.keys(calc_method_choose),
+      // hh_limit:"20",//报警（高）
+      // h_limit:"10",//预警（高）
+
+      /* 振动测点 */
+      levelRms: '0',
+      //过滤阈值：这个可以填小数
+      areaRatio: '20',
+      //增长百分比：正数，填20，就是20%的意思
+      sampHours: '24',
+      //平均值计算时间：正整数，多少小时的意思
+      death_time: '4',
+      //死区时间，单位小时，新增：正整数
+      packn: '2',
+      //连续n包，新增：正整数
+
+      /* 振动系列 */
+      frequency: "",
+      frequency_val: "",
+      frequency_sources: "",
+      spectral: "",
+      spectral_val: "",
+      spectral_sources: "",
+      filter: "0",
+      filter_val: "滤波器1",
+      filter_sources: Object.values(filter_choose),
+      filter_sources_key: Object.keys(filter_choose),
+      order: "",
+      specOrder: "",
+      //过采样
+      resampling: '0',
+      resampling_val: '是',
+      resampling_sources: Object.values(resampling_choose),
+      resampling_sources_key: Object.keys(resampling_choose),
+
+      /* 工艺量 */
+      // byUnit: "0",//单位索引
+      byUnitName: "m",
+      //名称
+      unitNum: "4",
+      //数据有效位
+      // hh_limit: "20",//报警高 (上面有)
+      // h_limit: "10",//预警高
+      // l_limit:"-10",//预警低
+      // ll_limit:"-20",//报警低
+      hi_value: "1000",
+      //工程量输入范围高
+      low_value: "-1000",
+      //工程量输入范围低
+      ref_vol: "1000",
+      //信号输入范围高
+      ref_eng: "-1000",
+      //信号输入范围低
+      corr: "1",
+      //校正参数
+      scale: "0",
+      //零点偏移
+      dataaddress: "40001",
+      //数据地址
+      datamode: "0",
+      //过程量类型
+      datamode_val: "读保持寄存器",
+      datamode_sources: Object.values(datamode_choose),
+      datamode_sources_key: Object.keys(datamode_choose),
+      slaveid: "1",
+      //从设备号
+      normal: "0",
+      //正常
+      value_left: "0",
+      //左比较值
+      value_right: "0",
+      //右比较值
+
+      /* 倾覆和合成倾角的测点 */
+      tt_sensor_name: "",
+      //传感器名称
+      tt_ch_type: type,
+      // 关联通道（虚拟） 倾覆或合成倾角的测点类型
+      tt_ch_id: "",
+      //关联通道（虚拟） 倾覆或合成倾角的测点id
+      tt_pos_loc: "",
+      //安装位置 塔顶、机舱、塔底
+      tt_pos_loc_source: Object.values(tt_pos_loc_source),
+      tt_pos_loc_source_key: Object.keys(tt_pos_loc_source),
+      rock1_id: "",
+      rock1_pos_name: "",
+      // 晃度倾角X名称
+      rock1_ch_id: "",
+      rock1_ch_name: " ",
+      //晃度倾角X关联通道名称
+      rock1_ch_sources: "",
+      rock2_id: "",
+      rock2_pos_name: "",
+      // 晃度倾角Y名称
+      rock2_ch_id: "",
+      rock2_ch_name: "  ",
+      //晃度倾角Y关联通道
+      rock2_ch_sources: "",
+      sUnitName: "mm",
+      self1: "0",
+      self2: "0",
+
+      /* 合成倾角部分 */
+      offset_angle: 0,
+      //偏置角度
+      dip_model: "0",
+      //传感器类型
+      dip_model_val: "WindIT 2917BV",
+      dip_model_sources: Object.values(dip_model_choose),
+      dip_model_sources_key: Object.keys(dip_model_choose),
+      sourceType: '5',
+      //数据来源
+      sourceType_val: '串口',
+      sourceType_sources: Object.values(sourceType_choose),
+      sourceType_sources_key: Object.keys(sourceType_choose),
+      diameter: 4000,
+      //基础直径
+      offset1: 0,
+      //偏移量1
+      slaveid1: 1,
+      //从设备号1
+      offset2: 0,
+      //偏移量2
+      slaveid2: 1,
+      //从设备号2
+      datamode1: '0',
+      //过程量类型 '读保持寄存器'
+      datamode1_val: '读保持寄存器',
+      datamode1_sources: Object.values(datamode_choose),
+      datamode1_sources_key: Object.keys(datamode_choose),
+      datamode2: '0',
+      datamode2_val: '读保持寄存器',
+      datamode2_sources: Object.values(datamode_choose),
+      datamode2_sources_key: Object.keys(datamode_choose),
+
+      /* 长采样默认值 */
+      capture_mode: "1",
+      method_val: "手动采样",
+      method_sources: Object.values(method_choose),
+      method_sources_key: Object.keys(method_choose),
+      capture_byId: '1',
+      //定时长采样序号
+      capture_sources: "",
+      //定时长采样序号可选
+      capture_chName: "",
+      //定时长采样通道
+      capture_chName_sources: []
+    }, "alarmList", [])
+  };
+  var dwOpt_freq_begin, dwOpt_freq_end;
+
+  for (var i = 0; i < 8; i++) {
+    if (i == 0) {
+      dwOpt_freq_begin = '0.1';
+      dwOpt_freq_end = '10';
+    } else if (i == 1) {
+      dwOpt_freq_begin = '10';
+      dwOpt_freq_end = '2000';
+    } else if (i == 2) {
+      dwOpt_freq_begin = '10';
+      dwOpt_freq_end = '5000';
+    } else {
+      dwOpt_freq_begin = "".concat(i * 10);
+      dwOpt_freq_end = "".concat((i + 1) * 10);
+    }
+
+    position.baseInfo["band".concat(i)] = {
+      dwOpt_freq_selected: "0",
+      dwOpt_freq_name: "\u9891\u6BB5".concat(i + 1),
+      optfreq_type_val: "能量有效值",
+      optfreq_type: "0",
+      optfreq_type_sources: Object.values(optfreq_type_choose),
+      optfreq_type_sources_key: Object.keys(optfreq_type_choose),
+      dwOpt_freq_begin: dwOpt_freq_begin,
+      dwOpt_freq_end: dwOpt_freq_end
+    };
+  }
+
+  if (type == 10) {
+    position.baseInfo.byUnit = "0";
+  }
+
+  if (type == 3 || type == 15 || type == 4 || type == 8 || type == 16 || type == 9 || type == 6 || type == 11 || type == 12 || type == 13) {
+    //振动系报警值较多
+    position.isalarm_sources = Object.values(isalarm_vib_choose);
+    position.isalarm_sources_key = Object.keys(isalarm_vib_choose);
+  }
+
+  return position;
+}
+function changePosition(type, oldPosition) {
+  var position = {};
+  position.index = oldPosition.index;
+  position.updateTime = oldPosition.updateTime;
+  position.mac_id = oldPosition.mac_id; //机组uid
+
+  position.m_type = oldPosition.m_type; //机组uid
+
+  position.dgm_type = oldPosition.dgm_type; //采集站类型：处理测点设置的差异化、测点数目等
+
+  position.dgm_id = oldPosition.dgm_id;
+  position.dgm_name = oldPosition.dgm_name;
+  position.ch_type = oldPosition.ch_type;
+  position.ch_id = oldPosition.ch_id;
+  position.ch_name = oldPosition.ch_name;
+  position.pos_id = oldPosition.pos_id;
+  position.pos_type = type;
+  position.pos_name = oldPosition.pos_name; //测点名称
+
+  position.task_id = oldPosition.task_id; //任务
+
+  position.pos_activity = oldPosition.pos_activity; //是否有效
+
+  position.isalarm = oldPosition.isalarm; //报警
+
+  if (type == 3 || type == 15 || type == 4 || type == 8 || type == 16 || type == 9 || type == 6 || type == 12 || type == 11 || type == 13) {
+    var _position$baseInfo;
+
+    //振动系列
+    position.baseInfo = (_position$baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      alarmList: oldPosition.baseInfo.alarmList,
+      resampling: '0',
+      //重新采样
+      posShow: "0",
+      //是否显示在总貌图
+      filter: oldPosition.baseInfo.filter,
+      hanning: "1",
+      //是否汉宁窗
+      warn_grow: "20",
+      //预警梯度
+      alarm_grow: "20",
+      //报警梯度
+      frequency: oldPosition.baseInfo.frequency,
+      spectral: oldPosition.baseInfo.spectral
+    }, _defineProperty(_position$baseInfo, "resampling", oldPosition.baseInfo.resampling), _defineProperty(_position$baseInfo, "band", []), _position$baseInfo);
+
+    for (var i = 0; i < 8; i++) {
+      position.baseInfo.band[i] = {
+        lineNum: String(i + 1),
+        dwOpt_freq_selected: oldPosition.baseInfo["band".concat(i)].dwOpt_freq_selected,
+        dwOpt_freq_name: oldPosition.baseInfo["band".concat(i)].dwOpt_freq_name,
+        optfreq_type: oldPosition.baseInfo["band".concat(i)].optfreq_type,
+        dwOpt_freq_begin: oldPosition.baseInfo["band".concat(i)].dwOpt_freq_begin,
+        dwOpt_freq_end: oldPosition.baseInfo["band".concat(i)].dwOpt_freq_end
+      };
+    }
+
+    if (type == 3) {
+      //微信报警信息
+      Object.assign(position.baseInfo, {
+        levelRms: oldPosition.baseInfo.levelRms,
+        //过滤阈值：这个可以填小数
+        areaRatio: oldPosition.baseInfo.areaRatio,
+        //增长百分比：正数，填20，就是20%的意思
+        sampHours: oldPosition.baseInfo.sampHours,
+        //平均值计算时间：正整数，多少小时的意思
+        death_time: oldPosition.baseInfo.death_time,
+        //死区时间，单位小时，新增：正整数
+        packn: oldPosition.baseInfo.packn //连续n包，新增：正整数
+
+      });
+    }
+
+    if (type == 11 || type == 13) {
+      //倾覆和合成倾角
+      Object.assign(position.baseInfo, {
+        tt_sensor_name: oldPosition.baseInfo.tt_sensor_name,
+        //传感器名称
+        tt_ch_type: oldPosition.baseInfo.tt_ch_type,
+        // 关联通道（虚拟） 倾覆或合成倾角的测点类型
+        tt_ch_id: oldPosition.baseInfo.tt_ch_id,
+        //关联通道（虚拟） 倾覆或合成倾角的测点id
+        tt_pos_loc: oldPosition.baseInfo.tt_pos_loc,
+        //安装位置 塔顶、机舱、塔底
+        rock1_id: oldPosition.baseInfo.rock1_id,
+        rock1_pos_name: oldPosition.baseInfo.rock1_pos_name,
+        rock1_ch_id: oldPosition.baseInfo.rock1_ch_id,
+        rock1_ch_name: oldPosition.baseInfo.rock1_ch_name,
+        rock1_ch_type: oldPosition.baseInfo.rock1_ch_type,
+        rock2_id: oldPosition.baseInfo.rock2_id,
+        rock2_pos_name: oldPosition.baseInfo.rock2_pos_name,
+        rock2_ch_id: oldPosition.baseInfo.rock2_ch_id,
+        rock2_ch_name: oldPosition.baseInfo.rock2_ch_name,
+        rock2_ch_type: oldPosition.baseInfo.rock2_ch_type
+      });
+
+      if (type == 11) {
+        //倾覆独有部分
+        Object.assign(position.baseInfo, {
+          sUnitName: oldPosition.baseInfo.sUnitName,
+          self1: oldPosition.baseInfo.self1,
+          self2: oldPosition.baseInfo.self2
+        });
+      }
+
+      if (type == 13) {
+        //合成倾角独有部分
+        Object.assign(position.baseInfo, {
+          offset_angle: oldPosition.baseInfo.offset_angle,
+          //偏置角度
+          dip_model: oldPosition.baseInfo.dip_model,
+          //传感器类型
+          sourceType: oldPosition.baseInfo.sourceType,
+          //数据来源
+          diameter: oldPosition.baseInfo.diameter,
+          //基础直径
+          offset1: oldPosition.baseInfo.offset1,
+          //偏移量1
+          slaveid1: oldPosition.baseInfo.slaveid1,
+          //从设备号1
+          offset2: oldPosition.baseInfo.offset2,
+          //偏移量2
+          slaveid2: oldPosition.baseInfo.slaveid2,
+          //从设备号2
+          datamode1: oldPosition.baseInfo.datamode1,
+          //过程量类型
+          datamode2: oldPosition.baseInfo.datamode2
+        });
+      }
+    }
+  } else if (type == 1) {
+    //转速系列
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      speedRate: oldPosition.baseInfo.speedRate,
+      baseRate: oldPosition.baseInfo.baseRate,
+      byUnit: oldPosition.baseInfo.byUnit,
+      min_speed: oldPosition.baseInfo.min_speed,
+      max_speed: oldPosition.baseInfo.max_speed,
+      svibsList: oldPosition.baseInfo.svibsList
+    };
+  } else if (type == 7 || type == 2) {
+    //温度过程量测点
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      h_limit: oldPosition.baseInfo.h_limit,
+      hh_limit: oldPosition.baseInfo.hh_limit,
+      l_limit: oldPosition.baseInfo.l_limit,
+      ll_limit: oldPosition.baseInfo.ll_limit
+    };
+  } else if (type == 5) {
+    //数字量
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      hh_limit: oldPosition.baseInfo.hh_limit,
+      h_limit: oldPosition.baseInfo.h_limit,
+      calc_method: oldPosition.baseInfo.calc_method
+    };
+  } else if (type == 10) {
+    //工艺量
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      posShow: oldPosition.baseInfo.posShow,
+      //是否显示在总貌图
+      byUnit: oldPosition.baseInfo.byUnit,
+      //单位索引
+      byUnitName: oldPosition.baseInfo.byUnitName,
+      //名称
+      unitNum: oldPosition.baseInfo.unitNum,
+      //数据有效位
+      hh_limit: oldPosition.baseInfo.hh_limit,
+      //报警高
+      h_limit: oldPosition.baseInfo.h_limit,
+      //预警高
+      l_limit: oldPosition.baseInfo.l_limit,
+      //预警低
+      ll_limit: oldPosition.baseInfo.ll_limit,
+      //报警低
+      hi_value: oldPosition.baseInfo.hi_value,
+      //工程量输入范围高
+      low_value: oldPosition.baseInfo.low_value,
+      //工程量输入范围低
+      ref_vol: oldPosition.baseInfo.ref_vol,
+      //信号输入范围高
+      ref_eng: oldPosition.baseInfo.ref_eng,
+      //信号输入范围低
+      scale: oldPosition.baseInfo.scale,
+      //校正参数
+      corr: oldPosition.baseInfo.corr,
+      //零点偏移
+      dataaddress: oldPosition.baseInfo.dataaddress,
+      //数据地址
+      datamode: oldPosition.baseInfo.datamode,
+      slaveid: oldPosition.baseInfo.slaveid,
+      //从设备号
+      normal: oldPosition.baseInfo.normal,
+      value_left: oldPosition.baseInfo.value_left,
+      //左比较值
+      value_right: oldPosition.baseInfo.value_right //右比较值
+
+    };
+  } else if (type == 200) {
+    //长采样
+    position.baseInfo = {
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      capture_mode: oldPosition.baseInfo.capture_mode,
+      capture_byId: oldPosition.baseInfo.capture_byId
+    };
+  } else if (type == 14) {
+    //螺栓测点
+    position.baseInfo = {
+      alarmList: oldPosition.baseInfo.alarmList,
+      alarm_smooth_a: oldPosition.baseInfo.alarm_smooth_a,
+      alarm_smooth_b: oldPosition.baseInfo.alarm_smooth_b,
+      posShow: oldPosition.baseInfo.posShow,
+      alarm_grow: oldPosition.baseInfo.alarm_grow,
+      warn_grow: oldPosition.baseInfo.warn_grow
+    };
+  }
+  /* 加入共同的baseInfo属性 */
+
+
+  position.baseInfo.alarmList = oldPosition.baseInfo.alarmList;
+  return position;
+}
+
+/***/ }),
+
+/***/ "./src/components/content/system/position/table/js/pos_mixin.js":
+/*!**********************************************************************!*\
+  !*** ./src/components/content/system/position/table/js/pos_mixin.js ***!
+  \**********************************************************************/
+/*! exports provided: posMixin */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "posMixin", function() { return posMixin; });
+/* harmony import */ var _pos_hdtable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pos_hdtable.js */ "./src/components/content/system/position/table/js/pos_hdtable.js");
+/* harmony import */ var _pos_info_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pos_info.js */ "./src/components/content/system/position/table/js/pos_info.js");
+/* harmony import */ var _pos_methods__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pos_methods */ "./src/components/content/system/position/table/js/pos_methods.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+var posMixin = {
+  data: function data() {
+    return {
+      hot: {},
+      //hottable对象
+      data: [],
+      //hottable的data数据
+      initList: {
+        pos_folderList: {},
+        //所有的组织列表
+        pos_machineList: {},
+        //所有的机组列表
+        pos_dgmList: {},
+        //所有的采集器列表
+        pos_chaList: {},
+        //所有的通道列表，根据name来查询
+        cap_chaList: {},
+        //长采样序号对应振动的通道列表，根据ID来查询
+        cap_sequenceNum: {},
+        //长采样序号列表
+        rock_chaList: {},
+        //晃度通道对应列表
+        mac_pos_id_list: [],
+        //机组对应测点表{机组：[]}
+        rock_pos_id_list: [],
+        //存晃度和倾角的pos_id列表
+        rock_list: {},
+        //存放倾覆或合成倾角带的晃度或者倾角测点
+        task_idSources: {} //任务的统计列表 {dgm_id:{ch_id:{[task_id_sources],[indexs]}}}
+
+      },
+      changeList: {
+        changeData: {},
+        //修改的数据
+        deleteData: [],
+        //删除的数据
+        addData: {} //新增的数据
+
+      },
+      scroll: 0 //滚动距离
+
+    };
+  },
+  //销毁的时候清除位置
+  destroyed: function destroyed() {
+    this.$store.commit('clearSroll', 'position');
+  },
+  //进入的时候恢复scoll位置
+  activated: function activated() {
+    var wtHolder = document.getElementsByClassName('wtHolder')[0];
+
+    if (wtHolder) {
+      var state = this.$store.state.scroll['position'][this.type];
+      wtHolder.scrollTop = state === undefined ? 0 : state.scrollTop;
+      wtHolder.scrollLeft = state === undefined ? 0 : state.scrollLeft;
+    }
+  },
+  //离开的时候提示修改数据
+  // deactivated() {
+  //   if (!$.isEmptyObject(this.changeList.changeData) || !$.isEmptyObject(this.changeList.addData)) {
+  //     swal({
+  //       title: "提示",
+  //       text: `${posType_name(this.type)}数据修改未保存`,
+  //       button: "确认"
+  //     })
+  //   }
+  // },
+  mounted: function mounted() {
+    this.getListData(this.type);
+  },
+  methods: {
+    getListData: function getListData(type) {
+      var _this = this;
+
+      this.$getApi.queryPositionInfo(type, this.$store.state.tids).then(function (res) {
+        var result = Object(_pos_info_js__WEBPACK_IMPORTED_MODULE_1__["getPositionInfo"])(res, type); //有点问题
+
+        console.log(result);
+
+        if (!result) {
+          _this.$emit("child-msg", _this.type, false); //没有机组显示提示
+
+        } else {
+          var _result = _objectSpread({}, result),
+              data = _result.data,
+              invalidPos = _result.invalidPos,
+              initList = _objectWithoutProperties(_result, ["data", "invalidPos"]);
+
+          if (invalidPos.length) {
+            //如果有失效测点则 发送父组件处理
+            _this.$emit("invalidPosM", invalidPos);
+          }
+
+          _this.data = data;
+          _this.initList = initList; //渲染表格
+
+          _this.$emit("child-msg", _this.type, true);
+
+          _this.filter_by_dgmName();
+
+          _this.renderTable();
+          /* 将默认的第一个机组发送个树状图 */
+
+
+          if (_this.data.length > 0) {
+            var linkObj = [_this.data[0].mac_id];
+
+            _this.$store.commit('setTreePosition', linkObj);
+          }
+        }
+      })["catch"](function (err) {
+        console.log('请求错误', err);
+      });
+    },
+
+    /* 渲染表格 */
+    renderTable: function renderTable() {
+      var HotTable = document.getElementById('HotTable'); //创建table
+
+      this.hot = new _pos_hdtable_js__WEBPACK_IMPORTED_MODULE_0__["default"](HotTable, this);
+      /* 添加行之后选项框错位 */
+
+      Object(_pos_methods__WEBPACK_IMPORTED_MODULE_2__["reRenderSelectOption"])(this.hot, this.data);
+      /* 监听滚动事件 */
+
+      this.listenScroll();
+    },
+
+    /* 切换测点的时候机组 */
+    listenScroll: function listenScroll() {
+      var _this2 = this;
+
+      var wtHolder = document.getElementsByClassName('wtHolder')[0];
+      wtHolder.addEventListener('scroll', function (e) {
+        var scrollTop = wtHolder.scrollTop;
+        var scrollLeft = wtHolder.scrollLeft;
+        var paload = {
+          scrollType: 'position',
+          type: _this2.type,
+          scrollTop: scrollTop,
+          scrollLeft: scrollLeft
+        };
+
+        _this2.$store.commit('setScroll', paload);
+
+        _this2.hot.destroyEditor(); //处理当选择下拉框后拖动滚动条框框会跟着跑的问题
+
+      });
+    },
+
+    /* 加载的时候根据dgm_name 来过滤数据 */
+    filter_by_dgmName: function filter_by_dgmName() {
+      var _this3 = this;
+
+      var data = [];
+      if (!sessionStorage.getItem('dgm_id')) return;
+      /* 没有这一选项返回  */
+
+      var dgm_ids = JSON.parse(sessionStorage.getItem('dgm_id'));
+      if (dgm_ids.length == 0) return;
+      /* 选项为空，返回 */
+
+      dgm_ids.forEach(function (dgm_id) {
+        _this3.data.forEach(function (position) {
+          if (position.dgm_id == dgm_id) {
+            data.push(position);
+          }
+        });
+      });
+      this.data = data;
+    },
+    //获取data
+    getData: function getData() {
+      return this.data;
+    },
+
+    /* 获取hot实例 */
+    getHot: function getHot() {
+      return this.hot;
+    }
+  }
+};
+
+/***/ })
+
+}]);
+//# sourceMappingURL=7-687d7917ec5c142279a8.js.map

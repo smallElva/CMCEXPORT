@@ -1,0 +1,2259 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
+
+/***/ "./src/components/content/system/alarm/table/js/alarm_columns.js":
+/*!***********************************************************************!*\
+  !*** ./src/components/content/system/alarm/table/js/alarm_columns.js ***!
+  \***********************************************************************/
+/*! exports provided: setHeaders, setColumns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setHeaders", function() { return setHeaders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setColumns", function() { return setColumns; });
+/* harmony import */ var _components_content_system_alarm_table_js_alarm_methods__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/content/system/alarm/table/js/alarm_methods */ "./src/components/content/system/alarm/table/js/alarm_methods.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+/* 表头部分
+ */
+//设置 列头(公共)
+
+function setHeaders(type) {
+  var header;
+
+  if (type == 1) {
+    header = ['组织名称', '机组名称', '测点名称', '测点类型', '数据类型', '工况#1', '工况#1预警（高）', '工况#1Ⅰ级报警（高）', '工况#1Ⅱ级报警（高）', '工况#2', '工况#2预警（高）', '工况#2Ⅰ级报警（高）', '工况#2Ⅱ级报警（高）', '工况#3', '工况#3预警（高）', '工况#3Ⅰ级报警（高）', '工况#3Ⅱ级报警（高）', '工况#4', '工况#4预警（高）', '工况#4Ⅰ级报警（高）', '工况#4Ⅱ级报警（高）', '其他工况', '其他工况预警（高）', '其他工况Ⅰ级报警（高）', '其他工况Ⅱ级报警（高）'];
+  } else if (type == 2) {
+    header = ['组织名称', '机组名称', '测点名称', '测点类型', 'Ⅱ级报警(高)', 'Ⅰ级报警(高)', '预警(高)', '预警(低)', 'Ⅰ级报警(低)', 'Ⅱ级报警(低)'];
+  } else if (type == 3) {
+    header = ['组织名称', '机组名称', '测点名称', '测点类型', '数据类型', '报警门限', '报警计数'];
+  }
+
+  return header;
+}
+/* 表数据部分
+ */
+//设置columns（公共）（组织名称、机组名称、测点名称、测点类型）
+
+function setColumns(type, data) {
+  var _columns;
+
+  var alarmBaseInfo = 'alarmBaseInfo';
+  var columns; // let columnObj = data.alarmBaseInfo.code==2000?alarm_threshold_index_val:vib_k_hh;
+
+  columns = [{
+    data: "".concat(alarmBaseInfo, ".t_name")
+  }, {
+    data: "".concat(alarmBaseInfo, ".mac_me")
+  }, {
+    data: "".concat(alarmBaseInfo, ".pos_name")
+  }, {
+    data: "".concat(alarmBaseInfo, ".pos_type_name")
+  }];
+
+  (_columns = columns).push.apply(_columns, _toConsumableArray(selectColumns(parseInt(type), alarmBaseInfo, data)));
+
+  return columns;
+} //列表渲染的选择
+
+function selectColumns(type, alarmBaseInfo, data) {
+  var col;
+
+  switch (type) {
+    case 1:
+      //工况报警
+      col = [{
+        data: "".concat(alarmBaseInfo, ".alarmInfo.name"),
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].alarmBaseInfo.valueSources;
+        }
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.status_1"),
+        type: 'checkbox',
+        checkedTemplate: '1',
+        uncheckedTemplate: '0'
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.h_limit_1")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.hh_limit_1")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.hhh_limit_1"),
+        readOnly: true
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.status_2"),
+        type: 'checkbox',
+        checkedTemplate: '1',
+        uncheckedTemplate: '0'
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.h_limit_2")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.hh_limit_2")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.hhh_limit_2"),
+        readOnly: true
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.status_3"),
+        type: 'checkbox',
+        checkedTemplate: '1',
+        uncheckedTemplate: '0'
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.h_limit_3")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.hh_limit_3")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.hhh_limit_3"),
+        readOnly: true
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.status_4"),
+        type: 'checkbox',
+        checkedTemplate: '1',
+        uncheckedTemplate: '0'
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.h_limit_4")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.hh_limit_4")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.hhh_limit_4"),
+        readOnly: true
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.status_5"),
+        type: 'checkbox',
+        checkedTemplate: '1',
+        uncheckedTemplate: '0'
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.h_limit_5")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.hh_limit_5")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarmInfo.hhh_limit_5"),
+        readOnly: true
+      }];
+      break;
+
+    case 2:
+      //常规报警
+      col = [{
+        data: "".concat(alarmBaseInfo, ".baseInfo.hhh_limit"),
+        readOnly: true
+      }, //报警高
+      {
+        data: "".concat(alarmBaseInfo, ".baseInfo.hh_limit")
+      }, //预警高
+      {
+        data: "".concat(alarmBaseInfo, ".baseInfo.h_limit")
+      }, //报警低
+      {
+        data: "".concat(alarmBaseInfo, ".baseInfo.l_limit")
+      }, //报警低
+      {
+        data: "".concat(alarmBaseInfo, ".baseInfo.ll_limit")
+      }, //预警低
+      {
+        data: "".concat(alarmBaseInfo, ".baseInfo.lll_limit"),
+        readOnly: true
+      } //报警高
+      ];
+      break;
+
+    case 3:
+      //MHD报警
+      col = [{
+        data: "".concat(alarmBaseInfo, ".code_val"),
+        editor: 'select',
+        selectOptions: function selectOptions(row) {
+          return data[row].alarmBaseInfo.codeSources;
+        }
+      }, {
+        data: "".concat(alarmBaseInfo, ".columnObj")
+      }, {
+        data: "".concat(alarmBaseInfo, ".alarm_counter")
+      }];
+      break;
+  }
+
+  return col;
+}
+
+/***/ }),
+
+/***/ "./src/components/content/system/alarm/table/js/alarm_hdtable.js":
+/*!***********************************************************************!*\
+  !*** ./src/components/content/system/alarm/table/js/alarm_hdtable.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(swal) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return alarmhdtable; });
+/* harmony import */ var network_getApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! network/getApi */ "./src/network/getApi.js");
+/* harmony import */ var common_hdtable_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! common/hdtable.js */ "./src/common/hdtable.js");
+/* harmony import */ var _alarm_info_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./alarm_info.js */ "./src/components/content/system/alarm/table/js/alarm_info.js");
+/* harmony import */ var _alarm_columns_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./alarm_columns.js */ "./src/components/content/system/alarm/table/js/alarm_columns.js");
+/* harmony import */ var utils_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! utils/utils */ "./src/utils/utils.js");
+/* harmony import */ var _alarm_methods_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./alarm_methods.js */ "./src/components/content/system/alarm/table/js/alarm_methods.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+
+
+var colWidth = '';
+function alarmhdtable(el, property) {
+  // console.log(new Handsontable());
+  var data = property.getData(); //创建表格属性的实例
+
+  var tableDataIns = new tableData(property); // 组装振动表格数据
+
+  var vibTable = {
+    // 表格右键菜单
+    contextMenu: tableDataIns.contextMenu(),
+    // 表格显示的数据
+    data: data,
+    manualColumnFreeze: true,
+    // fixedColumnsLeft: 4,
+    //表格的列
+    colHeaders: tableDataIns.colHeaders(),
+    //表格的列头自定义
+    // nestedHeaders:tableDataIns.nestedHeaders(),
+    //数据渲染renderData
+    columns: tableDataIns.columns(),
+    //过滤之后
+    afterFilter: tableDataIns.afterFilter(),
+    //单元格属性设置
+    cells: tableDataIns.cells(),
+    //单击单元格或行/列标题后触发。如果单击行/列标题，则坐标索引为负。
+    afterOnCellMouseUp: tableDataIns.afterOnCellMouseUp(),
+    beforeChange: tableDataIns.beforeChange(),
+    afterChange: tableDataIns.afterChange(),
+    afterScrollHorizontally: tableDataIns.afterScrollHorizontally(),
+    //横向滚动之后
+    //列宽改变
+    afterColumnResize: tableDataIns.afterColumnResize()
+  };
+  /**列宽设置**/
+  //默认情况下自适应
+
+  if (data.length === 0) {
+    //如果表格没有数据，设置默认宽度，以免表头挤在一起
+    vibTable.colWidths = '170';
+  } else if (data.length && colWidth !== '') {
+    //如果有数据，且拖动表格列宽的情况下，保存为拖动后的列宽
+    vibTable.colWidths = colWidth;
+  }
+
+  return Object(common_hdtable_js__WEBPACK_IMPORTED_MODULE_1__["default"])(el, vibTable);
+} //表格的方法
+
+var tableData =
+/*#__PURE__*/
+function () {
+  function tableData(property) {
+    _classCallCheck(this, tableData);
+
+    this.type = property.type;
+    this.getData = property.getData;
+    this.getHot = property.getHot;
+    this.reRenderSelectOption = property.reRenderSelectOption;
+    this.initList = property.initList;
+    this.changeList = property.changeList;
+  }
+
+  _createClass(tableData, [{
+    key: "contextMenu",
+    value: function contextMenu() {
+      return {
+        items: {
+          'freeze_column': {
+            name: '固定列'
+          },
+          "unfreeze_column": {
+            name: '取消列固定'
+          }
+        }
+      };
+    }
+    /* 表格的数据渲染 */
+
+  }, {
+    key: "colHeaders",
+    value: function colHeaders() {
+      return Object(_alarm_columns_js__WEBPACK_IMPORTED_MODULE_3__["setHeaders"])(this.type);
+    }
+  }, {
+    key: "nestedHeaders",
+    value: function nestedHeaders() {
+      return Object(_alarm_columns_js__WEBPACK_IMPORTED_MODULE_3__["setHeaders"])(this.type);
+    }
+  }, {
+    key: "columns",
+    value: function columns() {
+      return Object(_alarm_columns_js__WEBPACK_IMPORTED_MODULE_3__["setColumns"])(this.type, this.getData());
+    }
+    /* 表格的方法渲染 */
+    //振动的单元格渲染
+
+  }, {
+    key: "cells",
+    value: function cells() {
+      var that = this;
+      return function (row, col, prop) {
+        var data = that.getData();
+        if (data.length == 0) return;
+        var type = that.type;
+        var cellProperties = this;
+
+        if (col == 0 || col == 1 || col == 2 || col == 3) {
+          cellProperties.readOnly = true;
+        }
+
+        if (type == 1) {
+          if (col > 4) {
+            if (data[row].alarmBaseInfo.alarmInfo.name == "无") {
+              cellProperties.readOnly = true;
+            } else {
+              cellProperties.readOnly = false;
+            }
+          }
+
+          if (data[row].alarmBaseInfo.dgm_type == 7 && data[row].alarmBaseInfo.alarmInfo.name != "无" && (prop == 'alarmBaseInfo.alarmInfo.hhh_limit_5' || prop == 'alarmBaseInfo.alarmInfo.hhh_limit_1' || prop == 'alarmBaseInfo.alarmInfo.hhh_limit_2' || prop == 'alarmBaseInfo.alarmInfo.hhh_limit_3' || prop == 'alarmBaseInfo.alarmInfo.hhh_limit_4')) {
+            cellProperties.readOnly = false;
+          } else if (data[row].alarmBaseInfo.dgm_type != 7 && (prop == 'alarmBaseInfo.alarmInfo.hhh_limit_5' || prop == 'alarmBaseInfo.alarmInfo.hhh_limit_1' || prop == 'alarmBaseInfo.alarmInfo.hhh_limit_2' || prop == 'alarmBaseInfo.alarmInfo.hhh_limit_3' || prop == 'alarmBaseInfo.alarmInfo.hhh_limit_4')) {
+            cellProperties.readOnly = true;
+          }
+        }
+
+        if (type == 3 && col == 5) {
+          if (data[row].alarmBaseInfo.code == 2000) {
+            cellProperties.prop = "alarmBaseInfo.alarm_threshold_index_val";
+            cellProperties.editor = 'select';
+            cellProperties.selectOptions = data[row].alarmBaseInfo.alarmIndexSources;
+          } else {
+            cellProperties.prop = "alarmBaseInfo.vib_k_hh";
+            cellProperties.type = 'text';
+          }
+        }
+
+        if (type == 2) {
+          if ((data[row].alarmBaseInfo.dgm_type == 2 || data[row].alarmBaseInfo.dgm_type == 1) && data[row].alarmBaseInfo.pos_type == 5) {
+            cellProperties.readOnly = true;
+          }
+
+          if (data[row].alarmBaseInfo.pos_type == 5 && (prop == 'alarmBaseInfo.baseInfo.ll_limit' || prop == 'alarmBaseInfo.baseInfo.l_limit')) {
+            cellProperties.readOnly = true;
+          }
+
+          if (data[row].alarmBaseInfo.pos_type == 7 && data[row].alarmBaseInfo.dgm_type == 7 && (prop == 'alarmBaseInfo.baseInfo.lll_limit' || prop == 'alarmBaseInfo.baseInfo.hhh_limit')) {
+            cellProperties.readOnly = false;
+          }
+        }
+
+        return cellProperties;
+      };
+    } // 列宽被改变后
+
+  }, {
+    key: "afterColumnResize",
+    value: function afterColumnResize() {
+      var that = this;
+      return function (condition) {
+        var hot = that.getHot();
+        colWidth = hot.getColWidth(condition); //修改拖动后的列宽
+      };
+    } //点击单元格之后输出该行信息（共用）
+
+  }, {
+    key: "afterOnCellMouseUp",
+    value: function afterOnCellMouseUp() {
+      var that = this;
+      return function (e, coords, td) {
+        if (coords.row >= 0) {
+          var row_info = that.getPositionByIndex(coords.row); // console.log(row_info);
+        }
+      };
+    } // 过滤的方法(有待优化)（共用）
+
+  }, {
+    key: "afterFilter",
+    value: function afterFilter() {
+      var that = this;
+      return function (condition) {
+        var hot = that.getHot();
+
+        switch (parseInt(that.type)) {
+          case 1:
+            sessionStorage.setItem('filter_alarm1', JSON.stringify(condition));
+            break;
+
+          case 2:
+            sessionStorage.setItem('filter_alarm2', JSON.stringify(condition));
+            break;
+
+          case 3:
+            sessionStorage.setItem('filter_alarm3', JSON.stringify(condition));
+            break;
+        }
+
+        hot.view.wt.wtOverlays.adjustElementsSize(true);
+      };
+    } //改变数据的时候拼装数据结构（共用）
+
+  }, {
+    key: "beforeChange",
+    value: function beforeChange() {
+      var that = this;
+      return function (changes, source) {
+        var change_index;
+        var change_prop;
+        var change_oldVal;
+        var change_newVal;
+        var flag;
+        var data = that.getData();
+        var hot = that.getHot(); // console.log('beforeChange');
+        //创建更改组织、机组、采集器、通道、任务的联动实例
+
+        for (var i = 0; i < changes.length; i++) {
+          var physicalRow = hot.toPhysicalRow(changes[i][0]);
+          var columnVal = hot.propToCol(changes[i][1]);
+          change_index = changes[i][0];
+          change_prop = changes[i][1];
+          change_oldVal = changes[i][2];
+          change_newVal = changes[i][3];
+
+          if (change_oldVal == change_newVal) {
+            continue;
+          }
+
+          var alarm = that.getPositionByIndex(change_index); //工况报警
+
+          if (change_prop == "alarmBaseInfo.alarmInfo.name") {
+            flag = Object(utils_utils__WEBPACK_IMPORTED_MODULE_4__["setChangeCellResult"])(alarm.alarmBaseInfo.valueSources, alarm.alarmBaseInfo.valueSources_key, change_newVal, change_index);
+
+            if (flag === false) {
+              return false;
+            } else {
+              for (var _i = 0; _i < data.length; _i++) {
+                if (change_newVal != "无" && alarm.alarmBaseInfo.mac_pos_id == data[_i].alarmBaseInfo.mac_pos_id && change_newVal == data[_i].alarmBaseInfo.alarmInfo.name) {
+                  swal({
+                    title: "提示",
+                    text: '该特征值已经存在，请另选其他特征值！',
+                    button: "确认"
+                  });
+                  return false;
+                }
+              }
+
+              alarm.alarmBaseInfo.alarmInfo.code = flag;
+              alarm.alarmBaseInfo.alarmInfo.status = "1";
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.h_limit_1") {
+            if (Number(change_newVal) >= alarm.alarmBaseInfo.alarmInfo.hh_limit_1) {
+              swal({
+                title: "提示",
+                text: '预警值应该小于报警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.hh_limit_1") {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.alarmInfo.h_limit_1) {
+              swal({
+                title: "提示",
+                text: '报警值应该大于预警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.hhh_limit_1") {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.alarmInfo.hh_limit_1) {
+              swal({
+                title: "提示",
+                text: 'Ⅱ级报警值应该大于Ⅰ级报警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.h_limit_2") {
+            if (Number(change_newVal) >= alarm.alarmBaseInfo.alarmInfo.hh_limit_2) {
+              swal({
+                title: "提示",
+                text: '预警值应该小于报警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.hh_limit_2") {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.alarmInfo.h_limit_2) {
+              swal({
+                title: "提示",
+                text: '报警值应该大于预警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.hhh_limit_2") {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.alarmInfo.hh_limit_2) {
+              swal({
+                title: "提示",
+                text: 'Ⅱ级报警值应该大于Ⅰ级报警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.h_limit_3") {
+            if (Number(change_newVal) >= alarm.alarmBaseInfo.alarmInfo.hh_limit_3) {
+              swal({
+                title: "提示",
+                text: '预警值应该小于报警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.hh_limit_3") {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.alarmInfo.h_limit_3) {
+              swal({
+                title: "提示",
+                text: '报警值应该大于预警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.hhh_limit_3") {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.alarmInfo.hh_limit_3) {
+              swal({
+                title: "提示",
+                text: 'Ⅱ级报警值应该大于Ⅰ级报警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.h_limit_4") {
+            if (Number(change_newVal) >= alarm.alarmBaseInfo.alarmInfo.hh_limit_4) {
+              swal({
+                title: "提示",
+                text: '预警值应该小于报警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.hh_limit_4") {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.alarmInfo.h_limit_4) {
+              swal({
+                title: "提示",
+                text: '报警值应该大于预警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.hhh_limit_4") {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.alarmInfo.hh_limit_4) {
+              swal({
+                title: "提示",
+                text: 'Ⅱ级报警值应该大于Ⅰ级报警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.h_limit_5") {
+            if (Number(change_newVal) >= alarm.alarmBaseInfo.alarmInfo.hh_limit_5) {
+              swal({
+                title: "提示",
+                text: '预警值应该小于报警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.hh_limit_5") {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.alarmInfo.h_limit_5) {
+              swal({
+                title: "提示",
+                text: '报警值应该大于预警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } else if (change_prop == "alarmBaseInfo.alarmInfo.hhh_limit_5") {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.alarmInfo.hh_limit_5) {
+              swal({
+                title: "提示",
+                text: 'Ⅱ级报警值应该大于Ⅰ级报警值！',
+                button: "确认"
+              });
+              return false;
+            }
+          } //常规报警
+
+
+          if (change_prop == 'alarmBaseInfo.baseInfo.l_limit') {
+            if (Number(change_newVal) >= alarm.alarmBaseInfo.baseInfo.h_limit) {
+              swal({
+                title: "提示",
+                text: '输入值必须满足Ⅱ级报警>Ⅰ级报警>报警>预警>Ⅰ级预警>Ⅱ级预警',
+                button: "确认"
+              });
+              return false;
+            } else if (Number(change_newVal) <= alarm.alarmBaseInfo.baseInfo.ll_limit) {
+              swal({
+                title: "提示",
+                text: '输入值必须满足Ⅱ级报警>Ⅰ级报警>报警>预警>Ⅰ级预警>Ⅱ级预警',
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == 'alarmBaseInfo.baseInfo.h_limit') {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.baseInfo.l_limit) {
+              swal({
+                title: "提示",
+                text: '输入值必须满足Ⅱ级报警>Ⅰ级报警>报警>预警>Ⅰ级预警>Ⅱ级预警',
+                button: "确认"
+              });
+              return false;
+            } else if (Number(change_newVal) >= alarm.alarmBaseInfo.baseInfo.hh_limit) {
+              swal({
+                title: "提示",
+                text: '输入值必须满足Ⅱ级报警>Ⅰ级报警>报警>预警>Ⅰ级预警>Ⅱ级预警',
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == 'alarmBaseInfo.baseInfo.ll_limit') {
+            if (Number(change_newVal) >= alarm.alarmBaseInfo.baseInfo.l_limit) {
+              swal({
+                title: "提示",
+                text: '输入值必须满足Ⅱ级报警>Ⅰ级报警>报警>预警>Ⅰ级预警>Ⅱ级预警',
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == 'alarmBaseInfo.baseInfo.lll_limit') {
+            if (Number(change_newVal) >= alarm.alarmBaseInfo.baseInfo.ll_limit) {
+              swal({
+                title: "提示",
+                text: '输入值必须满足Ⅱ级报警>Ⅰ级报警>报警>预警>Ⅰ级预警>Ⅱ级预警',
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == 'alarmBaseInfo.baseInfo.hh_limit') {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.baseInfo.h_limit) {
+              swal({
+                title: "提示",
+                text: '输入值必须满足Ⅱ级报警>Ⅰ级报警>报警>预警>Ⅰ级预警>Ⅱ级预警',
+                button: "确认"
+              });
+              return false;
+            }
+          }
+
+          if (change_prop == 'alarmBaseInfo.baseInfo.hhh_limit') {
+            if (Number(change_newVal) <= alarm.alarmBaseInfo.baseInfo.hh_limit) {
+              swal({
+                title: "提示",
+                text: '输入值必须满足Ⅱ级报警>Ⅰ级报警>报警>预警>Ⅰ级预警>Ⅱ级预警',
+                button: "确认"
+              });
+              return false;
+            }
+          } //MHD报警
+
+
+          if (change_prop == 'alarmBaseInfo.code_val') {
+            flag = Object(utils_utils__WEBPACK_IMPORTED_MODULE_4__["setChangeCellResult"])(alarm.alarmBaseInfo.codeSources, alarm.alarmBaseInfo.codeSources_key, change_newVal, change_index);
+
+            if (flag === false) {
+              return false;
+            } else {
+              alarm.alarmBaseInfo.code = flag;
+              hot.updateSettings({
+                cells: function cells(row, col, prop) {
+                  var data = that.getData();
+                  if (data.length == 0) return;
+                  var cellProperties = this;
+
+                  if (col == 0 || col == 1 || col == 2 || col == 3) {
+                    cellProperties.readOnly = true;
+                  }
+
+                  if (col == 5) {
+                    if (data[row].alarmBaseInfo.code == 2000) {
+                      cellProperties.prop = "alarmBaseInfo.alarm_threshold_index_val";
+                      cellProperties.editor = 'select';
+                      cellProperties.selectOptions = data[row].alarmBaseInfo.alarmIndexSources;
+                    } else {
+                      cellProperties.prop = "alarmBaseInfo.vib_k_hh";
+                      cellProperties.type = 'text';
+                    }
+                  }
+
+                  if (col == 6) {
+                    if (data[row].alarmBaseInfo.code == 24000) {
+                      cellProperties.readOnly = true;
+                    }
+                  }
+
+                  return cellProperties;
+                }
+              });
+
+              if (alarm.alarmBaseInfo.code == 2000) {
+                alarm.alarmBaseInfo.alarm_threshold_index = alarm.alarmBaseInfo.alarmIndexSources_key[0];
+                alarm.alarmBaseInfo.columnObj = alarm.alarmBaseInfo.alarmIndexSources[0];
+                alarm.alarmBaseInfo.alarm_threshold_index_val = alarm.alarmBaseInfo.alarmIndexSources[0];
+                alarm.alarmBaseInfo.alarm_counter = "10";
+              } else {
+                alarm.alarmBaseInfo.columnObj = "3.5";
+                alarm.alarmBaseInfo.vib_k_hh = "3.5";
+                alarm.alarmBaseInfo.alarm_counter = "";
+              }
+            }
+          }
+
+          if (alarm.alarmBaseInfo.code == 2000 && change_prop == 'alarmBaseInfo.columnObj') {
+            flag = Object(utils_utils__WEBPACK_IMPORTED_MODULE_4__["setChangeCellResult"])(alarm.alarmBaseInfo.alarmIndexSources, alarm.alarmBaseInfo.alarmIndexSources_key, change_newVal, change_index);
+
+            if (flag === false) {
+              return false;
+            } else {
+              alarm.alarmBaseInfo.alarm_threshold_index = flag;
+              alarm.alarmBaseInfo.columnObj = change_newVal;
+            }
+          }
+
+          if (alarm.alarmBaseInfo.code == 24000 && change_prop == 'alarmBaseInfo.columnObj') {
+            alarm.alarmBaseInfo.vib_k_hh = change_newVal;
+            alarm.alarmBaseInfo.columnObj = change_newVal;
+          }
+
+          hot.setCellMeta(physicalRow, columnVal, 'className', 'red-color');
+        }
+      };
+    } //改变数据后的方法 （共用）
+
+  }, {
+    key: "afterChange",
+    value: function afterChange() {
+      var that = this;
+      return function (changes, source) {
+        //修改数据事件
+        // console.log('afterChange');
+        var changeData = that.changeList.changeData;
+        var data = that.getData();
+
+        if (changes) {
+          changes.forEach(function (change) {
+            var alarm = that.getPositionByIndex(change[0]);
+            var sendAlarm = Object(_alarm_info_js__WEBPACK_IMPORTED_MODULE_2__["changeAlarm"])(that.type, alarm, change[0], data);
+
+            if (that.type == 1) {
+              changeData[alarm.alarmBaseInfo.mac_pos_id] = sendAlarm;
+            } else {
+              changeData[alarm.alarmBaseInfo.mac_id + "_" + alarm.alarmBaseInfo.pos_type + "_" + alarm.alarmBaseInfo.pos_id] = sendAlarm;
+            }
+          });
+        } // console.log(changeData);
+
+      };
+    }
+    /* 横向滚动之后*/
+
+  }, {
+    key: "afterScrollHorizontally",
+    value: function afterScrollHorizontally() {
+      var that = this;
+      return function () {
+        //修改数据事件
+        var wtHolder = document.getElementsByClassName('wtHolder')[0];
+        var scrollLeft = wtHolder.scrollLeft;
+        var wtWidth = wtHolder.clientWidth;
+
+        if (scrollLeft > wtWidth) {
+          //当滚动超出表格宽度之后重新渲染，防止点击表格单元表头错行
+          that.getHot().render();
+        }
+      };
+    }
+    /* 根据索引行获取真实数据和物理行 (共用)*/
+
+  }, {
+    key: "getPositionByIndex",
+    value: function getPositionByIndex(index) {
+      var hot = this.getHot();
+      var data = this.getData();
+      var physicalRow = hot.toPhysicalRow(index);
+      var info = data[physicalRow];
+      return info;
+    }
+  }, {
+    key: "deepClone",
+    value: function deepClone(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    } //过滤数据
+
+  }, {
+    key: "filterData",
+    value: function filterData(arr, filterArr) {
+      var newArr = [];
+      arr.filter(function (n) {
+        if (filterArr.includes(n)) {
+          var id = n.alarmBaseInfo.mac_id + '_' + n.alarmBaseInfo.pos_id + '_' + n.alarmBaseInfo.pos_type;
+          newArr.push(id);
+        }
+      });
+      return newArr;
+    }
+  }]);
+
+  return tableData;
+}();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js")))
+
+/***/ }),
+
+/***/ "./src/components/content/system/alarm/table/js/alarm_info.js":
+/*!********************************************************************!*\
+  !*** ./src/components/content/system/alarm/table/js/alarm_info.js ***!
+  \********************************************************************/
+/*! exports provided: getAlarmInfo, changeAlarm, sortPositionsName */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAlarmInfo", function() { return getAlarmInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeAlarm", function() { return changeAlarm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sortPositionsName", function() { return sortPositionsName; });
+/* harmony import */ var _alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./alarm_methods.js */ "./src/components/content/system/alarm/table/js/alarm_methods.js");
+
+var alarmIndexSource = {
+  "0": "1",
+  "1": "1.4",
+  "2": "2.3",
+  "3": "2.8",
+  "4": "3",
+  "5": "3.5",
+  "6": "4",
+  "7": "4.5",
+  "8": "5",
+  "9": "7.1",
+  "10": "11",
+  "11": "20",
+  "12": "30",
+  "13": "40",
+  "14": "50"
+};
+var codeSource = {
+  "2000": "有效值",
+  "24000": "峭度"
+};
+function getAlarmInfo(res, type) {
+  var alarmBaseInfo = {};
+  var basicInfo = {};
+  var origionData = [];
+  var data = [];
+
+  if (type == 1) {
+    if (res.msg === 1 && res.alarm_list.length > 0) {
+      res.alarm_list.forEach(function (machine) {
+        if (machine.machine_info.length > 0) {
+          machine.machine_info.forEach(function (alarmList) {
+            if (alarmList.alarms.length > 0) {
+              alarmList.alarms.forEach(function (alarm) {
+                basicInfo = {
+                  t_id: machine.t_id,
+                  t_name: machine.t_name,
+                  mac_pos_id: alarmList.mac_id + "_" + alarm.pos_id + "_" + alarm.pos_type,
+                  mac_id: alarmList.mac_id,
+                  mac_me: alarmList.mac_me,
+                  m_type: alarmList.m_type,
+                  pos_id: alarm.pos_id,
+                  pos_name: alarm.pos_name,
+                  pos_type: alarm.pos_type,
+                  dgm_type: alarm.dgm_type,
+                  pos_type_name: Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["posType"])(alarm.pos_type),
+                  tt_pos_loc: alarm.tt_pos_loc,
+                  baseInfo: alarm.baseInfo
+                };
+                origionData.push(basicInfo);
+              });
+            }
+          });
+        }
+      });
+
+      for (var i = 0; i < origionData.length; i++) {
+        origionData[i].statusInfo = [];
+        origionData[i].valueSources = {};
+
+        if (origionData[i].baseInfo.length > 0) {
+          for (var j = 0; j < origionData[i].baseInfo.length; j++) {
+            if (origionData[i].baseInfo[j].status == 1) {
+              origionData[i].statusInfo.push(origionData[i].baseInfo[j]);
+            }
+          }
+        }
+
+        origionData[i].codeArr = [];
+
+        var _posType = parseInt(origionData[i].pos_type);
+
+        if (origionData[i].dgm_type == 1) {
+          origionData[i].statusInfo.length = 1;
+          origionData[i].codeArr = Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["getCodeArr"])(Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["getFlagType"])(_posType), 0, origionData[i].tt_pos_loc, origionData[i].dgm_type);
+        } else if (origionData[i].dgm_type == 7) {
+          origionData[i].statusInfo.length = 15;
+          origionData[i].codeArr = Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["getCodeArr"])(Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["getFlagType"])(_posType), 2, origionData[i].tt_pos_loc, origionData[i].dgm_type);
+        } else {
+          origionData[i].statusInfo.length = 5;
+          origionData[i].codeArr = Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["getCodeArr"])(Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["getFlagType"])(_posType), 0, origionData[i].tt_pos_loc, origionData[i].dgm_type);
+        }
+
+        for (var _j = 0; _j < origionData[i].codeArr.length; _j++) {
+          origionData[i].valueSources["无"] = "";
+          origionData[i].valueSources[origionData[i].codeArr[_j].value] = origionData[i].codeArr[_j].code;
+        }
+
+        for (var m = 0; m < origionData[i].statusInfo.length; m++) {
+          if (origionData[i].statusInfo[m] == undefined) {
+            origionData[i].statusInfo[m] = {
+              code: "",
+              h_limit_1: "3",
+              h_limit_2: "3",
+              h_limit_3: "3",
+              h_limit_4: "3",
+              h_limit_5: "3",
+              hh_limit_1: "5",
+              hh_limit_2: "5",
+              hh_limit_3: "5",
+              hh_limit_4: "5",
+              hh_limit_5: "5",
+              hhh_limit_1: "8",
+              hhh_limit_2: "8",
+              hhh_limit_3: "8",
+              hhh_limit_4: "8",
+              hhh_limit_5: "8",
+              name: "无",
+              status: "0",
+              status_1: "0",
+              status_2: "0",
+              status_3: "0",
+              status_4: "0",
+              status_5: "0"
+            };
+          } // origionData[i].statusInfo[m].name = origionData[i].statusInfo[m].name.replace(/\s*/g,"");//去掉名称空格
+
+
+          if (origionData[i].statusInfo[m].code != "") {
+            origionData[i].statusInfo[m].name = Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["getCodeName"])(origionData[i].statusInfo[m].code); //根据code得到特征值的名称
+          }
+
+          alarmBaseInfo = {
+            mac_pos_id: origionData[i].mac_pos_id,
+            t_id: origionData[i].t_id,
+            t_name: origionData[i].t_name,
+            mac_id: origionData[i].mac_id,
+            mac_me: origionData[i].mac_me,
+            m_type: origionData[i].m_type,
+            pos_id: origionData[i].pos_id,
+            dgm_type: origionData[i].dgm_type,
+            pos_name: origionData[i].pos_name,
+            pos_type: origionData[i].pos_type,
+            pos_type_name: origionData[i].pos_type_name,
+            baseInfo: origionData[i].baseInfo,
+            alarmInfo: origionData[i].statusInfo[m],
+            valueSources: Object.keys(origionData[i].valueSources),
+            valueSources_key: Object.values(origionData[i].valueSources),
+            codeArr: origionData[i].codeArr
+          };
+          data.push({
+            alarmBaseInfo: alarmBaseInfo
+          });
+        }
+      } // data = sortPositionsName(data).concat();
+
+    }
+  } else {
+    if (res.msg === 1 && res.alarm_list.length > 0) {
+      res.alarm_list.forEach(function (machine) {
+        if (machine.machine_info.length > 0) {
+          machine.machine_info.forEach(function (alarmList) {
+            if (alarmList.alarms.length > 0) {
+              alarmList.alarms.forEach(function (alarm) {
+                alarmBaseInfo = {
+                  t_id: machine.t_id,
+                  t_name: machine.t_name,
+                  mac_id: alarmList.mac_id,
+                  mac_me: alarmList.mac_me,
+                  m_type: alarmList.m_type,
+                  pos_id: alarm.pos_id,
+                  pos_name: alarm.pos_name,
+                  pos_type: alarm.pos_type,
+                  dgm_type: alarm.dgm_type,
+                  pos_type_name: Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["posType"])(alarm.pos_type)
+                };
+
+                if (type == 2) {
+                  alarmBaseInfo.baseInfo = alarm.baseInfo;
+                }
+
+                if (type == 3) {
+                  Object.assign(alarmBaseInfo, {
+                    baseInfo: alarm.baseInfo[0],
+                    code_val: Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["getCodeName"])(alarm.baseInfo[0].code),
+                    code: alarm.baseInfo[0].code,
+                    codeSources: Object.values(codeSource),
+                    codeSources_key: Object.keys(codeSource),
+                    alarm_threshold_index: alarm.baseInfo[0].alarm_threshold_index,
+                    alarm_threshold_index_val: Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["alarmIndex"])(alarm.baseInfo[0].alarm_threshold_index),
+                    alarmIndexSources: Object.values(alarmIndexSource),
+                    alarmIndexSources_key: Object.keys(alarmIndexSource),
+                    vib_k_hh: alarm.baseInfo[0].vib_k_hh,
+                    alarm_counter: alarm.baseInfo[0].alarm_counter,
+                    columnObj: alarm.baseInfo[0].code == 2000 ? Object(_alarm_methods_js__WEBPACK_IMPORTED_MODULE_0__["alarmIndex"])(alarm.baseInfo[0].alarm_threshold_index) : alarm.baseInfo[0].vib_k_hh
+                  });
+                }
+
+                data.push({
+                  alarmBaseInfo: alarmBaseInfo
+                });
+              });
+            }
+          });
+        }
+      });
+    }
+  } // console.log(data)
+
+
+  return data;
+}
+function changeAlarm(type, oldAlarm, index, data) {
+  var alarm = {};
+
+  if (type == 1) {
+    var changeArr = [];
+
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].alarmBaseInfo.mac_pos_id == oldAlarm.alarmBaseInfo.mac_pos_id) {
+        changeArr.push(data[i]);
+      }
+    }
+
+    alarm.baseInfo = {};
+    alarm.baseInfo.alarmList = [];
+    alarm.t_id = oldAlarm.alarmBaseInfo.t_id;
+    alarm.t_name = oldAlarm.alarmBaseInfo.t_name;
+    alarm.pos_id = oldAlarm.alarmBaseInfo.pos_id; //测点id
+
+    alarm.pos_type = oldAlarm.alarmBaseInfo.pos_type; //测点id
+
+    alarm.pos_name = oldAlarm.alarmBaseInfo.pos_name; //测点名称
+
+    alarm.dgm_type = oldAlarm.alarmBaseInfo.dgm_type; //测点名称
+
+    alarm.mac_id = oldAlarm.alarmBaseInfo.mac_id; //机组uid
+
+    alarm.mac_me = oldAlarm.alarmBaseInfo.mac_me; //机组uid
+
+    alarm.m_type = oldAlarm.alarmBaseInfo.m_type; //机组uid
+
+    for (var _i = 0; _i < oldAlarm.alarmBaseInfo.codeArr.length; _i++) {
+      var baseInfoObj = {};
+
+      for (var j = 0; j < changeArr.length; j++) {
+        if (oldAlarm.alarmBaseInfo.codeArr[_i].code == changeArr[j].alarmBaseInfo.alarmInfo.code) {
+          baseInfoObj.code = changeArr[j].alarmBaseInfo.alarmInfo.code;
+          baseInfoObj.h_limit_1 = changeArr[j].alarmBaseInfo.alarmInfo.h_limit_1;
+          baseInfoObj.h_limit_2 = changeArr[j].alarmBaseInfo.alarmInfo.h_limit_2;
+          baseInfoObj.h_limit_3 = changeArr[j].alarmBaseInfo.alarmInfo.h_limit_3;
+          baseInfoObj.h_limit_4 = changeArr[j].alarmBaseInfo.alarmInfo.h_limit_4;
+          baseInfoObj.h_limit_5 = changeArr[j].alarmBaseInfo.alarmInfo.h_limit_5;
+          baseInfoObj.hh_limit_1 = changeArr[j].alarmBaseInfo.alarmInfo.hh_limit_1;
+          baseInfoObj.hh_limit_2 = changeArr[j].alarmBaseInfo.alarmInfo.hh_limit_2;
+          baseInfoObj.hh_limit_3 = changeArr[j].alarmBaseInfo.alarmInfo.hh_limit_3;
+          baseInfoObj.hh_limit_4 = changeArr[j].alarmBaseInfo.alarmInfo.hh_limit_4;
+          baseInfoObj.hh_limit_5 = changeArr[j].alarmBaseInfo.alarmInfo.hh_limit_5;
+          baseInfoObj.hhh_limit_1 = changeArr[j].alarmBaseInfo.alarmInfo.hhh_limit_1;
+          baseInfoObj.hhh_limit_2 = changeArr[j].alarmBaseInfo.alarmInfo.hhh_limit_2;
+          baseInfoObj.hhh_limit_3 = changeArr[j].alarmBaseInfo.alarmInfo.hhh_limit_3;
+          baseInfoObj.hhh_limit_4 = changeArr[j].alarmBaseInfo.alarmInfo.hhh_limit_4;
+          baseInfoObj.hhh_limit_5 = changeArr[j].alarmBaseInfo.alarmInfo.hhh_limit_5;
+          baseInfoObj.name = changeArr[j].alarmBaseInfo.alarmInfo.name;
+          baseInfoObj.status = changeArr[j].alarmBaseInfo.alarmInfo.status;
+          baseInfoObj.status_1 = changeArr[j].alarmBaseInfo.alarmInfo.status_1;
+          baseInfoObj.status_2 = changeArr[j].alarmBaseInfo.alarmInfo.status_2;
+          baseInfoObj.status_3 = changeArr[j].alarmBaseInfo.alarmInfo.status_3;
+          baseInfoObj.status_4 = changeArr[j].alarmBaseInfo.alarmInfo.status_4;
+          baseInfoObj.status_5 = changeArr[j].alarmBaseInfo.alarmInfo.status_5;
+          break;
+        } else {
+          baseInfoObj.code = oldAlarm.alarmBaseInfo.codeArr[_i].code.toString();
+          baseInfoObj.h_limit_1 = "3";
+          baseInfoObj.h_limit_2 = "3";
+          baseInfoObj.h_limit_3 = "3";
+          baseInfoObj.h_limit_4 = "3";
+          baseInfoObj.h_limit_5 = "3";
+          baseInfoObj.hh_limit_1 = "5";
+          baseInfoObj.hh_limit_2 = "5";
+          baseInfoObj.hh_limit_3 = "5";
+          baseInfoObj.hh_limit_4 = "5";
+          baseInfoObj.hh_limit_5 = "5";
+          baseInfoObj.hhh_limit_1 = "8";
+          baseInfoObj.hhh_limit_2 = "8";
+          baseInfoObj.hhh_limit_3 = "8";
+          baseInfoObj.hhh_limit_4 = "8";
+          baseInfoObj.hhh_limit_5 = "8";
+          baseInfoObj.name = oldAlarm.alarmBaseInfo.codeArr[_i].value;
+          baseInfoObj.status = "0";
+          baseInfoObj.status_1 = "0";
+          baseInfoObj.status_2 = "0";
+          baseInfoObj.status_3 = "0";
+          baseInfoObj.status_4 = "0";
+          baseInfoObj.status_5 = "0";
+        }
+      }
+
+      alarm.baseInfo.alarmList.push(baseInfoObj);
+    }
+  } else {
+    alarm = {
+      t_id: oldAlarm.alarmBaseInfo.t_id,
+      t_name: oldAlarm.alarmBaseInfo.t_name,
+      mac_id: oldAlarm.alarmBaseInfo.mac_id,
+      mac_me: oldAlarm.alarmBaseInfo.mac_me,
+      m_type: oldAlarm.alarmBaseInfo.m_type,
+      pos_id: oldAlarm.alarmBaseInfo.pos_id,
+      pos_name: oldAlarm.alarmBaseInfo.pos_name,
+      pos_type: oldAlarm.alarmBaseInfo.pos_type,
+      dgm_type: oldAlarm.alarmBaseInfo.dgm_type
+    };
+
+    if (type == 2) {
+      alarm.baseInfo = oldAlarm.alarmBaseInfo.baseInfo;
+    }
+
+    if (type == 3) {
+      alarm.baseInfo = {};
+      alarm.baseInfo.alarmList = [];
+      alarm.baseInfo.alarmList[0] = {
+        alarm_counter: oldAlarm.alarmBaseInfo.alarm_counter,
+        alarm_threshold_index: oldAlarm.alarmBaseInfo.alarm_threshold_index,
+        code: oldAlarm.alarmBaseInfo.code,
+        vib_k_hh: oldAlarm.alarmBaseInfo.vib_k_hh
+      };
+    }
+  }
+
+  return alarm;
+}
+/**测点排序方法**/
+
+function sortPositionsName(arr) {
+  var sortArr = [];
+  var pos_vibrate = []; //振动测点
+
+  var pos_envelope = []; //包络测点
+
+  var pos_vibrateOrder = []; //振动阶次测点
+
+  var pos_envelopeOrder = []; //包络阶次测点
+
+  var pos_samp = []; //长采样测点
+
+  var pos_slosh = []; //晃度测点
+
+  var pos_overturn = []; //倾覆测点
+
+  var pos_inclinate = []; //倾角测点
+
+  var pos_synthetic = []; //合成倾角测点
+
+  var pos_bolt = []; //螺栓测点
+
+  for (var m = 0, posLen = arr.length; m < posLen; m++) {
+    switch (parseInt(arr[m].alarmBaseInfo.pos_type)) {
+      case 3:
+        pos_vibrate.push(arr[m]);
+        break;
+
+      case 4:
+        pos_envelope.push(arr[m]);
+        break;
+
+      case 8:
+        pos_vibrateOrder.push(arr[m]);
+        break;
+
+      case 9:
+        pos_envelopeOrder.push(arr[m]);
+        break;
+
+      case 200:
+        pos_samp.push(arr[m]);
+        break;
+
+      case 6:
+        pos_slosh.push(arr[m]);
+        break;
+
+      case 11:
+        pos_overturn.push(arr[m]);
+        break;
+
+      case 12:
+        pos_inclinate.push(arr[m]);
+        break;
+
+      case 13:
+        pos_synthetic.push(arr[m]);
+        break;
+
+      case 14:
+        pos_bolt.push(arr[m]);
+        break;
+    }
+  }
+
+  sortArr = pos_vibrate.concat(pos_envelope, pos_vibrateOrder, pos_envelopeOrder, pos_samp, pos_slosh, pos_overturn, pos_inclinate, pos_synthetic, pos_bolt);
+  return sortArr;
+}
+
+/***/ }),
+
+/***/ "./src/components/content/system/alarm/table/js/alarm_methods.js":
+/*!***********************************************************************!*\
+  !*** ./src/components/content/system/alarm/table/js/alarm_methods.js ***!
+  \***********************************************************************/
+/*! exports provided: posType, getCodeArr2000, getCodeArr, getFlagType, getSourceCodeArr, getCodeName, isCommonCode, alarmIndex, arraymove */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "posType", function() { return posType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCodeArr2000", function() { return getCodeArr2000; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCodeArr", function() { return getCodeArr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFlagType", function() { return getFlagType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSourceCodeArr", function() { return getSourceCodeArr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCodeName", function() { return getCodeName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isCommonCode", function() { return isCommonCode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "alarmIndex", function() { return alarmIndex; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "arraymove", function() { return arraymove; });
+/**
+ * @posType
+ * param@val=后端给的测点类型值
+
+ * **/
+function posType(val) {
+  var posTypeVal = "";
+
+  switch (parseInt(val)) {
+    case 1:
+      posTypeVal = "转速测点";
+      break;
+
+    case 3:
+      posTypeVal = "振动测点";
+      break;
+
+    case 4:
+      posTypeVal = "包络测点";
+      break;
+
+    case 8:
+      posTypeVal = "振动阶次测点";
+      break;
+
+    case 9:
+      posTypeVal = "包络阶次测点";
+      break;
+
+    case 200:
+      posTypeVal = "长采样测点";
+      break;
+
+    case 6:
+      posTypeVal = "晃度测点";
+      break;
+
+    case 11:
+      posTypeVal = "倾覆测点";
+      break;
+
+    case 12:
+      posTypeVal = "倾角测点";
+      break;
+
+    case 13:
+      posTypeVal = "合成倾角测点";
+      break;
+
+    case 7:
+      posTypeVal = "温度测点";
+      break;
+
+    case 2:
+      posTypeVal = "过程量测点";
+      break;
+
+    case 5:
+      posTypeVal = "数字量测点";
+      break;
+
+    case 10:
+      posTypeVal = "工艺量测点";
+      break;
+
+    case 14:
+      posTypeVal = "螺栓测点";
+      break;
+
+    case 15:
+      posTypeVal = "冲击测点";
+      break;
+
+    case 16:
+      posTypeVal = "冲击阶次测点";
+      break;
+  }
+
+  return posTypeVal;
+}
+/**
+ * 构建报警特征值表 振动采集器V1
+ * flag：默认为当前测点的类型分类标记flag_pos
+ */
+
+function getCodeArr2000(flag) {
+  var codeArr = [];
+
+  for (var i = 0; i < getSourceCodeArr().length; i++) {
+    var code = getSourceCodeArr()[i].code;
+
+    switch (flag) {
+      case 1:
+        if (code == 2000 || code == 3000 || code == 4000 || code == 19000) {
+          codeArr.push(getSourceCodeArr()[i]);
+        }
+
+        break;
+
+      case 2:
+        if (code == 5000 || code == 19000) {
+          codeArr.push(getSourceCodeArr()[i]);
+        }
+
+        break;
+
+      case 3:
+        if (code == 9000 || code == 10000 || code == 11000 || code == 19000) {
+          codeArr.push(getSourceCodeArr()[i]);
+        }
+
+        break;
+
+      case 4:
+        if (code == 20000 || code == 30000 || code == 31000 || code == 32000) {
+          codeArr.push(getSourceCodeArr()[i]);
+        }
+
+        break;
+    }
+  }
+
+  return codeArr;
+}
+/**
+ * 构建报警特征值表
+ * flag：默认为当前测点的类型分类标记flag_pos
+ * flag：1:振动、振动阶次 2：包络、包络阶次 3：晃度 4：倾覆 5：倾角 6：合成倾角 7：沉降 8：螺栓
+ * QaGlobal.project=项目标记：0=CS2000，1=DS9100，2=TMS2000
+ * tt_pos_loc塔筒测点安装位置
+ * dgmType采集器类型
+ */
+
+function getCodeArr(flag, project, tt_pos_loc, dgmType) {
+  var codeArr = [];
+
+  for (var i = 0; i < getSourceCodeArr().length; i++) {
+    var code = getSourceCodeArr()[i].code;
+
+    switch (flag) {
+      case 1:
+        if (parseInt(dgmType) === 1) {
+          if (code == 2000 || code == 3000 || code == 4000 || code == 19000 || isCommonCode(code)) {
+            codeArr.push(getSourceCodeArr()[i]);
+          } else if (project == 2 && code == 46000) {
+            codeArr.push(getSourceCodeArr()[i]);
+          }
+        } else {
+          if (code == 2000 || code == 3000 || code == 4000 || code == 19000 || code == 24000 || code == 15000 || isCommonCode(code)) {
+            codeArr.push(getSourceCodeArr()[i]);
+          } else if (project == 2 && code == 46000) {
+            codeArr.push(getSourceCodeArr()[i]);
+          }
+        }
+
+        break;
+
+      case 2:
+        if (parseInt(dgmType) === 1) {
+          if (code == 5000 || code == 19000 || isCommonCode(code)) {
+            codeArr.push(getSourceCodeArr()[i]);
+          } else if (project == 2 && code == 46000) {
+            codeArr.push(getSourceCodeArr()[i]);
+          }
+        } else {
+          if (code == 5000 || code == 6000 || code == 19000 || isCommonCode(code)) {
+            codeArr.push(getSourceCodeArr()[i]);
+          } else if (project == 2 && (code == 46000 || code == 52001 || code == 52002 || code == 52003 || code == 52004 || code == 52005 || code == 52006 || code == 52007 || code == 52008 || code == 52009)) {
+            codeArr.push(getSourceCodeArr()[i]);
+          }
+        }
+
+        break;
+
+      case 3:
+        if (code == 9000 || code == 10000 || code == 11000 || code == 29000 || code == 19000 || isCommonCode(code)) {
+          codeArr.push(getSourceCodeArr()[i]);
+        }
+
+        break;
+
+      case 4:
+        if (code == 20000 || code == 30000 || code == 31000 || code == 32000 || isCommonCode(code)) {
+          codeArr.push(getSourceCodeArr()[i]);
+        }
+
+        break;
+
+      case 5:
+        if (code == 33000 || code == 34000 || code == 35000 || code == 36000 || code == 47000 || isCommonCode(code)) {
+          codeArr.push(getSourceCodeArr()[i]);
+        }
+
+        break;
+
+      case 6:
+        if (code == 37000 || code == 38000 || code == 39000 || code == 40000 || code == 48000 || isCommonCode(code)) {
+          codeArr.push(getSourceCodeArr(tt_pos_loc)[i]);
+        }
+
+        break;
+
+      case 7:
+        if (code == 37000 || code == 38000 || code == 39000 || code == 40000 || code == 43000 || isCommonCode(code)) {
+          codeArr.push(getSourceCodeArr()[i]);
+        }
+
+        break;
+
+      case 8:
+        if (code == 23000 || code == 44000) {
+          codeArr.push(getSourceCodeArr()[i]);
+        }
+
+        break;
+    }
+  }
+
+  return codeArr;
+}
+/**
+ * 获取振动系测点的类型
+ * flag：默认为当前测点的类型分类标记flag_pos
+ * flag：1:振动、振动阶次 2：包络、包络阶次 3：晃度 4：倾覆 5：倾角 6：合成倾角 7：沉降 8：螺栓
+ * type表示测点类型
+ *
+ */
+
+function getFlagType(type) {
+  var flag;
+
+  switch (parseInt(type)) {
+    case 3:
+      flag = 1;
+      break;
+
+    case 8:
+      flag = 1;
+      break;
+
+    case 4:
+    case 15:
+      flag = 2;
+      break;
+
+    case 9:
+    case 16:
+      flag = 2;
+      break;
+
+    case 6:
+      flag = 3;
+      break;
+
+    case 11:
+      flag = 4;
+      break;
+
+    case 12:
+      flag = 5;
+      break;
+
+    case 13:
+      flag = 6;
+      break;
+
+    case 14:
+      flag = 8;
+      break;
+  }
+
+  return flag;
+}
+function getSourceCodeArr(tt_pos_loc) {
+  var sourceCodeArr = [{
+    "code": "2000",
+    "value": getCodeName(2000)
+  }, {
+    "code": "3000",
+    "value": getCodeName(3000)
+  }, {
+    "code": "4000",
+    "value": getCodeName(4000)
+  }, {
+    "code": "5000",
+    "value": getCodeName(5000)
+  }, {
+    "code": "6000",
+    "value": getCodeName(6000)
+  }, {
+    "code": "9000",
+    "value": getCodeName(9000)
+  }, {
+    "code": "10000",
+    "value": getCodeName(10000)
+  }, {
+    "code": "11000",
+    "value": getCodeName(11000)
+  }, {
+    "code": "29000",
+    "value": getCodeName(29000)
+  }, {
+    "code": "20000",
+    "value": getCodeName(20000)
+  }, {
+    "code": "30000",
+    "value": getCodeName(30000)
+  }, {
+    "code": "31000",
+    "value": getCodeName(31000)
+  }, {
+    "code": "32000",
+    "value": getCodeName(32000)
+  }, {
+    "code": "19000",
+    "value": getCodeName(19000)
+  }, {
+    "code": "24000",
+    "value": getCodeName(24000)
+  }, {
+    "code": "15000",
+    "value": getCodeName(15000)
+  }, {
+    "code": "33000",
+    "value": getCodeName(33000)
+  }, {
+    "code": "34000",
+    "value": getCodeName(34000)
+  }, {
+    "code": "35000",
+    "value": getCodeName(35000)
+  }, {
+    "code": "36000",
+    "value": getCodeName(36000)
+  }, {
+    "code": "47000",
+    "value": getCodeName(47000)
+  }, {
+    "code": "37000",
+    "value": getCodeName(37000)
+  }, {
+    "code": "38000",
+    "value": getCodeName(38000)
+  }, {
+    "code": "39000",
+    "value": getCodeName(39000)
+  }, {
+    "code": "40000",
+    "value": getCodeName(40000, tt_pos_loc)
+  }, {
+    "code": "48000",
+    "value": getCodeName(48000, tt_pos_loc)
+  }, {
+    "code": "41000",
+    "value": getCodeName(41000)
+  }, {
+    "code": "42000",
+    "value": getCodeName(42000)
+  }, {
+    "code": "43000",
+    "value": getCodeName(43000)
+  }, {
+    "code": "44000",
+    "value": getCodeName(44000)
+  }, {
+    "code": "46000",
+    "value": getCodeName(46000)
+  }, {
+    "code": "12001",
+    "value": getCodeName(12001)
+  }, {
+    "code": "12002",
+    "value": getCodeName(12002)
+  }, {
+    "code": "12003",
+    "value": getCodeName(12003)
+  }, {
+    "code": "12004",
+    "value": getCodeName(12004)
+  }, {
+    "code": "12005",
+    "value": getCodeName(12005)
+  }, {
+    "code": "12006",
+    "value": getCodeName(12006)
+  }, {
+    "code": "12007",
+    "value": getCodeName(12007)
+  }, {
+    "code": "12008",
+    "value": getCodeName(12008)
+  }, {
+    "code": "52001",
+    "value": getCodeName(52001)
+  }, {
+    "code": "52002",
+    "value": getCodeName(52002)
+  }, {
+    "code": "52003",
+    "value": getCodeName(52003)
+  }, {
+    "code": "52004",
+    "value": getCodeName(52004)
+  }, {
+    "code": "52005",
+    "value": getCodeName(52005)
+  }, {
+    "code": "52006",
+    "value": getCodeName(52006)
+  }, {
+    "code": "52007",
+    "value": getCodeName(52007)
+  }, {
+    "code": "52008",
+    "value": getCodeName(52008)
+  }, {
+    "code": "52009",
+    "value": getCodeName(52009)
+  }, {
+    "code": "55000",
+    "value": getCodeName(55000)
+  }, {
+    "code": "56000",
+    "value": getCodeName(56000)
+  }];
+  return sourceCodeArr;
+}
+/**
+* 根据code获取特征值字段中文名
+*/
+
+function getCodeName(tmpCode, tt_pos_loc) {
+  switch (parseInt(tmpCode)) {
+    case 0:
+      return "时间";
+    //
+
+    case 1000:
+      return "转速";
+    //（振动和包络字段）
+
+    case 2000:
+      return "有效值";
+    //
+
+    case 3000:
+      return "峰值";
+    //振动峰值
+
+    case 4000:
+      return "峰峰值";
+    //振动峰峰值
+
+    case 5000:
+      return "包络解调值";
+    //包络有效值(解调值)
+
+    case 6000:
+      return "包络特征值";
+    // 包络特征值
+
+    case 7000:
+      return "数字量值";
+    //数字量值
+
+    case 8000:
+      return "过程量值";
+    //过程量值
+
+    case 9000:
+      return "有效值";
+    //晃度有效值
+
+    case 10000:
+      return "峰值";
+    //晃度峰值
+
+    case 11000:
+      return "峰峰值";
+    //晃度峰峰值
+
+    case 12001:
+      return "频段1";
+    //可选频段频谱幅值可选频段n 对应code=12001~12008
+
+    case 12002:
+      return "频段2";
+    //可选频段频谱幅值可选频段n 对应code=12001~12008
+
+    case 12003:
+      return "频段3";
+    //可选频段频谱幅值可选频段n 对应code=12001~12008
+
+    case 12004:
+      return "频段4";
+    //可选频段频谱幅值可选频段n 对应code=12001~12008
+
+    case 12005:
+      return "频段5";
+    //可选频段频谱幅值可选频段n 对应code=12001~12008
+
+    case 12006:
+      return "频段6";
+    //可选频段频谱幅值可选频段n 对应code=12001~12008
+
+    case 12007:
+      return "频段7";
+    //可选频段频谱幅值可选频段n 对应code=12001~12008
+
+    case 12008:
+      return "频段8";
+    //可选频段频谱幅值可选频段n 对应code=12001~12008
+
+    case 13001:
+      return "频段1";
+    //可选频段频谱幅值最大值与频谱幅值的比值可选频段n 对应code=13001~13008
+
+    case 13002:
+      return "频段2因数";
+    //可选频段频谱幅值最大值与频谱幅值的比值可选频段n 对应code=13001~13008
+
+    case 13003:
+      return "频段3因数";
+    //可选频段频谱幅值最大值与频谱幅值的比值可选频段n 对应code=13001~13008
+
+    case 13004:
+      return "频段4因数";
+    //可选频段频谱幅值最大值与频谱幅值的比值可选频段n 对应code=13001~13008
+
+    case 13005:
+      return "频段5因数";
+    //可选频段频谱幅值最大值与频谱幅值的比值可选频段n 对应code=13001~13008
+
+    case 13006:
+      return "频段6因数";
+    //可选频段频谱幅值最大值与频谱幅值的比值可选频段n 对应code=13001~13008
+
+    case 13007:
+      return "频段7因数";
+    //可选频段频谱幅值最大值与频谱幅值的比值可选频段n 对应code=13001~13008
+
+    case 13008:
+      return "频段8因数";
+    //可选频段频谱幅值最大值与频谱幅值的比值可选频段n 对应code=13001~13008
+
+    case 14000:
+      return "电压";
+    //Gap电压
+
+    case 15000:
+      return "峰值因数";
+    //峰值因数=振动峰值/振动有效值
+
+    case 16000:
+      return "转速测点转速值";
+    //转速测点转速值
+
+    case 17000:
+      return "测点位置";
+    //测点位置（不属于特征值，用于列表显示）
+
+    case 18000:
+      return "数字量类型";
+    //数字量类型（不属于特征值，用于列表显示）
+
+    case 19000:
+      return "能量有效值";
+    //能量有效值
+
+    case 20000:
+      return "有效值";
+    //倾覆有效值
+
+    case 21000:
+      return "风速";
+    //风速
+
+    case 22000:
+      return "功率";
+    //功率
+
+    case 23000:
+      return "温度值";
+    //温度值
+
+    case 24000:
+      return "峭度";
+    //峭度
+
+    case 25000:
+      return "裕度";
+    //裕度
+
+    case 26000:
+      return "歪度";
+    //歪度
+
+    case 27000:
+      return "工艺量";
+    //工艺量
+
+    case 28000:
+      return "转速直流量";
+    //转速直流量
+
+    case 29000:
+      return "晃度位移值";
+    //晃度位移
+
+    case 30000:
+      return "峰值";
+    //倾覆峰值
+
+    case 31000:
+      return "峰峰值";
+    //倾覆峰峰值
+
+    case 32000:
+      return "位移";
+    //倾覆位移值
+
+    case 33000:
+      return "有效值";
+    //倾角有效值
+
+    case 34000:
+      return "峰值";
+    //倾角峰值
+
+    case 35000:
+      return "峰峰值";
+    //倾角峰峰值
+
+    case 36000:
+      return "平均值";
+    //倾角平均值
+
+    case 37000:
+      return "有效值";
+    //合成倾角有效值
+
+    case 38000:
+      return "峰值";
+    //合成倾角峰值
+
+    case 39000:
+      return "峰峰值";
+    //合成倾角峰峰值
+
+    case 40000:
+      return "平均值";
+    //合成倾角平均值/沉降角度:塔底的叫沉降；塔顶的叫合成倾角
+
+    case 41000:
+      return "平均值相位";
+    //（合成）平均值相位
+
+    case 42000:
+      return "峰值相位";
+    //（合成）峰值相位
+
+    case 43000:
+      return "沉降量";
+    //（合成）沉降量
+
+    case 44000:
+      return "预紧力值";
+    //预紧力值
+
+    case 45000:
+      return "温度值";
+    //温度值（螺栓）
+
+    case 46000:
+      return "冲击值";
+    //冲击值
+
+    case 47000:
+      return "位移";
+    //倾角位移值
+
+    case 48000:
+      if (tt_pos_loc == 1 || tt_pos_loc == 0) {
+        return "位移"; //（合成）倾角位移值:塔底的叫平均值；塔顶的叫位移值
+      } else if (tt_pos_loc == 2) {
+        return "沉降量"; //（合成）倾角位移值:塔底的叫平均值；塔顶的叫位移值
+      }
+
+      break;
+
+    case 49000:
+      return "振动一次积分有效值";
+    //振动一次积分有效值
+
+    case 50000:
+      return "振动二次积分有效值";
+    //振动二次积分有效值
+    //tmu2000 包络/包络阶次/冲击/冲击阶次新增9特征值
+
+    case 52001:
+      return "保持架对外环";
+    //保持架对外环
+
+    case 52002:
+      return "保持架对内环";
+    //保持架对内环
+
+    case 52003:
+      return "外环内滚道";
+    //外环内滚道
+
+    case 52004:
+      return "外环外滚道";
+    //外环外滚道
+
+    case 52005:
+      return "滚单";
+    //滚单
+
+    case 52006:
+      return "滚双";
+    //滚双
+
+    case 52007:
+      return "本轴齿轮";
+    //本轴齿轮
+
+    case 52008:
+      return "邻轴齿轮";
+    //保持架对外环
+
+    case 52009:
+      return "踏面";
+    //踏面
+
+    default:
+      return "undefined";
+  }
+}
+/**
+ * 各测点共同的特征值
+ */
+
+function isCommonCode(code) {
+  if (code > 12000 && code < 14000) {
+    return true;
+  }
+
+  return false;
+}
+/**
+ * *报警门限转换
+ * **/
+
+function alarmIndex(val) {
+  var posTypeVal = "";
+
+  switch (parseInt(val)) {
+    case 0:
+      posTypeVal = "1";
+      break;
+
+    case 1:
+      posTypeVal = "1.4";
+      break;
+
+    case 2:
+      posTypeVal = "2.3";
+      break;
+
+    case 3:
+      posTypeVal = "2.8";
+      break;
+
+    case 4:
+      posTypeVal = "3";
+      break;
+
+    case 5:
+      posTypeVal = "3.5";
+      break;
+
+    case 6:
+      posTypeVal = "4";
+      break;
+
+    case 7:
+      posTypeVal = "4.5";
+      break;
+
+    case 8:
+      posTypeVal = "5";
+      break;
+
+    case 9:
+      posTypeVal = "7.1";
+      break;
+
+    case 10:
+      posTypeVal = "11";
+      break;
+
+    case 11:
+      posTypeVal = "20";
+      break;
+
+    case 12:
+      posTypeVal = "30";
+      break;
+
+    case 13:
+      posTypeVal = "40";
+      break;
+
+    case 14:
+      posTypeVal = "50";
+      break;
+  }
+
+  return posTypeVal;
+} // 数组重新排序
+
+function arraymove(arr, fromIndex, toIndex) {
+  var element = arr[fromIndex];
+  arr.splice(fromIndex, 1);
+  arr.splice(toIndex, 0, element);
+}
+
+/***/ }),
+
+/***/ "./src/components/content/system/alarm/table/js/alarm_mixin.js":
+/*!*********************************************************************!*\
+  !*** ./src/components/content/system/alarm/table/js/alarm_mixin.js ***!
+  \*********************************************************************/
+/*! exports provided: alarmMixin */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($, swal) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "alarmMixin", function() { return alarmMixin; });
+/* harmony import */ var _alarm_hdtable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./alarm_hdtable.js */ "./src/components/content/system/alarm/table/js/alarm_hdtable.js");
+/* harmony import */ var _alarm_info_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./alarm_info.js */ "./src/components/content/system/alarm/table/js/alarm_info.js");
+
+
+var alarmMixin = {
+  data: function data() {
+    return {
+      hot: {},
+      //hottable对象
+      data: [],
+      //hottable的data数据
+      changeList: {
+        changeData: {},
+        //修改的数据
+        sortMacList: [],
+        //过滤机组名列表
+        sortDgmList: [] //过滤采集器列表
+
+      },
+      scroll: 0 //滚动距离
+
+    };
+  },
+  mounted: function mounted() {
+    this.getListData(this.type);
+  },
+  beforeRouteLeave: function beforeRouteLeave(to, from, next) {
+    var changeData = this.changeList.changeData; //修改测点信息
+
+    if (!$.isEmptyObject(changeData)) {
+      swal({
+        title: "警告",
+        text: "\u6B63\u5728\u79BB\u5F00\u672C\u9875\u9762\uFF0C\u672C\u9875\u9762\u5185\u6240\u6709\u672A\u4FDD\u5B58\u6570\u636E\u90FD\u4F1A\u4E22\u5931\u3002",
+        buttons: {
+          sure: "确认",
+          cancel: "取消"
+        },
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          next();
+        } else {
+          window.history.go(1);
+        }
+      });
+    } else {
+      next();
+    }
+  },
+  methods: {
+    getListData: function getListData(type) {
+      var _this = this;
+
+      this.$getApi.queryAllAlarmInfo(type, this.$store.state.tids).then(function (res) {
+        var result = Object(_alarm_info_js__WEBPACK_IMPORTED_MODULE_1__["getAlarmInfo"])(res, type);
+
+        if (!result.length) {
+          _this.$emit("child-msg", true);
+        } else {
+          //组织position结构
+          _this.data = result; //渲染表格
+
+          _this.$emit("child-msg", false);
+
+          _this.renderTable();
+        }
+      })["catch"](function (err) {
+        console.log('请求错误', err);
+      });
+    },
+
+    /* 渲染表格 */
+    renderTable: function renderTable() {
+      var _this2 = this;
+
+      var HotTable = document.getElementById('HotTable');
+      var property = {
+        type: this.type,
+        getData: this.getData,
+        getHot: this.getHot,
+        changeList: this.changeList,
+        reRenderSelectOption: this.reRenderSelectOption
+      }; //创建table
+
+      this.hot = new _alarm_hdtable_js__WEBPACK_IMPORTED_MODULE_0__["default"](HotTable, property);
+      this.reRenderSelectOption();
+      /* 监听滚动事件 */
+
+      var wtHolder = document.getElementsByClassName('wtHolder')[0];
+      wtHolder.addEventListener('scroll', function (e) {
+        _this2.hot.destroyEditor(); //处理当选择下拉框后拖动滚动条框框会跟着跑的问题
+
+      });
+      this.filterRows(this.hot, this.data);
+    },
+
+    /*渲染下拉选项*/
+    reRenderSelectOption: function reRenderSelectOption() {
+      var _this3 = this;
+
+      //重新渲染selectOption,让每个option
+      var cellMeta = this.hot.getCellMetaAtRow(0);
+      var rows = this.data.length;
+      cellMeta.forEach(function (item) {
+        if (item.prop == "alarmBaseInfo.alarm_threshold_index_val") {
+          //MHD报警的报警门限
+          for (var i = 0; i <= rows; i++) {
+            _this3.hot.setCellMeta(i, item.col, "selectOptions", function (row) {
+              return _this3.data[_this3.hot.toPhysicalRow(row)].alarmBaseInfo.alarmIndexSources;
+            });
+          }
+        }
+
+        if (item.prop == "alarmBaseInfo.alarmInfo.name") {
+          //工况报警的数据类型
+          for (var _i = 0; _i <= rows; _i++) {
+            _this3.hot.setCellMeta(_i, item.col, "selectOptions", function (row) {
+              return _this3.data[_this3.hot.toPhysicalRow(row)].alarmBaseInfo.valueSources;
+            });
+          }
+        }
+      });
+    },
+    //保留过滤后的结果
+    filterRows: function filterRows(hot, data) {
+      var filtersPlugin = hot.getPlugin('filters');
+
+      if (this.type == 1 && sessionStorage.getItem('filter_alarm1')) {
+        var filterArr = JSON.parse(sessionStorage.getItem('filter_alarm1'));
+        filtersPlugin.addCondition(filterArr[0].column, filterArr[0].conditions[0].name, filterArr[0].conditions[0].args, filterArr[0].operations);
+        filtersPlugin.filter();
+      } else if (this.type == 2 && sessionStorage.getItem('filter_alarm2')) {
+        var _filterArr = JSON.parse(sessionStorage.getItem('filter_alarm2'));
+
+        filtersPlugin.addCondition(_filterArr[0].column, _filterArr[0].conditions[0].name, _filterArr[0].conditions[0].args, _filterArr[0].operations);
+        filtersPlugin.filter();
+      } else if (this.type == 3 && sessionStorage.getItem('filter_alarm3')) {
+        var _filterArr2 = JSON.parse(sessionStorage.getItem('filter_alarm3'));
+
+        filtersPlugin.addCondition(_filterArr2[0].column, _filterArr2[0].conditions[0].name, _filterArr2[0].conditions[0].args, _filterArr2[0].operations);
+        filtersPlugin.filter();
+      }
+    },
+    //获取data
+    getData: function getData() {
+      return this.data;
+    },
+
+    /* 获取hot实例 */
+    getHot: function getHot() {
+      return this.hot;
+    }
+  }
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js")))
+
+/***/ })
+
+}]);
+//# sourceMappingURL=13-f6e1c7b926558570a229.js.map
