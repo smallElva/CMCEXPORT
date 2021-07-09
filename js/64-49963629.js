@@ -142,6 +142,7 @@ __webpack_require__.r(__webpack_exports__);
               }
 
               sessionStorage.setItem('getTidList', JSON.stringify(tids));
+              console.log(JSON.parse(sessionStorage.getItem('getTidList')));
 
               _this2.$store.commit('setTids', JSON.parse(sessionStorage.getItem('getTidList')));
 
@@ -642,4 +643,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=64-7dc25585.js.map
+//# sourceMappingURL=64-49963629.js.map

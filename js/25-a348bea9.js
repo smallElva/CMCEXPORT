@@ -947,7 +947,7 @@ __webpack_require__.r(__webpack_exports__);
 
               _this.$store.commit('setTids', _this.chooseTid);
             } else {
-              sessionStorage.setItem('getTidList', _this.$store.state.origTids);
+              sessionStorage.setItem('getTidList', JSON.stringify(_this.$store.state.origTids));
 
               _this.$store.commit('setTids', _this.$store.state.origTids);
             }
@@ -3221,4 +3221,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=25-4586db90.js.map
+//# sourceMappingURL=25-a348bea9.js.map
