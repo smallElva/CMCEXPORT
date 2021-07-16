@@ -302,6 +302,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           button: "确认"
         });
       } else {
+        // 不能同时保存60台机组
+        var length = Object.keys(changeData).length;
+
+        if (length > 60) {
+          swal({
+            title: "提示",
+            text: "不能同时修改或创建60台机组",
+            button: "确认"
+          });
+          return;
+        }
+
         if (that.checkName(type)) {
           var text = '存在同一组织下机组名重复';
 
@@ -957,6 +969,36 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return false;
     },
 
+    /* 鼠标移动之后 */
+    mouseUp: function mouseUp(e) {
+      var btnContent = $('.btn-content').position();
+      var leftVal = btnContent.left;
+
+      if (leftVal < 60) {
+        this.leftClass = {
+          "left-btn": true,
+          "active": true,
+          "disable": false
+        };
+        this.rightClass = {
+          "right-btn": true,
+          "active": false
+        };
+      } else {
+        this.leftClass = {
+          "left-btn": true,
+          "active": false,
+          "disable": true
+        };
+        this.rightClass = {
+          "right-btn": true,
+          "active": false
+        };
+      }
+
+      this.$forceUpdate();
+    },
+
     /* 左右拖动 */
     mouseMove: function mouseMove(e) {
       var odiv = e.target; //获取目标元素
@@ -1054,13 +1096,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var that = this;
       var btnContent = $('.btn-content').position();
       var btnConWidth = $('.btn-content').width();
-      var leftVal = btnContent.left;
+      var arr = [];
       this.btnData.forEach(function (item, index) {
+        if (item.isShow) {
+          arr.push(item);
+        }
+      });
+      arr.forEach(function (item, index) {
         if (item.name == that.name) {
           num = index;
         }
       });
-      $('.btn-content').css('left', leftVal - 50 * num);
+      var leftVal = 60;
+
+      if (btnContent != undefined) {
+        if (btnConWidth >= 1000 && num >= 10) {
+          leftVal = 60 - 50 * num;
+          $('.btn-content').css('left', leftVal);
+        }
+      }
 
       if (leftVal >= 60) {
         this.leftClass = {
@@ -1274,6 +1328,9 @@ var render = function() {
             on: {
               mousedown: function($event) {
                 return _vm.mouseMove($event)
+              },
+              mouseup: function($event) {
+                return _vm.mouseUp($event)
               }
             }
           },
@@ -1714,4 +1771,4 @@ function reRenderSelectOption(hot, data) {
 /***/ })
 
 }]);
-//# sourceMappingURL=15-61db91c2.js.map
+//# sourceMappingURL=15-538cb0b0.js.map

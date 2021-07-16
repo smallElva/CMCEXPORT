@@ -1106,7 +1106,7 @@ __webpack_require__.r(__webpack_exports__);
                 button: "确认"
               });
               return;
-            } else if (changeTmsData[_i3].pre_id.length > 8) {
+            } else if (changeTmsData[_i3].pre_id.length !== 8) {
               swal({
                 title: "提示",
                 text: "\u8BBE\u5907id\u9700\u4E3A8\u4F4D\u6570\u5B57",
@@ -1976,6 +1976,36 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
 
+    /* 鼠标移动之后 */
+    mouseUp: function mouseUp(e) {
+      var btnContent = $('.btn-content').position();
+      var leftVal = btnContent.left;
+
+      if (leftVal < 40) {
+        this.leftClass = {
+          "left-btn": true,
+          "active": true,
+          "disable": false
+        };
+        this.rightClass = {
+          "right-btn": true,
+          "active": false
+        };
+      } else {
+        this.leftClass = {
+          "left-btn": true,
+          "active": false,
+          "disable": true
+        };
+        this.rightClass = {
+          "right-btn": true,
+          "active": false
+        };
+      }
+
+      this.$forceUpdate();
+    },
+
     /* 左右拖动 */
     mouseMove: function mouseMove(e) {
       var odiv = e.target; //获取目标元素
@@ -2073,28 +2103,35 @@ __webpack_require__.r(__webpack_exports__);
       var that = this;
       var btnContent = $('.btn-content').position();
       var btnConWidth = $('.btn-content').width();
-      var leftVal = btnContent.left;
       this.btnData.forEach(function (item, index) {
         if (item.name == that.name) {
           num = index;
         }
       });
-      $('.btn-content').css('left', leftVal - 50 * num);
 
-      if (leftVal >= 60) {
-        this.leftClass = {
-          "left-btn": true,
-          "active": false,
-          "disable": true
-        };
-      }
+      if (btnContent != undefined) {
+        var leftVal = 60;
 
-      if (Math.abs(leftVal) > btnConWidth - 150) {
-        this.rightClass = {
-          "right-btn": true,
-          "active": true,
-          "disable": true
-        };
+        if (btnConWidth >= 1000 && num >= 10) {
+          leftVal = 60 - 50 * num;
+          $('.btn-content').css('left', leftVal);
+        }
+
+        if (leftVal >= 60) {
+          this.leftClass = {
+            "left-btn": true,
+            "active": false,
+            "disable": true
+          };
+        }
+
+        if (Math.abs(leftVal) > btnConWidth - 150) {
+          this.rightClass = {
+            "right-btn": true,
+            "active": true,
+            "disable": true
+          };
+        }
       }
     },
 
@@ -2708,6 +2745,9 @@ var render = function() {
                   on: {
                     mousedown: function($event) {
                       return _vm.mouseMove($event)
+                    },
+                    mouseup: function($event) {
+                      return _vm.mouseUp($event)
                     }
                   }
                 },
@@ -3031,4 +3071,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=32-c1953e91.js.map
+//# sourceMappingURL=32-eefe9829.js.map

@@ -470,6 +470,36 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       }
     },
 
+    /* 鼠标移动之后 */
+    mouseUp: function mouseUp(e) {
+      var btnContent = $('.btn-content').position();
+      var leftVal = btnContent.left;
+
+      if (leftVal < 60) {
+        this.leftClass = {
+          "left-btn": true,
+          "active": true,
+          "disable": false
+        };
+        this.rightClass = {
+          "right-btn": true,
+          "active": false
+        };
+      } else {
+        this.leftClass = {
+          "left-btn": true,
+          "active": false,
+          "disable": true
+        };
+        this.rightClass = {
+          "right-btn": true,
+          "active": false
+        };
+      }
+
+      this.$forceUpdate();
+    },
+
     /* 左右拖动 */
     mouseMove: function mouseMove(e) {
       var odiv = e.target; //获取目标元素
@@ -594,21 +624,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var num;
       var btnContent = $('.btn-content').position();
       var btnConWidth = $('.btn-content').width();
+      this.btnData.forEach(function (item, index) {
+        if (item.name == _this4.name) {
+          num = index;
+        }
+      });
 
       if (btnContent != undefined) {
-        var leftVal = btnContent.left;
-        this.btnData.forEach(function (item, index) {
-          if (item.name == _this4.name) {
-            num = index;
-          }
-        });
-        $('.btn-content').css('left', leftVal - 50 * num);
+        var leftVal = 80;
+
+        if (btnConWidth >= 1000 && num >= 10) {
+          leftVal = 80 - 50 * num;
+          $('.btn-content').css('left', 80 - 50 * num);
+        }
 
         if (leftVal >= 80) {
           this.leftClass = {
             "left-btn": true,
             "active": false,
             "disable": true
+          };
+        }
+
+        if (leftVal < 80) {
+          this.leftClass = {
+            "left-btn": true,
+            "active": false,
+            "disable": false
           };
         }
 
@@ -1404,6 +1446,9 @@ var render = function() {
             on: {
               mousedown: function($event) {
                 return _vm.mouseMove($event)
+              },
+              mouseup: function($event) {
+                return _vm.mouseUp($event)
               }
             }
           },
@@ -1868,4 +1913,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=34-ad28f995.js.map
+//# sourceMappingURL=34-cd94a8a5.js.map

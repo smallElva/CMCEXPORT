@@ -363,10 +363,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
-      this.$store.commit("setIsReal", this.isReal);
-      this.$store.commit("setTreeData", this.chooseTree); //组织信息赋值给vuex
-
-      this.$store.commit("setMacData", this.chooseMac); //机组信息赋值给vuex
+      this.$store.commit("setIsReal", this.isReal); // this.$store.commit("setTreeData", this.chooseTree); //组织信息赋值给vuex
+      // this.$store.commit("setMacData", this.selectMachine); //机组信息赋值给vuex
 
       this.$store.commit("setPosData", this.choosePos); //测点信息赋值给vuex
     },
@@ -398,10 +396,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
-      this.$store.commit("setIsReal", this.isReal);
-      this.$store.commit("setTreeData", this.chooseTree); //组织信息赋值给vuex
-
-      this.$store.commit("setMacData", this.chooseMac); //机组信息赋值给vuex
+      this.$store.commit("setIsReal", this.isReal); // this.$store.commit("setTreeData", this.chooseTree); //组织信息赋值给vuex
+      // this.$store.commit("setMacData", this.selectMachine); //机组信息赋值给vuex
 
       this.$store.commit("setPosData", this.choosePos); //测点信息赋值给vuex
     }
@@ -750,4 +746,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=60-e67e11e1.js.map
+//# sourceMappingURL=60-3e93d9bc.js.map

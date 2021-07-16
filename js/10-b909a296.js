@@ -2730,6 +2730,8 @@ var macMixin = {
 
               if ($.isEmptyObject(_this.initList.folderData)) {
                 _this.$emit("child-msg", true);
+
+                _this.$parent.loading = false; //关闭加载中
               } else {
                 _this.$emit("child-msg", false);
 
@@ -2812,6 +2814,8 @@ var macMixin = {
 
             if ($.isEmptyObject(_this2.initList.pumpFolderData)) {
               _this2.$emit("child-msg", true);
+
+              _this2.$parent.loading = false; //关闭加载中
             } else {
               _this2.$emit("child-msg", false);
 
@@ -2837,6 +2841,8 @@ var macMixin = {
         if (res !== undefined) {
           if (res.length === 0) {
             _this3.$emit("child-msg", true);
+
+            _this3.$parent.loading = false; //关闭加载中
           } else {
             //渲染表格
             _this3.$emit("child-msg", false);
@@ -2901,6 +2907,11 @@ var macMixin = {
 
           if (res && res.machine_list && res.machine_list.length) {
             for (var i = 0; i < res.machine_list.length; i++) {
+              if (type == 9 && res.machine_list[i].t_root == -1) {
+                linkObj = [res.machine_list[i].t_id, res.machine_list[i].t_name, type];
+                break;
+              }
+
               if (type == 1 && res.machine_list[i].t_root == 0) {
                 linkObj = [res.machine_list[i].t_id, res.machine_list[i].t_name, type];
                 break;
@@ -2976,6 +2987,11 @@ var macMixin = {
                 }
 
                 if (type == 8 && res[i].t_root == 2) {
+                  linkObj = [res[i].folder_id, res[i].folder_name, type];
+                  break;
+                }
+
+                if (type == 10 && res[i].t_root == -1) {
                   linkObj = [res[i].folder_id, res[i].folder_name, type];
                   break;
                 }
@@ -3105,4 +3121,4 @@ var macMixin = {
 /***/ })
 
 }]);
-//# sourceMappingURL=10-a57fcb3f.js.map
+//# sourceMappingURL=10-b909a296.js.map

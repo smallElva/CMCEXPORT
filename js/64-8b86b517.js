@@ -382,6 +382,49 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "login" } }, [
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.language,
+            expression: "language"
+          }
+        ],
+        staticClass: "select-language",
+        on: {
+          change: [
+            function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.language = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
+            function($event) {
+              return _vm.changeLang()
+            }
+          ]
+        }
+      },
+      _vm._l(_vm.languages, function(item) {
+        return _c(
+          "option",
+          { attrs: { title: item.text }, domProps: { value: item.key } },
+          [_vm._v(_vm._s(item.text))]
+        )
+      }),
+      0
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "login-edit" }, [
       _c("h3", { staticClass: "login_title" }, [_vm._v("配置管理中心")]),
       _vm._v(" "),
@@ -481,7 +524,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("登录")]
+                [_vm._v(_vm._s(_vm.$t("Login.title")))]
               )
             ])
           ])
@@ -643,4 +686,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=64-49963629.js.map
+//# sourceMappingURL=64-8b86b517.js.map

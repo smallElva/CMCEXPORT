@@ -878,6 +878,14 @@ import 'flatpickr/dist/flatpickr.min.css'*/
 
       this.fileName = this.selectMachine.mac_me + '_' + this.selectPosition.pos_name;
       return {
+        type: {
+          chart: "1"
+          /* 1.波形频谱图 2.对比分析 */
+          ,
+          chartType: "wave"
+          /* 波形（wave）,频谱（spectrum）,趋势图（trend） */
+
+        },
         // 图谱标题
         title: {
           show: true,
@@ -1082,6 +1090,14 @@ import 'flatpickr/dist/flatpickr.min.css'*/
 
       this.fileName = this.selectMachine.mac_me + '_' + this.selectPosition.pos_name;
       return {
+        type: {
+          chart: "1"
+          /* 1.波形频谱图 2.对比分析 */
+          ,
+          chartType: "spectrum"
+          /* 波形（wave）,频谱（spectrum）,趋势图（trend） */
+
+        },
         // 图谱标题
         title: {
           show: true,
@@ -1320,6 +1336,14 @@ import 'flatpickr/dist/flatpickr.min.css'*/
 
       this.fileName = this.selectMachine.mac_me + '_' + this.selectPosition.pos_name;
       return {
+        type: {
+          chart: "1"
+          /* 1.波形频谱图 2.对比分析 */
+          ,
+          chartType: "trend"
+          /* 波形（wave）,频谱（spectrum）,趋势图（trend） */
+
+        },
         // 图谱标题
         title: {
           show: true,
@@ -7542,7 +7566,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         /* 1.波形频谱图 2.对比分析 */
         ,
         chartType: ""
-        /* 波形（wave）,频谱（spectrum） */
+        /* 波形（wave）,频谱（spectrum）,趋势图（trend） */
 
       },
       // 图谱标题
@@ -8081,11 +8105,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       };
       this._movePos = {
         x: {
-          oldVal: 0,
-          newVal: 0,
-          move: 0,
-          source: 0,
-          addLabel: 0
+          start: null,
+          // （显示）最小值
+          end: null,
+          // （显示）最大值
+          length: null // （显示）数据长度
+
         },
         y: {
           oldVal: 0,
@@ -8287,7 +8312,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               var r = _this._scope.r;
               /* 出界的判断 */
 
-              if (dx >= opt.grid.left && dx <= r.r && dy >= opt.grid.top && dy <= r.b + 30) {} else {
+              if (dx >= 0 && dx <= r.r && dy >= opt.grid.top && dy <= r.b + 40) {} else {
                 _this.removeEvent(window, "mousemove", _this.event.dom.mousemove);
               }
 
@@ -8310,7 +8335,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 moveY.newVal = e.offsetY;
                 moveY.move = moveY.newVal - moveY.oldVal;
 
-                if (moveY.source >= scopeR.b && moveY.source <= scopeR.b + 30) {
+                if (moveY.source >= scopeR.b && moveY.source <= scopeR.b + 40) {
                   // 拖动 x 轴
                   multiple = Math.abs((moveX.newVal - propX.b) / propX.k - (moveX.oldVal - propX.b) / propX.k);
 
@@ -8523,7 +8548,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             var xArr = opt.x.data;
 
             if (opt && xArr.length > 0) {
-              if (dx >= opt.grid.left && dx <= _this._scope.r.r && dy >= opt.grid.top && dy <= _this._scope.r.b + 30) {
+              if (dx >= opt.grid.left && dx <= _this._scope.r.r && dy >= opt.grid.top && dy <= _this._scope.r.b + 40) {
                 var dVal = _this.findNearbyPoint(dx, dy); // 鼠标点在当前波形上的位置索引
 
 
@@ -8611,6 +8636,41 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
                 _this._scope.v.y.start = data.min;
                 _this._scope.v.y.end = data.max + (data.max - data.min) / 10;
+
+                _this.mappingY(type);
+              } else if (dx > 0 && dx < opt.grid.left && dy >= opt.grid.top && dy <= _this._scope.r.b + 40) {
+                // 仅缩放y轴
+                var valY = _this._scope.v.y.end - (dy - opt.grid.top) * (_this._scope.v.y.end - _this._scope.v.y.start) / (_this._scope.r.b - opt.grid.top);
+                multiple = {
+                  start: (valY - _this._scope.v.y.start) * 0.1,
+                  end: (_this._scope.v.y.end - valY) * 0.1
+                };
+
+                var _start, _end;
+
+                if (zoomVal < 0) {
+                  _start = _this._scope.v.y.start + multiple.start;
+                  _end = _this._scope.v.y.end - multiple.end;
+
+                  if (_start >= _end || 0 >= _end) {
+                    return;
+                  } else {
+                    _this._scope.v.y.start = _start;
+                    _this._scope.v.y.end = _end;
+                    type = 2;
+                  }
+                } else {
+                  _start = _this._scope.v.y.start - multiple.start;
+                  _end = _this._scope.v.y.end + multiple.end;
+
+                  if (_start < _this._computeParams.extremum.y.min || _end > _this._computeParams.extremum.y.max) {
+                    type = 1;
+                  } else {
+                    _this._scope.v.y.start = _start;
+                    _this._scope.v.y.end = _end;
+                    type = 2;
+                  }
+                }
 
                 _this.mappingY(type);
               }
@@ -8701,6 +8761,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               var layer = ["background", // 背景
               "data", // 数据
               "foreground", // 前景
+              "speed", // 转速
               "failure", // 故障频率
               "subFreq", // 差频信息
               "nxFreq", // 倍频信息
@@ -8956,6 +9017,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             });
 
             _this._option.tools.timeDifferent.formatter(Boolean(tools.flag_subTime));
+
+            if (tools.flag_subTime) {
+              _this._option.tools.timeDifferent.dom;
+            }
 
             _this.labelLineWave();
 
@@ -9345,6 +9410,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var layer = ["background", // 背景
         "data", // 数据
         "foreground", // 前景
+        "speed", // 转速
         "failure", // 故障频率
         "subFreq", // 差频信息
         "nxFreq", // 倍频信息
@@ -9380,19 +9446,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         if (mark && mark.data) {
           // 长度相同可能是切换
-          if (mark.data.length == opt2.series.markLine.data.length) {// for (let i = 0, len = mark.data.length; i < len; i++) {
-            //   if (opt2.series.markLine.data[i].name !== mark.data[i].name || opt2.series.markLine.data[i].xAxis !== mark.data[i].xAxis) {
-            //       isMarkSame = false
-            //     }
-            // }
-          } else {
-            isMarkSame = false;
-          }
-        }
+          if (mark.isRefresh !== undefined) {
+            if (!mark.isRefresh) {
+              isMarkSame = false;
+            }
 
-        if (opt1.x.data.length != opt2.x.data.length) {
-          isMarkSame = true;
-        }
+            mark.isRefresh = true;
+          }
+        } // if (opt1.x && opt2.x && opt1.x.data && opt2.x.data && opt1.x.data.length != opt2.x.data.length) {
+        //   isMarkSame = false
+        // }
+
 
         if (!isMarkSame) {
           this._option = this.mergeOption(opt2, opt1);
@@ -9405,6 +9469,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             this.drawMarkLine();
           } else if (_coordinateSystem === "circle") {
             this.getNearPoint(mark.data);
+          } else if (!_coordinateSystem) {
+            //对比分析图故障频率
+            this.drawMarkLine();
           }
 
           return;
@@ -9716,7 +9783,26 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           var arr = optX.data;
           var l = arr.length;
 
-          if (opt.series.type !== "bar") {
+          if (opt.series.type === "bar") {
+            /* 柱状图处理 */
+            var bar = scope.r.w / l;
+            var barWidth = bar / 2;
+            var space = bar / 2;
+
+            if (bar > 80) {
+              bar > 80 && (barWidth = 40);
+              space = bar - barWidth;
+            }
+
+            params.extremum.x = {
+              min: barWidth,
+              max: space
+            };
+            scope.v.x.start = params.extremum.x.min;
+            scope.v.x.end = params.extremum.x.max;
+            scope.v.x.length = bar;
+          } else {
+            /* x轴最大值、最小值、范围、转换为坐标系的比例系数 */
             params.extremum.x = {
               min: Number.MAX_VALUE,
               max: 0
@@ -9775,23 +9861,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             scope.v.x.start = params.extremum.x.min;
             scope.v.x.end = params.extremum.x.max;
             scope.v.x.length = divider;
-          } else {
-            var bar = scope.r.w / l;
-            var barWidth = bar / 2;
-            var space = bar / 2;
-
-            if (bar > 80) {
-              bar > 80 && (barWidth = 40);
-              space = bar - barWidth;
-            }
-
-            params.extremum.x = {
-              min: barWidth,
-              max: space
-            };
-            scope.v.x.start = params.extremum.x.min;
-            scope.v.x.end = params.extremum.x.max;
-            scope.v.x.length = bar;
           }
         } else {
           var _k = scope.r.w / (scope.v.x.end - scope.v.x.start);
@@ -9821,13 +9890,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               min: Number.MAX_VALUE,
               max: Number.MAX_VALUE * -1
             };
+            var val, value;
 
             for (var _i19 = 0; _i19 < l; _i19++) {
-              var val = arr[_i19];
+              val = arr[_i19];
 
               if (this.getDataType(arr[0]) === "Array") {
                 for (var j = 0, len = val.length; j < len; j++) {
-                  var value = val[j];
+                  value = val[j];
                   params.extremum.y.max < value && (params.extremum.y.max = Number(value));
                   params.extremum.y.min > value && (params.extremum.y.min = Number(value));
                 }
@@ -10384,7 +10454,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 circle.y.push(valY * params.y.k + params.y.b);
 
                 if (valueSpeed && valueSpeed[j] !== undefined) {
-                  str.push("".concat(posName[_i26], "\uFF1A").concat(vY).concat(unit[_i26], "/\u8F6C\u901F\uFF1A").concat(valueSpeed[j], "rpm"));
+                  str.push("".concat(posName[_i26], "\uFF1A").concat(vY).concat(unit[_i26], "/").concat(localStorage.getItem('language') == 'en' ? 'Speed' : '转速', "\uFF1A").concat(valueSpeed[j] == null || valueSpeed[j] == undefined || valueSpeed[j] >= 100000000 ? localStorage.getItem('language') == 'en' ? 'No Data' : '无数据' : valueSpeed[j] + 'rpm'));
                 } else {
                   str.push("".concat(posName[_i26], "\uFF1A").concat(vY).concat(unit[_i26]));
                 } // if (valueSpeed && valueSpeed[j] !== undefined) {
@@ -10656,6 +10726,29 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 clickCtx.fillText(this.round(yVal[_i38], 4), opt.grid.left - 5, circle.y[_i38]);
               }
 
+              var _valueSpeed;
+
+              if (opt.y.speed && _typeof(opt.y.speed[res.key]) != undefined) {
+                _valueSpeed = Number(opt.y.speed[res.key]).toFixed(2);
+              } // 绘制转速
+
+
+              if (_valueSpeed && typeof _valueSpeed !== 'undefined') {
+                if (_valueSpeed >= Math.pow(10, 8)) {
+                  _valueSpeed = localStorage.getItem('language') == 'en' ? 'No Data' : '无数据';
+                } else {
+                  _valueSpeed = this.round(_valueSpeed, 4) + 'rpm';
+                }
+
+                var speedCtx = this._drawTools.ctx.speed;
+                speedCtx.clearRect(95, 20, 150, 30);
+                speedCtx.beginPath();
+                speedCtx.font = '14px Arial';
+                speedCtx.fillStyle = '#b96600';
+                speedCtx.textBaseline = "top";
+                speedCtx.fillText(_valueSpeed, 100, 24);
+              }
+
               clickCtx.textBaseline = "top";
               clickCtx.textAlign = _alignX2;
               clickCtx.fillText(this.formatDateStr(res.val, 2), line.x.oldVal, line.y.newVal + 5);
@@ -10805,126 +10898,156 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             // 
             dataCtx.beginPath();
             dataCtx.lineWidth = series.lineStyle.width;
-            dataCtx.strokeStyle = series.lineStyle.color;
-            var tmp_r = xk * xArr[1] + xb - (xk * xArr[0] + xb);
-            /* 第一个点与第二个点的像素差 */
+            dataCtx.strokeStyle = series.lineStyle.color; // 大于两万个点时且是波形图或者频谱图，再进行数据少画
 
-            if (tmp_r < 1) {
-              if (tmp_r <= Number.MIN_VALUE) return;
-              dx = Math.ceil(1 / tmp_r); //两个点的距离像素的倒数(向上取整)
-              // 当缩到足够小时，坐标转换会出现精度问题，导致dx过大
-              // 当dx大到一定程度，将使得下面的循环变量i不能递增，从而死机
-              // dx 超出波形点的长度是无意义的，因此作如下限制
+            if (opt.type && opt.type.chartType && (opt.type.chartType == 'wave' || opt.type.chartType == 'spectrum') && xArr.length > 20000) {
+              var tmp_r = xk * xArr[1] + xb - (xk * xArr[0] + xb);
+              /* 第一个点与第二个点的像素差 */
 
-              if (dx > xArr.length) dx = xArr.length;
-            }
+              if (tmp_r < 1) {
+                if (tmp_r <= Number.MIN_VALUE) return;
+                dx = Math.ceil(1 / tmp_r); //两个点的距离像素的倒数(向上取整)
+                // 当缩到足够小时，坐标转换会出现精度问题，导致dx过大
+                // 当dx大到一定程度，将使得下面的循环变量i不能递增，从而死机
+                // dx 超出波形点的长度是无意义的，因此作如下限制
 
-            var _l12 = xArr.length;
-
-            if (_l12 > 1) {
-              for (var _i43 = _l12; _i43 > 0; _i43 = _i43 - dx) {
-                var _val7 = xArr[_i43];
-                var max_y = -Number.MAX_VALUE;
-                var min_y = Number.MAX_VALUE;
-
-                if (dx > 1) {
-                  // 取y值得最大值和最小值
-                  var b = _i43;
-                  var e = b - dx;
-
-                  if (b > xArr.length) {
-                    b = xArr.lengt;
-                  }
-
-                  if (e < 0) {
-                    e = 0;
-                  }
-
-                  for (var _j6 = b; _j6 > e; _j6--) {
-                    var _y3 = yArr[_j6];
-                    if (_y3 > max_y) max_y = _y3;
-                    if (_y3 < min_y) min_y = _y3;
-                  }
-
-                  if ( // xn >= left &&
-                  // xn <= right &&
-                  _val7 >= left && _val7 <= right && max_y <= top && max_y >= bottom && min_y >= bottom && min_y <= top) {
-                    x = {
-                      oVal: xk * _val7 + xb,
-                      nVal: xk * _val7 + xb
-                    };
-                    y = {
-                      oVal: yk * min_y + yb,
-                      nVal: yk * max_y + yb
-                    };
-                    dataCtx.lineTo(x.oVal, y.oVal);
-                    dataCtx.moveTo(x.oVal, y.oVal);
-                    dataCtx.lineTo(x.nVal, y.nVal);
-                  }
-                } else {
-                  var _xn = xArr[_i43 - 1],
-                      _yo = yArr[_i43],
-                      _yn = yArr[_i43 - 1];
-
-                  if (_xn >= left && _xn <= right && _val7 >= left && _val7 <= right && _yn <= top && _yn >= bottom && _yo >= bottom && _yo <= top) {
-                    x = {
-                      oVal: xk * _val7 + xb,
-                      nVal: xk * _xn + xb
-                    };
-                    y = {
-                      oVal: _yo * yk + yb,
-                      nVal: _yn * yk + yb
-                    };
-                    dataCtx.moveTo(x.oVal, y.oVal);
-                    dataCtx.lineTo(x.nVal, y.nVal);
-                  }
-                }
+                if (dx > xArr.length) dx = xArr.length;
               }
-              /* for (let i = l; i--;) {
-                const val = xArr[i];
-                if (i === 0) break;
-                let xn = xArr[i - 1],
-                  yo = yArr[i],
-                  yn = yArr[i - 1];
-                if (
-                  xn >= left &&
-                  xn <= right &&
-                  val >= left &&
-                  val <= right &&
-                  yn <= top &&
-                  yn >= bottom &&
-                  yo >= bottom &&
-                  yo <= top
-                ) {
-                  x = {
-                    oVal: xk * val + xb,
-                    nVal: xk * xn + xb
-                  };
-                  y = {
-                    oVal: yo * yk + yb,
-                    nVal: yn * yk + yb
-                  };
-                  dataCtx.moveTo(x.oVal, y.oVal);
-                  dataCtx.lineTo(x.nVal, y.nVal);
+
+              var _l12 = xArr.length;
+
+              if (_l12 > 1) {
+                for (var _i43 = _l12; _i43 > 0; _i43 = _i43 - dx) {
+                  var _val7 = xArr[_i43];
+                  var max_y = -Number.MAX_VALUE;
+                  var min_y = Number.MAX_VALUE;
+
+                  if (dx > 1) {
+                    // 取y值得最大值和最小值
+                    var b = _i43;
+                    var e = b - dx;
+
+                    if (b > xArr.length) {
+                      b = xArr.lengt;
+                    }
+
+                    if (e < 0) {
+                      e = 0;
+                    }
+
+                    for (var _j6 = b; _j6 > e; _j6--) {
+                      var _y3 = yArr[_j6];
+                      if (_y3 > max_y) max_y = _y3;
+                      if (_y3 < min_y) min_y = _y3;
+                    }
+
+                    if ( // xn >= left &&
+                    // xn <= right &&
+                    _val7 >= left && _val7 <= right && max_y <= top && max_y >= bottom && min_y >= bottom && min_y <= top) {
+                      x = {
+                        oVal: xk * _val7 + xb,
+                        nVal: xk * _val7 + xb
+                      };
+                      y = {
+                        oVal: yk * min_y + yb,
+                        nVal: yk * max_y + yb
+                      };
+                      dataCtx.lineTo(x.oVal, y.oVal);
+                      dataCtx.moveTo(x.oVal, y.oVal);
+                      dataCtx.lineTo(x.nVal, y.nVal);
+                    }
+                  } else {
+                    var _xn = xArr[_i43 - 1],
+                        _yo = yArr[_i43],
+                        _yn = yArr[_i43 - 1];
+
+                    if (_xn >= left && _xn <= right && _val7 >= left && _val7 <= right && _yn <= top && _yn >= bottom && _yo >= bottom && _yo <= top) {
+                      x = {
+                        oVal: xk * _val7 + xb,
+                        nVal: xk * _xn + xb
+                      };
+                      y = {
+                        oVal: _yo * yk + yb,
+                        nVal: _yn * yk + yb
+                      };
+                      dataCtx.moveTo(x.oVal, y.oVal);
+                      dataCtx.lineTo(x.nVal, y.nVal);
+                    }
+                  }
                 }
-              } */
+                /* for (let i = l; i--;) {
+                  const val = xArr[i];
+                  if (i === 0) break;
+                  let xn = xArr[i - 1],
+                    yo = yArr[i],
+                    yn = yArr[i - 1];
+                  if (
+                    xn >= left &&
+                    xn <= right &&
+                    val >= left &&
+                    val <= right &&
+                    yn <= top &&
+                    yn >= bottom &&
+                    yo >= bottom &&
+                    yo <= top
+                  ) {
+                    x = {
+                      oVal: xk * val + xb,
+                      nVal: xk * xn + xb
+                    };
+                    y = {
+                      oVal: yo * yk + yb,
+                      nVal: yn * yk + yb
+                    };
+                    dataCtx.moveTo(x.oVal, y.oVal);
+                    dataCtx.lineTo(x.nVal, y.nVal);
+                  }
+                } */
 
 
-              dataCtx.stroke();
+                dataCtx.stroke();
+              }
+            } else {
+              var _l13 = xArr.length;
+
+              if (_l13 > 1) {
+                for (var _i44 = _l13; _i44--;) {
+                  var _val8 = xArr[_i44];
+                  if (_i44 === 0) break;
+                  var _xn2 = xArr[_i44 - 1],
+                      _yo2 = yArr[_i44],
+                      _yn2 = yArr[_i44 - 1];
+
+                  if (_xn2 >= left && _xn2 <= right && _val8 >= left && _val8 <= right && _yn2 <= top && _yn2 >= bottom && _yo2 >= bottom && _yo2 <= top) {
+                    x = {
+                      oVal: xk * _val8 + xb,
+                      nVal: xk * _xn2 + xb
+                    };
+                    y = {
+                      oVal: _yo2 * yk + yb,
+                      nVal: _yn2 * yk + yb
+                    };
+                    dataCtx.moveTo(x.oVal, y.oVal);
+                    dataCtx.lineTo(x.nVal, y.nVal);
+                  }
+                }
+
+                dataCtx.stroke();
+              }
             }
 
             if (series.symbol.show) {
-              for (var _i44 = 0, _l13 = xArr.length; _i44 < _l13; _i44++) {
-                var _val8 = xArr[_i44];
-                y = yArr[_i44];
+              for (var _i45 = 0, _l14 = xArr.length; _i45 < _l14; _i45++) {
+                var _val9 = xArr[_i45];
+                y = yArr[_i45];
 
-                if (_val8 >= left && _val8 <= right && y <= top && y >= bottom) {
-                  _val8 = _val8 * xk + xb;
+                if (_val9 >= left && _val9 <= right && y <= top && y >= bottom) {
+                  _val9 = _val9 * xk + xb;
                   y = y * yk + yb;
                   dataCtx.beginPath();
                   dataCtx.strokeStyle = series.lineStyle.color;
                   dataCtx.fillStyle = series.symbol.color === "" ? "#fff" : series.symbol.color;
-                  dataCtx.arc(_val8, y, 3, 0, 2 * Math.PI);
+                  dataCtx.arc(_val9, y, 3, 0, 2 * Math.PI);
                   dataCtx.stroke();
                   dataCtx.fill();
                 }
@@ -10936,35 +11059,35 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           dataCtx.lineWidth = series.lineStyle.width;
           dataCtx.strokeStyle = series.lineStyle.color;
 
-          for (var _i45 = 0, _l14 = xArr.length; _i45 < _l14; _i45++) {
-            var _val9 = xArr[_i45];
-            y = yArr[_i45];
+          for (var _i46 = 0, _l15 = xArr.length; _i46 < _l15; _i46++) {
+            var _val10 = xArr[_i46];
+            y = yArr[_i46];
             var cy = yb <= real.b ? yb : real.b;
 
-            if (_val9 >= left && _val9 <= right && y <= top && y >= bottom) {
-              _val9 = _val9 * xk + xb;
+            if (_val10 >= left && _val10 <= right && y <= top && y >= bottom) {
+              _val10 = _val10 * xk + xb;
               y = y * yk + yb;
-              dataCtx.moveTo(_val9, cy);
-              dataCtx.lineTo(_val9, y + 1);
+              dataCtx.moveTo(_val10, cy);
+              dataCtx.lineTo(_val10, y + 1);
             }
           }
 
           dataCtx.stroke();
         } else if (series.type === "scatter") {
           //散点图
-          for (var _i46 = xArr.length; _i46--;) {
-            var _val10 = xArr[_i46];
-            if (_i46 === 0) break;
-            var _xn2 = xArr[_i46 - 1],
-                _yo2 = yArr[_i46],
-                _yn2 = yArr[_i46 - 1];
+          for (var _i47 = xArr.length; _i47--;) {
+            var _val11 = xArr[_i47];
+            if (_i47 === 0) break;
+            var _xn3 = xArr[_i47 - 1],
+                _yo3 = yArr[_i47],
+                _yn3 = yArr[_i47 - 1];
 
-            if (_val10 >= left && _val10 <= right && _yo2 >= bottom && _yo2 <= top) {
+            if (_val11 >= left && _val11 <= right && _yo3 >= bottom && _yo3 <= top) {
               x = {
-                oVal: xk * _val10 + xb
+                oVal: xk * _val11 + xb
               };
               y = {
-                oVal: _yo2 * yk + yb
+                oVal: _yo3 * yk + yb
               };
               dataCtx.beginPath();
               dataCtx.fillStyle = series.symbol.color;
@@ -11003,11 +11126,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           if (key !== -1) {
             var valX = arrX[key];
-            var _l15 = valX.length;
+            var _l16 = valX.length;
             debugger;
 
-            for (var i = _l15; i--;) {
-              if (i === _l15 - 1) {
+            for (var i = _l16; i--;) {
+              if (i === _l16 - 1) {
                 v1 = Math.abs(valX[i] * xk + xb - dx);
                 v2 = Math.abs(valX[i - 1] * xk + xb - dx);
                 dValue = v1 > v2 ? {
@@ -11041,9 +11164,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             // }
 
           } else {
-            for (var _i47 = l; _i47--;) {
-              var _valX = arrX[_i47];
-              var valY = arrY[_i47];
+            for (var _i48 = l; _i48--;) {
+              var _valX = arrX[_i48];
+              var valY = arrY[_i48];
               var len = _valX.length;
               /* for (let j = len; j--;) {
                 const vx1 = (valX[j] * xk + xb - dx) ** 2;
@@ -11091,7 +11214,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               dValue = {
                 val: _valX[_key2],
                 key: _key2,
-                index: _i47,
+                index: _i48,
                 valY: valY[_key2]
               };
             }
@@ -11292,9 +11415,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             break;
         }
 
-        flag.tools.flag_wave_Pulse && this.drawWavePulse();
+        flag.tools.flag_wave_Pulse && this.drawWavePulse(); // flag.addPeakPos.length > 0 && (type === 1 ? this.drawAddLabel(1) : this.drawAddLabel(2))
+
         flag.addPeakPos.length > 0 && this.drawAddLabel(2);
-        this._option.series.markLine.data.length > 0 && this.drawMarkLine();
+        this._option.series.markLine.data && this._option.series.markLine.data.length > 0 && this.drawMarkLine();
         this._option.series.gateMsg.isShow && this.drawGateLine();
       },
       // 绘制开窗放大范围
@@ -11335,8 +11459,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
               moveX.move >= 0 ? yArr = opt.y.data.slice(pos.oldPos.key, pos.newPos.key + 1) : yArr = opt.y.data.slice(pos.newPos.key, pos.oldPos.key + 1);
 
-              for (var _i48 = 0, l = yArr.length; _i48 < l; _i48++) {
-                var val = yArr[_i48];
+              for (var _i49 = 0, l = yArr.length; _i49 < l; _i49++) {
+                var val = yArr[_i49];
                 num.max < val && (num.max = val);
                 num.min > val && (num.min = val);
               }
@@ -11359,13 +11483,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   end = pos.oldPos.key;
                 }
 
-                for (var _i49 = 0, _l16 = opt.y.data.length; _i49 < _l16; _i49++) {
-                  var data = opt.y.data[_i49].slice(start, end);
+                for (var _i50 = 0, _l17 = opt.y.data.length; _i50 < _l17; _i50++) {
+                  var data = opt.y.data[_i50].slice(start, end);
 
                   for (var j = 0, len = data.length; j < len; j++) {
-                    var _val11 = data[j];
-                    num.max < _val11 && (num.max = _val11);
-                    num.min > _val11 && (num.min = _val11);
+                    var _val12 = data[j];
+                    num.max < _val12 && (num.max = _val12);
+                    num.min > _val12 && (num.min = _val12);
                   }
                 }
               } // if (moveX.move >= 0) {
@@ -11958,37 +12082,37 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               if (flag.line.idx == undefined) {
                 font = {
                   x: optX.data[flag.line.key] * xk + xb,
-                  time: "时间：" + this.round(optX.data[flag.line.key]) + optX.name,
-                  timeDif: "时间差：" + Math.round(Math.abs(flag.line.val - optX.data[flag.last_xWave.key]) * 10000) / 10000 + optX.name,
-                  subFreq: "频率差：" + Math.round(1 / Math.abs(flag.last_xWave.val - flag.line.val) * 10000) / 10000 + "Hz",
-                  amplitude: "幅值：" + Math.round(optY.data[flag.line.key] * 10000) / 10000 + optY.name
+                  time: (localStorage.getItem('language') == 'en' ? 'Time:' : "时间：") + this.round(optX.data[flag.line.key]) + optX.name,
+                  timeDif: (localStorage.getItem('language') == 'en' ? 'delta-t:' : "时间差：") + Math.round(Math.abs(flag.line.val - optX.data[flag.last_xWave.key]) * 10000) / 10000 + optX.name,
+                  subFreq: (localStorage.getItem('language') == 'en' ? 'Delta F:' : "频率差：") + Math.round(1 / Math.abs(flag.last_xWave.val - flag.line.val) * 10000) / 10000 + "Hz",
+                  amplitude: (localStorage.getItem('language') == 'en' ? 'amplitude:' : "幅值：") + Math.round(optY.data[flag.line.key] * 10000) / 10000 + optY.name
                 };
-                if (flag.last_xWave.key === -1) font.timeDif = "时间差：" + Math.round(Math.abs(flag.line.val - optX.data[0]) * 10000) / 10000 + optX.name;
+                if (flag.last_xWave.key === -1) font.timeDif = (localStorage.getItem('language') == 'en' ? 'delta-t:' : "时间差：") + Math.round(Math.abs(flag.line.val - optX.data[0]) * 10000) / 10000 + optX.name;
               } else {
                 if (flag.last_xWave.idx == undefined) flag.last_xWave.idx = 0;
                 font = {
                   x: optX.data[flag.firstCommon.idx][flag.line.key] * xk + xb,
-                  time: "时间：" + this.round(optX.data[flag.firstCommon.idx][flag.line.key]) + optX.name[flag.firstCommon.idx],
-                  timeDif: "时间差：" + Math.round(Math.abs(flag.line.val - optX.data[flag.firstCommon.idx][flag.last_xWave.key]) * 10000) / 10000 + optX.name,
-                  subFreq: "频率差：" + Math.round(1 / Math.abs(flag.last_xWave.val - flag.line.val) * 10000) / 10000 + "Hz",
+                  time: localStorage.getItem('language') == 'en' ? 'Time:' : "时间：" + this.round(optX.data[flag.firstCommon.idx][flag.line.key]) + optX.name[flag.firstCommon.idx],
+                  timeDif: localStorage.getItem('language') == 'en' ? 'delta-t:' : "时间差：" + Math.round(Math.abs(flag.line.val - optX.data[flag.firstCommon.idx][flag.last_xWave.key]) * 10000) / 10000 + optX.name,
+                  subFreq: localStorage.getItem('language') == 'en' ? 'Delta F:' : "频率差：" + Math.round(1 / Math.abs(flag.last_xWave.val - flag.line.val) * 10000) / 10000 + "Hz",
                   amplitude: []
                 };
 
-                for (var _i50 = 0; _i50 < optX.data.length; _i50++) {
-                  var valueX = optX.data[_i50];
-                  var valueY = optY.data[_i50];
+                for (var _i51 = 0; _i51 < optX.data.length; _i51++) {
+                  var valueX = optX.data[_i51];
+                  var valueY = optY.data[_i51];
 
                   for (var j = 0; j < valueY.length; j++) {
                     var valX = valueX[j];
                     var valY = valueY[j];
 
                     if (j == flag.line.key && valX == flag.line.val) {
-                      font.amplitude.push(["\u5E45\u503C".concat(font.amplitude.length, "\uFF1A").concat(this.round(valY * 10000 / 10000) + optY.name)]);
+                      font.amplitude.push(["".concat(localStorage.getItem('language') == 'en' ? 'amplitude' : "幅值").concat(font.amplitude.length, "\uFF1A").concat(this.round(valY * 10000 / 10000) + optY.name)]);
                     }
                   }
                 }
 
-                if (flag.last_xWave.key === -1) font.timeDif = "时间差：" + Math.round(Math.abs(flag.line.val - optX.data[flag.firstCommon.idx][0]) * 10000) / 10000 + optX.name;
+                if (flag.last_xWave.key === -1) font.timeDif = localStorage.getItem('language') == 'en' ? 'delta-t:' : "时间差：" + Math.round(Math.abs(flag.line.val - optX.data[flag.firstCommon.idx][0]) * 10000) / 10000 + optX.name;
               }
 
               font.x - opt.grid.left >= scopeR.w / 2 && (font.x -= 150);
@@ -12018,8 +12142,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   subCtx.fillText(font.timeDif, font.x + 10, opt.grid.top + 23);
                   subCtx.fillText(font.subFreq, font.x + 10, opt.grid.top + 38);
 
-                  for (var _i51 = 0; _i51 < font.amplitude.length; _i51++) {
-                    subCtx.fillText(font.amplitude[_i51], font.x + 10, opt.grid.top + 38 + 20 * (_i51 + 1));
+                  for (var _i52 = 0; _i52 < font.amplitude.length; _i52++) {
+                    subCtx.fillText(font.amplitude[_i52], font.x + 10, opt.grid.top + 38 + 20 * (_i52 + 1));
                   }
                 }
               }
@@ -12027,39 +12151,39 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               if (flag.line.idx == undefined) {
                 font = {
                   x: flag.line.val * xk + xb,
-                  time: "点序：" + this.round(flag.line.val),
-                  timeDif: "点数差：" + this.round(flag.line.val - optX.data[flag.last_xWave.key]),
-                  amplitude: "波形值：" + this.round(optY.data[flag.line.key])
+                  time: localStorage.getItem('language') == 'en' ? 'order:' : "点序：" + this.round(flag.line.val),
+                  timeDif: localStorage.getItem('language') == 'en' ? 'order:' : "点数差：" + this.round(flag.line.val - optX.data[flag.last_xWave.key]),
+                  amplitude: localStorage.getItem('language') == 'en' ? 'value:' : "波形值：" + this.round(optY.data[flag.line.key])
                 };
-                if (flag.last_xWave.key === -1) font.timeDif = "点数差：" + this.round(flag.line.val - optX.data[0]);
+                if (flag.last_xWave.key === -1) font.timeDif = localStorage.getItem('language') == 'en' ? 'order:' : "点数差：" + this.round(flag.line.val - optX.data[0]);
               } else {
                 if (flag.last_xWave.idx == undefined) flag.last_xWave.idx = 0;
                 font = {
                   x: flag.line.val * xk + xb,
-                  time: "点序：" + this.round(flag.line.val),
-                  timeDif: "点数差：" + this.round(flag.line.val - optX.data[flag.firstCommon.idx][flag.last_xWave.key]),
+                  time: localStorage.getItem('language') == 'en' ? 'order：' : "点序：" + this.round(flag.line.val),
+                  timeDif: localStorage.getItem('language') == 'en' ? 'order：' : "点数差：" + this.round(flag.line.val - optX.data[flag.firstCommon.idx][flag.last_xWave.key]),
                   amplitude: [] //"波形值：" + this.round(optY.data[flag.firstCommon.idx][flag.line.key])
 
                 };
 
-                for (var _i52 = 0; _i52 < optX.data.length; _i52++) {
-                  var _valueX = optX.data[_i52];
-                  var _valueY = optY.data[_i52];
+                for (var _i53 = 0; _i53 < optX.data.length; _i53++) {
+                  var _valueX = optX.data[_i53];
+                  var _valueY = optY.data[_i53];
 
                   for (var _j7 = 0; _j7 < _valueY.length; _j7++) {
                     var _valX2 = _valueX[_j7];
                     var _valY = _valueY[_j7];
 
                     if (_j7 == flag.line.key && _valX2 == flag.line.val) {
-                      font.amplitude.push(["\u6CE2\u5F62\u503C".concat(font.amplitude.length, "\uFF1A").concat(this.round(_valY))]);
+                      font.amplitude.push(["".concat(localStorage.getItem('language') == 'en' ? 'value:' : '波形值').concat(font.amplitude.length, "\uFF1A").concat(this.round(_valY))]);
                     }
                   }
                 }
 
-                if (flag.last_xWave.key === -1) font.timeDif = "点数差：" + this.round(flag.line.val - optX.data[flag.firstCommon.idx][0]);
+                if (flag.last_xWave.key === -1) font.timeDif = localStorage.getItem('language') == 'en' ? 'order:' : "点数差：" + this.round(flag.line.val - optX.data[flag.firstCommon.idx][0]);
               }
 
-              if (flag.last_xWave.key === -1) font.timeDif = "点数差：" + this.round(flag.line.val - optX.data[flag.firstCommon.idx][0]);
+              if (flag.last_xWave.key === -1) font.timeDif = localStorage.getItem('language') == 'en' ? 'order:' : "点数差：" + this.round(flag.line.val - optX.data[flag.firstCommon.idx][0]);
               font.x - opt.grid.left >= scopeR.w / 2 && (font.x -= 106);
 
               if (font.x >= opt.grid.left && font.x + 110 <= scopeR.r) {
@@ -12083,8 +12207,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   subCtx.fillText(font.time, font.x + 10, opt.grid.top + 8);
                   subCtx.fillText(font.timeDif, font.x + 10, opt.grid.top + 23);
 
-                  for (var _i53 = 0; _i53 < font.amplitude.length; _i53++) {
-                    subCtx.fillText(font.amplitude[_i53], font.x + 10, opt.grid.top + 38 + 20 * (_i53 + 1));
+                  for (var _i54 = 0; _i54 < font.amplitude.length; _i54++) {
+                    subCtx.fillText(font.amplitude[_i54], font.x + 10, opt.grid.top + 38 + 20 * (_i54 + 1));
                   }
                 }
               }
@@ -12094,15 +12218,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if (opt.toolTip.symbol.show) {
             var size = opt.toolTip.symbol.size;
 
-            for (var _i54 = 1, l = flag.labelLine.wave.length; _i54 < l; _i54++) {
+            for (var _i55 = 1, l = flag.labelLine.wave.length; _i55 < l; _i55++) {
               // 对比分析图多条数据情况
               var line = {
-                x: optX.data[flag.labelLine.wave[_i54].xAxis] * xk + xb,
-                y: optY.data[flag.labelLine.wave[_i54].xAxis] * yk + yb
+                x: optX.data[flag.labelLine.wave[_i55].xAxis] * xk + xb,
+                y: optY.data[flag.labelLine.wave[_i55].xAxis] * yk + yb
               };
               var line1 = {
-                x: optX.data[flag.labelLine.wave[_i54].xAxis] * xk + xb,
-                y: optY.data[flag.labelLine.wave[_i54].xAxis] * yk + yb
+                x: optX.data[flag.labelLine.wave[_i55].xAxis] * xk + xb,
+                y: optY.data[flag.labelLine.wave[_i55].xAxis] * yk + yb
               };
 
               if (flag.line.idx != undefined && flag.firstCommon.idx != undefined) {
@@ -12124,7 +12248,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 for (var _k3 = 0; _k3 < optX.data.length; _k3++) {
                   var _valueX2 = optX.data[_k3];
                   var _valueY2 = optY.data[_k3];
-                  var index = Math.round(_valueX2.length * optX.data[flag.firstCommon.idx][optX.data[flag.firstCommon.idx].length - 1] * flag.labelLine.wave[_i54].xAxis / (optX.data[flag.firstCommon.idx].length * _valueX2[_valueX2.length - 1])); // if (maxIndex == flag.firstCommon.idx ){
+                  var index = Math.round(_valueX2.length * optX.data[flag.firstCommon.idx][optX.data[flag.firstCommon.idx].length - 1] * flag.labelLine.wave[_i55].xAxis / (optX.data[flag.firstCommon.idx].length * _valueX2[_valueX2.length - 1])); // if (maxIndex == flag.firstCommon.idx ){
                   //   //通过百分比计算下标：选中的点/选中下表长度 = index/当前下标长度
                   //   index = flag.labelLine.wave[i].xAxis * optX.data[k].length / maxX;
                   // } else {
@@ -12147,15 +12271,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   y: y1
                 };
                 line = {
-                  x: optX.data[flag.firstCommon.idx][flag.labelLine.wave[_i54].xAxis] * xk + xb,
-                  y: optY.data[flag.firstCommon.idx][flag.labelLine.wave[_i54].xAxis] * yk + yb
+                  x: optX.data[flag.firstCommon.idx][flag.labelLine.wave[_i55].xAxis] * xk + xb,
+                  y: optY.data[flag.firstCommon.idx][flag.labelLine.wave[_i55].xAxis] * yk + yb
                 };
               }
 
               if (line.x >= opt.grid.left && line.x <= scopeR.r && line.y >= opt.grid.top && line.y <= scopeR.b) {
                 subCtx.beginPath();
-                subCtx.strokeStyle = flag.labelLine.wave[_i54].lineStyle.color;
-                subCtx.fillStyle = flag.labelLine.wave[_i54].lineStyle.color;
+                subCtx.strokeStyle = flag.labelLine.wave[_i55].lineStyle.color;
+                subCtx.fillStyle = flag.labelLine.wave[_i55].lineStyle.color;
                 subCtx.moveTo(line.x, opt.grid.top);
                 subCtx.lineTo(line.x, line.y - size);
                 subCtx.stroke();
@@ -12170,7 +12294,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 } else {
                   subCtx.beginPath();
                   subCtx.arc(line.x, line.y, size, 0, 2 * Math.PI);
-                  subCtx.fillStyle = opt.toolTip.symbol.color !== "" ? opt.toolTip.symbol.color : flag.labelLine.wave[_i54].lineStyle.color;
+                  subCtx.fillStyle = opt.toolTip.symbol.color !== "" ? opt.toolTip.symbol.color : flag.labelLine.wave[_i55].lineStyle.color;
                   subCtx.fill();
                 }
 
@@ -12182,8 +12306,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           } else {
             subCtx.beginPath();
 
-            for (var _i55 = 1, _l17 = flag.labelLine.wave.length; _i55 < _l17; _i55++) {
-              if (_i55 === 0) break; // 对比分析图多条数据情况
+            for (var _i56 = 1, _l18 = flag.labelLine.wave.length; _i56 < _l18; _i56++) {
+              if (_i56 === 0) break; // 对比分析图多条数据情况
 
               var x = optX.data;
               var y = optY.data;
@@ -12194,13 +12318,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
 
               var _line = {
-                x: x[flag.labelLine.wave[_i55].xAxis] * xk + xb,
-                y: y[flag.labelLine.wave[_i55].xAxis] * yk + yb
+                x: x[flag.labelLine.wave[_i56].xAxis] * xk + xb,
+                y: y[flag.labelLine.wave[_i56].xAxis] * yk + yb
               };
 
               if (_line.x >= opt.grid.left && _line.x <= scopeR.r && _line.y >= opt.grid.top && _line.y <= scopeR.b) {
-                subCtx.strokeStyle = flag.labelLine.wave[_i55].lineStyle.color;
-                subCtx.fillStyle = flag.labelLine.wave[_i55].lineStyle.color;
+                subCtx.strokeStyle = flag.labelLine.wave[_i56].lineStyle.color;
+                subCtx.fillStyle = flag.labelLine.wave[_i56].lineStyle.color;
                 subCtx.moveTo(_line.x, opt.grid.top);
                 subCtx.lineTo(_line.x, scopeR.b);
               }
@@ -12226,8 +12350,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           var _font3 = {
             x: xArr[flagLine.key] * xk + xb,
-            amplitude: "\u5E45\u503C\uFF1A".concat(this.round(yArr[flagLine.key])),
-            subFreq: "\u5DEE\u9891\uFF1A".concat(this.round(flagLine.val - xArr[flag.arr_B[0]])).concat(unit)
+            amplitude: "".concat(localStorage.getItem('language') == 'en' ? 'amplitude' : "幅值", "\uFF1A").concat(this.round(yArr[flagLine.key])),
+            subFreq: "".concat(localStorage.getItem('language') == 'en' ? ' beat' : "差频", "\uFF1A").concat(this.round(flagLine.val - xArr[flag.arr_B[0]])).concat(unit)
           };
           var height = 70;
           var _index2 = 0; // 防止倍频出现无限大
@@ -12239,26 +12363,26 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if (this.getDataType(unit) === "Array") {
             _font3 = {
               x: xArr[flagLine.key] * xk + xb,
-              freq: "\u9891\u7387\uFF1A".concat(this.round(flagLine.val)).concat(unit[flagLine.idx]),
-              subFreq: "\u5DEE\u9891\uFF1A".concat(this.round(flagLine.val - xArr[flag.arr_B[0]])).concat(unit[flagLine.idx])
+              freq: "".concat(localStorage.getItem('language') == 'en' ? ' frequency' : "频率", "\uFF1A").concat(this.round(flagLine.val)).concat(unit[flagLine.idx]),
+              subFreq: "".concat(localStorage.getItem('language') == 'en' ? ' beat' : "差频", "\uFF1A").concat(this.round(flagLine.val - xArr[flag.arr_B[0]])).concat(unit[flagLine.idx])
             };
 
-            for (var _i56 = 0, _l18 = optY.data.length; _i56 < _l18; _i56++) {
-              var value = optY.data[_i56];
+            for (var _i57 = 0, _l19 = optY.data.length; _i57 < _l19; _i57++) {
+              var value = optY.data[_i57];
 
               if (value[flagLine.key]) {
-                _font3["amplitude".concat(_i56 + 1)] = "\u5E45\u503C\uFF1A".concat(this.round(value[flagLine.key]));
+                _font3["amplitude".concat(_i57 + 1)] = "".concat(localStorage.getItem('language') == 'en' ? 'amplitude' : "幅值", "\uFF1A").concat(this.round(value[flagLine.key]));
                 _index2++;
               }
             }
 
             height = (_index2 + 3) * 15;
           } else if (unit === "NX") {
-            _font3.freq = "\u9891\u7387\uFF1A".concat(this.round(flagLine.val * opt.series.dataMsg.rotateSpeed / 60), "Hz");
-            _font3.nxFreq = "\u500D\u9891\uFF1A".concat(this.round(flagLine.val)).concat(unit);
+            _font3.freq = "".concat(localStorage.getItem('language') == 'en' ? ' frequency' : "频率", "\uFF1A").concat(this.round(flagLine.val * opt.series.dataMsg.rotateSpeed / 60), "Hz");
+            _font3.nxFreq = "".concat(localStorage.getItem('language') == 'en' ? 'SHG' : "倍频", "\uFF1A").concat(this.round(flagLine.val)).concat(unit);
           } else {
-            _font3.freq = "\u9891\u7387\uFF1A".concat(this.round(flagLine.val)).concat(unit);
-            _font3.nxFreq = "\u500D\u9891\uFF1A".concat(this.round(flagLine.val * 60 / opt.series.dataMsg.rotateSpeed), "NX");
+            _font3.freq = "".concat(localStorage.getItem('language') == 'en' ? ' frequency' : "频率", "\uFF1A").concat(this.round(flagLine.val)).concat(unit);
+            _font3.nxFreq = "".concat(localStorage.getItem('language') == 'en' ? 'SHG' : "倍频", "\uFF1A").concat(this.round(flagLine.val * 60 / opt.series.dataMsg.rotateSpeed), "NX");
           }
 
           _font3.x - opt.grid.left >= scopeR.w / 2 && (_font3.x -= 125);
@@ -12293,11 +12417,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if (opt.toolTip.symbol.show) {
             var _size2 = opt.toolTip.symbol.size;
 
-            for (var _i57 = 0, _l19 = flag.labelLine.spectrum.length; _i57 < _l19; _i57++) {
-              if (flag.labelLine.spectrum[_i57].name === "" && flag.labelLine.spectrum[_i57].lineStyle) {
-                subCtx.strokeStyle = flag.labelLine.spectrum[_i57].lineStyle.color;
-                subCtx.fillStyle = opt.toolTip.symbol.color !== "" ? opt.toolTip.symbol.color : flag.labelLine.spectrum[_i57].lineStyle.color;
-                _index2 = flag.labelLine.spectrum[_i57].xAxis;
+            for (var _i58 = 0, _l20 = flag.labelLine.spectrum.length; _i58 < _l20; _i58++) {
+              if (flag.labelLine.spectrum[_i58].name === "" && flag.labelLine.spectrum[_i58].lineStyle) {
+                subCtx.strokeStyle = flag.labelLine.spectrum[_i58].lineStyle.color;
+                subCtx.fillStyle = opt.toolTip.symbol.color !== "" ? opt.toolTip.symbol.color : flag.labelLine.spectrum[_i58].lineStyle.color;
+                _index2 = flag.labelLine.spectrum[_i58].xAxis;
 
                 var _x5 = xArr[_index2] * xk + xb;
 
@@ -12329,8 +12453,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 }
               }
 
-              if (!flag.labelLine.spectrum[_i57].lineStyle && flag.labelLine.spectrum[_i57].name.indexOf("p") === -1 && flag.labelLine.spectrum[_i57].name.indexOf("x") === -1) {
-                _index2 = flag.labelLine.spectrum[_i57].xAxis;
+              if (!flag.labelLine.spectrum[_i58].lineStyle && flag.labelLine.spectrum[_i58].name.indexOf("p") === -1 && flag.labelLine.spectrum[_i58].name.indexOf("x") === -1) {
+                _index2 = flag.labelLine.spectrum[_i58].xAxis;
 
                 var _x6 = xArr[_index2] * xk + xb;
 
@@ -12365,14 +12489,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
             }
           } else {
-            for (var _i58 = 0, _l20 = flag.labelLine.spectrum.length; _i58 < _l20; _i58++) {
-              if (flag.labelLine.spectrum[_i58].name === "" && flag.labelLine.spectrum[_i58].lineStyle) {
-                subCtx.strokeStyle = flag.labelLine.spectrum[_i58].lineStyle.color;
-                subCtx.fillStyle = flag.labelLine.spectrum[_i58].lineStyle.color;
+            for (var _i59 = 0, _l21 = flag.labelLine.spectrum.length; _i59 < _l21; _i59++) {
+              if (flag.labelLine.spectrum[_i59].name === "" && flag.labelLine.spectrum[_i59].lineStyle) {
+                subCtx.strokeStyle = flag.labelLine.spectrum[_i59].lineStyle.color;
+                subCtx.fillStyle = flag.labelLine.spectrum[_i59].lineStyle.color;
 
-                var _x7 = xArr[flag.labelLine.spectrum[_i58].xAxis] * xk + xb;
+                var _x7 = xArr[flag.labelLine.spectrum[_i59].xAxis] * xk + xb;
 
-                var _y6 = yArr[flag.labelLine.spectrum[_i58].xAxis] * yk + yb;
+                var _y6 = yArr[flag.labelLine.spectrum[_i59].xAxis] * yk + yb;
 
                 if (_x7 >= opt.grid.left && _x7 <= scopeR.r && _y6 >= opt.grid.top && _y6 <= scopeR.b) {
                   subCtx.beginPath();
@@ -12382,10 +12506,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 }
               }
 
-              if (!flag.labelLine.spectrum[_i58].lineStyle && flag.labelLine.spectrum[_i58].name.indexOf("p") === -1 && flag.labelLine.spectrum[_i58].name.indexOf("x") === -1) {
+              if (!flag.labelLine.spectrum[_i59].lineStyle && flag.labelLine.spectrum[_i59].name.indexOf("p") === -1 && flag.labelLine.spectrum[_i59].name.indexOf("x") === -1) {
                 var oneLine = {
-                  x: xArr[flag.labelLine.spectrum[_i58].xAxis] * xk + xb,
-                  y: yArr[flag.labelLine.spectrum[_i58].xAxis] * yk + yb
+                  x: xArr[flag.labelLine.spectrum[_i59].xAxis] * xk + xb,
+                  y: yArr[flag.labelLine.spectrum[_i59].xAxis] * yk + yb
                 };
 
                 if (oneLine.x >= opt.grid.left && oneLine.x <= scopeR.r && oneLine.y >= opt.grid.top && oneLine.y <= scopeR.b) {
@@ -12405,23 +12529,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if (opt.toolTip.symbol.show) {
             var _size3 = opt.toolTip.symbol.size;
 
-            for (var _i59 = 0, _l21 = flag.labelLine.spectrum.length; _i59 < _l21; _i59++) {
-              if (flag.labelLine.spectrum[_i59].name !== "" && flag.labelLine.spectrum[_i59].lineStyle) {
+            for (var _i60 = 0, _l22 = flag.labelLine.spectrum.length; _i60 < _l22; _i60++) {
+              if (flag.labelLine.spectrum[_i60].name !== "" && flag.labelLine.spectrum[_i60].lineStyle) {
                 // 适应对比分析图多图谱
                 var _x8 = void 0,
                     _y7 = void 0;
 
                 if (flag.line.idx == undefined) {
-                  _x8 = optX.data[flag.labelLine.spectrum[_i59].xAxis] * xk + xb;
-                  _y7 = optY.data[flag.labelLine.spectrum[_i59].xAxis] * yk + yb;
+                  _x8 = optX.data[flag.labelLine.spectrum[_i60].xAxis] * xk + xb;
+                  _y7 = optY.data[flag.labelLine.spectrum[_i60].xAxis] * yk + yb;
                 } else {
-                  _x8 = optX.data[flag.line.idx][flag.labelLine.spectrum[_i59].xAxis] * xk + xb;
-                  _y7 = optY.data[flag.line.idx][flag.labelLine.spectrum[_i59].xAxis] * yk + yb;
+                  _x8 = optX.data[flag.line.idx][flag.labelLine.spectrum[_i60].xAxis] * xk + xb;
+                  _y7 = optY.data[flag.line.idx][flag.labelLine.spectrum[_i60].xAxis] * yk + yb;
                 }
 
                 if (_x8 > opt.grid.left && _x8 <= scopeR.r && _y7 >= opt.grid.top && _y7 <= scopeR.b) {
-                  var _font4 = flag.labelLine.spectrum[_i59].name;
-                  var color = flag.labelLine.spectrum[_i59].lineStyle.color;
+                  var _font4 = flag.labelLine.spectrum[_i60].name;
+                  var color = flag.labelLine.spectrum[_i60].lineStyle.color;
                   clickCtx.beginPath();
                   clickCtx.lineWidth = 1;
                   clickCtx.strokeStyle = color;
@@ -12448,23 +12572,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
             }
           } else {
-            for (var _i60 = 0, _l22 = flag.labelLine.spectrum.length; _i60 < _l22; _i60++) {
-              if (flag.labelLine.spectrum[_i60].name !== "" && flag.labelLine.spectrum[_i60].lineStyle) {
+            for (var _i61 = 0, _l23 = flag.labelLine.spectrum.length; _i61 < _l23; _i61++) {
+              if (flag.labelLine.spectrum[_i61].name !== "" && flag.labelLine.spectrum[_i61].lineStyle) {
                 // 适应对比分析图多图谱
                 var _x9 = void 0,
                     _y8 = void 0;
 
                 if (flag.line.idx == undefined) {
-                  _x9 = optX.data[flag.labelLine.spectrum[_i60].xAxis] * xk + xb;
-                  _y8 = optY.data[flag.labelLine.spectrum[_i60].xAxis] * yk + yb;
+                  _x9 = optX.data[flag.labelLine.spectrum[_i61].xAxis] * xk + xb;
+                  _y8 = optY.data[flag.labelLine.spectrum[_i61].xAxis] * yk + yb;
                 } else {
-                  _x9 = optX.data[flag.line.idx][flag.labelLine.spectrum[_i60].xAxis] * xk + xb;
-                  _y8 = optY.data[flag.line.idx][flag.labelLine.spectrum[_i60].xAxis] * yk + yb;
+                  _x9 = optX.data[flag.line.idx][flag.labelLine.spectrum[_i61].xAxis] * xk + xb;
+                  _y8 = optY.data[flag.line.idx][flag.labelLine.spectrum[_i61].xAxis] * yk + yb;
                 }
 
                 if (_x9 > opt.grid.left && _x9 <= scopeR.r && _y8 >= opt.grid.top && _y8 <= scopeR.b) {
-                  var _font5 = flag.labelLine.spectrum[_i60].name;
-                  var _color = flag.labelLine.spectrum[_i60].lineStyle.color;
+                  var _font5 = flag.labelLine.spectrum[_i61].name;
+                  var _color = flag.labelLine.spectrum[_i61].lineStyle.color;
                   clickCtx.beginPath();
                   clickCtx.lineWidth = 1;
                   clickCtx.strokeStyle = _color;
@@ -12517,8 +12641,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
             var speedPulesIndex = 0; //转速脉冲点X轴数据下标
 
-            for (var _i61 = 0, l = xArr.length; _i61 < l; _i61++) {
-              if (xArr[_i61] == xArray[speedPulesIndex]) {
+            for (var _i62 = 0, l = xArr.length; _i62 < l; _i62++) {
+              if (xArr[_i62] == xArray[speedPulesIndex]) {
                 var x = xArray[speedPulesIndex] * xk + xb;
                 var y = yArray[speedPulesIndex] * yk + yb;
 
@@ -12556,10 +12680,42 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var yArr = opt.y.data;
         var xMax = xArr[xArr.length - 1];
 
+        for (var _i63 = 0; _i63 < l; _i63++) {
+          // 增加判断，防止有效频段过滤频率后产生偏差
+          if (!Array.isArray(xArr[0])) {
+            if (_flag.addPeakPos[_i63].value == opt.x.data[_flag.addPeak[_i63]]) {
+              break;
+            } else {
+              //xArr变化过，需要重新取下标
+              for (var _n = 0, len = xArr.length; _n < len; _n++) {
+                if (_flag.addPeakPos[_i63].value == xArr[_n]) {
+                  _flag.addPeak[_i63] = _n;
+                  _flag.line.key = _n;
+                  _flag.line.val = xArr[_n];
+                }
+              }
+            }
+          } else {
+            if (_flag.addPeakPos[_i63].value == opt.x.data[_flag.muchaddPeak[_i63].idx][_flag.addPeak[_i63]]) {
+              break;
+            } else {
+              //xArr变化过，需要重新取下标
+              for (var _n2 = 0, _len3 = xArr[_flag.muchaddPeak[_i63].idx].length; _n2 < _len3; _n2++) {
+                if (_flag.addPeakPos[_i63].value == xArr[_flag.muchaddPeak[_i63].idx][_n2]) {
+                  _flag.addPeak[_i63] = _n2;
+                  _flag.line.key = _n2;
+                  _flag.line.val = xArr[_flag.muchaddPeak[_i63].idx][_n2];
+                  _flag.muchaddPeak[_i63].key = _n2;
+                }
+              }
+            }
+          }
+        }
+
         if (type === 1 && l < n) {
           if (l !== 0) {
-            for (var _i62 = 0; _i62 < l; _i62++) {
-              if (_flag.addPeak[_i62] === _flag.line.key) {
+            for (var _i64 = 0; _i64 < l; _i64++) {
+              if (_flag.addPeak[_i64] === _flag.line.key) {
                 return;
               }
             }
@@ -12593,27 +12749,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           _flag.addPeakPos.length = 0;
 
           if (Array.isArray(xArr[0])) {
-            var _loop = function _loop(_i63) {
+            var _loop = function _loop(_i65) {
               var idx = void 0;
               var xFreq = void 0;
 
               _flag.muchaddPeak.forEach(function (item) {
-                if (item.key === _flag.addPeak[_i63]) {
+                if (item.key === _flag.addPeak[_i65]) {
                   idx = item.idx;
                 }
               });
 
               if (idx !== undefined) {
-                xFreq = xArr[idx][_flag.addPeak[_i63]];
+                xFreq = xArr[idx][_flag.addPeak[_i65]];
               }
 
               if (!xFreq) {
                 // 若当前下标下的x值不存在取
-                for (var j = 0, len = xArr.length; j < len; j++) {
+                for (var j = 0, _len4 = xArr.length; j < _len4; j++) {
                   var value = xArr[j];
 
-                  if (j !== idx && value[_flag.addPeak[_i63]]) {
-                    xFreq = value[_flag.addPeak[_i63]];
+                  if (j !== idx && value[_flag.addPeak[_i65]]) {
+                    xFreq = value[_flag.addPeak[_i65]];
                     break;
                   }
                 }
@@ -12621,24 +12777,26 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
               _flag.addPeakPos.push({
                 xName: opt.x.name[idx],
+                value: xFreq,
                 freq: _this4.round(xFreq),
-                x: _i63 * (size.width + 5) + opt.grid.left + 0.5,
+                x: _i65 * (size.width + 5) + opt.grid.left + 0.5,
                 y: opt.grid.top,
                 flag: 0
               });
             };
 
             //多组数据
-            for (var _i63 = 0; _i63 < l; _i63++) {
-              _loop(_i63);
+            for (var _i65 = 0; _i65 < l; _i65++) {
+              _loop(_i65);
             }
           } else {
             //一组数据
-            for (var _i64 = 0; _i64 < l; _i64++) {
+            for (var _i66 = 0; _i66 < l; _i66++) {
               _flag.addPeakPos.push({
                 xName: opt.x.name,
-                freq: this.round(opt.x.data[_flag.addPeak[_i64]]),
-                x: _i64 * (size.width + 5) + opt.grid.left + 0.5,
+                value: opt.x.data[_flag.addPeak[_i66]],
+                freq: this.round(opt.x.data[_flag.addPeak[_i66]]),
+                x: _i66 * (size.width + 5) + opt.grid.left + 0.5,
                 y: opt.grid.top,
                 flag: 0
               });
@@ -12649,15 +12807,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               peak = null,
               flag = -1;
 
-          for (var _i65 = 0; _i65 < l; _i65++) {
-            if (_flag.addPeakPos[_i65].flag) {
-              peak = _flag.addPeak[_i65];
-              movePos = _flag.addPeakPos[_i65];
-              flag = _i65;
+          for (var _i67 = 0; _i67 < l; _i67++) {
+            if (_flag.addPeakPos[_i67].flag) {
+              peak = _flag.addPeak[_i67];
+              movePos = _flag.addPeakPos[_i67];
+              flag = _i67;
 
-              _flag.addPeak.splice(_i65, 1);
+              _flag.addPeak.splice(_i67, 1);
 
-              _flag.addPeakPos.splice(_i65, 1);
+              _flag.addPeakPos.splice(_i67, 1);
 
               break;
             }
@@ -12671,11 +12829,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         if (opt.series.dataMsg.setPower && opt.x.name === _flag.addPeakPos[0].xName) {
-          for (var _i66 = 0, len = xArr.length; _i66 < len; _i66++) {
+          for (var _i68 = 0, _len5 = xArr.length; _i68 < _len5; _i68++) {
             for (var j = 0, length = _flag.addPeakPos.length; j < length; j++) {
-              if (_flag.addPeakPos[j].freq == xArr[_i66]) {
+              if (_flag.addPeakPos[j].freq == xArr[_i68]) {
                 // 若x值与xArr数组相同，将下标推入addPeak
-                _flag.addPeak[j] = _i66;
+                _flag.addPeak[j] = _i68;
                 break;
               }
             }
@@ -12692,9 +12850,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           y: null
         };
         var freqObj = {
-          Hz: "频率：",
-          NX: "倍频：",
-          ms: "时间："
+          Hz: "".concat(localStorage.getItem('language') == 'en' ? ' frequency' : "频率", "\uFF1A"),
+          NX: "".concat(localStorage.getItem('language') == 'en' ? 'SHG' : "倍频", "\uFF1A"),
+          ms: "".concat(localStorage.getItem('language') == 'en' ? 'Time' : "时间", "\uFF1A")
         };
         var freq = freqObj[opt.x.name];
 
@@ -12709,20 +12867,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var yb = proportion.y.b;
 
         if (Array.isArray(xArr[0])) {
-          var _loop2 = function _loop2(_i67) {
-            var halfWidth = _flag.addPeakPos[_i67].x + size.width / 2;
+          var _loop2 = function _loop2(_i69) {
+            var halfWidth = _flag.addPeakPos[_i69].x + size.width / 2;
             var arr = [];
             var m = 0;
             var idx = void 0;
 
             _flag.muchaddPeak.forEach(function (item) {
-              if (item.key === _flag.addPeak[_i67]) {
+              if (item.key === _flag.addPeak[_i69]) {
                 idx = item.idx;
               }
             });
 
             if (idx !== undefined) {
-              var y = yArr[idx][_flag.addPeak[_i67]];
+              var y = yArr[idx][_flag.addPeak[_i69]];
 
               if (y !== undefined) {
                 arr.push({
@@ -12730,8 +12888,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   val: _this4.round(y)
                 });
                 line = {
-                  x: xArr[idx][_flag.addPeak[_i67]] * xk + xb,
-                  y: yArr[idx][_flag.addPeak[_i67]] * yk + yb
+                  x: xArr[idx][_flag.addPeak[_i69]] * xk + xb,
+                  y: yArr[idx][_flag.addPeak[_i69]] * yk + yb
                 };
                 m += 15;
               }
@@ -12739,36 +12897,36 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
             var length = arr.length;
             foreCtx.fillStyle = opt.series.markLine.lineStyle.color;
-            foreCtx.fillRect(_flag.addPeakPos[_i67].x, _flag.addPeakPos[_i67].y, size.width, size.height + (length - 1) * 20);
+            foreCtx.fillRect(_flag.addPeakPos[_i69].x, _flag.addPeakPos[_i69].y, size.width, size.height + (length - 1) * 20);
             foreCtx.fillStyle = opt.series.markLine.fontStyle.color;
-            foreCtx.fillText("".concat(freq).concat(_flag.addPeakPos[_i67].freq).concat(opt.x.name[idx]), _flag.addPeakPos[_i67].x + 5, _flag.addPeakPos[_i67].y + 8);
+            foreCtx.fillText("".concat(freq).concat(_flag.addPeakPos[_i69].freq).concat(opt.x.name[idx]), _flag.addPeakPos[_i69].x + 5, _flag.addPeakPos[_i69].y + 8);
 
             for (var _j11 = 0; _j11 < length; _j11++) {
               var value = arr[_j11];
-              foreCtx.fillText("幅值：" + value.val, _flag.addPeakPos[_i67].x + 5, _flag.addPeakPos[_i67].y + 23 + value.dy);
+              foreCtx.fillText("".concat(localStorage.getItem('language') == 'en' ? 'amplitude' : "幅值", "\uFF1A") + value.val, _flag.addPeakPos[_i69].x + 5, _flag.addPeakPos[_i69].y + 23 + value.dy);
             }
 
-            foreCtx.moveTo(halfWidth, _flag.addPeakPos[_i67].y + size.height + (length - 1) * 20);
+            foreCtx.moveTo(halfWidth, _flag.addPeakPos[_i69].y + size.height + (length - 1) * 20);
             foreCtx.lineTo(line.x, line.y);
           };
 
-          for (var _i67 = 0; _i67 < l; _i67++) {
-            _loop2(_i67);
+          for (var _i69 = 0; _i69 < l; _i69++) {
+            _loop2(_i69);
           }
         } else {
-          for (var _i68 = 0; _i68 < l; _i68++) {
-            if (xArr.length < _flag.addPeak[_i68] && opt.series.dataMsg.setPower || _flag.addPeakPos[_i68].freq > xMax && _flag.addPeakPos.xName === opt.x.name) continue;
-            var halfWidth = _flag.addPeakPos[_i68].x + size.width / 2;
+          for (var _i70 = 0; _i70 < l; _i70++) {
+            if (xArr.length < _flag.addPeak[_i70] && opt.series.dataMsg.setPower || _flag.addPeakPos[_i70].freq > xMax && _flag.addPeakPos.xName === opt.x.name) continue;
+            var halfWidth = _flag.addPeakPos[_i70].x + size.width / 2;
             line = {
-              x: xArr[_flag.addPeak[_i68]] * xk + xb,
-              y: yArr[_flag.addPeak[_i68]] * yk + yb
+              x: xArr[_flag.addPeak[_i70]] * xk + xb,
+              y: yArr[_flag.addPeak[_i70]] * yk + yb
             };
             foreCtx.fillStyle = opt.series.markLine.lineStyle.color;
-            foreCtx.fillRect(_flag.addPeakPos[_i68].x, _flag.addPeakPos[_i68].y, size.width, size.height);
+            foreCtx.fillRect(_flag.addPeakPos[_i70].x, _flag.addPeakPos[_i70].y, size.width, size.height);
             foreCtx.fillStyle = opt.series.markLine.fontStyle.color;
-            foreCtx.fillText("".concat(freq).concat(_flag.addPeakPos[_i68].freq).concat(opt.x.name), _flag.addPeakPos[_i68].x + 5, _flag.addPeakPos[_i68].y + 8);
-            foreCtx.fillText("幅值：" + opt.y.data[_flag.addPeak[_i68]].toFixed(4) + opt.y.name, _flag.addPeakPos[_i68].x + 5, _flag.addPeakPos[_i68].y + 23);
-            foreCtx.moveTo(halfWidth, _flag.addPeakPos[_i68].y + size.height);
+            foreCtx.fillText("".concat(freq).concat(_flag.addPeakPos[_i70].freq).concat(opt.x.name), _flag.addPeakPos[_i70].x + 5, _flag.addPeakPos[_i70].y + 8);
+            foreCtx.fillText("".concat(localStorage.getItem('language') == 'en' ? 'amplitude' : "幅值", "\uFF1A") + opt.y.data[_flag.addPeak[_i70]].toFixed(4) + opt.y.name, _flag.addPeakPos[_i70].x + 5, _flag.addPeakPos[_i70].y + 23);
+            foreCtx.moveTo(halfWidth, _flag.addPeakPos[_i70].y + size.height);
             foreCtx.lineTo(line.x, line.y);
           }
         }
@@ -12781,24 +12939,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           foreCtx.fillStyle = opt.toolTip.symbol.color !== "" ? opt.toolTip.symbol.color : opt.toolTip.lineStyle.color;
 
           if (Array.isArray(xArr[0])) {
-            var _loop3 = function _loop3(_i69) {
+            var _loop3 = function _loop3(_i71) {
               foreCtx.beginPath(); // for (let j = 0, len = xArr.length; j < len; j++) {
 
               var idx = void 0;
 
               _flag.muchaddPeak.forEach(function (item) {
-                if (item.key === _flag.addPeak[_i69]) {
+                if (item.key === _flag.addPeak[_i71]) {
                   idx = item.idx;
                 }
               });
 
               if (idx !== undefined) {
-                var xValue = xArr[idx][_flag.addPeak[_i69]];
+                var xValue = xArr[idx][_flag.addPeak[_i71]];
 
                 if (xValue) {
                   line = {
                     x: xValue * xk + xb,
-                    y: yArr[idx][_flag.addPeak[_i69]] * yk + yb
+                    y: yArr[idx][_flag.addPeak[_i71]] * yk + yb
                   };
                 }
               } // }
@@ -12808,15 +12966,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               foreCtx.fill();
             };
 
-            for (var _i69 = 0; _i69 < l; _i69++) {
-              _loop3(_i69);
+            for (var _i71 = 0; _i71 < l; _i71++) {
+              _loop3(_i71);
             }
           } else {
-            for (var _i70 = 0; _i70 < l; _i70++) {
+            for (var _i72 = 0; _i72 < l; _i72++) {
               foreCtx.beginPath();
               line = {
-                x: xArr[_flag.addPeak[_i70]] * xk + xb,
-                y: yArr[_flag.addPeak[_i70]] * yk + yb
+                x: xArr[_flag.addPeak[_i72]] * xk + xb,
+                y: yArr[_flag.addPeak[_i72]] * yk + yb
               };
               foreCtx.arc(line.x, line.y, opt.toolTip.symbol.size, 0, 2 * Math.PI);
               foreCtx.fill();
@@ -13140,9 +13298,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         view.setUint32(40, length, true); //数据长度
 
-        for (var _i71 = 0; _i71 < l; _i71++) {
-          if (Math.abs(data[_i71]) > max) {
-            max = Math.abs(data[_i71]);
+        for (var _i73 = 0; _i73 < l; _i73++) {
+          if (Math.abs(data[_i73]) > max) {
+            max = Math.abs(data[_i73]);
           }
         }
 
@@ -13153,8 +13311,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         var xs = 32760 / max; //放大系数:short/max，short范围(-32768~32767)
 
-        for (var _i72 = 0; _i72 < l; _i72++) {
-          data[_i72] = Math.round(data[_i72] * xs); //数据
+        for (var _i74 = 0; _i74 < l; _i74++) {
+          data[_i74] = Math.round(data[_i74] * xs); //数据
         }
 
         buffer.set(new Uint8Array(new Int16Array(data).buffer), 44); //数据
@@ -13209,36 +13367,70 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               arr.length = 0;
             } else {
               var lineStyle = opt.series.markLine.lineStyle;
-              var fontStyle = opt.series.markLine.fontStyle;
+              var fontStyle = opt.series.markLine.fontStyle; // 新增对比分析的故障频率
 
-              for (var _i73 = 0; _i73 < l; _i73++) {
-                var x = opt.x.data[arr[_i73].xAxis] * paramsX.k + paramsX.b + 0.5;
-                var y = opt.y.data[arr[_i73].xAxis] * paramsY.k + paramsY.b;
+              if (opt.x.data[0] && Array.isArray(opt.x.data[0])) {
+                for (var _i75 = 0; _i75 < l; _i75++) {
+                  var x = opt.x.data[0][arr[_i75].xAxis] * paramsX.k + paramsX.b + 0.5;
+                  var y = opt.y.data[0][arr[_i75].xAxis] * paramsY.k + paramsY.b;
 
-                if (x >= opt.grid.left && x <= scopeR.r && y >= opt.grid.top && y <= scopeR.b) {
-                  failCtx.beginPath();
-                  failCtx.lineWidth = 1;
-                  failCtx.strokeStyle = lineStyle.color;
-                  failCtx.fillStyle = lineStyle.color; //设定故障频率文字颜色
+                  if (x >= opt.grid.left && x <= scopeR.r && y >= opt.grid.top && y <= scopeR.b) {
+                    failCtx.beginPath();
+                    failCtx.lineWidth = 1;
+                    failCtx.strokeStyle = lineStyle.color;
+                    failCtx.fillStyle = lineStyle.color; //设定故障频率文字颜色
 
-                  failCtx.font = fontStyle.weight + " " + fontStyle.size + " " + fontStyle.family;
-                  failCtx.save();
-                  failCtx.moveTo(x, opt.grid.top);
-                  failCtx.lineTo(x, y - 3);
-                  failCtx.translate(x - scopeR.h, 110 + opt.grid.top);
-                  failCtx.rotate(-90 * Math.PI / 180);
-                  failCtx.textAlign = "right";
-                  failCtx.textBaseline = "bottom";
-                  failCtx.fillText(arr[_i73].name, 40 + opt.grid.top, scopeR.h);
-                  failCtx.restore();
-                  failCtx.stroke();
-                  failCtx.beginPath();
-                  failCtx.fillStyle = lineStyle.color;
-                  failCtx.arc(x, y, 3, 0, 2 * Math.PI);
-                  failCtx.fill();
-                  failCtx.moveTo(x, y + 3);
-                  failCtx.lineTo(x, scopeR.b);
-                  failCtx.stroke();
+                    failCtx.font = fontStyle.weight + " " + fontStyle.size + " " + fontStyle.family;
+                    failCtx.save();
+                    failCtx.moveTo(x, opt.grid.top);
+                    failCtx.lineTo(x, y - 3);
+                    failCtx.translate(x - scopeR.h, 110 + opt.grid.top);
+                    failCtx.rotate(-90 * Math.PI / 180);
+                    failCtx.textAlign = "right";
+                    failCtx.textBaseline = "bottom";
+                    failCtx.fillText(arr[_i75].name, 40 + opt.grid.top, scopeR.h);
+                    failCtx.restore();
+                    failCtx.stroke();
+                    failCtx.beginPath();
+                    failCtx.fillStyle = lineStyle.color;
+                    failCtx.arc(x, y, 3, 0, 2 * Math.PI);
+                    failCtx.fill();
+                    failCtx.moveTo(x, y + 3);
+                    failCtx.lineTo(x, scopeR.b);
+                    failCtx.stroke();
+                  }
+                }
+              } else {
+                for (var _i76 = 0; _i76 < l; _i76++) {
+                  var _x10 = opt.x.data[arr[_i76].xAxis] * paramsX.k + paramsX.b + 0.5;
+
+                  var _y9 = opt.y.data[arr[_i76].xAxis] * paramsY.k + paramsY.b;
+
+                  if (_x10 >= opt.grid.left && _x10 <= scopeR.r && _y9 >= opt.grid.top && _y9 <= scopeR.b) {
+                    failCtx.beginPath();
+                    failCtx.lineWidth = 1;
+                    failCtx.strokeStyle = lineStyle.color;
+                    failCtx.fillStyle = lineStyle.color; //设定故障频率文字颜色
+
+                    failCtx.font = fontStyle.weight + " " + fontStyle.size + " " + fontStyle.family;
+                    failCtx.save();
+                    failCtx.moveTo(_x10, opt.grid.top);
+                    failCtx.lineTo(_x10, _y9 - 3);
+                    failCtx.translate(_x10 - scopeR.h, 110 + opt.grid.top);
+                    failCtx.rotate(-90 * Math.PI / 180);
+                    failCtx.textAlign = "right";
+                    failCtx.textBaseline = "bottom";
+                    failCtx.fillText(arr[_i76].name, 40 + opt.grid.top, scopeR.h);
+                    failCtx.restore();
+                    failCtx.stroke();
+                    failCtx.beginPath();
+                    failCtx.fillStyle = lineStyle.color;
+                    failCtx.arc(_x10, _y9, 3, 0, 2 * Math.PI);
+                    failCtx.fill();
+                    failCtx.moveTo(_x10, _y9 + 3);
+                    failCtx.lineTo(_x10, scopeR.b);
+                    failCtx.stroke();
+                  }
                 }
               }
             }
@@ -13248,22 +13440,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         } else if (coordinateSystem === "circle") {
           var color = opt.series.data.color;
 
-          for (var _i74 = 0, _l23 = arr.length; _i74 < _l23; _i74++) {
+          for (var _i77 = 0, _l24 = arr.length; _i77 < _l24; _i77++) {
             failCtx.beginPath();
 
-            var _iterator4 = _createForOfIteratorHelper(arr[_i74]),
-                _step4;
-
-            try {
-              for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-                var val = _step4.value;
-                failCtx.strokeStyle = color[_i74];
+            if (arr[_i77]) {
+              // for (let val of arr[i]) {
+              //机舱轨迹图点击
+              for (var val in arr[_i77]) {
+                failCtx.strokeStyle = color[_i77];
                 failCtx.arc(scopeR.x, scopeR.y, val, 0, 2 * Math.PI);
               }
-            } catch (err) {
-              _iterator4.e(err);
-            } finally {
-              _iterator4.f();
             }
           }
 
@@ -13271,22 +13457,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         } else if (coordinateSystem === "circleLine") {
           var _color2 = opt.series.data.color;
 
-          for (var _i75 = 0, _l24 = arr.length; _i75 < _l24; _i75++) {
+          for (var _i78 = 0, _l25 = arr.length; _i78 < _l25; _i78++) {
             failCtx.beginPath();
 
-            var _iterator5 = _createForOfIteratorHelper(arr[_i75]),
-                _step5;
+            var _iterator4 = _createForOfIteratorHelper(arr[_i78]),
+                _step4;
 
             try {
-              for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                var _val12 = _step5.value;
-                failCtx.strokeStyle = _color2[_i75];
-                failCtx.arc(scopeR.x, scopeR.y, _val12, 0, 2 * Math.PI);
+              for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+                var _val13 = _step4.value;
+                failCtx.strokeStyle = _color2[_i78];
+                failCtx.arc(scopeR.x, scopeR.y, _val13, 0, 2 * Math.PI);
               }
             } catch (err) {
-              _iterator5.e(err);
+              _iterator4.e(err);
             } finally {
-              _iterator5.f();
+              _iterator4.f();
             }
           }
 
@@ -13422,9 +13608,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         dataCtx.clearRect(0, 0, dom.width, dom.height);
 
-        for (var _i76 = 0, l = phase.length; _i76 < l; _i76++) {
+        for (var _i79 = 0, l = phase.length; _i79 < l; _i79++) {
           var Aarr = amplitude;
-          var Parr = phase[_i76];
+          var Parr = phase[_i79];
           var color = data.color;
           dataCtx.lineWidth = series.lineStyle.width;
           dataCtx.fillStyle = color;
@@ -13460,7 +13646,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               axis.x.push(x);
               axis.y.push(y);
               axis.index.push({
-                i: _i76,
+                i: _i79,
                 j: j
               });
               dataCtx.stroke();
@@ -13570,10 +13756,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         dataCtx.clearRect(0, 0, dom.width, dom.height);
 
-        for (var _i77 = 0, l = phase.length; _i77 < l; _i77++) {
-          var Aarr = amplitude[_i77];
-          var Parr = phase[_i77];
-          var color = data.color[_i77];
+        for (var _i80 = 0, l = phase.length; _i80 < l; _i80++) {
+          var Aarr = amplitude[_i80];
+          var Parr = phase[_i80];
+          var color = data.color[_i80];
           /* 散点图的点的颜色 */
 
           dataCtx.fillStyle = color;
@@ -13587,7 +13773,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             axis.x.push(x);
             axis.y.push(y);
             axis.index.push({
-              i: _i77,
+              i: _i80,
               j: j
             });
             dataCtx.arc(x, y, 2, 0, 2 * Math.PI);
@@ -13635,9 +13821,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var ry = scope.y;
         ctx.clearRect(0, 0, dom.width, dom.height);
 
-        for (var _i78 = 0, l = data.length; _i78 < l; _i78++) {
+        for (var _i81 = 0, l = data.length; _i81 < l; _i81++) {
           for (var j = 0; j < 2; j++) {
-            var value = data[_i78];
+            var value = data[_i81];
             if (value.data >= series.data.maxAmplitude) continue;
             var r = scope.rs * value.data / series.data.maxAmplitude;
             ctx.beginPath();
@@ -13712,9 +13898,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var yArr = this._option.y.data;
         var result = [];
 
-        for (var _i79 = 0; _i79 < xArr.length; _i79++) {
-          if (x1 <= xArr[_i79] && xArr[_i79] <= x2) {
-            result.push(yArr[_i79]);
+        for (var _i82 = 0; _i82 < xArr.length; _i82++) {
+          if (x1 <= xArr[_i82] && xArr[_i82] <= x2) {
+            result.push(yArr[_i82]);
           }
         }
 
@@ -13844,8 +14030,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var paramsY = this._computeParams.proportion.y;
         failCtx.clearRect(0, 0, this._dom.width, this._dom.height);
 
-        for (var _i80 = 0, l = data.length; _i80 < l; _i80++) {
-          var value = data[_i80];
+        for (var _i83 = 0, l = data.length; _i83 < l; _i83++) {
+          var value = data[_i83];
           failCtx.beginPath();
           failCtx.strokeStyle = value.lineStyle.color;
           failCtx.lineWidth = value.lineStyle.width;
@@ -14148,4 +14334,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=30-bac90aef.js.map
+//# sourceMappingURL=30-dbf7c8ca.js.map

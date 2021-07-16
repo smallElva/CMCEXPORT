@@ -1084,6 +1084,34 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
 
+    /* 移动之后 */
+    mouseUp: function mouseUp(e) {
+      var btnContent = $('.btn-content').position();
+      var leftVal = btnContent.left;
+
+      if (leftVal < 60) {
+        this.leftClass = {
+          "left-btn": true,
+          "active": true,
+          "disable": false
+        };
+        this.rightClass = {
+          "right-btn": true,
+          "active": false
+        };
+      } else {
+        this.leftClass = {
+          "left-btn": true,
+          "active": false,
+          "disable": true
+        };
+        this.rightClass = {
+          "right-btn": true,
+          "active": false
+        };
+      }
+    },
+
     /* 左右拖动 */
     mouseMove: function mouseMove(e) {
       var odiv = e.target; //获取目标元素
@@ -1808,6 +1836,9 @@ var render = function() {
             on: {
               mousedown: function($event) {
                 return _vm.mouseMove($event)
+              },
+              mouseup: function($event) {
+                return _vm.mouseUp($event)
               }
             }
           },
@@ -1989,4 +2020,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=21-c58164b8.js.map
+//# sourceMappingURL=21-681b11b7.js.map
