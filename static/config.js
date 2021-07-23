@@ -1,7 +1,7 @@
 /* 特殊现场设置配置 */
 let config = {
     company:0, /*  0:中自庆安，1:金风现场 */
-    intelligentNav: true, /*  智子设置模块 true:显示，false:隐藏 */
+    intelligentNav: false, /*  智子设置模块 true:显示，false:隐藏 */
 }
 
 //机泵类型列表

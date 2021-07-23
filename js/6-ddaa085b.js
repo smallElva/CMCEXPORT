@@ -4822,6 +4822,11 @@ var tableData = /*#__PURE__*/function () {
             var data = that.getData();
             var dgm = that.getDgmInfoByIndex(changes[i][0]);
             var columnVal = hot.propToCol(changes[i][1]);
+
+            if (change_newVal === null) {
+              hot.setDataAtCell(changes[i][0], columnVal, '');
+            }
+
             var physicalRow = hot.toPhysicalRow(changes[i][0]);
             var sendDgm = Object(_dgm_info_js__WEBPACK_IMPORTED_MODULE_2__["changeDgm"])(that.type, dgm, changes[i][0]);
             var changeMachineId = sendDgm.machineId + "_" + physicalRow;
@@ -5575,4 +5580,4 @@ var dgmMixin = {
 /***/ })
 
 }]);
-//# sourceMappingURL=6-515258c9.js.map
+//# sourceMappingURL=6-ddaa085b.js.map

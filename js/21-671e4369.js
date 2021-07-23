@@ -1846,6 +1846,14 @@ var render = function() {
             return _c(
               "button",
               {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: btn.isShow,
+                    expression: "btn.isShow"
+                  }
+                ],
                 key: index,
                 staticClass: "con-dgm-btn",
                 class: btn.active ? "active" : "",
@@ -2020,4 +2028,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=21-681b11b7.js.map
+//# sourceMappingURL=21-671e4369.js.map

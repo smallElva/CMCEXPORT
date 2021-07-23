@@ -692,6 +692,14 @@ var render = function() {
             return _c(
               "router-link",
               {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: btn.isShow,
+                    expression: "btn.isShow"
+                  }
+                ],
                 key: index,
                 staticClass: "con-dgm-btn",
                 attrs: { to: { path: btn.name } },
@@ -821,4 +829,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
-//# sourceMappingURL=20-31c3e43e.js.map
+//# sourceMappingURL=20-224837be.js.map

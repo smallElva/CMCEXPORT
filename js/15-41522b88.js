@@ -197,8 +197,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
         }
       },
-      deep: true,
-      immediate: true
+      deep: true // immediate: true
+
     }
   },
   mounted: function mounted() {
@@ -214,6 +214,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     this.statePage(this.name);
     this.getTroot();
+    var macBtn = this.$store.state.customInfo.chooseMacBtn;
+
+    if (macBtn) {
+      this.btnData = macBtn;
+    }
+
     this.setBtnContentPosition();
   },
   methods: {
@@ -1771,4 +1777,4 @@ function reRenderSelectOption(hot, data) {
 /***/ })
 
 }]);
-//# sourceMappingURL=15-538cb0b0.js.map
+//# sourceMappingURL=15-41522b88.js.map
